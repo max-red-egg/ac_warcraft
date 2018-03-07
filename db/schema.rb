@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_07_082103) do
+ActiveRecord::Schema.define(version: 2018_03_07_085850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "missions", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.integer "level", default: 0, null: false
+    t.text "description", default: ""
+    t.integer "participant_number", default: 1, null: false
+    t.integer "invitation_number", default: 0, null: false
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
