@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_07_091114) do
+ActiveRecord::Schema.define(version: 2018_03_07_091630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "invited_id"
+    t.integer "take_mission_id"
+    t.string "state", default: "inviting", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "invite_msgs", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "missions", force: :cascade do |t|
     t.string "name", default: "", null: false

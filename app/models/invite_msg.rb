@@ -1,0 +1,2 @@
+class InviteMsg < ApplicationRecord
+end
