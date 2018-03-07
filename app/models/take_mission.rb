@@ -1,0 +1,2 @@
+class TakeMission < ApplicationRecord
+end
