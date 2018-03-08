@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_08_022522) do
+ActiveRecord::Schema.define(version: 2018_03_08_023251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 2018_03_08_022522) do
     t.integer "invitation_id"
   end
 
+  create_table "mission_reviews", force: :cascade do |t|
+    t.integer "user_take_mission_id"
+    t.integer "reviewer_id"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "missions", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.integer "level", default: 0, null: false
@@ -46,14 +54,6 @@ ActiveRecord::Schema.define(version: 2018_03_08_022522) do
   create_table "teams", force: :cascade do |t|
     t.integer "mission_id"
     t.string "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "user_take_mission_reviews", force: :cascade do |t|
-    t.integer "user_take_mission_id"
-    t.integer "reviewer_id"
-    t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,2 +1,0 @@
-class UserTakeMissionReview < ApplicationRecord
-end
