@@ -1,0 +1,2 @@
+class AbortRequest < ApplicationRecord
+end

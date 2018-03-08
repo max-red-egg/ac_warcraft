@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TakeMissionTest < ActiveSupport::TestCase
+class AbortRequestTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
