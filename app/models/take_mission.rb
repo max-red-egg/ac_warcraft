@@ -1,2 +1,0 @@
-class TakeMission < ApplicationRecord
-end
