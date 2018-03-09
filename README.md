@@ -38,3 +38,13 @@ production:
 ```
 Install PostgreSQL on your local machine, and create a database "acwarcraft_development"
 
+## Generate seed data and fake user
+seed file generate a admin role
+```
+$ rails db:seed
+```
+fake user
+```
+$ rails dev:fake_user
+```
+
