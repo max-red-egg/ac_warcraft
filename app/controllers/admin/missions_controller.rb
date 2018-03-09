@@ -1,4 +1,4 @@
-class Admin::MissionsController < ApplicationController
+class Admin::MissionsController < Admin::BaseController
   def index
   end
 

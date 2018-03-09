@@ -12,7 +12,7 @@
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">ac warcraft</a>
+      <%=link_to "ALPHACamp Warcraft", root_path, class: "navbar-brand"%>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,8 +27,16 @@
         <ul class="navbar-nav">
         <!-- user login -->
           <% if current_user %> 
-            <li class="nav-item"><span class="navbar-text">Hello, <%= current_user.name%></span></li>
-        <!-- user don't login -->
+            <li class="nav-item"><span class="navbar-text">Hello, <%= current_user.name%></span>
+            </li>
+            <!-- if admin? -->
+            <% if current_user.admin? %>
+              <li class="nav-item"><%=link_to "後台", admin_root_path, class: "nav-link" %>
+              </li>
+            <%end%>
+
+            <li class="nav-item"> <%=link_to '登出', destroy_user_session_path, method: :delete ,class: "nav-link"%></li>
+        <!-- user on login -->
           <% else %>
             <li class="nav-item"><%= link_to '註冊', new_user_registration_path, class:"nav-link"%></li>
             <li class="nav-item"><%= link_to '登入', new_user_session_path, class:"nav-link" %></li>
@@ -38,6 +46,23 @@
     
       </div>
     </nav>
+        <!-- ===========alert and notice=========== -->
+    <% if flash[:notice] %>
+    <div class="container ">
+      <div class="alert alert-success alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= notice %>
+      </div>
+    </div>
+    <%end%>
+
+    <% if flash[:alert] %>
+    <div class="container ">
+      <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= alert %>
+      </div>
+    </div>
+    <%end%>
+    <!-- ===========alert and notice end =========== -->
     <%= yield %>
   </body>
 </html>
