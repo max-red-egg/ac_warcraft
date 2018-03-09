@@ -19,20 +19,22 @@ development:
 create `config/database.yml`
 ```yml
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: acwarcraft_development
 
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: acwarcraft_test
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: acwarcraft_production
+
 ```
+Install PostgreSQL on your local machine, and create a database "acwarcraft_development"
 
