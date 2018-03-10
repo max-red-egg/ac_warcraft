@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root "missions#index"
 
   resource :missions, only: [:index]
+  resources :users
 
   namespace :admin do 
     root "missions#index"
