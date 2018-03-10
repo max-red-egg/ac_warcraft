@@ -38,6 +38,9 @@ class Admin::MissionsController < Admin::BaseController
   end
 
   def destroy
+    @mission.destroy
+    flash[:notice] = "mission delete"
+    redirect_to admin_root_path
   end
 
   private

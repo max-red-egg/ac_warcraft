@@ -6,6 +6,8 @@
     <th scope="col">level</th>
     <th scope="col">participant_number</th>
     <th scope="col">invitation_number</th>
+    <th scope="col">control pannel</th>
+
   </thead>
  <tbody>
   <% @missions.each do |mission| %>
@@ -18,6 +20,9 @@
      <td>等級<%= mission.level %></td>
      <td><%=mission.participant_number%></td>
      <td><%=mission.invitation_number%></td>
+     <td>
+       <%= link_to "x", admin_mission_path(mission), method: :delete, data:{confirm:"確定刪除?"},class: "btn btn-danger" %>
+     </td>
    </tr>
   <%end%>
  </tbody>
