@@ -14,7 +14,7 @@
      <td><div style="width:100px;">
        
      <%=image_tag mission.image ,class: "img-fluid "%></div></td>
-     <td><%= mission.name %></td>
+     <td><%=link_to mission.name, admin_mission_path(mission) %></td>
      <td>等級<%= mission.level %></td>
      <td><%=mission.participant_number%></td>
      <td><%=mission.invitation_number%></td>

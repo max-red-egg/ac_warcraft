@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   namespace :admin do 
     root "missions#index"
-    resource :missions
+    resources :missions
   end
 
 end

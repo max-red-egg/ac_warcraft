@@ -4,7 +4,7 @@ class Admin::MissionsController < Admin::BaseController
   end
 
   def show 
-
+    @mission = Mission.find(params[:id])
   end
 
   def new
