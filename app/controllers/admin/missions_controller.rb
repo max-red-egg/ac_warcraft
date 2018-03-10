@@ -4,6 +4,7 @@ class Admin::MissionsController < Admin::BaseController
   end
 
   def show 
+
   end
 
   def new
@@ -25,6 +26,5 @@ class Admin::MissionsController < Admin::BaseController
 
   def mission_params
   end
-
 
 end
