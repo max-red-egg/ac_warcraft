@@ -1,3 +1,5 @@
 <div class="container">
-  <h1>this is admin::mission#index</h1>
+  <h1>admin page</h1>
+  <%= link_to "Create a Mission", new_admin_mission_path, class:"btn btn-primary" %>
+  <%= render partial: "mission_list" %>
 </div>

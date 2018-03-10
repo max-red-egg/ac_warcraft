@@ -1,0 +1,29 @@
+<table class="table">
+  <thead>
+    <th scope="col">id</th>
+    <th scope="col">image</th>
+    <th scope="col">name</th>
+    <th scope="col">level</th>
+    <th scope="col">participant_number</th>
+    <th scope="col">invitation_number</th>
+    <th scope="col">control pannel</th>
+
+  </thead>
+ <tbody>
+  <% @missions.each do |mission| %>
+   <tr>
+     <th scope="row"><%= mission.id%></th>
+     <td><div style="width:100px;">
+       
+     <%=image_tag mission.image ,class: "img-fluid "%></div></td>
+     <td><%=link_to mission.name, admin_mission_path(mission) %></td>
+     <td>等級<%= mission.level %></td>
+     <td><%=mission.participant_number%></td>
+     <td><%=mission.invitation_number%></td>
+     <td>
+       <%= link_to "x", admin_mission_path(mission), method: :delete, data:{confirm:"確定刪除?"},class: "btn btn-danger" %>
+     </td>
+   </tr>
+  <%end%>
+ </tbody>
+</table>
