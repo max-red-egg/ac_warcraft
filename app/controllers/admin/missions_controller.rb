@@ -1,4 +1,6 @@
 class Admin::MissionsController < Admin::BaseController
+  before_action :set_mission , only:[:show,:edit,:update,:destroy]
+
   def index
     @missions = Mission.all
   end
@@ -11,12 +13,19 @@ class Admin::MissionsController < Admin::BaseController
   end
 
   def create
+
   end
 
   def edit
   end
 
   def update
+    if @mission.update(mission_params)
+      flash[:notice] = "mission updated!"
+      redirect_to admin_mission_path(@mission)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -25,6 +34,11 @@ class Admin::MissionsController < Admin::BaseController
   private
 
   def mission_params
+    params.require(:mission).permit(:name,:level,:description,:participant_number,:invitation_number,:image)
+  end
+
+  def set_mission
+    @mission = Mission.find(params[:id])
   end
 
 end
