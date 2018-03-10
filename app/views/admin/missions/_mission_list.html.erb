@@ -1,0 +1,24 @@
+<table class="table">
+  <thead>
+    <th scope="col">id</th>
+    <th scope="col">image</th>
+    <th scope="col">name</th>
+    <th scope="col">level</th>
+    <th scope="col">participant_number</th>
+    <th scope="col">invitation_number</th>
+  </thead>
+ <tbody>
+  <% @missions.each do |mission| %>
+   <tr>
+     <th scope="row"><%= mission.id%></th>
+     <td><div style="width:100px;">
+       
+     <%=image_tag mission.image ,class: "img-fluid "%></div></td>
+     <td><%= mission.name %></td>
+     <td>等級<%= mission.level %></td>
+     <td><%=mission.participant_number%></td>
+     <td><%=mission.invitation_number%></td>
+   </tr>
+  <%end%>
+ </tbody>
+</table>

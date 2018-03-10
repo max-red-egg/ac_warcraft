@@ -1,5 +1,6 @@
 class Admin::MissionsController < Admin::BaseController
   def index
+    @missions = Mission.all
   end
 
   def show 
