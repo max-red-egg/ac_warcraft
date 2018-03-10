@@ -5,4 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create(name:'Admin', email:'admin@admin.com', password:'password',description:'This is admin',role:'admin' )
+file = File.open("#{Rails.root}/public/avatar/user10.jpg")
+User.create(name:'Admin', 
+  email:'admin@admin.com', 
+  password:'password', 
+  description:'This is admin',
+  role:'admin',
+  avatar: file )

@@ -401,7 +401,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.0)
   byebug
-  carrierwave (= 1.1.0)
+  carrierwave
   coffee-rails (~> 4.2)
   devise (~> 4.2)
   ffaker (~> 2.8, >= 2.8.1)

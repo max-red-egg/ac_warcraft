@@ -1,4 +1,27 @@
-<%= image_tag @user.avatar, class: "img-responsive center-block"%>
-<br>
-<h4><%= @user.name %></h4>
-<p><%= @user.description %></p>
+<br> 
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <% if @user.avatar %>
+        <%= image_tag @user.avatar_url, class: "img-responsive center-block"%>
+      <% end %>
+    </div>
+    <div class="col-md-2"></div>  
+    
+    <div class="col-md-7">
+      <h4>名字 <%= @user.name %></h4>
+      <p>自我介紹 <%= @user.description %></p>
+      <p>性別 <%= @user.gender %></p>
+      <p>等級 <%= @user.level %></p>
+      <p>目前狀態 <%= @user.state %></p>
+      <p>角色 <%= @user.role %></p>
+      <p>接受任務狀態 <%= @user.available %></p>
+      
+
+      <% if @user == current_user %>
+        <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-primary" %>
+      <% end %>
+    
+    </div>
+  </div>
+</div>
