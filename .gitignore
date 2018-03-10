@@ -32,4 +32,4 @@
 # Ignore db setting
 /config/database.yml
 
-secret.yml
+/config/secret.yml
