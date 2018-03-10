@@ -10,9 +10,18 @@ class Admin::MissionsController < Admin::BaseController
   end
 
   def new
+    @mission = Mission.new
   end
 
   def create
+    @mission = Mission.new(mission_params)
+    if @mission.save
+      flash[:notice] = "mission created!"
+      redirect_to admin_mission_path(@mission)
+    else
+      flash[:alert] = "something wrong!"
+      render :new
+    end
 
   end
 
