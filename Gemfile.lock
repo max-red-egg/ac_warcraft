@@ -57,9 +57,7 @@ GEM
       sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.0)
-
     carrierwave (1.1.0)
-
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
@@ -406,7 +404,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.0)
   byebug
-  carrierwave
+  carrierwave (= 1.1.0)
   coffee-rails (~> 4.2)
   devise (~> 4.2)
   ffaker (~> 2.8, >= 2.8.1)
