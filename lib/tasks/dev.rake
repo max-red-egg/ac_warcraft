@@ -21,11 +21,12 @@ namespace :dev do
   task fake_mission: :environment do
     Mission.destroy_all
     50.times do |i|
+      file = File.open("#{Rails.root}/public/mission/mission_#{i%12+1}.jpg")
         Mission.create!(
             name: FFaker::Book.title,
             description: FFaker::Book.description,
             level: rand(16),
-            image: FFaker::Book.cover,
+            image: file,
             invitation_number: 5
         )
     end
