@@ -3,7 +3,9 @@
   <div class='row'>
     <%= form_for(@user) do |f| %>
       <div class='col-md-3'>
-        <%= image_tag @user.avatar_url, class: "img-responsive center-block" %>
+        <% if @user.avatar_url %>
+        <%= image_tag @user.avatar_url, class: "img-responsive center-block"%>
+      <% end %>
         <%= f.label :avatar, "更換大頭照" %>
         <%= f.file_field :avatar %>
       </div>

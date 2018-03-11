@@ -34,5 +34,5 @@
 
 /config/secret.yml
 
-/public/avatar/
-public/uploads/
+/public/uploads
+

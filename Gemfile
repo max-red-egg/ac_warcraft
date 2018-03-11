@@ -43,7 +43,7 @@ gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'ffaker', '~> 2.8', '>= 2.8.1'
-gem 'carrierwave'             
+gem 'carrierwave',              '1.1.0'
 gem 'mini_magick',             '4.7.0'
 gem 'fog',                     '1.40.0'
 
