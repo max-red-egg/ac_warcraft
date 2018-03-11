@@ -33,5 +33,6 @@
 /config/database.yml
 
 /config/secret.yml
-public/avatar/
-public/uploads/
+
+/public/avatar/
+/public/uploads/

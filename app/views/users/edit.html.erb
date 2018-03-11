@@ -1,0 +1,35 @@
+<br>
+<div class='container'>
+  <div class='row'>
+    <%= form_for(@user) do |f| %>
+      <div class='col-md-3'>
+        <%= image_tag @user.avatar_url, class: "img-responsive center-block" %>
+        <%= f.label :avatar, "更換大頭照" %>
+        <%= f.file_field :avatar %>
+      </div>
+      <div class='col-md-9'>
+        <div class="form-group">
+          <%= f.label :name, "名字" %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :description, "自我介紹" %>
+          <%= f.text_area :description, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :state, "目前狀態" %>
+          <%= f.text_field :state, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :available, "是否能接受邀請" %>
+          <%= f.text_field :available, class: "form-control" %>
+        </div>
+
+        <%= f.submit "送出", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

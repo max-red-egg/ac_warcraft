@@ -1,0 +1,12 @@
+<div class="container">
+  <%= simple_form_for [:admin ,mission] do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :name %>
+    <%= f.input :level %>
+    <%= f.input :participant_number %>
+    <%= f.input :invitation_number %>
+    <%= f.input :image %>
+    <%= f.input :description %>
+    <%= f.button :submit, 'ok', class: 'btn btn-primary' %>
+  <%end%>
+</div>
