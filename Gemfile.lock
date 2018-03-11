@@ -57,7 +57,9 @@ GEM
       sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.0)
-    carrierwave (1.2.2)
+
+    carrierwave (1.1.0)
+
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
