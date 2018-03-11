@@ -19,7 +19,7 @@ class MissionImageUploader < CarrierWave::Uploader::Base
   #   # For Rails 3.1+ asset pipeline compatibility:
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
-  #  "/public/mission/mission_default.png"
+    ActionController::Base.helpers.asset_path("mission_default.png")
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   end
 
