@@ -1,0 +1,2 @@
+class UserInstance < ApplicationRecord
+end

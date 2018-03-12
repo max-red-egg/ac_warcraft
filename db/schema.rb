@@ -10,16 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_12_115707) do
+
+ActiveRecord::Schema.define(version: 2018_03_12_123302) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "abort_requests", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "team_id"
+    t.integer "instance_id"
     t.string "state", default: "request", null: false
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "instance_msgs", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "instance_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "instances", force: :cascade do |t|
+    t.integer "mission_id"
+    t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -27,7 +44,7 @@ ActiveRecord::Schema.define(version: 2018_03_12_115707) do
   create_table "invitations", force: :cascade do |t|
     t.integer "user_id"
     t.integer "invitee_id"
-    t.integer "team_id"
+    t.integer "instance_id"
     t.string "state", default: "inviting", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -41,14 +58,6 @@ ActiveRecord::Schema.define(version: 2018_03_12_115707) do
     t.integer "invitation_id"
   end
 
-  create_table "mission_reviews", force: :cascade do |t|
-    t.integer "user_team_id"
-    t.integer "reviewer_id"
-    t.text "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "missions", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.integer "level", default: 0, null: false
@@ -60,24 +69,17 @@ ActiveRecord::Schema.define(version: 2018_03_12_115707) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "team_msgs", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "team_id"
-    t.text "content"
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_instance_id"
+    t.integer "reviewer_id"
+    t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "teams", force: :cascade do |t|
-    t.integer "mission_id"
-    t.string "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "user_teams", force: :cascade do |t|
+  create_table "user_instances", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "team_id"
+    t.integer "instance_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
