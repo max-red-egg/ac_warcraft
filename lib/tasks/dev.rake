@@ -11,7 +11,8 @@ namespace :dev do
         level: rand(15)+1,
         gender: FFaker::Gender.random,
         description:FFaker::Lorem.paragraph,
-        avatar: file
+        avatar: file,
+        confirmed_at: Time.zone.now
         )
     end
     puts "create 30 fake user"
