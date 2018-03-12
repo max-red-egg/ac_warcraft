@@ -6,7 +6,14 @@ Rails.application.routes.draw do
 
   root "missions#index"
 
-  resources :missions, only: [:index, :show] 
+  resources :missions, only: [:index, :show] do
+    member do
+      post :challenge
+      # POST challenge_mission_path 挑戰本任務
+
+    end
+  end
+
   resources :users
 
   namespace :admin do 
