@@ -11,4 +11,5 @@ User.create(name:'Admin',
   password:'password', 
   description:'This is admin',
   role:'admin',
-  avatar: file )
+  avatar: file,
+  confirmed_at: Time.zone.now )

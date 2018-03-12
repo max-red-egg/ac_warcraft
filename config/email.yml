@@ -1,0 +1,31 @@
+development:
+
+  address: "smtp.gmail.com"
+
+  port: "587"
+
+  domain: <%=ENV['MAIL_HOST']%>
+
+  authentication: "plain"
+
+  user_name: <%=ENV['SENDMAIL_USERNAME']%>
+
+  password: <%=ENV['SENDMAIL_PASSWORD']%>
+
+  enable_starttls_auto: true
+
+production:
+
+  address: "smtp.mailgun.org"
+
+  port: "587"
+
+  domain: <%=ENV['DOMAIN']%>
+
+  authentication: "plain"
+
+  user_name: <%=ENV['MAILGUN_USERNAME']%>
+
+  password: <%=ENV['MAILGUN_PASSWORD']%>
+
+  enable_starttls_auto: true
