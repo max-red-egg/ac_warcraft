@@ -13,6 +13,5 @@
   </div>
   <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
   <!-- 如果等級符合 -->
-  <div class="btn btn-primary">接受任務</div>
-
+  <%= link_to "挑戰任務", challenge_mission_path(@mission), method: :post, class: "btn btn-primary" %>
 </div>
