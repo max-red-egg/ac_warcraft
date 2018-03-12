@@ -1,2 +1,0 @@
-class MissionReview < ApplicationRecord
-end
