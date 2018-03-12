@@ -9,6 +9,7 @@ admin:
   email: eggyy@email.com
   description: testtesttest
   gender: male
+  role: admin
 
 user1:
   name: user1 example
