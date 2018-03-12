@@ -1,0 +1,2 @@
+class InstanceMsg < ApplicationRecord
+end
