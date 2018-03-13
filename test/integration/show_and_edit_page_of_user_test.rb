@@ -4,9 +4,7 @@ class ShowAndEditPageOfUserTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers # include devise helper methods
   def setup
     @admin = users(:admin)
-    @admin.confirmed_at = Time.zone.now
-    @user = users(:user1)
-    @user.confirmed_at = Time.zone.now
+    @user = users(:user)
   end
 
   test "show page will show edit link when current user is visit" do
