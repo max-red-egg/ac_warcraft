@@ -2,6 +2,9 @@
   <h1>副本任務已完成</h1>
   <%= render partial:"mission_info", locals:{mission: @mission} %>
   <%= render partial: "member_info", locals:{members: @members} %>
-  
+
+  <h2>你的答案</h2>
+  <%= @instance.answer %>
+  <br>
   <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
 </div>

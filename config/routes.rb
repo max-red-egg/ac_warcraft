@@ -6,7 +6,12 @@ Rails.application.routes.draw do
 
   root "missions#index"
 
-  resources :instances, only: [:show, :create]
+  resources :instances, only: [:show] do
+    member do
+      post :submit
+      #任務完成，提交答案
+    end
+  end
   
   resources :missions, only: [:index, :show] do
     member do
