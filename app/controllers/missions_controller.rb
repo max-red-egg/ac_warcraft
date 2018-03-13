@@ -16,8 +16,8 @@ class MissionsController < ApplicationController
       #使用者available變為busy
       instance = current_user.instances.build(mission_id: params[:id])
       current_user.available = 'busy'
-      current_user.save
-      instance.save
+      current_user.save!
+      instance.save!
       flash[:notice] = "挑戰任務成功" 
       redirect_back(fallback_location: root_path)
     else
