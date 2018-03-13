@@ -10,10 +10,24 @@ admin:
   description: testtesttest
   gender: male
   role: admin
+  confirmed_at: <%= Time.zone.now %>
 
-user1:
-  name: user1 example
-  email: user1@email.com
+user:
+  name: user example
+  email: user@email.com
   description: testtesttest
   gender: male
+  confirmed_at: <%= Time.zone.now %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name:  <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.com" %>
+  description: <%= FFaker::Lorem.paragraph %>
+  gender: <%= FFaker::Gender.random %>
+  role: normal
+  confirmed_at: <%= Time.zone.now %>
+<% end %>
+
+
   

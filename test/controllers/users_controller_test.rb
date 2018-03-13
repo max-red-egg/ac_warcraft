@@ -4,10 +4,20 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers # include devise helper methods
   def setup
     @admin = users(:admin)
-    @admin.confirmed_at = Time.zone.now
-    @user = users(:user1)
-    @user.confirmed_at = Time.zone.now
+    @user = users(:user)
   end
+
+  test "only login can see user/index page" do
+    # not sign in
+    get users_path
+    assert_redirected_to new_user_session_path
+
+    # sign in as @user
+    sign_in @user
+    get users_path
+    assert_response :success
+  end
+
   test "only login can see show page" do
     # not sign in
     get user_path(@user)

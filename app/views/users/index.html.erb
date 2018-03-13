@@ -6,7 +6,7 @@
       <% @users.each do |user| %>
         <div style="border:1px solid #b0b0b0" class="col-md-2">
           <div style="width:100px">
-            <%= image_tag user.avatar_url, class: "img-fluid" %>
+            <%= image_tag user.avatar_url, class: "img-fluid" if user.avatar_url %>
           </div>
           <ul>
             <li>名字: <%= link_to user.name, user %></li>
