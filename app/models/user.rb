@@ -20,11 +20,11 @@ class User < ApplicationRecord
   end
 
   def busy?
-    self.state == 'busy'
+    self.available == 'busy'
   end
 
   # 確認該任務可不可以執行
   def take_mission?(mission)
-    (self.state=='yes')&& (self.level >= mission.level)
+    (self.available=='yes')&& (self.level >= mission.level)
   end
 end
