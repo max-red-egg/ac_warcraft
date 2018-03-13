@@ -5,5 +5,13 @@
   </div>
   <%= render partial:"mission_info", locals:{mission: @mission} %>
   <%= render partial: "member_info", locals:{members: @members} %>
+
+  <div class="">
+  <%= simple_form_for @instance, url:submit_instance_path(@instance), method: :post do |f| %>
+    <%= f.input :answer %>
+    <%= f.button :submit, '提交', class: "btn btn-primary" %>
+  <%end%>
+  </div>
+
   <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
 </div>

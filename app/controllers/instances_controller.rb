@@ -18,5 +18,25 @@ class InstancesController < ApplicationController
     end
       
   end
+  def submit
+    instance = Instance.find(params[:id])
+    if instance.update!(submit_params)
+      flash[:notice] = "任務完成！"
 
+      # 更改instance狀態
+      instance.complete!
+
+
+      redirect_to instance_path(instance)
+    else
+      flash[:alert] = "提交失敗！"
+      redirect_to instance_path(instance)
+    end
+
+  end
+
+  private
+  def submit_params
+    params.require(:instance).permit(:answer)
+  end
 end

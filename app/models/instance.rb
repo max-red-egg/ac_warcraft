@@ -1,5 +1,5 @@
 class Instance < ApplicationRecord
-  after_commit :setup_state
+  after_commit :setup_state!
   has_many :user_instances, dependent: :destroy
 
   #instance.members 表示此副本的所有成員
@@ -8,8 +8,23 @@ class Instance < ApplicationRecord
   #instance.mission 表示本隊的任務
   belongs_to :mission
 
+
+  def complete!
+    #任務完成，更改狀態
+    if self.state == 'in_progress'
+      self.state = 'complete'
+      self.save
+      #更改所有member狀態
+      members = self.members
+      members.each do |member|
+        member.available = "yes"
+        member.save
+      end
+    end
+  end
+
   private
-  def setup_state
+  def setup_state!
     #如果人數滿，組隊中會變成進行中
 
     #如果設定在after_commit 會造成查詢次數過多
@@ -21,5 +36,7 @@ class Instance < ApplicationRecord
       end
     end
   end
+
+
 
 end
