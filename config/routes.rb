@@ -6,11 +6,12 @@ Rails.application.routes.draw do
 
   root "missions#index"
 
+  resources :instances, only: [:show, :create]
+  
   resources :missions, only: [:index, :show] do
     member do
       post :challenge
       # POST challenge_mission_path 挑戰本任務
-
     end
   end
 

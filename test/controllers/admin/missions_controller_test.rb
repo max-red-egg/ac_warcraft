@@ -4,9 +4,7 @@ class Admin::MissionsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers # include devise helper methods
   def setup
     @admin = users(:admin)
-    @admin.confirmed_at = Time.zone.now
-    @user = users(:user1)
-    @user.confirmed_at = Time.zone.now
+    @user = users(:user)
     @mission = missions(:mission1)
   end
 

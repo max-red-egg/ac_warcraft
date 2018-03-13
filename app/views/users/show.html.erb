@@ -2,9 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <% if @user.avatar_url %>
-        <%= image_tag @user.avatar_url, class: "img-responsive center-block"%>
-      <% end %>
+        <%= image_tag @user.avatar_url, class: "img-responsive center-block" if @user.avatar_url %>
     </div>
     <div class="col-md-2"></div>  
     
@@ -15,7 +13,7 @@
       <p>等級 <%= @user.level %></p>
       <p>目前狀態 <%= @user.state %></p>
       <p>角色 <%= @user.role %></p>
-      <p>接受任務狀態 <%= @user.available %></p>
+      <p>接受任務狀態 <%= transcript_user_state(@user.available) %></p>
       
 
       <% if @user == current_user %>

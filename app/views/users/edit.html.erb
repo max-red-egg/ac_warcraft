@@ -1,33 +1,26 @@
 <br>
 <div class='container'>
   <div class='row'>
-    <%= form_for(@user) do |f| %>
+    <%= simple_form_for(@user) do |f| %>
       <div class='col-md-3'>
-        <% if @user.avatar_url %>
-        <%= image_tag @user.avatar_url, class: "img-responsive center-block"%>
-      <% end %>
-        <%= f.label :avatar, "更換大頭照" %>
-        <%= f.file_field :avatar %>
+        <%= image_tag @user.avatar_url , class: "img-responsive center-block" if @user.avatar_url %>
+        <%= f.input :avatar, label: "更換大頭貼" %>
       </div>
       <div class='col-md-9'>
         <div class="form-group">
-          <%= f.label :name, "名字" %>
-          <%= f.text_field :name, class: "form-control" %>
+          <%= f.input :name, label: "名字", class: "form-control" %>
         </div>
         
         <div class="form-group">
-          <%= f.label :description, "自我介紹" %>
-          <%= f.text_area :description, class: "form-control" %>
+          <%= f.input :description, label: "自我介紹", class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :state, "目前狀態" %>
-          <%= f.text_field :state, class: "form-control" %>
+          <%= f.input :state, label: "目前狀態", class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :available, "是否能接受邀請" %>
-          <%= f.text_field :available, class: "form-control" %>
+          <%= f.input :available, label: "能否接受邀請", class: "form-control" %>
         </div>
 
         <%= f.submit "送出", class: "btn btn-primary" %>
