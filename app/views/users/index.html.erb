@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>瀏覽隊友</h1>
+  <div class="row">
+    
+      <!-- show user -->
+      <% @users.each do |user| %>
+        <div style="border:1px solid #b0b0b0" class="col-md-2">
+          <div style="width:100px">
+            <%= image_tag user.avatar_url, class: "img-fluid" %>
+          </div>
+          <ul>
+            <li>名字: <%= link_to user.name, user %></li>
+            <li><%= transcript_user_state(user.available) %></li> 
+          </ul>
+        </div>
+
+      <%end%>
+      <!-- show user end -->
+  </div>
+  <%= paginate @users %>
+</div>

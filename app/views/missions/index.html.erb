@@ -1,6 +1,9 @@
 <div class="container">
   <h1>mission#index</h1>
-
+  <button class="btn">
+    <%= link_to "瀏覽所有使用者", users_path %>
+  </button>
+  
   <!-- show mission -->
   <% @missions.each do |mission| %>
     <div style="border:1px solid #b0b0b0">
