@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 2018_03_12_123302) do
+ActiveRecord::Schema.define(version: 2018_03_12_152457) do
 
 
   # These are extensions that must be enabled in order to support this database
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_03_12_123302) do
 
   create_table "instances", force: :cascade do |t|
     t.integer "mission_id"
-    t.string "state"
+    t.string "state", default: "teaming", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -13,6 +13,5 @@
   </div>
   <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
   <!-- 如果等級符合 -->
-  <div class="btn btn-primary">接受任務</div>
-
+  <%= render partial:"challenge" , locals: {mission: @mission} %>
 </div>
