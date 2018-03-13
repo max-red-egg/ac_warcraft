@@ -2,6 +2,8 @@ class InstancesController < ApplicationController
   def show
     @instance = Instance.find(params[:id])
     @mission = @instance.mission
+    @members = @instance.members
+    
     #如果不同的instance.state, render 不同的template
     case @instance.state
     when "teaming"
