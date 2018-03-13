@@ -31,8 +31,6 @@
 
 # Ignore db setting
 /config/database.yml
-
-/config/secret.yml
-
+/config/secrets.yml
 /public/uploads
 
