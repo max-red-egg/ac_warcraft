@@ -3,7 +3,7 @@ class InstancesController < ApplicationController
     @instance = Instance.find(params[:id])
     @mission = @instance.mission
     @members = @instance.members
-    
+
     #如果不同的instance.state, render 不同的template
     case @instance.state
     when "teaming"
@@ -19,7 +19,4 @@ class InstancesController < ApplicationController
       
   end
 
-  def create
-    
-  end
 end
