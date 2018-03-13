@@ -1,0 +1,7 @@
+<div class="container">
+  <h1>副本任務已完成</h1>
+  <%= render partial:"mission_info", locals:{mission: @mission} %>
+  <%= render partial: "member_info", locals:{members: @members} %>
+  
+  <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
+</div>
