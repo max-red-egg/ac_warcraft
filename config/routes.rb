@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   root "missions#index"
 
   resources :missions, only: [:index, :show] do
+    resources :instances, only: [:show, :create]
+    #instances#create似乎可以取代 challenge
+    #確定後challenge會改掉
+
     member do
       post :challenge
       # POST challenge_mission_path 挑戰本任務
