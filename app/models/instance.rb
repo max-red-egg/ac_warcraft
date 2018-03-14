@@ -17,10 +17,27 @@ class Instance < ApplicationRecord
       #更改所有member狀態
       members = self.members
       members.each do |member|
-        member.available = "yes"
+        member.available = 'yes'
         member.save
       end
     end
+  end
+
+  def abort!
+    if self.state == 'in_progress' || self.state == 'teaming'
+      self.state = 'abort'
+      self.save
+      #更改所有member狀態
+      members = self.members
+      members.each do |member|
+        member.available = 'yes'
+        member.save
+      end
+    end
+  end
+
+  def is_member?(user)
+    members.include?(user)
   end
 
   private
