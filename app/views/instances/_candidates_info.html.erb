@@ -1,0 +1,11 @@
+<h1>可選隊員</h1>
+<div class="row">
+  <% candidates.each do |candidate| %>
+    <div class="col-md-3">
+      <%= link_to candidate do %>
+        <%= image_tag candidate.avatar_url, class: "img-responsive center-block small" if candidate.avatar_url %>
+        <%= candidate.name %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

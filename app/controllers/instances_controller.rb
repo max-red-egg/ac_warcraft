@@ -4,6 +4,11 @@ class InstancesController < ApplicationController
     @mission = @instance.mission
     @members = @instance.members
 
+    # 選出可以參與此任務的users
+    @candidates = User.all.select do |user|
+      user.take_mission?(@mission)
+    end
+
     #如果不同的instance.state, render 不同的template
     case @instance.state
     when "teaming"

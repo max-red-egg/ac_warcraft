@@ -26,9 +26,10 @@ namespace :dev do
         Mission.create!(
             name: FFaker::Book.title,
             description: FFaker::Book.description,
-            level: rand(16),
+            level: rand(15)+1,
             image: file,
-            invitation_number: 5
+            invitation_number: 5,
+            participant_number: rand(2) + 1
         )
     end
     puts "create 50 fake missions"

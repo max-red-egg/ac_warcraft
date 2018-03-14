@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
 
   def admin?
-    self.role=='admin'
+    self.role == 'admin'
   end
 
   def busy?
@@ -25,6 +25,6 @@ class User < ApplicationRecord
 
   # 確認該任務可不可以執行
   def take_mission?(mission)
-    (self.available=='yes')&& (self.level >= mission.level)
+    (self.available == 'yes') && (self.level >= mission.level)
   end
 end
