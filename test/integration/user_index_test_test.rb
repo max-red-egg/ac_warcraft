@@ -7,7 +7,7 @@ class UserIndexTestTest < ActionDispatch::IntegrationTest
     @user = users(:user)
   end
 
-  test "test" do
+  test "user_index" do
     sign_in @admin
     get users_path
     assert_template 'users/index'

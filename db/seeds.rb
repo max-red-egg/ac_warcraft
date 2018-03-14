@@ -9,6 +9,7 @@ file = File.open("#{Rails.root}/public/avatar/user10.jpg")
 User.create(name:'Admin', 
   email:'admin@admin.com', 
   password:'password', 
+  level: 15,
   description:'This is admin',
   role:'admin',
   avatar: file,

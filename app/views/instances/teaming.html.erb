@@ -1,7 +1,10 @@
 <div class="container">
   <h1>組隊中</h1>
+  <div class="">
+    <%=image_tag @mission.image_url %>
+  </div>
   <%= render partial:"mission_info", locals:{mission: @mission} %>
   <%= render partial: "member_info", locals:{members: @members} %>
-  
+  <%= render partial: "candidates_info", locals:{candidates: @candidates} %>
   <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
 </div>

@@ -3,8 +3,12 @@ class MissionsController < ApplicationController
   def index
     @missions = Mission.page(params[:page]).per(20)
   end
+
   def show 
     @mission = Mission.find(params[:id])
+    # 如果要看的任務為現在正在進行的任務會重新導向到副本頁面
+    # current_instance = current_user.instances.select { |instance| instance.state == 'in_progress' }[0]
+    # redirect_to current_instance if current_instance.mission_id == @mission.id 
   end
 
   def challenge

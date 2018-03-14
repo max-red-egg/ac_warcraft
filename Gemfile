@@ -48,6 +48,7 @@ gem 'mini_magick',             '4.7.0'
 gem 'fog',                     '1.40.0'
 
 gem 'simple_form', '~> 3.5', '>= 3.5.1'
+gem 'rubocop'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,11 +1,12 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+instance_teaming:
+  mission: mission1
+  state: teaming
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+instance_in_progress:
+  mission: mission1
+  state: in_progress 
+
+instance_complete:
+  mission: mission1
+  state: complete 
+
