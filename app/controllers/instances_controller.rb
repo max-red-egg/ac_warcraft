@@ -12,6 +12,8 @@ class InstancesController < ApplicationController
       render "in_progress"
     when "complete"
       render "complete"
+    when "abort"
+      render "abort"
     else
       flash[:alert] = "任務關閉中"
       redirect_to root_path
@@ -32,8 +34,35 @@ class InstancesController < ApplicationController
       flash[:alert] = "提交失敗！"
       redirect_to instance_path(instance)
     end
+  end
+
+  def abort
+  # 放棄任務
+    #使用者可以直接中止任務
+    instance = Instance.find(params[:id])
+    if instance.is_member?(current_user)
+      #確認是團隊成員
+      if instance.state == "teaming" || instance.state == "in_progress"
+        #確認是 teaming 和 in_progress
+        instance.abort!
+        flash[:notice] = "任務中止"
+
+        # 回到instance#show
+        redirect_to instance_path(instance)
+      else
+        flash[:alert] = "存取禁止"
+        redirect_back(fallback_location: root_path)
+      end
+    #不是成員
+    else
+      flash[:alert] = "存取禁止"
+      redirect_back(fallback_location: root_path)
+    end
 
   end
+
+
+
 
   private
   def submit_params
