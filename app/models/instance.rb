@@ -49,12 +49,12 @@ class Instance < ApplicationRecord
   # ::instance method:: 確認user可被邀請？
   def can_invite?(user)
     # ----說明----
-    # 確認user為可接受邀請狀態
+    # 確認user為可接受邀本任務
     # 確認user不是 邀請中的使用者
     # 確認user不是member
     # ------------
-    # 如果user為可接受邀請
-    if user.available == "yes"
+    # 如果user可以接受任務
+    if user.take_mission?(self.mission)
       # user不在 邀請函是inviting 的集合中 且不是member, 就是可發送邀請
       return ( !self.invitees.where('invitations.state = ?','inviting').include?(user) ) &&  ( !self.members.include?(user) )
     else
@@ -65,9 +65,9 @@ class Instance < ApplicationRecord
   # ::instance method:: 列出所有可被邀請的使用者
   def invitable_users
     # ----說明----
-    # 可邀請的user = 所有的user - 被邀請中的user - members
+    # 可邀請的user = 所有可執行user- 被邀請中的user - members
     # ------------
-    users = User.all
+    users = User.where('available = ? AND level >= ?','yes',self.mission.level )
     users = users - self.invitees.where('invitations.state = ?','inviting') - self.members
   end
 
