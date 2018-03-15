@@ -8,6 +8,8 @@ class Instance < ApplicationRecord
   #instance.mission 表示本隊的任務
   belongs_to :mission
 
+  has_many :invitations
+  has_many :invitees, through: :invitations
 
   def complete!
     #任務完成，更改狀態
