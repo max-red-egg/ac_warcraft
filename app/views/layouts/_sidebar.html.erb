@@ -1,0 +1,37 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>任務資訊</span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <%= link_to fa_icon("gavel", text:'任務牆'), missions_path ,class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to fa_icon("file", text:'副本列表'), missions_path ,class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to fa_icon("envelope", text:'邀請函列表'), missions_path ,class: "nav-link" %>
+      </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>隊友資訊</span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <%= link_to fa_icon("user", text:'關於我'), edit_user_path(current_user) ,class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to fa_icon("users", text:'隊友清單'), users_path ,class: "nav-link" %>
+      </li>
+    </ul>
+
+  </div>
+</nav>
