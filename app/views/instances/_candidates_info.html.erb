@@ -6,6 +6,7 @@
         <%= image_tag candidate.avatar_url, class: "img-responsive center-block small" if candidate.avatar_url %>
         <%= candidate.name %>
       <% end %>
+      <%= button_to "invite" , invite_user_path(candidate), params: {instance_id: instance.id} %>
     </div>
   <% end %>
 </div>

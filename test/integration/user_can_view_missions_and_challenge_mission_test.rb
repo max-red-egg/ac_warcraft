@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserCanPickupMissionsAndViewCandidatesTest < ActionDispatch::IntegrationTest
+class UserCanViewMissionsAndChallengeMissionTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers # include devise helper methods
   def setup
     @admin = users(:admin)
@@ -32,6 +32,7 @@ class UserCanPickupMissionsAndViewCandidatesTest < ActionDispatch::IntegrationTe
     assert_select 'a[href=?]', challenge_mission_path(@mission2)
   end
 
+  # 確認user可以選擇挑戰
   test "when click challenge button a instance will create" do
     sign_in @user
     assert_equal "yes", @user.available

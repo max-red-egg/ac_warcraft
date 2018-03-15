@@ -10,7 +10,8 @@
         </div>
         <%= render partial:"mission_info", locals:{mission: @mission} %>
         <%= render partial: "member_info", locals:{members: @members} %>
-        <%= render partial: "candidates_info", locals:{candidates: @candidates} %>
+        <%= render partial: "inviting_users", locals: {invitations: @invitations } %>
+        <%= render partial: "candidates_info", locals:{candidates: @candidates, instance: @instance} %>
         <%= link_to '放棄任務', abort_instance_path, method: :post, class: "btn btn-primary" %>
         <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
       </div>

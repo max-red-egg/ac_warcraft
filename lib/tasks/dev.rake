@@ -36,4 +36,20 @@ namespace :dev do
     puts "Now you have #{Mission.count} missions!"
   end
 
+  task fake_mission_level1: :environment do
+    Mission.destroy_all
+    50.times do |i|
+      file = File.open("#{Rails.root}/public/mission/mission_#{i%12+1}.jpg")
+        Mission.create!(
+            name: FFaker::Book.title,
+            description: FFaker::Book.description,
+            level: 1,
+            image: file,
+            invitation_number: 5,
+            participant_number: rand(2) + 1
+        )
+    end
+    puts "create #{Mission.count} fake missions"
+    puts "Now you have #{Mission.count} missions!"
+  end
 end
