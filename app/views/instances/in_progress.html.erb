@@ -1,18 +1,26 @@
-<div class="container">
-  <h1>副本進行中</h1>
-  <div class="">
-    <%=image_tag @mission.image_url %>
-  </div>
-  <%= render partial:"mission_info", locals:{mission: @mission} %>
-  <%= render partial: "member_info", locals:{members: @members} %>
-  
-  <div class="">
-  <%= simple_form_for @instance, url:submit_instance_path(@instance), method: :post do |f| %>
-    <%= f.input :answer %>
-    <%= f.button :submit, '提交', class: "btn btn-primary" %>
-  <%end%>
-  </div>
+<div class="container-fluid">
+  <div class="row">
+    <%= render 'layouts/sidebar' %>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <%= render 'layouts/notice' %>
+      <div class="container">
+        <h1>副本進行中</h1>
+        <div class="">
+          <%=image_tag @mission.image_url %>
+        </div>
+        <%= render partial:"mission_info", locals:{mission: @mission} %>
+        <%= render partial: "member_info", locals:{members: @members} %>
 
-  <%= link_to '放棄任務', abort_instance_path, method: :post, class: "btn btn-primary" %>
-  <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
+        <div class="">
+        <%= simple_form_for @instance, url:submit_instance_path(@instance), method: :post do |f| %>
+          <%= f.input :answer %>
+          <%= f.button :submit, '提交', class: "btn btn-primary" %>
+        <%end%>
+        </div>
+
+        <%= link_to '放棄任務', abort_instance_path, method: :post, class: "btn btn-primary" %>
+        <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
+      </div>
+    </main>
+  </div>
 </div>
