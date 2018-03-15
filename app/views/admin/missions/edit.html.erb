@@ -1,4 +1,12 @@
-<div class="container">
-  <%= render partial:"form", locals: {mission: @mission} %>
+<div class="container-fluid">
+  <div class="row">
+    <%= render 'layouts/admin_sidebar' %>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <%= render 'layouts/notice' %>
+      <div class="container">
+        <%= render partial:"form", locals: {mission: @mission} %>
 
+      </div>
+    </main>
+  </div>
 </div>
