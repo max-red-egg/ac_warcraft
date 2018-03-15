@@ -8,7 +8,11 @@ class Instance < ApplicationRecord
   #instance.mission 表示本隊的任務
   belongs_to :mission
 
+  has_many :invitations
+  has_many :invitees, through: :invitations
 
+
+  # ::instance method:: 任務副本instance完成
   def complete!
     #任務完成，更改狀態
     if self.state == 'in_progress'
@@ -23,6 +27,7 @@ class Instance < ApplicationRecord
     end
   end
 
+  # ::instance method::  任務副本instance終止
   def abort!
     if self.state == 'in_progress' || self.state == 'teaming'
       self.state = 'abort'
@@ -36,11 +41,43 @@ class Instance < ApplicationRecord
     end
   end
 
+  # ::instance method:: 確認user為instance的成員
   def is_member?(user)
     members.include?(user)
   end
 
+  # ::instance method:: 確認user可被邀請？
+  def can_invite?(user)
+    # ----說明----
+    # 確認user為可接受邀本任務
+    # 確認user不是 邀請中的使用者
+    # 確認user不是member
+    # ------------
+    # 如果user可以接受任務
+    if user.take_mission?(self.mission)
+      # user不在 邀請函是inviting 的集合中 且不是member, 就是可發送邀請
+      return ( !self.invitees.where('invitations.state = ?','inviting').include?(user) ) &&  ( !self.members.include?(user) )
+    else
+      return false
+    end
+  end
+
+  # ::instance method:: 列出所有可被邀請的使用者
+  def invitable_users
+    # ----說明----
+    # 可邀請的user = 所有可執行user- 被邀請中的user - members
+    # ------------
+    users = User.where('available = ? AND level >= ?','yes',self.mission.level )
+    users = users - self.invitees.where('invitations.state = ?','inviting') - self.members
+  end
+
+  # ::instance method:: 列出所有發送邀請中的使用者
+  def inviting_users
+    self.invitees.where('invitations.state = ?','inviting')
+  end
+
   private
+  # ::instance method:: 自動設定任務副本instance狀態
   def setup_state!
     #如果人數滿，組隊中會變成進行中
 

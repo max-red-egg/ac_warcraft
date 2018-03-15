@@ -13,6 +13,8 @@ class User < ApplicationRecord
   #user.instances可以看到所有挑戰過的副本
   has_many :instances, through: :user_instances
 
+  has_many :invitations
+ 
 
 
   def admin?
