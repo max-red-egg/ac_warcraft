@@ -76,6 +76,11 @@ class Instance < ApplicationRecord
     self.invitees.where('invitations.state = ?','inviting')
   end
 
+  # ::instance method:: 列出所有發送邀請中的邀請函
+  def inviting_invitations
+    self.invitations.where('state = ?', 'inviting')
+  end
+
   private
   # ::instance method:: 自動設定任務副本instance狀態
   def setup_state!
