@@ -34,3 +34,6 @@
 /config/secrets.yml
 /public/uploads
 
+# Ignore Spring files.
+/spring/*.pid
+
