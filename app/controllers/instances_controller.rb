@@ -4,10 +4,13 @@ class InstancesController < ApplicationController
     @mission = @instance.mission
     @members = @instance.members
 
-    # 選出可以參與此任務的users
-    @candidates = User.all.select do |user|
-      user.take_mission?(@mission)
+    if @instance.state == "teaming"
+
+      #列出所有可被邀請的使用者
+      @candidates = @instance.invitable_users
+      # @instance.inviting_users 是正在邀請的使用者
     end
+
 
     #如果不同的instance.state, render 不同的template
     case @instance.state
