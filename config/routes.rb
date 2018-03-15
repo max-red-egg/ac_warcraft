@@ -29,7 +29,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do 
+    member do
+      post :invite
+    end
+  end
 
   namespace :admin do 
     root "missions#index"
