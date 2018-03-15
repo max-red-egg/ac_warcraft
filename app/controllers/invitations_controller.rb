@@ -1,5 +1,9 @@
 class InvitationsController < ApplicationController
   def show
+    @invitation = Invitation.find(params[:id])
+    @inviter = @invitation.user
+    @invitee = @invitation.invitee
+    @mission = @invitation.instance.mission
   end
 
   def accept
