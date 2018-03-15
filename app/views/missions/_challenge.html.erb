@@ -1,7 +1,6 @@
 <!-- 確認user可以挑戰任務 -->
 <%if current_user.take_mission?(mission)%>
   <%= link_to "挑戰任務", challenge_mission_path(mission), method: :post, class: "btn btn-primary" %>
-  
 <%else%>
-  <div class="btn btn-primary disabled" >挑戰任務</div>
+  <div class="btn btn-secondary disabled" >無法挑戰</div>
 <%end%>
