@@ -5,10 +5,12 @@ class InstancesController < ApplicationController
     @members = @instance.members
 
     if @instance.state == "teaming"
-
       #列出所有可被邀請的使用者
       @candidates = @instance.invitable_users
       # @instance.inviting_users 是正在邀請的使用者
+      #所有邀情函
+      @invitations = @instance.inviting_invitations.includes(:user)
+
     end
 
 

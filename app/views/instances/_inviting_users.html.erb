@@ -1,10 +1,12 @@
 <h2>已經送出邀請</h2>
-  <% inviting_users.each do |user| %>
+
+<% invitations.each do |invitation| %>
   <div class="col-md-3">
-    <%= link_to user do %>
-      <%= image_tag user.avatar_url, class: "img-responsive center-block small" if user.avatar_url %>
-      <%= user.name %>
+    <%= link_to invitation.invitee do %>
+      <%= image_tag invitation.invitee.avatar_url, class: "img-responsive center-block small" if invitation.invitee.avatar_url %>
+      <%= invitation.invitee.name %>
     <% end %>
-    <div class="btn btn-primary disabled">送出邀請中</div>
+  <div class="btn btn-primary disabled">送出邀請中</div>
   </div>
-<% end %>
+<%end%>
+
