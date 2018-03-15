@@ -8,7 +8,7 @@
         <p class="card-text"><%= truncate mission.description, length: 60 %></p>
         <%= link_to "任務詳情", mission_path(mission), class: "btn btn-primary" %>
         <!-- 任務狀態，若1人任務，直接建立副本開始挑戰，兩人以上，建立副本，直接進入組隊畫面-->
-        <a href="#" class="btn btn-warning">接受挑戰</a>
+        <%= render partial:"challenge" , locals: {mission: mission} %>
         <!-- 任務狀態 end -->
       </div>
     </div>

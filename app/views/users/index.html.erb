@@ -1,21 +1,29 @@
-<div class="container">
-  <h1>瀏覽隊友</h1>
+<div class="container-fluid">
   <div class="row">
-    
-      <!-- show user -->
-      <% @users.each do |user| %>
-        <div style="border:1px solid #b0b0b0" class="col-md-2">
-          <div style="width:100px">
-            <%= image_tag user.avatar_url, class: "img-fluid" if user.avatar_url %>
-          </div>
-          <ul>
-            <li>名字: <%= link_to user.name, user %></li>
-            <li><%= transcript_user_state(user.available) %></li> 
-          </ul>
-        </div>
+    <%= render 'layouts/sidebar' %>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
+      <%= render 'layouts/notice' %>
+      <div class="container">
+        <h1>瀏覽隊友</h1>
+        <div class="row">
 
-      <%end%>
-      <!-- show user end -->
+            <!-- show user -->
+            <% @users.each do |user| %>
+              <div style="border:1px solid #b0b0b0" class="col-md-2">
+                <div style="width:100px">
+                  <%= image_tag user.avatar_url, class: "img-fluid" if user.avatar_url %>
+                </div>
+                <ul>
+                  <li>名字: <%= link_to user.name, user %></li>
+                  <li><%= transcript_user_state(user.available) %></li>
+                </ul>
+              </div>
+
+            <%end%>
+            <!-- show user end -->
+        </div>
+        <%= paginate @users %>
+      </div>
+    </main>
   </div>
-  <%= paginate @users %>
 </div>
