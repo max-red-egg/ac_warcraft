@@ -1,8 +1,8 @@
-namespace :dev do 
-  task fake_user: :environment do 
+namespace :dev do
+  task fake_user: :environment do
     User.destroy_all
     20.times do |i|
-      
+
       file = File.open("#{Rails.root}/public/avatar/user#{i+1}.jpg")
       User.create!(
         email: (User.count+1).to_s+".user@gmail.com",
@@ -15,7 +15,7 @@ namespace :dev do
         confirmed_at: Time.zone.now
         )
     end
-    puts "create 30 fake user"
+    puts "create #{User.count} fake users"
     puts "Now you have #{User.count} users!"
   end
 
@@ -32,7 +32,7 @@ namespace :dev do
             participant_number: rand(2) + 1
         )
     end
-    puts "create 50 fake missions"
+    puts "create #{Mission.count} fake missions"
     puts "Now you have #{Mission.count} missions!"
   end
 
