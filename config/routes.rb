@@ -6,6 +6,13 @@ Rails.application.routes.draw do
 
   root "missions#index"
 
+  resources :invitations, only: [:show] do
+    member do 
+      post :accept
+      post :decline
+      post :cancel
+    end
+  end
   resources :instances, only: [:show] do
     member do
       post :submit
@@ -22,7 +29,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do 
+    member do
+      post :invite
+    end
+  end
 
   namespace :admin do 
     root "missions#index"
