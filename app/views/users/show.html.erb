@@ -1,24 +1,31 @@
-<br> 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
-        <%= image_tag @user.avatar_url, class: "img-responsive center-block" if @user.avatar_url %>
-    </div>
-    <div class="col-md-2"></div>  
-    
-    <div class="col-md-7">
-      <h4>名字 <%= @user.name %></h4>
-      <p>自我介紹 <%= @user.description %></p>
-      <p>性別 <%= @user.gender %></p>
-      <p>等級 <%= @user.level %></p>
-      <p>角色 <%= @user.role %></p>
-      <p>接受任務狀態 <%= transcript_user_state(@user.available) %></p>
-      
+    <%= render 'layouts/sidebar' %>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <%= render 'layouts/notice' %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+              <%= image_tag @user.avatar_url, class: "img-responsive center-block" if @user.avatar_url %>
+          </div>
+          <div class="col-md-2"></div>
 
-      <% if @user == current_user %>
-        <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-primary" %>
-      <% end %>
-    
-    </div>
+          <div class="col-md-7">
+            <h4>名字 <%= @user.name %></h4>
+            <p>自我介紹 <%= @user.description %></p>
+            <p>性別 <%= @user.gender %></p>
+            <p>等級 <%= @user.level %></p>
+            <p>角色 <%= @user.role %></p>
+            <p>接受任務狀態 <%= transcript_user_state(@user.available) %></p>
+
+
+            <% if @user == current_user %>
+              <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-primary" %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 </div>
