@@ -7,6 +7,7 @@
       <%= invitation.invitee.name %>
     <% end %>
   <div class="btn btn-primary disabled">送出邀請中</div>
+  <%= button_to '取消邀請', cancel_invitation_path(invitation), class: 'btn btn-danger' %>
   </div>
 <%end%>
 
