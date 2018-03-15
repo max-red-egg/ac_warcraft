@@ -7,7 +7,7 @@
   <%= render partial: "member_info", locals:{members: @members} %>
 
 
-  <%= render partial: "inviting_users", locals: { inviting_users: @instance.inviting_users } %>
+  <%= render partial: "inviting_users", locals: {invitations: @invitations } %>
 
 
   <%= render partial: "candidates_info", locals:{candidates: @candidates, instance: @instance} %>
