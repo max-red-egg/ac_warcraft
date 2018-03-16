@@ -1,7 +1,7 @@
 class InvitationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_invitation
-  before_action :auth_invitee, only: [:accpet, :decline]
+  before_action :auth_invitee, only: [:accept, :decline]
   before_action :check_inviting, only: [:accept, :decline, :cancel]
 
   def show
@@ -24,7 +24,7 @@ class InvitationsController < ApplicationController
   def accept
     #受邀者可以接受邀請
     #before_aciton :auth_invitee
-    #cbefore_aciton :heck_inviting
+    #before_aciton :check_inviting
     # binding.pry
     @invitation.state = 'accept'
     @invitation.save
