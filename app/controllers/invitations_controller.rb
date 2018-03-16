@@ -4,8 +4,8 @@ class InvitationsController < ApplicationController
   def show
   #要驗證只有受邀請的人可以進這個action
     @invitation = Invitation.find(params[:id])
-    @inviter = @invitation.user
-    @invitee = @invitation.invitee
+    @inviter = @invitation.user                    #邀請者
+    @invitee = @invitation.invitee                 #受邀者
     @mission = @invitation.instance.mission
     @invite_msgs = @invitation.invite_msgs.includes(:user)
     if @invitation.state == 'inviting'
@@ -58,7 +58,7 @@ class InvitationsController < ApplicationController
     #invitatoin.state = 'cancel'
     @invitation = Invitation.find(params[:id])
     #只有發起這個邀請的人可以取消邀請
-    
+
     if current_user == @invitation.user && @invitation.state == "inviting"
       @invitation.update!(state: "cancel")
       flash[:notice] = "取消邀請"
