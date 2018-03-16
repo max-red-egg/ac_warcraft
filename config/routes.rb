@@ -7,13 +7,13 @@ Rails.application.routes.draw do
   root "missions#index"
 
   resources :invitations, only: [:show] do
-    member do 
+    member do
       post :accept
       post :decline
       post :cancel
     end
   end
-  resources :instances, only: [:show] do
+  resources :instances, only: [:index, :show] do
     member do
       post :submit
       #任務完成，提交答案
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       #放棄任務
     end
   end
-  
+
   resources :missions, only: [:index, :show] do
     member do
       post :challenge
@@ -29,13 +29,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users do 
+  resources :users do
     member do
       post :invite
     end
   end
 
-  namespace :admin do 
+  namespace :admin do
     root "missions#index"
     resources :missions
   end

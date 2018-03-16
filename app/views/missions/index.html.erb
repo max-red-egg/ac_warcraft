@@ -6,7 +6,7 @@
       <div class="container">
         <h2>任務牆</h2>
         <div class="row">
-         <%= render partial:"shared/mission_card" , locals: {mission: @mission} %>
+         <%= render partial:"shared/mission_card" , locals: { missions: @missions } %>
         </div>
         <%= paginate @missions %>
       </div>
