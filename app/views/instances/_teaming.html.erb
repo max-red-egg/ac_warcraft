@@ -20,7 +20,7 @@
   <% @candidates.each do |user| %>
     <div class="col-md-3 my-3">
       <%= render partial:"shared/user_card" , locals: {user: user} %>
-      <%= link_to "邀請" , invite_user_path(user), params: {instance_id: @instance.id}, class: "btn btn-primary" %>
+      <%= button_to "邀請" , invite_user_path(user), params: {instance_id: @instance.id}, class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>
