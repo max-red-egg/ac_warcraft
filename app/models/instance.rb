@@ -56,6 +56,7 @@ class Instance < ApplicationRecord
     # 如果user可以接受任務
     if user.take_mission?(self.mission)
       # user不在 邀請函是inviting 的集合中 且不是member, 就是可發送邀請
+     
       return ( !self.invitees.where('invitations.state = ?','inviting').include?(user) ) &&  ( !self.members.include?(user) )
     else
       return false
