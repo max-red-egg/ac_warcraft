@@ -1,12 +1,14 @@
-  <div>
-    <!-- 顯示團隊成員 -->
-    <h2>副本成員</h2>
+<div class="row mb-3">
+  <div class="col-12">
+    <h3>副本成員</h3>
+  </div>
+  <div class="col-12">
     <ul>
-      <%members.each do |member| %>
+      <% members.each do |member| %>
         <li>
           <%= member.name %>
         </li>
-      <%end%>
+      <% end %>
     </ul>
-
-  </div>  
+  </div>
+</div>
