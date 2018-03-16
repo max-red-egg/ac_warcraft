@@ -34,6 +34,10 @@
 
 <script>
   $(document).ready(function() {
-    $('#instance_list').DataTable();
+    $('#instance_list').DataTable({
+      "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+      "order": [[ 1, "desc" ]],
+      "columnDefs": [{ "orderable": false, "targets": [3,5] }]
+    });
 } );
 </script>
