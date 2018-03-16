@@ -1,13 +1,25 @@
-<% instances.each do |instance| %>
-  <div class="col-sm-6 col-lg-4 col-xl-3 my-3 ">
-    <div class="card" >
-      <%= image_tag instance.mission.image_url, class: "card-img-top" %>
-      <div class="card-body">
-        <h5 class="card-title"><%= link_to instance.mission.name, mission_path(instance.mission) %></h5>
-        <p class="card-text"><span class="badge badge-success">Level <%= instance.mission.level %></span> <span class="badge badge-success">Team# <%= instance.mission.participant_number %></span></p>
-        <p class="card-text"><%= truncate instance.mission.description, length: 60 %></p>
-        <%= link_to "副本詳情", instance_path(instance), class: "btn btn-primary" %>
+<% if instances.present? %>
+  <% instances.each do |instance| %>
+    <div class="col-12 my-2">
+      <div class="card" >
+        <div class="row">
+          <div class="col-4 pr-0">
+            <div class="card-body h-100 card-img-left" style="background-image: url(<%= instance.mission.image_url %>);" ></div>
+          </div>
+          <div class="col-8 pl-0">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to instance.mission.name, mission_path(instance.mission) %></h5>
+              <p class="card-text"><span class="badge badge-success">Level <%= instance.mission.level %></span> <span class="badge badge-success">Team# <%= instance.mission.participant_number %></span></p>
+              <p class="card-text"><%= truncate instance.mission.description, length: 60 %></p>
+              <%= link_to "副本詳情", instance_path(instance), class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  <%end%>
+<% else %>
+  <div class="col-12">
+    <p>無</p>
   </div>
-<%end%>
+<% end %>

@@ -4,9 +4,7 @@ class InstancesController < ApplicationController
   def index
     @instances_in_progress = current_user.instances.where(state: 'in_progress')
     @instances_teaming = current_user.instances.where(state: 'teaming')
-    @instances_complete = current_user.instances.where(state: 'complete')
-    @instances_abort = current_user.instances.where(state: 'abort')
-
+    @instances_history = current_user.instances.where(state: ['complete', 'abort'])
   end
 
   def show

@@ -4,37 +4,28 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
       <%= render 'layouts/notice' %>
       <div class="container">
-        <h3>進行中副本</h3>
-        <div class="row">`
-          <% if @instances_in_progress.present? %>
-            <%= render partial:"shared/instance_card" , locals: {instances: @instances_in_progress} %>
-          <% else %>
-            無
-          <% end %>
+        <div class="row mb-5">
+          <div class="col-lg-6">
+            <h3>進行中副本</h3>
+            <div class="row">
+              <%= render partial:"shared/instance_card" , locals: {instances: @instances_in_progress} %>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h3>組隊中副本</h3>
+            <div class="row">
+              <%= render partial:"shared/instance_card" , locals: {instances: @instances_teaming} %>
+            </div>
+          </div>
         </div>
-        <h3>組隊中副本</h3>
         <div class="row">
-          <% if @instances_teaming.present? %>
-            <%= render partial:"shared/instance_card" , locals: {instances: @instances_teaming} %>
-          <% else %>
-            <p>無</p>
-          <% end %>
-        </div>
-        <h3>已完成副本</h3>
-        <div class="row">
-          <% if @instances_complete.present? %>
-            <%= render partial:"shared/instance_card" , locals: {instances: @instances_complete} %>
-          <% else %>
-            無
-          <% end %>
-        </div>
-        <h3>取消組隊副本</h3>
-        <div class="row">
-          <% if @instances_abort.present? %>
-            <%= render partial:"shared/instance_card" , locals: {instances: @instances_abort} %>
-          <% else %>
-            無
-          <% end %>
+          <div class="col-12">
+            <h3>歷史副本</h3>
+            <div class="row">
+              <%= render partial:"shared/instance_list" , locals: {instances: @instances_history} %>
+            </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
