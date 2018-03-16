@@ -4,13 +4,29 @@
 
   <li>受邀者： <%= link_to @invitee.name, user_path(@invitee) %></li>
   <li>任務：<%= link_to @mission.name , mission_path(@mission) %></li>
+  <li>副本：<%= link_to @invitation.instance.name , instance_path(@invitation.instance) %></li>
   <li>任務描述<%= simple_format @mission.description %></li>
+  <li>邀請狀態：<%= @invitation.state %></li>
 </ul>
 
-<div class="">這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言</div>
+<div class="">
+這裡可顯示留言內容
 
-<!-- 接受邀請按鈕 -->
-<% if current_user == @invitee %>
-<%= button_to '接受', accept_invitation_path(@invitation) %>
-<% end %>
-<!-- 拒絕邀請按鈕 -->
+<!-- invitation.state ==inviting -->
+
+這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言
+<!--===============================-->
+</div>
+
+<!-- invitation.state ==inviting -->
+<% if @invitation.state == 'inviting' %>
+  <!-- 接受邀請按鈕 -->
+  <% if current_user == @invitee %>
+    <%= button_to '接受', accept_invitation_path(@invitation) %>
+  <% end %>
+  <!-- 拒絕邀請按鈕 -->
+  <% if current_user == @invitee %>
+    <%= button_to '拒絕', decline_invitation_path(@invitation) %>
+  <% end %>
+<%end%>
+<!--===============================-->

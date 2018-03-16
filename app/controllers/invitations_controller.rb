@@ -16,7 +16,7 @@ class InvitationsController < ApplicationController
     # binding.pry
 
     @invitation = Invitation.find(params[:id])
-    if @invitation.invitee == current_user && @invitation.instance.state == 'teaming'
+    if @invitation.invitee == current_user && @invitation.instance.state == 'teaming' && @invitation.state == 'inviting'
       @invitation.state = 'accept'
       @invitation.save
       # binding.pry
@@ -33,6 +33,20 @@ class InvitationsController < ApplicationController
   end
 
   def decline
+    # 受邀者可以拒絕邀請
+    #要先做檢覈
+    # 1.是不是本人
+    # 2.invitation 狀態是 inviting
+    @invitation = Invitation.find(params[:id])
+    if current_user == @invitation.invitee && @invitation.state == 'inviting'
+      @invitation.state = 'decline'
+      @invitation.save
+      flash[:notice] = '拒絕邀請'
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:alert] = '::decline: 存取失敗'
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def cancel
@@ -50,4 +64,5 @@ class InvitationsController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
+
 end
