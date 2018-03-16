@@ -1,0 +1,2 @@
+module InviteMsgsHelper
+end
