@@ -3,15 +3,20 @@ class InvitationsController < ApplicationController
   before_action :set_invitation
 
   def show
-  #要驗證只有受邀請的人可以進這個action
-
     @inviter = @invitation.user                    #邀請者
     @invitee = @invitation.invitee                 #受邀者
-    @mission = @invitation.instance.mission
-    @invite_msgs = @invitation.invite_msgs.includes(:user)
-    if @invitation.state == 'inviting'
-      @invite_msg = InviteMsg.new
+    if current_user == @inviter || current_user == @invitee
+      #只有邀請者或受邀者才可以瀏覽
+      @mission = @invitation.instance.mission
+      @invite_msgs = @invitation.invite_msgs.includes(:user)
+      if @invitation.state == 'inviting'
+        @invite_msg = InviteMsg.new
+      end
+    else
+      flash[:alert] = '::Invitation: 禁止瀏覽！'
+      redirect_back(fallback_location: root_path)
     end
+
   end
 
   def accept
@@ -69,5 +74,6 @@ class InvitationsController < ApplicationController
   def set_invitation
     @invitation = Invitation.find(params[:id])
   end
+
 
 end
