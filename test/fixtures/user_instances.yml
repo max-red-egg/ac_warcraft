@@ -8,4 +8,10 @@ user_instance2:
 
 user_instance3:
   user: user
-  instance: instance_in_progress  
+  instance: instance_in_progress
+
+user_instance4:
+  user: user4
+  instance: instance_teaming
+
+

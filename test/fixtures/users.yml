@@ -29,6 +29,23 @@ user2:
   confirmed_at: <%= Time.zone.now %>
   level: 15
 
+user3:
+  name: user3 example
+  email: user3@email.com
+  description: testtesttest
+  gender: male
+  confirmed_at: <%= Time.zone.now %>
+  level: 15
+  available: busy
+
+user4:
+  name: user4 example
+  email: user4@email.com
+  description: testtesttest
+  gender: male
+  confirmed_at: <%= Time.zone.now %>
+  level: 15
+  
 <% 30.times do |n| %>
 user_<%= n %>:
   name:  <%= "User #{n}" %>
