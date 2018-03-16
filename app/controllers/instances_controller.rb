@@ -1,5 +1,14 @@
 class InstancesController < ApplicationController
   before_action :authenticate_user!
+
+  def index
+    @instances_in_progress = current_user.instances.where(state: 'in_progress')
+    @instances_teaming = current_user.instances.where(state: 'teaming')
+    @instances_complete = current_user.instances.where(state: 'complete')
+    @instances_abort = current_user.instances.where(state: 'abort')
+
+  end
+
   def show
     @instance = Instance.find(params[:id])
     @mission = @instance.mission
