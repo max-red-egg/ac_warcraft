@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :instances, through: :user_instances
 
   has_many :invitations
+  has_many :invite_msgs
  
 
 
