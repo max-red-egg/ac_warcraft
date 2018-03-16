@@ -8,5 +8,9 @@ instance_in_progress:
 
 instance_complete:
   mission: mission1
-  state: complete 
+  state: complete
+
+instance_teaming2:
+  mission: mission2
+  state: teaming
 

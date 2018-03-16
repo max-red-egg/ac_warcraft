@@ -1,0 +1,16 @@
+<h1>任務邀請</h1>
+<ul>
+  <li>邀請者：<%= link_to @inviter.name, user_path(@inviter) %> </li>
+
+  <li>受邀者： <%= link_to @invitee.name, user_path(@invitee) %></li>
+  <li>任務：<%= link_to @mission.name , mission_path(@mission) %></li>
+  <li>任務描述<%= simple_format @mission.description %></li>
+</ul>
+
+<div class="">這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言</div>
+
+<!-- 接受邀請按鈕 -->
+<% if current_user == @invitee %>
+<%= button_to '接受', accept_invitation_path(@invitation) %>
+<% end %>
+<!-- 拒絕邀請按鈕 -->
