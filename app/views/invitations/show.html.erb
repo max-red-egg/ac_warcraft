@@ -1,32 +1,46 @@
-<h1>任務邀請</h1>
-<ul>
-  <li>邀請者：<%= link_to @inviter.name, user_path(@inviter) %> </li>
+<div class="container">
+  <h1>任務邀請</h1>
+  <ul>
+    <li>邀請者：<%= link_to @inviter.name, user_path(@inviter) %> </li>
 
-  <li>受邀者： <%= link_to @invitee.name, user_path(@invitee) %></li>
-  <li>任務：<%= link_to @mission.name , mission_path(@mission) %></li>
-  <li>副本：<%= link_to @invitation.instance.name , instance_path(@invitation.instance) %></li>
-  <li>任務描述<%= simple_format @mission.description %></li>
-  <li>邀請狀態：<%= @invitation.state %></li>
-</ul>
+    <li>受邀者： <%= link_to @invitee.name, user_path(@invitee) %></li>
+    <li>任務：<%= link_to @mission.name , mission_path(@mission) %></li>
+    <li>副本：<%= link_to @invitation.instance_id , instance_path(@invitation.instance) %></li>
+    <li>任務描述<%= simple_format @mission.description %></li>
+    <li>邀請狀態：<%= @invitation.state %></li>
+  </ul>
 
-<div class="">
-這裡可顯示留言內容
+  <div class="">
+    <h2>訊息內容</h2>
+  <ul>
+    <% @invite_msgs.each do |msg| %>
+    <li>
+      <%= msg.user.name %> 說： <%= msg.content %>
+    </li>
+    <% end %>
+  </ul>
 
-<!-- invitation.state ==inviting -->
+  <!-- invitation.state ==inviting -->
+  <!-- 訊息留言 -->
+  <% if @invitation.state == 'inviting' %>
+    <%=simple_form_for @invite_msg ,url: invitation_invite_msgs_path(@invitation) do |f|%>
+      <%= f.input :content, label: false, placeholder:'聊聊天吧...'%>
+      <%= f.button :submit, '送出', class:"btn btn-primary" %>
+    <%end%>
+  <%end%>
+  <!--===============================-->
+  </div>
 
-這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言這裡可以留言
-<!--===============================-->
+  <!-- invitation.state ==inviting -->
+  <% if @invitation.state == 'inviting' %>
+    <!-- 接受邀請按鈕 -->
+    <% if current_user == @invitee %>
+      <%= button_to '接受', accept_invitation_path(@invitation) %>
+    <% end %>
+    <!-- 拒絕邀請按鈕 -->
+    <% if current_user == @invitee %>
+      <%= button_to '拒絕', decline_invitation_path(@invitation) %>
+    <% end %>
+  <%end%>
+  <!--===============================-->
 </div>
-
-<!-- invitation.state ==inviting -->
-<% if @invitation.state == 'inviting' %>
-  <!-- 接受邀請按鈕 -->
-  <% if current_user == @invitee %>
-    <%= button_to '接受', accept_invitation_path(@invitation) %>
-  <% end %>
-  <!-- 拒絕邀請按鈕 -->
-  <% if current_user == @invitee %>
-    <%= button_to '拒絕', decline_invitation_path(@invitation) %>
-  <% end %>
-<%end%>
-<!--===============================-->
