@@ -31,10 +31,9 @@ class InvitationsController < ApplicationController
     # 受邀者可以拒絕邀請
     #要先做檢覈
     # 1.是不是本人
-    # 2.該副本是否已經啟動
-    # 3.invitation 狀態是 inviting
+    # 2.invitation 狀態是 inviting
     @invitation = Invitation.find(params[:id])
-    if current_user == @invitation.invitee && @invitation.instance.state == 'teaming' && @invitation.state == 'inviting'
+    if current_user == @invitation.invitee && @invitation.state == 'inviting'
       @invitation.state = 'decline'
       @invitation.save
       flash[:notice] = '拒絕邀請'
