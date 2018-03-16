@@ -7,6 +7,10 @@ class InvitationsController < ApplicationController
     @inviter = @invitation.user
     @invitee = @invitation.invitee
     @mission = @invitation.instance.mission
+    @invite_msgs = @invitation.invite_msgs.includes(:user)
+    if @invitation.state == 'inviting'
+      @invite_msg = InviteMsg.new
+    end
   end
 
   def accept

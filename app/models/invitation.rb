@@ -4,6 +4,7 @@ class Invitation < ApplicationRecord
   belongs_to :instance
   belongs_to :invitee, class_name: "User"
   #可能要加counter cache
+  has_many :invite_msgs
 
 
   private
