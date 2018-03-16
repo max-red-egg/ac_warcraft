@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <%= render 'layouts/sidebar' %>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
+      <%= render 'layouts/notice' %>
+      <div class="container">
+        <div class="row mb-3">
+          <div class="col">
+            <h2>副本標題(<%= @instance.state %>) <span class="ml-3"><%= abort_button(@instance) %></span></h2>
+          </div>
+        </div>
+        <%= render partial:'mission_info', locals: {mission: @mission} %>
+
+        <%= render partial:'teaming' if @instance.state == 'teaming' %>
+        <%= render partial:'in_progress' if @instance.state == 'in_progress'  %>
+        <%= render partial:'complete' if @instance.state == 'complete' %>
+        <%= render partial:'abort' if @instance.state == 'abort'  %>
+
+        <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
+      </div>
+    </main>
+  </div>
+</div>

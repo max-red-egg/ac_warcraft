@@ -4,9 +4,7 @@ class InstancesController < ApplicationController
   def index
     @instances_in_progress = current_user.instances.where(state: 'in_progress')
     @instances_teaming = current_user.instances.where(state: 'teaming')
-    @instances_complete = current_user.instances.where(state: 'complete')
-    @instances_abort = current_user.instances.where(state: 'abort')
-
+    @instances_history = current_user.instances.where(state: ['complete', 'abort'])
   end
 
   def show
@@ -20,22 +18,6 @@ class InstancesController < ApplicationController
       # @instance.inviting_users 是正在邀請的使用者
       #所有邀情函
       @invitations = @instance.inviting_invitations.includes(:user)
-
-    end
-
-    #如果不同的instance.state, render 不同的template
-    case @instance.state
-    when "teaming"
-      render "teaming"
-    when "in_progress"
-      render "in_progress"
-    when "complete"
-      render "complete"
-    when "abort"
-      render "abort"
-    else
-      flash[:alert] = "任務關閉中"
-      redirect_to root_path
     end
   end
 
