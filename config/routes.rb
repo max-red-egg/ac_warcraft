@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post :decline
       post :cancel
     end
+    resources :invite_msgs, only: [:create]
   end
   resources :instances, only: [:show] do
     member do
