@@ -3,7 +3,7 @@
     <h3>副本成員</h3>
   </div>
   <% members.each do |member| %>
-    <div class="col-md-3 my-3">
+    <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3">
       <%= render partial:"shared/user_card" , locals: {user: member} %>
     </div>
   <% end %>
