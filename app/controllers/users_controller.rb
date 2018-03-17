@@ -45,6 +45,7 @@ class UsersController < ApplicationController
     # ------------
     instance = Instance.find(params[:instance_id])
     user = User.find(params[:id])
+
     #確認該使用者可以接受邀請
     if instance.can_invite?(user)
       #產生邀請

@@ -19,6 +19,14 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     assert_equal "yes", @user.available
   end
 
+  # 放棄後的任務仍然在user副本列表
+  test "abort mission still include in user's instance list" do
+    post abort_instance_path(@instance)
+    @instance.reload
+    assert_equal "abort", @instance.state
+    assert_includes @user.instances, @instance
+  end
+
   test "user can submit instance" do
     post submit_instance_path(@instance), params: {instance: { answer: "123" }}
     @instance.reload

@@ -22,13 +22,14 @@ class InstancesControllerTest < ActionDispatch::IntegrationTest
   test "instance/show can rendering correct view depend on state" do
     sign_in @user
     get instance_path(@instance_teaming)
-    assert_template 'instances/teaming'
+    assert_template :show
+    assert_select 'h3', text: '可選隊員'
 
     get instance_path(@instance_in_progress)
-    assert_template 'instances/in_progress'
+    assert_select "input[type='submit']"
 
     get instance_path(@instance_complete)
-    assert_template 'instances/complete'
+    assert_select 'h3', text: '你的答案'
   end
 
   test "only member can abort a instance" do

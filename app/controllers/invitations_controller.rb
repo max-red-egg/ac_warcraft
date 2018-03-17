@@ -5,6 +5,7 @@ class InvitationsController < ApplicationController
   before_action :check_inviting, only: [:accept, :decline, :cancel]
 
   def show
+
     @inviter = @invitation.user                    #邀請者
     @invitee = @invitation.invitee                 #受邀者
     if current_user == @inviter || current_user == @invitee
@@ -35,12 +36,14 @@ class InvitationsController < ApplicationController
 
   def decline
     # 受邀者可以拒絕邀請
+
     #before_aciton :auth_invitee
     #before_aciton :check_inviting
     @invitation.state = 'decline'
     @invitation.save
     flash[:notice] = '拒絕邀請'
     redirect_back(fallback_location: root_path)
+
   end
 
   def cancel
