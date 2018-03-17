@@ -8,7 +8,7 @@
     <div class="col-md-3 my-3">
       <%= render partial:"shared/user_card" , locals: {user: invitation.invitee} %>
       <%= link_to '聊聊', invitation_path(invitation), class: 'btn btn-primary' %>
-      <%= button_to '取消邀請', cancel_invitation_path(invitation), class: 'btn btn-danger' %>
+      <%= link_to '取消邀請', cancel_invitation_path(invitation), method: :post, class: 'btn btn-danger' %>
     </div>
   <% end %>
 </div>
