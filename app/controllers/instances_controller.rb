@@ -18,6 +18,9 @@ class InstancesController < ApplicationController
       # @instance.inviting_users 是正在邀請的使用者
       #所有邀情函
       @invitations = @instance.inviting_invitations.includes(:user)
+      #剩下可發送的邀請函數量
+      @remaining_invitations_count = @instance.remaining_invitations_count
+
     end
   end
 
