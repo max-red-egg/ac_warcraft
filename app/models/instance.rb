@@ -49,14 +49,17 @@ class Instance < ApplicationRecord
   # ::instance method:: 確認user可被邀請？
   def can_invite?(user)
     # ----說明----
+    # 確認是否還有足夠的邀請函可以發送
     # 確認user為可接受邀本任務
     # 確認user不是 邀請中的使用者
     # 確認user不是member
     # ------------
     # 如果user可以接受任務
-    if user.take_mission?(self.mission)
+    if self.remaining_invitations_count <= 0
+      #如果沒有邀請函可以發送，則不能邀請該user
+      return false
+    elsif user.take_mission?(self.mission)
       # user不在 邀請函是inviting 的集合中 且不是member, 就是可發送邀請
-     
       return ( !self.invitees.where('invitations.state = ?','inviting').include?(user) ) &&  ( !self.members.include?(user) )
     else
       return false
