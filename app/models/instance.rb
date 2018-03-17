@@ -18,12 +18,6 @@ class Instance < ApplicationRecord
     if self.state == 'in_progress'
       self.state = 'complete'
       self.save
-      #更改所有member狀態
-      members = self.members
-      members.each do |member|
-        member.available = 'yes'
-        member.save
-      end
     end
   end
 
@@ -32,12 +26,6 @@ class Instance < ApplicationRecord
     if self.state == 'in_progress' || self.state == 'teaming'
       self.state = 'abort'
       self.save
-      #更改所有member狀態
-      members = self.members
-      members.each do |member|
-        member.available = 'yes'
-        member.save
-      end
     end
   end
 
