@@ -1,4 +1,4 @@
-<div class="card mb-2" >
+<div class="card user-card mb-2" >
   <div class="row">
     <div class="col-5 pr-0">
       <div class="card-body h-100 card-img-left p-1 d-flex align-items-end" style="background-image: url(<%= user.avatar_url if user.avatar_url %>);" >
@@ -9,8 +9,10 @@
       <div class="card-body p-2">
         <h5 class="card-title"><%= link_to user.name, user_path(user) %></h5>
         <p class="card-text">
-          其他資訊 <br>
-          上次上線：<%= time_ago_in_words(user.current_sign_in_at) + ' ago login' if user.current_sign_in_at %>
+          資訊 1 <br>
+          資訊 2 <br>
+          上次上線：<br>
+          <%= time_ago_in_words(user.current_sign_in_at) + ' ago' if user.current_sign_in_at %>
         </p>
       </div>
     </div>
