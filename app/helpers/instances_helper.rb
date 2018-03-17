@@ -9,4 +9,13 @@ module InstancesHelper
       end
     end
   end
+
+  def transcript_instance_state(instance)
+    case instance.state
+    when 'teaming' then '組隊中'
+    when 'in_progress' then '進行中'
+    when 'complete' then '已完成'
+    when 'abort' then '已放棄'
+    end
+  end
 end

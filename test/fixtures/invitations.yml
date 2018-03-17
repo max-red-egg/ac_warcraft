@@ -2,3 +2,9 @@ invitation1:
   user: user
   invitee: user3
   instance: instance_teaming
+
+invitation2:
+  user: user
+  invitee: user3
+  instance: instance_teaming
+  state: 'accept'

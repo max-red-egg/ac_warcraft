@@ -1,4 +1,6 @@
 class InviteMsgsController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     # 新增邀請函的留言
     invitation = Invitation.find(params[:invitation_id])

@@ -11,6 +11,6 @@ instance_complete:
   state: complete
 
 instance_teaming2:
-  mission: mission2
+  mission: mission3
   state: teaming
 

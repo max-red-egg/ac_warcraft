@@ -2,7 +2,7 @@ class InvitationsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-  #要驗證只有受邀請的人可以進這個action
+  
     @invitation = Invitation.find(params[:id])
     @inviter = @invitation.user                    #邀請者
     @invitee = @invitation.invitee                 #受邀者
@@ -10,6 +10,11 @@ class InvitationsController < ApplicationController
     @invite_msgs = @invitation.invite_msgs.includes(:user)
     if @invitation.state == 'inviting'
       @invite_msg = InviteMsg.new
+    end
+    #要驗證只有受邀請的人可以進這個action
+    unless current_user == @inviter || current_user == @invitee
+      flash[:alert] = '存取禁止'
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -45,6 +50,9 @@ class InvitationsController < ApplicationController
     if current_user == @invitation.invitee && @invitation.state == 'inviting'
       @invitation.state = 'decline'
       @invitation.save
+      # 將使用者的狀態變回yes
+      current_user.available = 'yes'
+      current_user.save
       flash[:notice] = '拒絕邀請'
       redirect_back(fallback_location: root_path)
     else

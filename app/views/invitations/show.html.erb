@@ -37,7 +37,7 @@
         </div>
         <!-- 訊息留言 -->
         <% if @invitation.state == 'inviting' %>
-          <%=simple_form_for @invite_msg ,url: invitation_invite_msgs_path(@invitation) do |f|%>
+          <%= simple_form_for @invite_msg ,url: invitation_invite_msgs_path(@invitation) do |f| %>
             <%= f.input :content, label: false, placeholder:'聊聊天吧...'%>
             <%= f.button :submit, '送出', class:"btn btn-primary" %>
           <%end%>
