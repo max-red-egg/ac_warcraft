@@ -81,6 +81,10 @@ class Instance < ApplicationRecord
   def inviting_invitations
     self.invitations.where('state = ?', 'inviting')
   end
+  # ::instance method:: 是否還有邀請函可以發送
+  def remaining_invitations_count
+    self.mission.invitation_number - self.inviting_invitations.count
+  end
 
   private
   # ::instance method:: 自動設定任務副本instance狀態
