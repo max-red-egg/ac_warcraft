@@ -15,12 +15,25 @@
 
 <div class="row mb-4">
   <div class="col-12">
-    <h3>可選隊員</h3>
+    <h3>可選隊員 </h3>
+    <h5><span class="badge badge-info">你還可發送<%=@remaining_invitations_count%> 張邀請</span></h5>
   </div>
-  <% @candidates.each do |user| %>
-    <div class="col-md-3 my-3">
-      <%= render partial:"shared/user_card" , locals: {user: user} %>
-      <%= button_to "邀請" , invite_user_path(user), params: {instance_id: @instance.id}, class: "btn btn-primary" %>
-    </div>
+  
+  <% if @remaining_invitations_count > 0 %>
+    <!-- 還有剩下的邀請函 -->
+    <% @candidates.each do |user| %>
+      <div class="col-md-3 my-3">
+        <%= render partial:"shared/user_card" , locals: {user: user} %>
+        <%= button_to "邀請" , invite_user_path(user), params: {instance_id: @instance.id}, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  <% else %>
+    <!-- 沒有剩下的邀請函 -->
+    <% @candidates.each do |user| %>
+      <div class="col-md-3 my-3">
+        <%= render partial:"shared/user_card" , locals: {user: user} %>
+        <div class="btn btn-primary disabled">邀請</div>
+      </div>
+    <% end %>
   <% end %>
 </div>
