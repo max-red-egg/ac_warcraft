@@ -23,5 +23,12 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get invitation_path(@invitation)
     assert_response :success
+
+    #其他使用者不能看到邀請函
+    sign_in @user2
+    get invitation_path(@invitation)
+    assert_response :redirect
   end
+
+
 end

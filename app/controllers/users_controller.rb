@@ -3,8 +3,8 @@ class UsersController < ApplicationController
 
   def index
     # @users = User.all
-    @users = User.page(params[:page]).per(6)
-  end 
+    @users = User.page(params[:page]).per(20)
+  end
 
   def show
     @user = User.find(params[:id])
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
 
-    if @user.update_attributes(user_params) 
+    if @user.update_attributes(user_params)
       flash[:notice] = "成功更新個人資料！"
       redirect_to user_path(@user)
     else
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def invite
     # ----說明-----
-    # routes: 
+    # routes:
     #   透過POST invite_user_path(user) 來發送邀請
     # parameters:
     #   user_id: params[:id]
@@ -45,7 +45,8 @@ class UsersController < ApplicationController
     # ------------
     instance = Instance.find(params[:instance_id])
     user = User.find(params[:id])
-    #確認該使用者可以接受邀請 
+
+    #確認該使用者可以接受邀請
     if instance.can_invite?(user)
       #產生邀請
       invitation = current_user.invitations.build(instance_id: instance.id, invitee_id: user.id)

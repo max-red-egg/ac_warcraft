@@ -1,33 +1,27 @@
 <%= render partial: "member_info", locals:{members: @members} %>
 
-<div class="row mb-3">
+<div class="row mb-4">
   <div class="col-12">
     <h3>已經送出邀請</h3>
   </div>
   <% @invitations.each do |invitation| %>
-    <div class="col-md-3">
-      <%= link_to invitation.invitee do %>
-        <%= image_tag invitation.invitee.avatar_url, class: "img-responsive center-block small" if invitation.invitee.avatar_url %>
-        <%= invitation.invitee.name %>
-      <% end %>
-    <div class="btn btn-primary disabled">送出邀請中</div>
-    <%= link_to '聊聊', invitation_path(invitation), class: 'btn btn-primary' %>
-    <%= button_to '取消邀請', cancel_invitation_path(invitation), class: 'btn btn-danger' %>
+    <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3">
+      <%= render partial:"shared/user_card" , locals: {user: invitation.invitee} %>
+      <%= link_to '聊聊', invitation_path(invitation), class: 'btn btn-primary' %>
+      <%= link_to '取消邀請', cancel_invitation_path(invitation), method: :post, class: 'btn btn-danger' %>
     </div>
-  <%end%>
+  <% end %>
 </div>
 
-<div class="row mb-3">
+<div class="row mb-4">
   <div class="col-12">
-    <h3>可選隊員</h3>
+    <h3>可選隊員 </h3>
+    <h5><span class="badge badge-info">你還可發送 <%=@remaining_invitations_count%> 張邀請</span></h5>
   </div>
-  <% @candidates.each do |candidate| %>
-    <div class="col-md-3">
-      <%= link_to candidate do %>
-        <%= image_tag candidate.avatar_url, class: "img-responsive center-block small" if candidate.avatar_url %>
-        <%= candidate.name %>
-      <% end %>
-      <%= button_to "invite" , invite_user_path(candidate), params: {instance_id: @instance.id} %>
+  <% @candidates.each do |user| %>
+    <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3">
+      <%= render partial:"shared/user_card" , locals: {user: user} %>
+      <%= button_to "邀請" , invite_user_path(user), params: {instance_id: @instance.id}, class: "btn btn-primary" if @remaining_invitations_count > 0 %>
     </div>
   <% end %>
 </div>
