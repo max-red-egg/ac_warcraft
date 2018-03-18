@@ -1,9 +1,8 @@
 module UsersHelper
   def transcript_user_state(state)
     case state
-    when 'yes' then '可邀清'
-    when 'no'  then '沒空'
-    when 'busy' then '任務進行中'
+    when true then '開啟'
+    when false  then '關閉'
     end
   end
 end
