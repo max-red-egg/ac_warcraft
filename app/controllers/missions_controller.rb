@@ -17,9 +17,7 @@ class MissionsController < ApplicationController
     if current_user.take_mission?(mission)
       #如果user可以挑戰這個任務
       #產生一個新副本
-      #使用者available變為busy
       instance = current_user.instances.create(mission_id: params[:id])
-      #current_user.available = 'busy'
 
       #current_user.save!
       instance.save!

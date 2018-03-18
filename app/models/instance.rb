@@ -59,7 +59,7 @@ class Instance < ApplicationRecord
     # ----說明----
     # 可邀請的user = 所有可執行user- 被邀請中的user - members
     # ------------
-    users = User.where('available = ? AND level >= ?','yes',self.mission.level )
+    users = User.where('available = ? AND level >= ?',true,self.mission.level )
     users = users - self.invitees.where('invitations.state = ?','inviting') - self.members
   end
 

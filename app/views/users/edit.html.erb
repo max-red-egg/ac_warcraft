@@ -20,7 +20,7 @@
               </div>
 
               <div class="form-group">
-                <%= f.input :available, label: "能否接受邀請", class: "form-control" %>
+                <%= f.input :available, label: "邀請信箱 ", class: "form-control" ,as: :select, collection: [['開啟', true], ['關閉', false]]%>
               </div>
 
               <%= f.submit "送出", class: "btn btn-primary" %>
