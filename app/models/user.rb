@@ -22,12 +22,10 @@ class User < ApplicationRecord
     self.role == 'admin'
   end
 
-  def busy?
-    self.available == 'busy'
-  end
-
   # 確認該任務可不可以執行
   def take_mission?(mission)
-    (self.available == 'yes') && (self.level >= mission.level)
+    #(self.available == 'yes') && (self.level >= mission.level)
+    #註解掉, 如果打開，則user available會影響是否可以直接挑戰任務
+    self.level >= mission.level
   end
 end
