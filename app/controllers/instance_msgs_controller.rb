@@ -1,0 +1,2 @@
+class InstanceMsgsController < ApplicationController
+end
