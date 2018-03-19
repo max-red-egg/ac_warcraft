@@ -5,6 +5,6 @@ invitation1:
 
 invitation2:
   user: user
-  invitee: user3
+  invitee: user2
   instance: instance_teaming
   state: 'accept'
