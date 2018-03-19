@@ -6,9 +6,19 @@ class InstancesControllerTest < ActionDispatch::IntegrationTest
     @user = users(:user)
     @admin = users(:admin)
     @user2 = users(:user2)
+    @user3 = users(:user3)
     @instance_teaming = instances(:instance_teaming)
     @instance_in_progress = instances(:instance_in_progress)
     @instance_complete = instances(:instance_complete)
+  end
+
+  test "only log in member can see instance/index" do
+    get instances_path
+    assert_response :redirect
+
+    sign_in @user
+    get instances_path
+    assert_response :success
   end
 
   test "only log in member can see instance/show" do
@@ -18,9 +28,14 @@ class InstancesControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get instance_path(@instance_teaming)
     assert_response :success
+
     # 有登入但不是成員
-    
     sign_in @user2
+    get instance_path(@instance_teaming)
+    assert_response :redirect
+
+    # 被邀請人
+    sign_in @user3
     get instance_path(@instance_teaming)
     assert_response :redirect
   end
@@ -29,13 +44,13 @@ class InstancesControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get instance_path(@instance_teaming)
     assert_template :show
-    assert_select 'h3', text: '可選隊員'
+    # assert_select 'h3', text: '可選隊員'
 
     get instance_path(@instance_in_progress)
     assert_select "input[type='submit']"
 
     get instance_path(@instance_complete)
-    assert_select 'h3', text: '你的答案'
+    # assert_select 'h3', text: '你的答案'
   end
 
   test "only member can abort a instance" do

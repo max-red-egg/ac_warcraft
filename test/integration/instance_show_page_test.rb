@@ -6,6 +6,7 @@ class InstanceShowPageTest < ActionDispatch::IntegrationTest
     @admin = users(:admin)
     @user = users(:user)
     @user2 = users(:user2)
+    @user3 = users(:user3)
     @instance_teaming = instances(:instance_teaming)
     @instance_in_progress = instances(:instance_in_progress)
     @instance_complete = instances(:instance_complete)
@@ -26,4 +27,57 @@ class InstanceShowPageTest < ActionDispatch::IntegrationTest
     assert_match @user2.name, response.body
     assert_match @user.name, response.body
   end
+
+  # 留言畫面只有組隊中的副本畫面看不到
+  test "msg view only shows in in_progress instances" do
+    sign_in @user
+    get instance_path(@instance_teaming)
+    assert_select 'h4', false, text: '副本訊息'
+
+    get instance_path(@instance_complete)
+    assert_select 'h4', text: '副本訊息'
+
+    get instance_path(@instance_in_progress)
+    assert_select 'h4', text: '副本訊息'
+  end
+
+  # 只有成員可以在副本裡面留言
+  test "members can leave messages in instance" do
+    # 非成員不能留言
+    sign_in @user3
+    assert_difference 'InstanceMsg.count', 0 do
+      post instance_instance_msgs_path(@instance_in_progress), params: { instance_msg: {content: "hihi"} }
+    end
+    assert_response :redirect
+    assert_not flash[:alert].nil?
+
+    #成員可以留言
+    sign_in @user 
+    assert_difference 'InstanceMsg.count', 1 do
+      post instance_instance_msgs_path(@instance_in_progress), params: { instance_msg: {content: "hihi"} }
+    end
+    assert_response :redirect
+    assert_not flash[:notice].nil?
+  end
+
+  # 組隊中的副本不能留言
+  test "cannot leave a message when instance's state is teaming" do
+    sign_in @user
+    assert_difference 'InstanceMsg.count', 0 do
+      post instance_instance_msgs_path(@instance_teaming), params: { instance_msg: {content: "hihi"} }
+    end
+    assert_response :redirect
+    assert_not flash[:alert].nil?
+  end
+
+  # 完成的副本不能留言
+  test "cannot leave a message when instance's state is complete" do
+    sign_in @user
+    assert_difference 'InstanceMsg.count', 0 do
+      post instance_instance_msgs_path(@instance_complete), params: { instance_msg: {content: "hihi"} }
+    end
+    assert_response :redirect
+    assert_not flash[:alert].nil?
+  end
+
 end

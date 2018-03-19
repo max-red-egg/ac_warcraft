@@ -10,6 +10,7 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
     @user4 = users(:user4)
     @instance = instances(:instance_teaming)
     @instance2 = instances(:instance_teaming2)
+    @instance3 = instances(:instance_invite1)
     @invitation = invitations(:invitation1)
     @invitation2 = invitations(:invitation2)
   end
@@ -21,7 +22,22 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
     end
     assert_includes @instance.invitees, @user2
   end
+  # 發出邀請時此副本的可邀請次數會減少
+  test "remaining_invitations_count of instance will decrease when send a invitation" do
+    sign_in @user
+    assert_difference '@invitation.instance.reload.remaining_invitations_count', -1 do
+      post invite_user_path(@user2), params: {instance_id: @instance.id}
+    end
+  end
 
+  #邀請次數為零的副本不可以在邀請人
+  test "cannot invite other when invitation number of instance is zero" do
+    sign_in @user
+    assert_difference 'Invitation.count', 0 do
+      post invite_user_path(@user3), params: {instance_id: @instance3.id}
+    end
+  end
+  
   #非本人不能夠接受邀請
   test "user cannot accept invites of other user's" do
     sign_in @user
@@ -36,6 +52,15 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
     post accept_invitation_path(@invitation)
     @invitation.reload
     assert_equal 'accept', @invitation.state
+  end
+  # 邀請成功此副本的可邀請次數會增加
+  test "remaining_invitations_count of instance will increase when accept a invite" do
+    sign_in @user3
+    assert_equal 'inviting', @invitation.state
+    
+    assert_difference '@invitation.instance.reload.remaining_invitations_count', 1 do
+      post accept_invitation_path(@invitation)
+    end 
   end
 
   # 受邀者可以拒絕邀請

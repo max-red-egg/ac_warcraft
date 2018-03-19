@@ -9,6 +9,7 @@ class InstanceMsgsController < ApplicationController
       instance_msg = instance.instance_msgs.create(msg_params)
       instance_msg.user = current_user
       instance_msg.save
+      flash[:notice] = '留言已送出'
       redirect_to instance_path(instance)
     else
       flash[:alert] = '無法送出留言'
