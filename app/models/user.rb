@@ -30,6 +30,15 @@ class User < ApplicationRecord
     ]
   )
 
+  scope :can_be_invited, ->(instance){
+    where('level >= ? AND available = ?',instance.mission.level,true
+      ).where.not(
+        id: User.joins(:user_instances).where('user_instances.instance_id = ? ',instance.id)
+      ).where.not(
+        id: User.joins('JOIN invitations ON invitations.invitee_id = users.id').where('invitations.instance_id = ? AND invitations.state = ?',instance.id,'inviting')
+      )
+  }
+
   scope :search_query, lambda { |query|
     return nil  if query.blank?
     # condition query, parse into individual keywords

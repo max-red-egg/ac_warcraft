@@ -14,7 +14,7 @@ class InstancesController < ApplicationController
 
     if @instance.state == "teaming"
 
-
+      # 篩選使用者 & 列出所有可被邀請的使用者
       @filterrific = initialize_filterrific(
             User,
             params[:filterrific],
@@ -24,10 +24,7 @@ class InstancesController < ApplicationController
               range_level: [['0-4', '0'], ['5-9', '5'], ['10-14', '10'], ['15-19', '15']],
             }
           ) or return
-      @candidates = @filterrific.find.page(params[:page])
-
-      # 列出所有可被邀請的使用者
-      # @candidates = @instance.invitable_users
+      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page])
 
       # @instance.inviting_users 是正在邀請的使用者
       #所有邀情函
