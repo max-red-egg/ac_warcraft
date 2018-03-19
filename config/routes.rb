@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       #任務完成，提交答案
       post :abort
       #放棄任務
+      get 'review/:user_id', action: "review", as: "review"
     end
     resources :instance_msgs, only: [:create]
   end
