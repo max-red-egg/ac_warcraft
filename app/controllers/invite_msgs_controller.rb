@@ -10,6 +10,8 @@ class InviteMsgsController < ApplicationController
       invite_msg.save
 
       @invite_msgs = invitation.invite_msgs.includes(:user)
+
+      invitation.time_updated!
     else
       flash[:alert] = '無法送出留言'
       redirect_back(fallback_location: root_path)

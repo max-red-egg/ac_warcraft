@@ -6,8 +6,13 @@ class Invitation < ApplicationRecord
   #可能要加counter cache
   has_many :invite_msgs
 
+  def time_updated!
+    self.updated_at = Time.now
+    self.save
+  end
 
   private
+
   def setup_state!
     if self.state == 'accept' && !instance.is_member?(self.invitee)
       #join invitee into instance
@@ -17,5 +22,4 @@ class Invitation < ApplicationRecord
       instance.save
     end
   end
-
 end
