@@ -11,6 +11,8 @@ class Instance < ApplicationRecord
   has_many :invitations
   has_many :invitees, through: :invitations
 
+  has_many :instance_msgs
+
 
   # ::instance method:: 任務副本instance完成
   def complete!

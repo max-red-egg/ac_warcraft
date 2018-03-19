@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       post :abort
       #放棄任務
     end
+    resources :instance_msgs, only: [:create]
   end
 
   resources :missions, only: [:index, :show] do
