@@ -1,7 +1,7 @@
 class MissionsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @missions = Mission.page(params[:page]).per(20)
+    @missions = Mission.order(level: :asc).page(params[:page]).per(20)
   end
 
   def show
