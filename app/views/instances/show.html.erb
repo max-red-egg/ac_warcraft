@@ -15,7 +15,9 @@
         <%= render partial:'in_progress' if @instance.state == 'in_progress'  %>
         <%= render partial:'complete' if @instance.state == 'complete' %>
         <%= render partial:'abort' if @instance.state == 'abort'  %>
-
+        
+        <%= render partial:'show_msgs' if @instance.state == 'in_progress' || @instance.state == 'complete' || @instance.state == 'abort' %>
+        <%= render partial:'leave_msg' if @instance.state == 'in_progress' %>
         <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
       </div>
     </main>

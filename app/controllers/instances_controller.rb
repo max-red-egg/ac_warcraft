@@ -14,7 +14,7 @@ class InstancesController < ApplicationController
     @mission = @instance.mission
     @members = @instance.members
 
-    if @instance.state == "teaming"
+    if @instance.state == 'teaming'
       #列出所有可被邀請的使用者
       @candidates = @instance.invitable_users
       # @instance.inviting_users 是正在邀請的使用者
@@ -22,8 +22,16 @@ class InstancesController < ApplicationController
       @invitations = @instance.inviting_invitations.includes(:user)
       #剩下可發送的邀請函數量
       @remaining_invitations_count = @instance.remaining_invitations_count
-
     end
+    if @instance.state == 'in_progress'
+      #只有任務進行中可以留言
+      @instance_msg = InstanceMsg.new
+    end
+    if @instance.state == 'in_progress' || @instance.state == 'abort' || @instance.state == 'complete'
+      # 組隊完成後，才可以瀏覽留言
+      @instance_msgs = @instance.instance_msgs
+    end
+
   end
 
   def submit
