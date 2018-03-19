@@ -114,4 +114,10 @@ class User < ApplicationRecord
   def take_mission?(mission)
     self.level >= mission.level
   end
+
+  # 是否有被user評論過instance副本？
+  def be_reviewed_from?(user,instance)
+    user_instance = self.user_instances.find_by(instance_id: instance.id)
+    user_instance.reviewers.include?(user)
+  end
 end
