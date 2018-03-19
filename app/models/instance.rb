@@ -13,6 +13,8 @@ class Instance < ApplicationRecord
 
   has_many :instance_msgs
 
+  has_many :reviews, through: :user_instances
+
 
   # ::instance method:: 任務副本instance完成
   def complete!

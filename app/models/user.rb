@@ -16,6 +16,12 @@ class User < ApplicationRecord
   has_many :invitations
   has_many :invite_msgs
 
+  #user.reviews 所有參與過的任務的評價
+  has_many :reviews, through: :user_instances
+
+  #給予其他user的評價
+  has_many :review_to_members, foreign_key: "reviewer_id", class_name:"Review"
+
   filterrific(
     default_filter_params: {
       sorted_by: 'name_asc',
