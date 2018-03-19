@@ -1,0 +1,47 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">邀請函標題 (邀請狀態：<%= @invitation.state %>)</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid">
+        <div class="row mb-4">
+          <div class="col-md-6 mb-3">
+            <h4>邀請者</h4>
+            <%= render partial:"shared/user_card" , locals: {user: @inviter} %>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h4>受邀者</h4>
+            <%= render partial:"shared/user_card" , locals: {user: @invitee} %>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <h4>對話</h4>
+          </div>
+          <div class="col" id="invitation_msg">
+            <%= render partial:"invitation_msg" %>
+          </div>
+        </div>
+        <!-- 訊息留言 -->
+        <% if @invitation.state == 'inviting' %>
+          <%= simple_form_for @invite_msg, remote: true, url: invitation_invite_msgs_path(@invitation) do |f| %>
+            <%= f.input :content, label: false, placeholder:'聊聊天吧...'%>
+            <%= f.button :submit, '送出留言', class:"btn btn-primary" %>
+          <%end%>
+        <%end%>
+        <!--===============================-->
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="mx-auto">
+        <% if @invitation.state == 'inviting' && current_user == @invitee  %>
+          <%= link_to '接受邀請', accept_invitation_path(@invitation), method: :post, class: "btn btn-primary"  %>
+          <%= link_to '拒絕邀請', decline_invitation_path(@invitation), method: :post, class: "btn btn-danger"  %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+

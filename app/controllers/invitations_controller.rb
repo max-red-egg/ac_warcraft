@@ -1,8 +1,12 @@
 class InvitationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_invitation
+  before_action :set_invitation, except: [:index]
   before_action :auth_invitee, only: [:accept, :decline]
   before_action :check_inviting, only: [:accept, :decline, :cancel]
+
+  def index
+    @invitations = Invitation.where(user_id: current_user).or(Invitation.where(invitee_id: current_user))
+  end
 
   def show
 
@@ -20,6 +24,11 @@ class InvitationsController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
 
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
   def accept
@@ -27,6 +36,7 @@ class InvitationsController < ApplicationController
     #before_aciton :auth_invitee
     #before_aciton :check_inviting
     # binding.pry
+    @invitation.send_accept_msg
     @invitation.state = 'accept'
     @invitation.save
     # binding.pry
@@ -39,6 +49,7 @@ class InvitationsController < ApplicationController
 
     #before_aciton :auth_invitee
     #before_aciton :check_inviting
+    @invitation.send_decline_msg
     @invitation.state = 'decline'
     @invitation.save
     flash[:notice] = '拒絕邀請'
@@ -52,6 +63,7 @@ class InvitationsController < ApplicationController
 
     #只有發起這個邀請的人可以取消邀請
     if current_user == @invitation.user
+      @invitation.send_cancel_msg
       @invitation.update!(state: "cancel")
       flash[:notice] = "取消邀請"
       redirect_to instance_path(@invitation.instance)
