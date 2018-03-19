@@ -20,6 +20,11 @@ class InvitationsController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
 
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
   def accept
