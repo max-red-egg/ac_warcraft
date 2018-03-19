@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     member do
       post :invite
     end
+    resources :reviews, only: [:index,:show,:create]
   end
 
   namespace :admin do
