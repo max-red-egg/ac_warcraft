@@ -19,13 +19,12 @@ class User < ApplicationRecord
   filterrific(
     default_filter_params: {
       sorted_by: 'name_asc',
-      with_available: true,
     },
     available_filters: [
       :sorted_by,
       :search_query,
-      :with_available,
       :with_gender,
+      :with_oldfriend,
       :range_level
     ]
   )
@@ -72,17 +71,23 @@ class User < ApplicationRecord
       order("users.created_at #{ direction }")
     when /^name_/
       order("LOWER(users.name) #{ direction }")
+    when /^level_/
+      order("users.level #{ direction }")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
   }
 
-  scope :with_available, lambda { |availables|
-    where(available: [*availables])
-  }
-
   scope :with_gender, lambda { |genders|
     where(gender: [*genders])
+  }
+
+  scope :with_oldfriend, lambda { |boolean|
+    if boolean == true # 待完成
+      where()
+    else
+      whrer()
+    end
   }
 
   # always include the lower boundary for semi open intervals
@@ -94,6 +99,8 @@ class User < ApplicationRecord
     [
       ['Name (a-z)', 'name_asc'],
       ['Name (z-a)', 'name_desc'],
+      ['Level (a-z)', 'level_asc'],
+      ['Level (z-a)', 'level_desc'],
       ['Registration date (newest first)', 'created_at_desc'],
       ['Registration date (oldest first)', 'created_at_asc']
     ]
