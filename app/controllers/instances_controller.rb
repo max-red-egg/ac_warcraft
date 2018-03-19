@@ -54,15 +54,15 @@ class InstancesController < ApplicationController
 
   def submit
     # 需要為成員而且副本狀態是進行中才能夠提交副本
-    if instance.state == "in_progress"
-      if instance.update!(submit_params)
+    if @instance.state == "in_progress"
+      if @instance.update!(submit_params)
         flash[:notice] = "任務完成！"
         # 更改instance狀態
-        instance.complete!
-        redirect_to instance_path(instance)
+        @instance.complete!
+        redirect_to instance_path(@instance)
       else
         flash[:alert] = "提交失敗！"
-        redirect_to instance_path(instance)
+        redirect_to instance_path(@instance)
       end
     else
       flash[:alert] = "存取禁止"
