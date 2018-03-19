@@ -1,8 +1,12 @@
 class InvitationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_invitation
+  before_action :set_invitation, except: [:index]
   before_action :auth_invitee, only: [:accept, :decline]
   before_action :check_inviting, only: [:accept, :decline, :cancel]
+
+  def index
+    @invitations = Invitation.where(user_id: current_user).or(Invitation.where(invitee_id: current_user))
+  end
 
   def show
 
