@@ -19,7 +19,7 @@ class InstancesControllerTest < ActionDispatch::IntegrationTest
     get instance_path(@instance_teaming)
     assert_response :success
     # 有登入但不是成員
-    binding.pry
+    
     sign_in @user2
     get instance_path(@instance_teaming)
     assert_response :redirect
