@@ -1,7 +1,7 @@
 class InstancesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_instance, only: [:show, :submit, :abort]
-  before_action :authenticate_instance_member, only: [:show, :submit, :abort]
+  before_action :set_instance, only: [:show, :submit, :abort, :review]
+  before_action :authenticate_instance_member, only: [:show, :submit, :abort, :review]
 
 
   def index
@@ -49,6 +49,12 @@ class InstancesController < ApplicationController
       # 組隊完成後，才可以瀏覽留言
       @instance_msgs = @instance.instance_msgs
     end
+    if @instance.state == 'abort' || @instance.state == 'complete'
+      # 完成後才可到評論頁面
+      # current_user在這個副本的所有review
+      @current_user_reviews = current_user.reviews.find_by_instance(@instance)
+            
+    end
 
   end
 
@@ -86,6 +92,41 @@ class InstancesController < ApplicationController
     end
   end
 
+
+  def review
+  #helper: new_review_instance_path(user)
+  #評價你的隊友
+    # 功能：
+    #  顯示評論 或 讓使用者輸入評論，submit後導向reviews#create action
+    # 條件：
+    #  instance狀態要在abort 或者 complete
+    #  不能評價自己
+    #  只能評價一次
+
+    # @user：被評論者
+    @user = User.find(params[:user_id])
+
+    # 不能評論自己
+    if @user == current_user
+      flash[:alert] = '不能評論自己'
+      redirect_back(fallback_location: root_path)
+    # instance狀態要為abort 或者 complete
+    elsif @instance.state != 'complete' && @instance.state != 'abort'
+      flash[:alert] = '任務尚未結束'
+      redirect_back(fallback_location: root_path)
+    end
+
+    # render 'review'. 如果已經被評論過，則顯示該則評論，沒有則顯示form
+    if @user.be_reviewed_from?(current_user, @instance)
+      # 已評論過，顯示評論
+      @review = @user.reviews.find_by_instance_reviewer(@instance,current_user)[0]
+      # ind_by_instance_reviewer是Reivew scope,回傳陣列, 但預設應該只有一筆
+    else
+      # 沒有評論過，讓current_user可以輸入review
+      @review = Review.new
+    end
+
+  end
 
   private
   def submit_params

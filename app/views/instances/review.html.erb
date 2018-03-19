@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>評價你的隊友<%= @user.name %></h1>
+  <ul>
+    <li>任務名稱：<%= link_to @instance.mission.name, instance_path(@instance) %></li>
+    <li>任務結果：<%= @instance.state %> </li>
+  </ul>
+
+  <!-- 如果有被評論過，則顯示評論內容 -->
+  <% if @user.be_reviewed_from?(current_user, @instance) %>
+    <h3>你對<%=@user.name%>的評價</h3>
+    <%= @review.comment %>
+    
+  <!-- 沒有被評論過，則顯示form，讓current_user輸入評價 -->
+  <% else %>
+
+    <h3><%=@user.name%>的表現讓你覺得？</h3>
+    <%= simple_form_for @review ,url: user_reviews_path(@user) do |f| %>
+      <%= f.input :instance_id, as: :hidden, input_html: {value: @instance.id }%>
+      <%= f.input :comment, label: false, placeholder:'評價一下吧...'%>
+      <%= f.button :submit, '送出', class:"btn btn-primary" %>
+    <%end%>
+
+  <%end%>
+</div>  
