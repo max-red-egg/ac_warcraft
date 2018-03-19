@@ -3,7 +3,6 @@ class InstancesController < ApplicationController
   before_action :set_instance, only: [:show, :submit, :abort]
   before_action :authenticate_instance_member, only: [:show, :submit, :abort]
 
-
   def index
     @instances_in_progress = current_user.instances.where(state: 'in_progress')
     @instances_teaming = current_user.instances.where(state: 'teaming')
@@ -13,7 +12,6 @@ class InstancesController < ApplicationController
   def show
     @mission = @instance.mission
     @members = @instance.members
-
 
     if @instance.state == "teaming"
 
@@ -39,12 +37,14 @@ class InstancesController < ApplicationController
         format.html
         format.js
       end
-      
+
     end
+
     if @instance.state == 'in_progress'
       #只有任務進行中可以留言
       @instance_msg = InstanceMsg.new
     end
+
     if @instance.state == 'in_progress' || @instance.state == 'abort' || @instance.state == 'complete'
       # 組隊完成後，才可以瀏覽留言
       @instance_msgs = @instance.instance_msgs

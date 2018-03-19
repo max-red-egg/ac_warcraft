@@ -36,6 +36,7 @@ class InvitationsController < ApplicationController
     #before_aciton :auth_invitee
     #before_aciton :check_inviting
     # binding.pry
+    @invitation.send_accept_msg
     @invitation.state = 'accept'
     @invitation.save
     # binding.pry
@@ -48,6 +49,7 @@ class InvitationsController < ApplicationController
 
     #before_aciton :auth_invitee
     #before_aciton :check_inviting
+    @invitation.send_decline_msg
     @invitation.state = 'decline'
     @invitation.save
     flash[:notice] = '拒絕邀請'
@@ -61,6 +63,7 @@ class InvitationsController < ApplicationController
 
     #只有發起這個邀請的人可以取消邀請
     if current_user == @invitation.user
+      @invitation.send_cancel_msg
       @invitation.update!(state: "cancel")
       flash[:notice] = "取消邀請"
       redirect_to instance_path(@invitation.instance)
