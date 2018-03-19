@@ -18,10 +18,39 @@
     <h3>可選隊員 </h3>
     <h5><span class="badge badge-info">你還可發送 <%=@remaining_invitations_count%> 張邀請</span></h5>
   </div>
-  <% @candidates.each do |user| %>
-    <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-      <%= render partial:"shared/user_card" , locals: {user: user} %>
-      <%= button_to "邀請" , invite_user_path(user), params: {instance_id: @instance.id}, class: "btn btn-primary" if @remaining_invitations_count > 0 %>
-    </div>
-  <% end %>
 </div>
+
+<div class="row mb-4 ">
+  <div class="col bg-light card mx-3">
+    <%= form_for_filterrific @filterrific do |f| %>
+    <div class="form-row card-body">
+        <div class="col-md-3 form-group" data-intro="Search by name or email." data-position="top">
+          <label>Search</label>
+          <%= f.text_field :search_query, class: "form-control" %>
+        </div>
+
+        <div class="form-group col-md-3" >
+          <label>Gender</label>
+          <%= f.select(:with_gender, @filterrific.select_options[:with_gender],
+            { include_blank: '- 不限 -' }, {class: "form-control"}
+          ) %>
+        </div>
+
+        <div class="form-group col-md-3" >
+          <label>Level</label>
+          <%= f.select(:range_level, @filterrific.select_options[:range_level],
+            { include_blank: '- 不限 -' }, {class: "form-control"}
+          ) %>
+        </div>
+
+        <div class="form-group col-md-3" >
+          <label>Sorted by</label>
+          <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by],{}, {class: "form-control"} ) %>
+        </div>
+      </div>
+      <%= render_filterrific_spinner %>
+    <% end %>
+  </div>
+</div>
+
+<%= render( partial: 'list', locals: { candidates: @candidates } ) %>

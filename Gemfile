@@ -48,6 +48,7 @@ gem 'mini_magick',             '4.7.0'
 gem 'fog',                     '1.40.0'
 
 gem 'simple_form', '~> 3.5', '>= 3.5.1'
+gem 'filterrific', '~> 5.0', '>= 5.0.1'
 gem 'rubocop'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.3'
 gem 'pry'
