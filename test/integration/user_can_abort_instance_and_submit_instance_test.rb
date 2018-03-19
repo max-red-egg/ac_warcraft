@@ -16,7 +16,7 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     @instance.reload
     assert_equal "abort", @instance.state
     @user.reload
-    assert_equal "yes", @user.available
+    assert_equal true, @user.available
   end
 
   # 放棄後的任務仍然在user副本列表
@@ -32,7 +32,7 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     @instance.reload
     assert_equal "complete", @instance.state
     @user.reload
-    assert_equal "yes", @user.available
+    assert_equal true, @user.available
   end
 
 end

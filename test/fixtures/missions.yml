@@ -3,16 +3,19 @@ mission1:
   name: mission1
   level: 5
   participant_number: 10
+  invitation_number: 10
 
 mission2:
   name: mission2
   level: 10
   participant_number: 1
+  invitation_number: 10
 
 mission3:
   name: mission3
   level: 10
-  participant_number: 5
+  participant_number: 1
+  invitation_number: 10
 
 <% 1.upto(50) do |n| %>
 mission_<%= n %>:

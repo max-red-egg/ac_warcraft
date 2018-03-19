@@ -36,7 +36,7 @@ user3:
   gender: male
   confirmed_at: <%= Time.zone.now %>
   level: 15
-  available: busy
+  available: false
 
 user4:
   name: user4 example
