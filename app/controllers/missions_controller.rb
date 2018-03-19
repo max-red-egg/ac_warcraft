@@ -1,14 +1,18 @@
 class MissionsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @missions = Mission.page(params[:page]).per(20)
+    @missions = Mission.order(level: :asc).page(params[:page]).per(20)
   end
 
-  def show 
+  def show
     @mission = Mission.find(params[:id])
     # 如果要看的任務為現在正在進行的任務會重新導向到副本頁面
     # current_instance = current_user.instances.select { |instance| instance.state == 'in_progress' }[0]
-    # redirect_to current_instance if current_instance.mission_id == @mission.id 
+    # redirect_to current_instance if current_instance.mission_id == @mission.id
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def challenge
@@ -21,7 +25,7 @@ class MissionsController < ApplicationController
 
       #current_user.save!
       instance.save!
-      flash[:notice] = "挑戰任務成功" 
+      flash[:notice] = "挑戰任務成功"
       #redirect_back(fallback_location: root_path)
       redirect_to instance_path(instance)
     else
