@@ -14,3 +14,7 @@ instance_teaming2:
   mission: mission3
   state: teaming
 
+instance_invite1:
+  mission: mission4
+  state: teaming
+
