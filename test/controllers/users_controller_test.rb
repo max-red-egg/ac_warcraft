@@ -59,6 +59,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     post invite_user_path(@user2), params: {instance_id: @instance.id}
     assert_response :redirect
+    # binding.pry
     assert_not flash[:notice].nil?
   end
   #不能邀請等級低的使用者
@@ -69,7 +70,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not flash[:alert].nil?
   end
   #不能邀請已經受邀請的使用者
-  test "cannot invite users who is invited" do
+  test "cannot invite users who are invited" do
     sign_in @user
     post invite_user_path(@user2), params: {instance_id: @instance.id}
     assert_not flash[:notice].nil?
@@ -79,8 +80,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not flash[:alert].nil?
   end
 
-  #不能邀請狀態為busy的使用者
-  test "cannot invite users who are busy" do
+  #不能邀請狀態為false的使用者
+  test "cannot invite users who's available is false" do
     sign_in @user
     post invite_user_path(@user3), params: {instance_id: @instance.id}
     assert_not flash[:alert].nil?

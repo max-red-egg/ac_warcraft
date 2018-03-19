@@ -45,6 +45,7 @@ class Instance < ApplicationRecord
     # 確認user不是member
     # ------------
     # 如果user可以接受任務
+    # binding.pry
     if self.remaining_invitations_count <= 0
       #如果沒有邀請函可以發送，則不能邀請該user
       return false

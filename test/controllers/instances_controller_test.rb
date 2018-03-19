@@ -5,18 +5,24 @@ class InstancesControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:user)
     @admin = users(:admin)
+    @user2 = users(:user2)
     @instance_teaming = instances(:instance_teaming)
     @instance_in_progress = instances(:instance_in_progress)
     @instance_complete = instances(:instance_complete)
   end
 
-  test "only log in user can see instance/show" do
+  test "only log in member can see instance/show" do
     get instance_path(@instance_teaming)
     assert_response :redirect
-
+    # 是成員也有登入
     sign_in @user
     get instance_path(@instance_teaming)
     assert_response :success
+    # 有登入但不是成員
+    
+    sign_in @user2
+    get instance_path(@instance_teaming)
+    assert_response :redirect
   end
   
   test "instance/show can rendering correct view depend on state" do

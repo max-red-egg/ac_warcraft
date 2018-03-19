@@ -35,11 +35,11 @@ class UserCanViewMissionsAndChallengeMissionTest < ActionDispatch::IntegrationTe
   # 確認user可以選擇挑戰
   test "when click challenge button a instance will create" do
     sign_in @user
-    assert_equal "yes", @user.available
+    assert_equal true, @user.available
     assert_difference 'Instance.count', 1 do
       post challenge_mission_path(@mission2)
     end
-    # 確認產生副本後user的狀態會改變
-    assert_equal "busy", @user.available
+    # 確認產生副本後user的狀態不會改變
+    assert_equal true, @user.available
   end
 end
