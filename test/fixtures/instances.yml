@@ -18,3 +18,7 @@ instance_invite1:
   mission: mission4
   state: teaming
 
+instance_abort:
+  mission: mission1
+  state: abort
+

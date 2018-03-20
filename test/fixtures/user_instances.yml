@@ -18,6 +18,18 @@ user_instance5:
   user: user
   instance: instance_invite1
 
-user_instanceˊ:
+user_instance6:
   user: user
   instance: instance_complete
+
+user_instance7:
+  user: user2
+  instance: instance_complete
+
+user_instance8:
+  user: user
+  instance: instance_abort
+
+user_instance9:
+  user: user2
+  instance: instance_abort

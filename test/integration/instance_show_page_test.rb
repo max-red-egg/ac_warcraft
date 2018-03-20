@@ -7,6 +7,7 @@ class InstanceShowPageTest < ActionDispatch::IntegrationTest
     @user = users(:user)
     @user2 = users(:user2)
     @user3 = users(:user3)
+    @user4 = users(:user4)
     @instance_teaming = instances(:instance_teaming)
     @instance_in_progress = instances(:instance_in_progress)
     @instance_complete = instances(:instance_complete)
@@ -26,6 +27,12 @@ class InstanceShowPageTest < ActionDispatch::IntegrationTest
     # 任務進行中畫面可以看到有參與的使用者
     assert_match @user2.name, response.body
     assert_match @user.name, response.body
+  end
+
+  test "test filter functionality" do
+    sign_in @user
+    get instance_path(@instance_teaming), xhr: true, params: {filterrific: { "with_gender" => 'female' }}
+    # binding.pry
   end
 
   # 留言畫面只有組隊中的副本畫面看不到
