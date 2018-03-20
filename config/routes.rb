@@ -20,7 +20,6 @@ Rails.application.routes.draw do
       #任務完成，提交答案
       post :abort
       #放棄任務
-      get 'review/:user_id', action: "review", as: "review"
     end
     resources :instance_msgs, only: [:create]
   end
@@ -32,11 +31,16 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reviews, only: [:index, :show] do
+    member do 
+      patch :submit
+    end        
+  end
+
   resources :users do
     member do
       post :invite
     end
-    resources :reviews, only: [:index,:show,:create]
   end
 
   namespace :admin do
