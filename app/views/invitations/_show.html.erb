@@ -9,11 +9,11 @@
         <div class="row mb-4">
           <div class="col-md-6 mb-3">
             <h4>邀請者</h4>
-            <%= render partial:"shared/user_card" , locals: {user: @inviter} %>
+            <%= render partial:'shared/user_card' , locals: {user: @inviter} %>
           </div>
           <div class="col-md-6 mb-3">
             <h4>受邀者</h4>
-            <%= render partial:"shared/user_card" , locals: {user: @invitee} %>
+            <%= render partial:'shared/user_card' , locals: {user: @invitee} %>
           </div>
         </div>
         <div class="row mb-4">
@@ -21,7 +21,7 @@
             <h4>對話</h4>
           </div>
           <div class="col" id="invitation_msg">
-            <%= render partial:"invitation_msg" %>
+            <%= render partial:'shared/msg_board', locals: {msgs: @invite_msgs} %>
           </div>
         </div>
         <!-- 訊息留言 -->

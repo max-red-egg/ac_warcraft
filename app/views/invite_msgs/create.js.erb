@@ -1,1 +1,1 @@
-$("#invitation_msg").html("<%= j(render partial:'invitations/invitation_msg') %>")
+$("#invitation_msg").html("<%= j(render partial:'shared/msg_board', locals: {msgs: @invite_msgs}) %>")
