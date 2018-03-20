@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :admin do
+    get 'instances/index'
+  end
+  namespace :admin do
   end
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -42,6 +45,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root "missions#index"
     resources :missions
+    resources :instances, only: [:index]
   end
 
 end
