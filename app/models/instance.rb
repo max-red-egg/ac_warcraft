@@ -8,12 +8,12 @@ class Instance < ApplicationRecord
   #instance.mission 表示本隊的任務
   belongs_to :mission
 
-  has_many :invitations
+  has_many :invitations.state
   has_many :invitees, through: :invitations
 
   has_many :instance_msgs
 
-  has_many :reviews, through: :user_instances
+  has_many :reviews
 
 
   # ::instance method:: 任務副本instance完成
