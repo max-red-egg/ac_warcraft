@@ -1,0 +1,28 @@
+<table class="table table-hover" id="sent_list">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">任務名稱</th>
+      <th scope="col">受邀者</th>
+      <th scope="col">邀請狀態</th>
+      <th scope="col">動作</th>
+      <th scope="col">最後更新</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sent_invitations.each do |invitation| %>
+      <tr>
+        <td><%= invitation.instance.mission.name %> <%= cross_invite_badges(invitation) %></td>
+        <td><%= invitation.invitee.name %></td>
+        <td><%= invitation.state %></td>
+        <td>
+          <% if invitation.state == 'inviting' %>
+            <%= link_to '聊聊', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
+          <% else %>
+            <%= link_to '邀請紀錄', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
+          <% end %>
+          </td>
+        <td><span style="display:none;"><%= invitation.updated_at %></span><%= time_ago_in_words(invitation.updated_at) + ' ago' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

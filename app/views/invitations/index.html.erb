@@ -6,40 +6,11 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <h3>邀請函列表</h3>
-            <div class="row">
-              <% if @invitations.present? %>
+            <h3>發出的邀請函</h3>
+            <div class="row mb-4">
+              <% if @sent_invitations.present? %>
                 <div class="col-12 my-3">
-                  <table class="table table-hover" id="invitation_list">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th scope="col">任務名稱</th>
-                        <th scope="col">邀請人</th>
-                        <th scope="col">受邀者</th>
-                        <th scope="col">邀請狀態</th>
-                        <th scope="col">動作</th>
-                        <th scope="col">最後更新</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% @invitations.each do |invitation| %>
-                        <tr>
-                          <td><%= invitation.instance.mission.name %></td>
-                          <td><%= invitation.user.name %></td>
-                          <td><%= invitation.invitee.name %></td>
-                          <td><%= invitation.state %></td>
-                          <td>
-                            <% if invitation.state == 'inviting' %>
-                              <%= link_to '聊聊', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
-                            <% else %>
-                              <%= link_to '邀請紀錄', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
-                            <% end %>
-                            </td>
-                          <td><span style="display:none;"><%= invitation.updated_at %></span><%= time_ago_in_words(invitation.updated_at) + ' ago' %></td>
-                        </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
+                  <%= render partial:'sent_list' %>
                 </div>
               <% else %>
                 <div class="col-12 my-3">
@@ -47,6 +18,22 @@
                 </div>
               <% end %>
             </div>
+          </div>
+        </div>
+        <div class="row my-4">
+          <div class="col-12">
+              <h3>收到的邀請函</h3>
+              <div class="row">
+                <% if @received_invitations.present? %>
+                  <div class="col-12 my-3">
+                    <%= render partial:'received_list' %>
+                  </div>
+                <% else %>
+                  <div class="col-12 my-3">
+                    <p>無</p>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
@@ -58,12 +45,19 @@
 
 <script>
   $(document).ready(function() {
-    $('#invitation_list').DataTable({
-      "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
-      "order": [[ 5, "desc" ]],
+    $('#sent_list').DataTable({
+      "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+      "order": [[ 4, "desc" ]],
       "columnDefs": [
-        { "orderable": false, "targets": [4] }
+        { "orderable": false, "targets": [3] }
         ]
     });
-} );
+    $('#received_list').DataTable({
+      "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+      "order": [[ 4, "desc" ]],
+      "columnDefs": [
+        { "orderable": false, "targets": [3] }
+        ]
+    });
+  });
 </script>
