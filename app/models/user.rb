@@ -16,6 +16,12 @@ class User < ApplicationRecord
   has_many :invitations
   has_many :invite_msgs
 
+  #user.reviews 所有參與過的任務的評價
+  has_many :reviews, through: :user_instances
+
+  #給予其他user的評價
+  has_many :review_to_members, foreign_key: "reviewer_id", class_name:"Review"
+
   filterrific(
     default_filter_params: {
       sorted_by: 'name_asc',
@@ -114,5 +120,11 @@ class User < ApplicationRecord
   # 確認該任務可不可以執行
   def take_mission?(mission)
     self.level >= mission.level
+  end
+
+  # 是否有被user評論過instance副本？
+  def be_reviewed_from?(user,instance)
+    user_instance = self.user_instances.find_by(instance_id: instance.id)
+    user_instance.reviewers.include?(user)
   end
 end
