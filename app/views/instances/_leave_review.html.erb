@@ -1,19 +1,23 @@
 <h1>評價</h1>
 
-<% @members.each do |member| %>
-  <% if current_user != member %>
-    <% if member.be_reviewed_from?(current_user, @instance) %>
-      <h3>你對<%=member.name%>的評價</h3>
-      <%=  member.reviews.find_by_instance_reviewer(@instance,current_user)[0].comment %>
-    <% else %>
-      <%= link_to '給'+ member.name + '一個評價！', review_instance_path(@instance,member) %>
-    <% end %>
-  <%end%>
-<%end%>
 
+
+<% @reviews_to_other.each do |review| %>
+  <% if review.submit? %>
+    <h3>你對<%=review.reviewee.name%>的評價</h3>
+    <%= review.comment %>
+  <% else %>
+    <h3>關於這次的任務，你覺得<%=review.reviewee.name%> ...</h3>
+    <%= simple_form_for review, url: submit_review_path(review) do |f| %>
+      <%= f.input :comment, label: false, placeholder:'評價一下吧...'%>
+      <%= f.button :submit, '送出', class:"btn btn-primary" %>
+    <% end %>
+  <% end %>
+<% end %>
+    
 <h3>其他人對你的評價：</h3>
 <ul>
-  <% @current_user_reviews.each do |review| %>
+  <% @reviews.each do |review| %>
     <li>
       <%= review.reviewer.name %> 說：<%= review.comment %>
     </li>
