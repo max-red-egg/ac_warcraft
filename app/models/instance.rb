@@ -8,7 +8,7 @@ class Instance < ApplicationRecord
   #instance.mission 表示本隊的任務
   belongs_to :mission
 
-  has_many :invitations.state
+  has_many :invitations
   has_many :invitees, through: :invitations
 
   has_many :instance_msgs
@@ -22,6 +22,18 @@ class Instance < ApplicationRecord
     if self.state == 'in_progress'
       self.state = 'complete'
       self.save
+
+      # 產生所有隊員的reivew
+      self.members.each do |reviewee| 
+        self.members.each do |reviewer|
+          if reviewee != reviewer
+            new_review = reviewee.reviews.build(instance_id: self.id)
+            new_review.reviewer = reviewer
+            new_review.save
+          end
+        end
+      end
+
     end
   end
 
@@ -30,6 +42,17 @@ class Instance < ApplicationRecord
     if self.state == 'in_progress' || self.state == 'teaming'
       self.state = 'abort'
       self.save
+
+      # 產生所有隊員的reivew
+      self.members.each do |reviewee| 
+        self.members.each do |reviewer|
+          if reviewee != reviewer
+            new_review = reviewee.reviews.build(instance_id: self.id)
+            new_review.reviewer = reviewer
+            new_review.save
+          end
+        end
+      end
     end
   end
 
@@ -96,7 +119,5 @@ class Instance < ApplicationRecord
       end
     end
   end
-
-
 
 end
