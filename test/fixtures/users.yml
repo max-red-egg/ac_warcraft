@@ -42,7 +42,7 @@ user4:
   name: user4 example
   email: user4@email.com
   description: testtesttest
-  gender: male
+  gender: female
   confirmed_at: <%= Time.zone.now %>
   level: 15
   

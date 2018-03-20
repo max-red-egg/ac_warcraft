@@ -20,12 +20,12 @@ class MissionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "only sign_in can access mission/show" do
-    get mission_path(@mission1)
-    assert_response :redirect
+    get mission_path(@mission1), xhr:true
+    assert_response 401
 
     sign_in @user
 
-    get mission_path(@mission1)
+    get mission_path(@mission1), xhr:true
     assert_response :success
   end
 

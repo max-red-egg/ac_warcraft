@@ -11,25 +11,25 @@ class UserCanViewMissionsAndChallengeMissionTest < ActionDispatch::IntegrationTe
 
   test "admin can view missions/show" do
     sign_in @admin
-    get mission_path(@mission1)
+    get mission_path(@mission1), xhr: true
     assert_template 'missions/show'
-    assert_select 'a'
   end
 
   test "user can click challenge button if user can take mission" do
     # 測試等級不夠的使用者看不到挑戰按鈕
     sign_in @admin
-    get mission_path(@mission2)
+    get mission_path(@mission2), xhr: true
     assert_template 'missions/show'
     assert_select 'button'
     assert_select 'a[href=?]', challenge_mission_path(@mission2), false
 
     # 等級夠的使用者可以看到挑戰按鈕
     sign_in @user
-    get mission_path(@mission2)
+    get mission_path(@mission2), xhr: true
     assert_template 'missions/show'
     assert_select 'button'
-    assert_select 'a[href=?]', challenge_mission_path(@mission2)
+    # binding.pry
+    assert_match '挑戰任務', response.body
   end
 
   # 確認user可以選擇挑戰
