@@ -6,12 +6,8 @@ class Review < ApplicationRecord
   belongs_to :reviewee, class_name: "User"
 
 
-  # scope :find_by_instance, ->(instance){
-  #   joins(:user_instance).where('user_instances.instance_id = ?',instance.id)
-  # }
-  # #利用instance和reviewer找出review
-  # scope :find_by_instance_reviewer, ->(instance,reviewer) {
-  #   joins(:user_instance).where('user_instances.instance_id = ?',instance.id).where('reviewer_id = ?', reviewer.id )
-  # }
+  scope :find_by_instance, ->(instance){
+    where('instance_id = ?',instance.id)
+  }
 
 end
