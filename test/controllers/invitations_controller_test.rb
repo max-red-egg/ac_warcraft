@@ -13,20 +13,20 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "only login can see invitation_show_page" do
-    get invitation_path(@invitation)
-    assert_response :redirect
+    get invitation_path(@invitation), xhr: true
+    assert_response 401
     #被邀請的人可以看到邀請函
     sign_in @user3
-    get invitation_path(@invitation)
+    get invitation_path(@invitation), xhr: true
     assert_response :success
     # 邀請人可以看到邀請函
     sign_in @user
-    get invitation_path(@invitation)
+    get invitation_path(@invitation), xhr: true
     assert_response :success
 
     #其他使用者不能看到邀請函
     sign_in @user2
-    get invitation_path(@invitation)
+    get invitation_path(@invitation), xhr: true
     assert_response :redirect
   end
 
