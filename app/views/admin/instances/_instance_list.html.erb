@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <th scope="col">id</th>
+    <th scope="col">image</th>
+    <th scope="col">name</th>
+    <th scope="col">level</th>
+    <th scope="col">participants</th>
+    <th scope="col">state</th>
+    
+
+  </thead>
+ <tbody>
+  <% @instances.each do |instance| %>
+   <tr>
+     <th scope="row"><%= instance.id%></th>
+     <td><div style="width:100px;">
+       
+     <%= image_tag instance.mission.image_url ,class: "img-fluid " %></div></td>
+     <td><%=link_to instance.mission.name, admin_mission_path(instance.mission) %></td>
+     <td>等級<%= instance.mission.level %></td>
+     <td><%= instance_member_names(instance) %></td>
+     <td><%= transcript_instance_state(instance) %></td>
+   </tr>
+  <%end%>
+ </tbody>
+</table>

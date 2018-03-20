@@ -18,4 +18,8 @@ module InstancesHelper
     when 'abort' then '已放棄'
     end
   end
+
+  def instance_member_names(instance)
+    instance.members.map {|member| member.name }.join(", ")
+  end
 end
