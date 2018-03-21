@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root "missions#index"
+  root "missions#my_mission"
 
   resources :invitations, only: [:index, :show] do
     member do
@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   resources :missions, only: [:index, :show] do
     member do
+      get :my_mission
       post :challenge
       # POST challenge_mission_path 挑戰本任務
     end
