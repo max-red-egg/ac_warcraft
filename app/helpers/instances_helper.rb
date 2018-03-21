@@ -19,6 +19,17 @@ module InstancesHelper
     end
   end
 
+  def enter_instance(instance)
+    case instance.state
+      when 'teaming'
+        link_to "招募隊友", instance_path(instance), class: "btn btn-primary"
+      when 'in_progress'
+        link_to "進行任務", instance_path(instance), class: "btn btn-primary"
+      else
+        link_to "副本詳情", instance_path(instance), class: "btn btn-primary"
+      end
+  end
+
   def transcript_instance_state(instance)
     case instance.state
     when 'teaming' then '組隊中'
