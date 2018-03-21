@@ -25,7 +25,7 @@
       </a>
     </h6>
     <ul class="nav flex-column">
-      <li class="nav-item <%= active_class?(edit_user_path(current_user)) %>">
+      <li class="nav-item <%= active_class?(user_path(current_user)) %>">
         <%= link_to fa_icon("user", text:'關於我'), user_path(current_user)  ,class: "nav-link" %>
       </li>
       <li class="nav-item <%= active_class?(users_path) %>">
