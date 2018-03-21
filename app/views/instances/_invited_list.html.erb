@@ -1,0 +1,10 @@
+<div class="col-12">
+  <h3>已經送出邀請</h3>
+</div>
+<% @invitations.each do |invitation| %>
+  <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3">
+    <%= render partial:"shared/user_card" , locals: {user: invitation.invitee} %>
+    <%= link_to '聊聊', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
+    <%= link_to '取消邀請', cancel_invitation_path(invitation), remote: true, method: :post, class: 'btn btn-danger' %>
+  </div>
+<% end %>

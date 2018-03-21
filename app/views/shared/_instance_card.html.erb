@@ -11,7 +11,7 @@
               <h5 class="card-title"><%= link_to instance.mission.name, instance_path(instance) %></h5>
               <p class="card-text"><span class="badge badge-success">Level <%= instance.mission.level %></span> <span class="badge badge-success">Team# <%= instance.mission.participant_number %></span></p>
               <p class="card-text"><%= truncate instance.mission.description, length: 60 %></p>
-              <%= link_to "副本詳情", instance_path(instance), class: "btn btn-primary" %>
+              <%= enter_instance(instance) %>
             </div>
           </div>
         </div>

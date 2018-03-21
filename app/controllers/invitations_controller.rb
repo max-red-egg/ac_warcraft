@@ -64,10 +64,32 @@ class InvitationsController < ApplicationController
 
     #只有發起這個邀請的人可以取消邀請
     if current_user == @invitation.user
+
+      @instance = @invitation.instance
       @invitation.send_cancel_msg
       @invitation.update!(state: "cancel")
       flash[:notice] = "取消邀請"
-      redirect_to instance_path(@invitation.instance)
+
+      @remaining_invitations_count = @instance.remaining_invitations_count
+      @invitations = @instance.inviting_invitations.includes(:user)
+      @filterrific = initialize_filterrific(
+            User,
+            params[:filterrific],
+            select_options: {
+              sorted_by: User.options_for_sorted_by,
+              with_gender: ['male', 'female'],
+              range_level: [['0-4', '0'], ['5-9', '5'], ['10-14', '10'], ['15-19', '15']],
+            }
+          ) or return
+      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page])
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
+
+
+
     else
       flash[:alert] = "操作失敗"
       redirect_back(fallback_location: root_path)

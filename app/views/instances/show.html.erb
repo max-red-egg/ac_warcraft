@@ -6,21 +6,30 @@
       <div class="container">
         <div class="row mb-4">
           <div class="col">
-            <h2>副本標題(<%= transcript_instance_state(@instance) %>) <span class="ml-3"><%= abort_button(@instance) %></span></h2>
+            <h2><%= instance_title(@instance) %> <span class="ml-3"><%= abort_button(@instance) %></span></h2>
           </div>
         </div>
         <%= render partial:'mission_info', locals: {mission: @mission} %>
 
-        <%= render partial:'teaming' if @instance.state == 'teaming' %>
-        <%= render partial:'in_progress' if @instance.state == 'in_progress'  %>
-        <%= render partial:'complete' if @instance.state == 'complete' %>
-        <%= render partial:'abort' if @instance.state == 'abort'  %>
-
-        <%= render partial:'show_msgs' if @instance.state == 'in_progress' || @instance.state == 'complete' || @instance.state == 'abort' %>
-        <%= render partial:'leave_msg' if @instance.state == 'in_progress' %>
+        <% case @instance.state %>
+          <% when "teaming" %>
+            <%= render partial:'/instances/state/teaming' %>
+          <% when "in_progress" %>
+            <%= render partial:'/instances/state/in_progress' %>
+          <% when "complete" %>
+            <%= render partial:'/instances/state/complete' %>
+          <% when "abort" %>
+            <%= render partial:'/instances/state/abort' %>
+        <% end %>
 
         <%= render partial: 'leave_review' if @instance.state == 'complete' || @instance.state == 'abort'%>
-        <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
+
+        <div class="row my-5">
+          <div class="col">
+            <p class="text-center"><%= link_to "回任務列表", instances_path, class:"btn btn-secondary "%></p>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>

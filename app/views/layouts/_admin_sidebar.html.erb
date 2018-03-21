@@ -7,11 +7,11 @@
       </a>
     </h6>
     <ul class="nav flex-column">
-      <li class="nav-item">
+      <li class="nav-item <%= active_class?(admin_missions_path) %>">
         <%= link_to fa_icon("gavel", text:'任務管理'), admin_missions_path ,class: "nav-link" %>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item <%= active_class?(admin_instances_path) %>">
         <%= link_to fa_icon("gavel", text:'副本管理'), admin_instances_path ,class: "nav-link" %>
       </li>
     </ul>

@@ -1,5 +1,16 @@
 class MissionsController < ApplicationController
   before_action :authenticate_user!
+
+  def my_mission
+    current_instances = current_user.instances.where(state: ['in_progress','teaming'])
+
+    if current_instances.count > 0
+      redirect_to instances_path
+    else
+      redirect_to missions_path
+    end
+  end
+
   def index
     @missions = Mission.order(level: :asc).page(params[:page]).per(20)
   end
