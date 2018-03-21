@@ -26,7 +26,7 @@ class Instance < ApplicationRecord
     if self.state == 'in_progress'
       self.state = 'complete'
       self.save
-
+      # binding.pry
       # 產生所有隊員的reivew
       self.members.each do |reviewee| 
         self.members.each do |reviewer|

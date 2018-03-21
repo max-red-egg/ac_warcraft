@@ -11,10 +11,14 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
   end
 
   test "user can abort mission" do
-    assert_equal "in_progress", @instance.state
-    post abort_instance_path(@instance)
-    @instance.reload
-    assert_equal "abort", @instance.state
+    instance = instances(:instance_in_progress)
+    assert_equal "in_progress", instance.state
+    assert_difference 'Review.count', 2 do
+      post abort_instance_path(instance)
+    end
+    
+    instance.reload
+    assert_equal "abort", instance.state
     @user.reload
     assert_equal true, @user.available
   end
@@ -28,9 +32,15 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
   end
 
   test "user can submit instance" do
-    post submit_instance_path(@instance), params: {instance: { answer: "123" }}
-    @instance.reload
-    assert_equal "complete", @instance.state
+    # binding.pry
+    # 提交任務時可以產生兩個review
+    instance = instances(:instance_in_progress)
+    assert_difference 'Review.count', 2 do
+      post submit_instance_path(instance), params: {instance: { answer: "123" }}
+    end
+    
+    instance.reload
+    assert_equal "complete", instance.state
     @user.reload
     assert_equal true, @user.available
   end
