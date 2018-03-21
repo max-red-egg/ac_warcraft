@@ -140,5 +140,9 @@ class User < ApplicationRecord
     missions = self.missions.where('instances.state = ? ', 'in_progress')
   end
 
+  def was_declined?(instance)
+    instance.invitations.where('invitations.invitee_id = ? AND invitations.state = ?', self, 'decline').present?
+  end
+
 
 end

@@ -51,7 +51,14 @@ module InstancesHelper
     end
   end
 
+  def user_aleary_decline(instance, user)
+    if user.was_declined?(instance)
+      content_tag(:span, '已拒絕' , class: "badge badge-danger mb-2")
+    end
+  end
+
   def instance_member_names(instance)
     instance.members.map {|member| member.name }.join(", ")
   end
+
 end
