@@ -9,5 +9,11 @@ class Review < ApplicationRecord
   scope :find_by_instance, ->(instance){
     where('instance_id = ?',instance.id)
   }
+  scope :submited, ->{
+    where(submit: true)
+  }
+  scope :unsubmit, ->{
+    where(submit: false)
+  }
 
 end

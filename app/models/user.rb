@@ -12,6 +12,8 @@ class User < ApplicationRecord
   #每次接受一個任務，就會產生一個副本instance,等人數符合後，instance的狀態會改成in_progress
   #user.instances可以看到所有挑戰過的副本
   has_many :instances, through: :user_instances
+  has_many :missions, through: :instances
+
 
   has_many :invitations
   has_many :invite_msgs
@@ -127,4 +129,12 @@ class User < ApplicationRecord
     user_instance = self.user_instances.find_by(instance_id: instance.id)
     user_instance.reviewers.include?(user)
   end
+
+
+  #所有參與過的任務
+  def missions_compeleted
+    missions = self.missions.where('instances.state = ? ', 'complete')
+  end
+
+
 end
