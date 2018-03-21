@@ -10,6 +10,15 @@ module InstancesHelper
     end
   end
 
+  def instance_title(instance)
+    case instance.state
+    when 'teaming' then '隊友招募中'
+    when 'in_progress' then '副本進行中'
+    when 'complete' then '副本已完成'
+    when 'abort' then '副本已放棄'
+    end
+  end
+
   def transcript_instance_state(instance)
     case instance.state
     when 'teaming' then '組隊中'
