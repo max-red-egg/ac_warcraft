@@ -13,7 +13,7 @@ class Instance < ApplicationRecord
 
   has_many :instance_msgs
 
-  has_many :reviews, through: :user_instances
+  has_many :reviews
 
 
   # ::instance method:: 任務副本instance完成
@@ -22,6 +22,18 @@ class Instance < ApplicationRecord
     if self.state == 'in_progress'
       self.state = 'complete'
       self.save
+
+      # 產生所有隊員的reivew
+      self.members.each do |reviewee| 
+        self.members.each do |reviewer|
+          if reviewee != reviewer
+            new_review = reviewee.reviews.build(instance_id: self.id)
+            new_review.reviewer = reviewer
+            new_review.save
+          end
+        end
+      end
+
     end
   end
 
@@ -30,6 +42,17 @@ class Instance < ApplicationRecord
     if self.state == 'in_progress' || self.state == 'teaming'
       self.state = 'abort'
       self.save
+
+      # 產生所有隊員的reivew
+      self.members.each do |reviewee| 
+        self.members.each do |reviewer|
+          if reviewee != reviewer
+            new_review = reviewee.reviews.build(instance_id: self.id)
+            new_review.reviewer = reviewer
+            new_review.save
+          end
+        end
+      end
     end
   end
 
@@ -96,7 +119,5 @@ class Instance < ApplicationRecord
       end
     end
   end
-
-
 
 end

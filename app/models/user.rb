@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :invite_msgs
 
   #user.reviews 所有參與過的任務的評價
-  has_many :reviews, through: :user_instances
+  has_many :reviews, foreign_key: "reviewee_id", class_name: "Review"
 
   #給予其他user的評價
   has_many :review_to_members, foreign_key: "reviewer_id", class_name:"Review"
