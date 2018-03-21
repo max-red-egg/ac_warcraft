@@ -20,6 +20,10 @@ class UsersController < ApplicationController
     @reviews = @user.reviews.submited
     @unsended_reviews = @user.review_to_members.unsubmit
 
+    respond_to do |format|
+      format.html
+      format.js
+    end
 
   end
 
