@@ -29,11 +29,11 @@ class InstanceShowPageTest < ActionDispatch::IntegrationTest
     assert_match @user.name, response.body
   end
 
-  test "test filter functionality" do
-    sign_in @user
-    get instance_path(@instance_teaming), xhr: true, params: {filterrific: { "with_gender" => 'female' }}
-    # binding.pry
-  end
+  # test "test filter functionality" do
+  #   sign_in @user
+  #   get instance_path(@instance_teaming), xhr: true, params: {filterrific: { "with_gender" => 'female' }}
+  #   # binding.pry
+  # end
 
   # 留言畫面只有組隊中的副本畫面看不到
   test "msg view only shows in in_progress instances" do
