@@ -12,9 +12,9 @@
     <% candidates.each do |user| %>
       <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3" id="filterrific_results">
         <%= render partial:"shared/user_card" , locals: {user: user} %>
-        <%= user_aleary_done(@instance, user) %>
+        <%= user_already_done(@instance, user) %>
         <%= user_in_progress(@instance, user) %>
-        <%= user_aleary_decline(@instance, user) %>
+        <%= user_already_decline(@instance, user) %>
         <%= button_to "邀請" , invite_user_path(user), params: {instance_id: @instance.id}, remote: true, data: { disable_with: '送出邀請...' }, class: "btn btn-primary" if @remaining_invitations_count > 0 %>
       </div>
     <% end %>

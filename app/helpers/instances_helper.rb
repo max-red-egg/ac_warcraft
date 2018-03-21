@@ -39,7 +39,7 @@ module InstancesHelper
     end
   end
 
-  def user_aleary_done(instance, user)
+  def user_already_done(instance, user)
     if user.missions_compeleted.include?(instance.mission)
       content_tag(:span, '已完成過' , class: "badge badge-success mb-2")
     end
@@ -51,9 +51,9 @@ module InstancesHelper
     end
   end
 
-  def user_aleary_decline(instance, user)
+  def user_already_decline(instance, user)
     if user.was_declined?(instance)
-      content_tag(:span, '已拒絕' , class: "badge badge-danger mb-2")
+      content_tag(:span, '已拒絕' , class: "badge badge-dangera mb-2")
     end
   end
 
