@@ -22,8 +22,8 @@
             <% if @user == current_user %>
               <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-primary" %>
             <% end %>
-            
-            <h4>參與過的任務</h4>
+
+            <h4>完成的任務</h4>
             <ul>
             <% @missions.each  do|mission| %>
               <li><%= link_to mission.name, mission_path(mission) %></li>

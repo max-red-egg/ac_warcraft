@@ -130,10 +130,14 @@ class User < ApplicationRecord
     user_instance.reviewers.include?(user)
   end
 
-
-  #所有參與過的任務
+  #所有完成過的任務
   def missions_compeleted
     missions = self.missions.where('instances.state = ? ', 'complete')
+  end
+
+  #正在進行中的任務
+  def missions_in_progress
+    missions = self.missions.where('instances.state = ? ', 'in_progress')
   end
 
 
