@@ -53,7 +53,7 @@ module InstancesHelper
 
   def user_already_decline(instance, user)
     if user.was_declined?(instance)
-      content_tag(:span, '已拒絕' , class: "badge badge-dangera mb-2")
+      content_tag(:span, '已拒絕' , class: "badge badge-danger mb-2")
     end
   end
 
