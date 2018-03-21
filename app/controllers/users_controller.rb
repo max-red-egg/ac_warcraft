@@ -7,7 +7,20 @@ class UsersController < ApplicationController
   end
 
   def show
+    # 使用者頁面可顯示：
+    #   已經完成的任務
+    #   所有的評價
+    #   所有評價的數量
+    #   尚未評價的數量
+    #   current_user 可以去看哪些評價沒送出
+
     @user = User.find(params[:id])
+    @missions = @user.missions_compeleted
+    @instances = @user.instances.find_complete
+    @reviews = @user.reviews.submited
+    @unsended_reviews = @user.review_to_members.unsubmit
+
+
   end
 
   def edit
