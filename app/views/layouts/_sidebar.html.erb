@@ -7,13 +7,13 @@
       </a>
     </h6>
     <ul class="nav flex-column">
-      <li class="nav-item">
+      <li class="nav-item <%= active_class?(missions_path) %>">
         <%= link_to fa_icon("gavel", text:'任務牆'), missions_path ,class: "nav-link" %>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <%= active_class?(instances_path) %>">
         <%= link_to fa_icon("file", text:'副本列表'), instances_path ,class: "nav-link" %>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <%= active_class?(invitations_path) %>">
         <%= link_to fa_icon("envelope", text:'邀請函列表'), invitations_path ,class: "nav-link" %>
       </li>
     </ul>
@@ -25,10 +25,10 @@
       </a>
     </h6>
     <ul class="nav flex-column">
-      <li class="nav-item">
+      <li class="nav-item <%= active_class?(edit_user_path(current_user)) %>">
         <%= link_to fa_icon("user", text:'關於我'), edit_user_path(current_user) ,class: "nav-link" %>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <%= active_class?(users_path) %>">
         <%= link_to fa_icon("users", text:'隊友清單'), users_path ,class: "nav-link" %>
       </li>
     </ul>
