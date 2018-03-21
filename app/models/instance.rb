@@ -15,6 +15,10 @@ class Instance < ApplicationRecord
 
   has_many :reviews
 
+  scope :find_complete ,-> {
+    where(state: 'complete')
+  }
+
 
   # ::instance method:: 任務副本instance完成
   def complete!
