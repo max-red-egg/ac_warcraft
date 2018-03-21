@@ -43,21 +43,40 @@ class UsersController < ApplicationController
     #  - invitation.invitee = user
     #  - invitation.instance = instance
     # ------------
-    instance = Instance.find(params[:instance_id])
+    @instance = Instance.find(params[:instance_id])
     user = User.find(params[:id])
     # binding.pry
     #確認該使用者可以接受邀請
-    if instance.can_invite?(user)
+    if @instance.can_invite?(user)
       #產生邀請
-      invitation = current_user.invitations.build(instance_id: instance.id, invitee_id: user.id)
+      invitation = current_user.invitations.build(instance_id: @instance.id, invitee_id: user.id)
       invitation.save
       flash[:notice] = '已送出邀請'
-      redirect_back(fallback_location: root_path)
+
+      @remaining_invitations_count = @instance.remaining_invitations_count
+      @invitations = @instance.inviting_invitations.includes(:user)
+      @filterrific = initialize_filterrific(
+            User,
+            params[:filterrific],
+            select_options: {
+              sorted_by: User.options_for_sorted_by,
+              with_gender: ['male', 'female'],
+              range_level: [['0-4', '0'], ['5-9', '5'], ['10-14', '10'], ['15-19', '15']],
+            }
+          ) or return
+      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page])
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
+
     else
       #不能收invite
       flash[:alert] = '不能送出邀請'
       redirect_back(fallback_location: root_path)
     end
+
   end
 
   private

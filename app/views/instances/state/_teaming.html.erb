@@ -1,22 +1,13 @@
-<%= render partial: "member_info", locals:{members: @members} %>
+<%= render partial: "member_list", locals:{members: @members} %>
 
-<div class="row mb-4">
-  <div class="col-12">
-    <h3>已經送出邀請</h3>
-  </div>
-  <% @invitations.each do |invitation| %>
-    <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-      <%= render partial:"shared/user_card" , locals: {user: invitation.invitee} %>
-      <%= link_to '聊聊', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
-      <%= link_to '取消邀請', cancel_invitation_path(invitation), method: :post, class: 'btn btn-danger' %>
-    </div>
-  <% end %>
+<div class="row mb-4" id="invited_list">
+  <%= render partial: "invited_list" %>
 </div>
 
 <div class="row mb-4">
   <div class="col-12">
     <h3>可選隊員 </h3>
-    <h5><span class="badge badge-info">你還可發送 <%=@remaining_invitations_count%> 張邀請</span></h5>
+    <h5><span class="badge badge-info">你還可發送 <span id="remaining_invitations"><%=@remaining_invitations_count%></span> 張邀請</span></h5>
   </div>
 </div>
 
