@@ -6,6 +6,10 @@ class Invitation < ApplicationRecord
   #可能要加counter cache
   has_many :invite_msgs
 
+  scope :find_inviting, -> {
+    where(state: 'inviting')
+  }
+
   def time_updated!
     self.updated_at = Time.now
     self.save
@@ -23,10 +27,25 @@ class Invitation < ApplicationRecord
     invite_msg.save
   end
 
-  def send_cancel_msg
+  def send_cancel_msg(*options)
+    if(options)
+      options.each do |option|
+        invite_msg = self.invite_msgs.create(content: option)
+        invite_msg.user = self.user
+        invite_msg.save
+      end
+    end
+
     invite_msg = self.invite_msgs.create(content: "很抱歉，我已取消這次邀請，有緣再見 -- 系統訊息")
     invite_msg.user = self.user
     invite_msg.save
+  end
+
+  def cancel!
+    if self.state == 'inviting'
+      self.state = 'cancel'
+      self.save
+    end
   end
 
   private
