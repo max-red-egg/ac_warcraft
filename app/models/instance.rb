@@ -117,9 +117,16 @@ class Instance < ApplicationRecord
     #如果設定在after_commit 會造成查詢次數過多
     #這裡要想一下怎麼改會比較好
     if self.state == 'teaming'
+    # 如果是人數已經滿了，則副本開始
       if self.members.length == self.mission.participant_number
         self.state = 'in_progress'
         self.save
+        # 副本開始，其他邀請函取消
+        # invitation.cancel inviting
+        self.invitations.find_inviting.each do |invitation|
+          invitation.cancel!
+          invitation.send_cancel_msg('已經有其他人答應我的組隊邀請！-- 系統訊息')
+        end
       end
     end
   end
