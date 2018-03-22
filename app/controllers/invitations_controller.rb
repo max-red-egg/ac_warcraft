@@ -84,11 +84,9 @@ class InvitationsController < ApplicationController
       @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page])
 
       respond_to do |format|
-        format.html
+        format.html { redirect_back(fallback_location: root_path) }
         format.js
       end
-
-
 
     else
       flash[:alert] = "操作失敗"

@@ -1,20 +1,24 @@
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title">邀請函標題 (邀請狀態：<%= @invitation.state %>)</h4>
+      <h4 class="modal-title"> <%= @inviter.name %> 邀請 <%= @invitee.name %> 進行任務 (邀請函狀態：<%= @invitation.state %>)</h4>
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     </div>
     <div class="modal-body">
       <div class="container-fluid">
         <div class="row mb-4">
-          <div class="col-md-6 mb-3">
-            <h4>邀請者</h4>
-            <%= render partial:'shared/user_card' , locals: {user: @inviter} %>
-          </div>
-          <div class="col-md-6 mb-3">
-            <h4>受邀者</h4>
-            <%= render partial:'shared/user_card' , locals: {user: @invitee} %>
-          </div>
+          <% if @inviter != current_user  %>
+            <div class="col-md-6 mb-3">
+              <h4>邀請者</h4>
+              <%= render partial:'shared/user_card' , locals: {user: @inviter} %>
+            </div>
+          <% end %>
+          <% if @invitee != current_user  %>
+            <div class="col-md-6 mb-3">
+              <h4>受邀者</h4>
+              <%= render partial:'shared/user_card' , locals: {user: @invitee} %>
+            </div>
+          <% end %>
         </div>
         <div class="row mb-4">
           <div class="col-12">
@@ -34,14 +38,17 @@
         <!--===============================-->
       </div>
     </div>
-    <div class="modal-footer">
-      <div class="mx-auto">
-        <% if @invitation.state == 'inviting' && current_user == @invitee  %>
-          <%= link_to '接受邀請', accept_invitation_path(@invitation), method: :post, class: "btn btn-primary"  %>
-          <%= link_to '拒絕邀請', decline_invitation_path(@invitation), method: :post, class: "btn btn-danger"  %>
-        <%end%>
+    <% if @invitation.state == 'inviting' %>
+      <div class="modal-footer">
+        <div class="mx-auto">
+          <% if current_user == @invitee %>
+            <%= link_to '接受邀請', accept_invitation_path(@invitation), method: :post, class: "btn btn-primary"  %>
+            <%= link_to '拒絕邀請', decline_invitation_path(@invitation), method: :post, data: {confirm: 'Are you sure?'}, class: "btn btn-danger"  %>
+          <% else %>
+            <%= link_to '取消邀請', cancel_invitation_path(@invitation), method: :post, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <%end%>
   </div>
 </div>
-

@@ -1,6 +1,6 @@
 <div class="row mb-4">
   <div class="col-12">
-    <h4>副本訊息</h4>
+    <h4>任務筆記與留言</h4>
   </div>
   <div class="col">
     <ul>
@@ -13,7 +13,7 @@
 
 <% if @instance.state == 'in_progress' %>
   <%= simple_form_for @instance_msg ,url: instance_instance_msgs_path(@instance) do |f| %>
-    <%= f.input :content, label: false, placeholder:'聊聊天吧...'%>
+    <%= f.input :content, label: false, placeholder:'留下筆記留言...'%>
     <%= f.button :submit, '送出', class:"btn btn-primary" %>
   <%end%>
 <% end %>
