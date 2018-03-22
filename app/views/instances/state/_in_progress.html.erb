@@ -9,11 +9,17 @@
     <h3>任務進度</h3>
   </div>
   <div class="col-12">
-    <%= simple_form_for @instance, url:submit_instance_path(@instance), method: :post do |f| %>
-      <%= f.input :answer %>
-      <%= f.button :submit, '提交', class: "btn btn-primary" %>
-    <%end%>
+    <div class="instance_ans">
+    <% if @answer == '' %>
+      <%=render partial:'ans_form', locals: {instance: @instance} %>
+    <% else %>
+      <%= render partial: 'ans_panel', locals: {instance: @instance} %>
+    <% end %>
+    </div>
+
+  
   </div>
+
 </div>
 
 <%= render partial:'msgs_board' %>

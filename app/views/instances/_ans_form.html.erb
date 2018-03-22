@@ -1,0 +1,4 @@
+<%=simple_form_for instance, remote: true, url:save_instance_path(instance),method: :post do |f| %>
+  <%= f.input :answer, required: true %>
+  <%= f.button :submit, '儲存', class: "btn btn-primary " %>
+<%end%>
