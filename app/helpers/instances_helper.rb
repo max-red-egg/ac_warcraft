@@ -39,7 +39,26 @@ module InstancesHelper
     end
   end
 
+  def user_already_done(instance, user)
+    if user.missions_compeleted.include?(instance.mission)
+      content_tag(:span, '已完成過' , class: "badge badge-success mb-2")
+    end
+  end
+
+  def user_in_progress(instance, user)
+    if user.missions_in_progress.include?(instance.mission)
+      content_tag(:span, '正執行中' , class: "badge badge-success mb-2")
+    end
+  end
+
+  def user_already_decline(instance, user)
+    if user.was_declined?(instance)
+      content_tag(:span, '已拒絕' , class: "badge badge-danger mb-2")
+    end
+  end
+
   def instance_member_names(instance)
     instance.members.map {|member| member.name }.join(", ")
   end
+
 end

@@ -1,17 +1,16 @@
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/sidebar' %>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
-      <%= render 'layouts/notice' %>
-      <div class="container">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">關於 <%=@user.name%></h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3">
-              <%= image_tag @user.avatar_url, class: "img-responsive center-block" if @user.avatar_url %>
+          <div class="col-sm-4 mb-4">
+              <%= image_tag @user.avatar_url, class: "img-thumbnail rounded-circle w-100" if @user.avatar_url %>
           </div>
-          <div class="col-md-2"></div>
-
-          <div class="col-md-7">
-            <h4>名字 <%= @user.name %></h4>
+          <div class="col-sm-8">
             <p>自我介紹 <%= @user.description %></p>
             <p>性別 <%= @user.gender %></p>
             <p>等級 <%= @user.level %></p>
@@ -44,22 +43,15 @@
               <%end%>
             </ul>
             <h4>尚未評論的評價</h4>
-            <p>你還有<%= @unsended_reviews.count %> 則評價尚未送出</p>
-            <% if current_user == @user %>
-              <ul>
-                <% @unsended_reviews.each do |review| %>
-                <li>你在 <%=link_to review.instance.mission.name , instance_path(review.instance)%> 任務中還沒送出對於<%= review.reviewee.name %> 的評價</li>
-                <% end %>
-              </ul>
-            <% end %>
-
-
-
-
-
+            <p>還有<%= @unsended_reviews.count %> 則評價尚未送出</p>
           </div>
         </div>
       </div>
-    </main>
+    </div>
+    <div class="modal-footer">
+      <div class="mx-auto">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+      </div>
+    </div>
   </div>
 </div>

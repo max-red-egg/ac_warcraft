@@ -1,7 +1,10 @@
-<%= render partial: "member_list", locals:{members: @members} %>
-
-<div class="row mb-4" id="invited_list">
-  <%= render partial: "invited_list" %>
+<div class="row mb-4">
+  <div class="col-md-6">
+    <%= render partial: "member_list", locals:{members: @members} %>
+  </div>
+  <div class="col-md-6" id="invited_list">
+    <%= render partial: "invited_list" %>
+  </div>
 </div>
 
 <div class="row mb-4">

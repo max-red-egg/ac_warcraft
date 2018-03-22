@@ -1,10 +1,9 @@
-<div class="row mb-4">
-  <div class="col-12">
-    <h3>副本成員</h3>
-  </div>
+<h3>副本成員</h3>
+<div class="row mt-3">
   <% members.each do |member| %>
-    <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-      <%= render partial:"shared/user_card" , locals: {user: member} %>
+    <div class="col-4 col-xl-3 mb-3">
+      <%= render partial:"shared/user_head" , locals: {user: member} %>
     </div>
   <% end %>
 </div>
+
