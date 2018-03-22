@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     member do
       post :submit
       #任務完成，提交答案
+      post :cancel
+      #取消組隊
       post :abort
       #放棄任務
     end
