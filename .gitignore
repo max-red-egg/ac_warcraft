@@ -30,7 +30,7 @@
 /config/master.key
 
 # Ignore db setting
-/config/database.yml
+
 /config/secrets.yml
 /public/uploads
 
