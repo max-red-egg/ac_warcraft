@@ -49,7 +49,7 @@ class Instance < ApplicationRecord
       #取消所有人的邀請函
       self.invitations.find_inviting.each do |invitation|
         invitation.cancel!
-        invitation.send_cancel_msg('我已經取消了本次任務組隊！-- 系統訊息')
+        invitation.send_cancel_msg
       end
     end
   end
@@ -140,7 +140,7 @@ class Instance < ApplicationRecord
         # invitation.cancel inviting
         self.invitations.find_inviting.each do |invitation|
           invitation.cancel!
-          invitation.send_cancel_msg('已經有其他人答應我的組隊邀請！-- 系統訊息')
+          invitation.send_cancel_msg
         end
       end
     end
