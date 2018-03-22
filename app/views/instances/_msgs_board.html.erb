@@ -17,3 +17,16 @@
     <%= f.button :submit, '送出', class:"btn btn-primary" %>
   <%end%>
 <% end %>
+
+
+<script>
+  // 按enter可以直接送出
+  $('#new_instance_msg').keypress(function (e) {
+        if(e.which == 13 && !e.shiftKey) {
+            // e.form.submit();
+            console.log(e);
+            e.preventDefault()
+            $('#new_instance_msg').submit();
+        }
+    });
+</script>

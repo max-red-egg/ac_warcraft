@@ -28,7 +28,7 @@
         <% if @invitation.state == 'inviting' %>
           <%= simple_form_for @invite_msg, remote: true, url: invitation_invite_msgs_path(@invitation) do |f| %>
             <%= f.input :content, label: false, placeholder:'聊聊天吧...'%>
-            <%= f.button :submit, '送出留言', class:"btn btn-primary" %>
+            <%= f.button :submit, '送出留言', class:"btn btn-primary submit" %>
           <%end%>
         <%end%>
         <!--===============================-->
@@ -44,4 +44,7 @@
     </div>
   </div>
 </div>
+
+
+
 
