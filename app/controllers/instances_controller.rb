@@ -1,7 +1,7 @@
 class InstancesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_instance, only: [:show, :submit, :abort, :review, :cancel]
-  before_action :authenticate_instance_member, only: [:show, :submit, :abort, :review, :cancel]
+  before_action :set_instance, only: [:show, :submit, :abort, :review, :cancel, :save,:edit]
+  before_action :authenticate_instance_member, only: [:show, :submit, :abort, :review, :cancel, :save, :edit]
 
   def index
     @instances_in_progress = current_user.instances.where(state: 'in_progress')
@@ -44,6 +44,9 @@ class InstancesController < ApplicationController
     if @instance.state == 'in_progress'
       #只有任務進行中可以留言
       @instance_msg = InstanceMsg.new
+
+      #答案
+      @answer = @instance.answer
     end
 
     if @instance.state == 'in_progress' || @instance.state == 'abort' || @instance.state == 'complete'
@@ -60,11 +63,21 @@ class InstancesController < ApplicationController
 
   end
 
+
+  def save
+    if @instance.state == "in_progress"
+      @instance.update!(submit_params)
+    end
+  end
+  def edit
+
+  end
+
   def submit
     # 需要為成員而且副本狀態是進行中才能夠提交副本
     # binding.pry
     if @instance.state == "in_progress"
-      if @instance.update!(submit_params)
+      if !@instance.answer.strip.empty?
         flash[:notice] = "任務完成！"
         # 更改instance狀態
         # binding.pry
