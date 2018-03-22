@@ -18,7 +18,7 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
   test "user can invite other users" do
     sign_in @user
     assert_difference 'Invitation.count', 1 do
-      post invite_user_path(@user2), params: {instance_id: @instance.id}
+      post invite_user_path(@user2), xhr: true, params: {instance_id: @instance.id}
     end
     assert_includes @instance.invitees, @user2
   end
@@ -26,7 +26,7 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
   test "remaining_invitations_count of instance will decrease when send a invitation" do
     sign_in @user
     assert_difference '@invitation.instance.reload.remaining_invitations_count', -1 do
-      post invite_user_path(@user2), params: {instance_id: @instance.id}
+      post invite_user_path(@user2), xhr: true, params: {instance_id: @instance.id}
     end
   end
 
@@ -34,7 +34,7 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
   test "cannot invite other when invitation number of instance is zero" do
     sign_in @user
     assert_difference 'Invitation.count', 0 do
-      post invite_user_path(@user3), params: {instance_id: @instance3.id}
+      post invite_user_path(@user3), xhr: true, params: {instance_id: @instance3.id}
     end
   end
   
@@ -82,7 +82,7 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
     sign_in @user
   
     assert_difference 'Invitation.count', 1 do
-      post invite_user_path(@user3), params: {instance_id: @instance2.id}
+      post invite_user_path(@user3), xhr: true, params: {instance_id: @instance2.id}
     end
     assert_includes @instance2.invitees, @user3
   end
@@ -101,13 +101,13 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
     # 被邀請者不能取消邀請
     sign_in @user3
     assert_equal 'inviting', @invitation.state
-    post cancel_invitation_path(@invitation)
+    post cancel_invitation_path(@invitation), xhr: true
     @invitation.reload
     assert_equal 'inviting', @invitation.state
 
     sign_in @user
     assert_equal 'inviting', @invitation.state
-    post cancel_invitation_path(@invitation)
+    post cancel_invitation_path(@invitation), xhr: true
     @invitation.reload
     assert_equal 'cancel', @invitation.state
   end

@@ -92,41 +92,5 @@ class InstancesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test "user cannot review self" do
-    # 自己不能評論自己
-    sign_in @user
-    get instance_path(@instance_complete)
-    assert_response :success
-    get review_instance_path(@instance_complete, @user)
-    assert_response :redirect
-  end
-
-  test "user cannot review non member" do
-    # 不能評論不是副本成員的使用者
-    sign_in @user
-    get instance_path(@instance_complete)
-    assert_response :success
-    get review_instance_path(@instance_complete, @user3)
-    assert_response :redirect  
-  end
-
-  test "instance state must be complete or abort" do
-    # 副本的狀態必須為完成或放棄
-    sign_in @user
-    get instance_path(@instance_teaming)
-    assert_response :success
-    get review_instance_path(@instance_teaming, @user)
-    assert_response :redirect
-  end
-
-  test "user can enter review page" do
-    # 副本狀態為完成或者放棄可以進入評價頁面
-    sign_in @user
-    get instance_path(@instance_complete)
-    assert_response :success
-    get review_instance_path(@instance_complete, @user2)
-    assert_response :success
-    get review_instance_path(@instance_abort, @user2)
-    assert_response :success
-  end
+  
 end

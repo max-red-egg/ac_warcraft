@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-
+  before_action :authenticate_user!
   def show 
   end
 
@@ -7,21 +7,22 @@ class ReviewsController < ApplicationController
   def submit
     review = Review.find(params[:id])
     if review.reviewer != current_user
-      flash[:alert] = '::review:: 存取禁止 '
+      flash[:alert] = '::review:: 存取禁止'
       redirect_back(fallback_location: root_path)
-    end
-    if review.submit
+    
+    elsif review.submit
       flash[:alert] = '你已經送過評價，無法再次評論'
       redirect_back(fallback_location: root_path)
-    end
-    if review.update!(review_params)
-      review.submit = true
-      review.save
-      flash[:notice] = '成功送出評價'
-      redirect_back(fallback_location: root_path)
     else
-      flash[:alert] = '::review:: something wrong!'
-      redirect_back(fallback_location: root_path)
+      if review.update!(review_params)
+        review.submit = true
+        review.save
+        flash[:notice] = '成功送出評價'
+        redirect_back(fallback_location: root_path)
+      else
+        flash[:alert] = '::review:: something wrong!'
+        redirect_back(fallback_location: root_path)
+      end
     end
   end
 

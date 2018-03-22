@@ -52,45 +52,46 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "only login can invite others" do
     # not sign in
-    post invite_user_path(@user), params: {instance_id: @instance.id}
-    assert_response :redirect
-    assert_not flash[:alert].nil?
+    post invite_user_path(@user),xhr: true, params: {instance_id: @instance.id}
+    assert_response 401
+    
     #sign in as @user
     sign_in @user
-    post invite_user_path(@user2), params: {instance_id: @instance.id}
-    assert_response :redirect
+    post invite_user_path(@user2),xhr: true, params: {instance_id: @instance.id}
+    # assert_response :redirect
     # binding.pry
     assert_not flash[:notice].nil?
   end
   #不能邀請等級低的使用者
   test "cannot invite users with level lower than mission" do
     sign_in @user
-    post invite_user_path(@admin), params: {instance_id: @instance.id}
-    assert_response :redirect
+    post invite_user_path(@admin),xhr: true, params: {instance_id: @instance.id}
+    # binding.pry
+    # assert_response :redirect
     assert_not flash[:alert].nil?
   end
   #不能邀請已經受邀請的使用者
   test "cannot invite users who are invited" do
     sign_in @user
-    post invite_user_path(@user2), params: {instance_id: @instance.id}
+    post invite_user_path(@user2),xhr: true, params: {instance_id: @instance.id}
     assert_not flash[:notice].nil?
     
-    post invite_user_path(@user2), params: {instance_id: @instance.id}
-    assert_response :redirect
+    post invite_user_path(@user2),xhr: true, params: {instance_id: @instance.id}
+    # assert_response :redirect
     assert_not flash[:alert].nil?
   end
 
   #不能邀請狀態為false的使用者
   test "cannot invite users who's available is false" do
     sign_in @user
-    post invite_user_path(@user3), params: {instance_id: @instance.id}
+    post invite_user_path(@user3),xhr: true, params: {instance_id: @instance.id}
     assert_not flash[:alert].nil?
   end
 
   #不能邀請已經是member的隊友
   test "cannot invite users who are already a member in that instance" do
     sign_in @user
-    post invite_user_path(@user4), params: {instance_id: @instance.id}
+    post invite_user_path(@user4),xhr: true, params: {instance_id: @instance.id}
     assert_not flash[:alert].nil?
   end
 

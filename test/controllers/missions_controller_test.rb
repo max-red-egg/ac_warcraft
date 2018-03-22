@@ -5,18 +5,34 @@ class MissionsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @admin = users(:admin)
     @user = users(:user)
+    @user1 = users(:user_1)
     @mission1 = missions(:mission1)
     @mission2 = missions(:mission2)
   end
 
   test "only sign_in can access mission/index" do
-    get root_path
+    get missions_path
     assert_response :redirect
+
 
     sign_in @user
 
-    get root_path
+    get missions_path
     assert_response :success
+  end
+
+  #如果有副本正在進行中進去首頁會被導向任務頁面
+  test "if user has instances will redirected to instances/index page when entering root" do
+    # 有在打副本的成員
+    sign_in @user
+
+    get root_path
+    assert_redirected_to instances_path
+
+    # 目前沒有副本的成員
+    sign_in @user1
+    get root_path
+    assert_redirected_to missions_path
   end
 
   test "only sign_in can access mission/show" do
