@@ -34,14 +34,17 @@
         <!--===============================-->
       </div>
     </div>
-    <div class="modal-footer">
-      <div class="mx-auto">
-        <% if @invitation.state == 'inviting' && current_user == @invitee  %>
-          <%= link_to '接受邀請', accept_invitation_path(@invitation), method: :post, class: "btn btn-primary"  %>
-          <%= link_to '拒絕邀請', decline_invitation_path(@invitation), method: :post, class: "btn btn-danger"  %>
-        <%end%>
+    <% if @invitation.state == 'inviting' %>
+      <div class="modal-footer">
+        <div class="mx-auto">
+          <% if current_user == @invitee %>
+            <%= link_to '接受邀請', accept_invitation_path(@invitation), method: :post, class: "btn btn-primary"  %>
+            <%= link_to '拒絕邀請', decline_invitation_path(@invitation), method: :post, data: {confirm: 'Are you sure?'}, class: "btn btn-danger"  %>
+          <% else %>
+            <%= link_to '取消邀請', cancel_invitation_path(@invitation), method: :post, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <%end%>
   </div>
 </div>
-
