@@ -1,7 +1,7 @@
 class InstancesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_instance, only: [:show, :submit, :abort, :review]
-  before_action :authenticate_instance_member, only: [:show, :submit, :abort, :review]
+  before_action :set_instance, only: [:show, :submit, :abort, :review, :cancel]
+  before_action :authenticate_instance_member, only: [:show, :submit, :abort, :review, :cancel]
 
   def index
     @instances_in_progress = current_user.instances.where(state: 'in_progress')
@@ -80,11 +80,25 @@ class InstancesController < ApplicationController
     end
   end
 
+  def cancel
+    #取消組隊
+    #取消後，其他邀請函會自動取消
+    if @instance.state == 'teaming'
+      flash[:notice] = '放棄組隊！'
+      @instance.cancel!
+      redirect_to instance_path(@instance)
+    else
+      flash[:alert] = "存取禁止"
+      redirect_back(fallback_location: root_path)
+    end
+
+  end
+
   def abort
   # 放棄任務
     #使用者可以直接中止任務
-    if @instance.state == "teaming" || @instance.state == "in_progress"
-      #確認副本是 teaming 和 in_progress
+    if @instance.state == 'in_progress'
+      #確認副本是in_progress
       @instance.abort!
       flash[:notice] = "任務中止"
       # 回到instance#show

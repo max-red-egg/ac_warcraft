@@ -41,9 +41,23 @@ class Instance < ApplicationRecord
     end
   end
 
+  def cancel!
+    if self.state == 'teaming'
+      self.state = 'cancel'
+      self.save
+
+      #取消所有人的邀請函
+      self.invitations.find_inviting.each do |invitation|
+        invitation.cancel!
+        invitation.send_cancel_msg('我已經取消了本次任務組隊！-- 系統訊息')
+      end
+    end
+  end
+
+
   # ::instance method::  任務副本instance終止
   def abort!
-    if self.state == 'in_progress' || self.state == 'teaming'
+    if self.state == 'in_progress'
       self.state = 'abort'
       self.save
 
@@ -59,6 +73,7 @@ class Instance < ApplicationRecord
       end
     end
   end
+
 
   # ::instance method:: 確認user為instance的成員
   def is_member?(user)
