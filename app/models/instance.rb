@@ -41,9 +41,23 @@ class Instance < ApplicationRecord
     end
   end
 
+  def cancel!
+    if self.state == 'teaming'
+      self.state = 'cancel'
+      self.save
+
+      #取消所有人的邀請函
+      self.invitations.find_inviting.each do |invitation|
+        invitation.cancel!
+        invitation.send_cancel_msg('我已經取消了本次任務組隊！-- 系統訊息')
+      end
+    end
+  end
+
+
   # ::instance method::  任務副本instance終止
   def abort!
-    if self.state == 'in_progress' || self.state == 'teaming'
+    if self.state == 'in_progress'
       self.state = 'abort'
       self.save
 
@@ -59,6 +73,7 @@ class Instance < ApplicationRecord
       end
     end
   end
+
 
   # ::instance method:: 確認user為instance的成員
   def is_member?(user)
@@ -117,9 +132,16 @@ class Instance < ApplicationRecord
     #如果設定在after_commit 會造成查詢次數過多
     #這裡要想一下怎麼改會比較好
     if self.state == 'teaming'
+    # 如果是人數已經滿了，則副本開始
       if self.members.length == self.mission.participant_number
         self.state = 'in_progress'
         self.save
+        # 副本開始，其他邀請函取消
+        # invitation.cancel inviting
+        self.invitations.find_inviting.each do |invitation|
+          invitation.cancel!
+          invitation.send_cancel_msg('已經有其他人答應我的組隊邀請！-- 系統訊息')
+        end
       end
     end
   end
