@@ -54,21 +54,42 @@ class InstancesControllerTest < ActionDispatch::IntegrationTest
     # assert_select 'h3', text: '你的答案'
   end
 
-  test "only member can abort a instance" do
+  test "only member can abort a in_progress_instance" do
     # 非任務成員
     sign_in @admin
     get root_path
-    post abort_instance_path(@instance_teaming)
+    post abort_instance_path(@instance_in_progress)
     assert_redirected_to root_path
     # 任務成員
     sign_in @user
     get root_path
-    post abort_instance_path(@instance_teaming)
-    assert_redirected_to instance_path(@instance_teaming)
+    post abort_instance_path(@instance_in_progress)
+    assert_redirected_to instance_path(@instance_in_progress)
+
     # 無法放棄已完成的任務
     sign_in @user
     get root_path
     post abort_instance_path(@instance_complete)
+    assert_redirected_to root_path
+  end
+
+  # 取消組隊中的任務
+  test "only member can cancel a teaming_instance" do
+    # 非任務成員
+    sign_in @admin
+    get root_path
+    post cancel_instance_path(@instance_teaming)
+    assert_redirected_to root_path
+    # 任務成員
+    sign_in @user
+    get root_path
+    post cancel_instance_path(@instance_teaming)
+    assert_redirected_to instance_path(@instance_teaming)
+
+    # 無法取消已完成的任務
+    sign_in @user
+    get root_path
+    post cancel_instance_path(@instance_complete)
     assert_redirected_to root_path
   end
 

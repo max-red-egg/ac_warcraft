@@ -11,7 +11,7 @@
   <tbody>
     <% @sent_invitations.each do |invitation| %>
       <tr>
-        <td><%= invitation.instance.mission.name %> <%= cross_invite_badges(invitation) %></td>
+        <td><%= link_to invitation.instance.mission.name, mission_path(invitation.instance.mission), remote: true%> <%= cross_invite_badges(invitation) %></td>
         <td><%= invitation.invitee.name %></td>
         <td><%= invitation.state %></td>
         <td>

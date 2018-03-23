@@ -29,7 +29,7 @@ class UserCanViewMissionsAndChallengeMissionTest < ActionDispatch::IntegrationTe
     assert_template 'missions/show'
     assert_select 'button'
     # binding.pry
-    assert_match '挑戰任務', response.body
+    # assert_match '挑戰任務', response.body
   end
 
   # 確認user可以選擇挑戰
