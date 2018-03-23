@@ -67,6 +67,10 @@ class InstancesController < ApplicationController
   def save
     if @instance.state == "in_progress"
       @instance.update!(submit_params)
+
+      @instance.modifier = current_user
+      @instance.save  #儲存答案的使用者  
+
     end
   end
   def edit
@@ -81,7 +85,7 @@ class InstancesController < ApplicationController
         flash[:notice] = "任務完成！"
         # 更改instance狀態
         # binding.pry
-        @instance.complete!
+        @instance.complete!(current_user)
         redirect_to instance_path(@instance)
       else
         flash[:alert] = "提交失敗！"
@@ -112,7 +116,7 @@ class InstancesController < ApplicationController
     #使用者可以直接中止任務
     if @instance.state == 'in_progress'
       #確認副本是in_progress
-      @instance.abort!
+      @instance.abort!(current_user)
       flash[:notice] = "任務中止"
       # 回到instance#show
       redirect_to instance_path(@instance)

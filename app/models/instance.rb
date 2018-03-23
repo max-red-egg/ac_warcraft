@@ -15,7 +15,7 @@ class Instance < ApplicationRecord
 
   has_many :reviews
 
-  belongs_to :modifier, class_name "User"
+  belongs_to :modifier, class_name: "User", optional: true
 
   scope :find_complete ,-> {
     where(state: 'complete')
@@ -23,10 +23,11 @@ class Instance < ApplicationRecord
 
 
   # ::instance method:: 任務副本instance完成
-  def complete!
+  def complete!(user)
     #任務完成，更改狀態
     if self.state == 'in_progress'
       self.state = 'complete'
+      self.modifier = user  #觸發的使用者
       self.save
       # binding.pry
       # 產生所有隊員的reivew
@@ -58,9 +59,10 @@ class Instance < ApplicationRecord
 
 
   # ::instance method::  任務副本instance終止
-  def abort!
+  def abort!(user)
     if self.state == 'in_progress'
       self.state = 'abort'
+      self.modifier = user  #觸發的使用者
       self.save
 
       # 產生所有隊員的reivew
