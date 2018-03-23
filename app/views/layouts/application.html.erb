@@ -5,13 +5,23 @@
     <%= csrf_meta_tags %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="turbolinks-cache-control" content="no-cache">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'base' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'base' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <%= render 'layouts/navbar' %>
-    <%= yield %>
+    <div class="wrapper">
+      <header class="topnavbar-wrapper">
+        <%= render partial: "layouts/navbar" %>
+      </header>
+      <%= yield %>
+      <footer>
+        <%= render partial: "layouts/footer" %>
+      </footer>
+    </div>
+    <%= render 'layouts/notice'%>
+    <%= render partial: "layouts/modal" %>
   </body>
 </html>

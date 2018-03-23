@@ -1,25 +1,27 @@
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/sidebar' %>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
-      <%= render 'layouts/notice' %>
-      <div class="container">
-        <div class="">
-          <%=image_tag @mission.image_url %>
-        </div>
-        <div class="">
-          <ul>
-            <li>任務名稱: <%=@mission.name%></li>
-            <li>等級: <%= @mission.level%></li>
-            <li>參加人數：<%= @mission.participant_number %></li>
-            <li>你還可發送 <%= @mission.invitation_number %> 張邀請</li>
-            <li>任務內容：<%= simple_format @mission.description %></li>
-          </ul>
-        </div>
-        <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
-        <!-- 如果等級符合 -->
-        <%= render partial:"challenge" , locals: {mission: @mission} %>
+<aside class="aside-container">
+  <%= render partial: "layouts/sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3><%=@mission.name%></h3>
       </div>
-    </main>
+      <div class="">
+        <%=image_tag @mission.image_url %>
+      </div>
+      <div class="">
+        <ul>
+          <li>任務名稱: <%=@mission.name%></li>
+          <li>等級: <%= @mission.level%></li>
+          <li>參加人數：<%= @mission.participant_number %></li>
+          <li>你還可發送 <%= @mission.invitation_number %> 張邀請</li>
+          <li>任務內容：<%= simple_format @mission.description %></li>
+        </ul>
+      </div>
+      <%= link_to "回首頁", root_path, class:"btn btn-secondary"%>
+      <!-- 如果等級符合 -->
+      <%= render partial:"challenge" , locals: {mission: @mission} %>
+    </div>
   </div>
-</div>
+</section>
