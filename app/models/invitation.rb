@@ -27,10 +27,10 @@ class Invitation < ApplicationRecord
     invite_msg.save
   end
 
-  def send_cancel_msg(*options)
-    if(options)
-      options.each do |option|
-        invite_msg = self.invite_msgs.create(content: option)
+  def send_cancel_msg(*msgs)
+    if(msgs)
+      msgs.each do |msg|
+        invite_msg = self.invite_msgs.create(content: msg)
         invite_msg.user = self.user
         invite_msg.save
       end

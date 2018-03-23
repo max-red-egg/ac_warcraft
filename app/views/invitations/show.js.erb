@@ -1,2 +1,13 @@
 $("#invitation_model").html("<%= j(render 'show') %>")
 $("#invitation_model").modal("show")
+
+  // 按enter可以直接送出
+  $('#new_invite_msg').keypress(function (e) {
+        if(e.which == 13 && !e.shiftKey) {
+            // e.form.submit();
+            console.log(e);
+            e.preventDefault()
+            $('.submit').click();
+            $('#invite_msg_content').val("");
+        }
+    });

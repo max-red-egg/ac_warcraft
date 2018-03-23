@@ -1,0 +1,12 @@
+<form>
+  <fieldset disabled>
+    <div class="form-group">
+      <label for="disabledTextInput">Answer</label>
+      <input type="text" id="disabledTextInput" class="form-control" placeholder="<%=instance.answer%>">
+    </div>
+</fieldset>
+</form>
+<div class="d-flex justify-content-between">
+  <%= link_to '編輯', edit_instance_path(instance),remote: true, class: "btn btn-outline-primary " %>
+<%= link_to "提交任務成果", submit_instance_path(@instance),method: :post, class: "btn btn-outline-danger" ,data: {confirm: '提交任務後就不能修改，你有跟隊友充分溝通嗎？'}%>
+</div>
