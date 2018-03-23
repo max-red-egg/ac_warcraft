@@ -52,4 +52,16 @@ namespace :dev do
     puts "create #{Mission.count} fake missions"
     puts "Now you have #{Mission.count} missions!"
   end
+
+  task fake_xp: :environment do
+    Mission.all.each do |mission|
+        mission.xp = Random.rand(200..600)
+        mission.save
+    end
+    User.all.each do |user|
+        user.xp = user.level * 1000
+        user.save
+    end
+    puts 'generated fake xp for missions and users!'
+  end
 end
