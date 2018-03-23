@@ -41,6 +41,7 @@ class InstanceShowPageTest < ActionDispatch::IntegrationTest
     get instance_path(@instance_teaming)
     assert_select 'h4', false
 
+    # binding.pry
     get instance_path(@instance_complete)
     assert_select 'h4'
 
