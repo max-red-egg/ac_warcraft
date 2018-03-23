@@ -3,5 +3,5 @@
     <%= render partial: "member_list", locals:{members: @members} %>
   </div>
 </div>
-
+<div class="info d-inline float-right"><small><em><%=@instance.modifier.name%> 於 <%= @instance.updated_at%> 提交了任務放棄</em></div>
 <%= render partial:'msgs_board' %>

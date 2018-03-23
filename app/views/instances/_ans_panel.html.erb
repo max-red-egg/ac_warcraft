@@ -1,7 +1,12 @@
 <form>
   <fieldset disabled>
     <div class="form-group">
-      <label for="disabledTextInput">Answer</label>
+      <label for="disabledTextInput">Answer
+         
+        </label> 
+        <% if instance.modifier %>
+          <div class="info d-inline float-right"><small><em><%=instance.modifier.name%> 於 <%= instance.updated_at%> 更新了答案</em></div>
+        <%end%>
       <input type="text" id="disabledTextInput" class="form-control" placeholder="<%=instance.answer%>">
     </div>
 </fieldset>
