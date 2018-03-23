@@ -34,6 +34,10 @@ class MissionsController < ApplicationController
       #產生一個新副本
       instance = current_user.instances.create(mission_id: params[:id])
 
+      instance.xp = mission.xp
+      #設定副本xp值
+      #如果有特殊xp加乘 可以在這邊修改
+
       #current_user.save!
       instance.save!
       flash[:notice] = "挑戰任務成功"
