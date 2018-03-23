@@ -9,7 +9,7 @@
             <h2><%= instance_title(@instance) %> <span class="ml-3"><%= abort_button(@instance) %><%= cancel_button(@instance) %></span></h2>
           </div>
         </div>
-        <%= render partial:'mission_info', locals: {mission: @mission} %>
+        <%= render partial:'mission_info', locals: {mission: @mission, instance: @instance} %>
 
         <% case @instance.state %>
           <% when "teaming" %>
