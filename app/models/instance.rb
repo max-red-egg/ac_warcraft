@@ -15,6 +15,8 @@ class Instance < ApplicationRecord
 
   has_many :reviews
 
+  belongs_to :modifier, class_name "User"
+
   scope :find_complete ,-> {
     where(state: 'complete')
   }
