@@ -45,4 +45,14 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     assert_equal true, @user.available
   end
 
+  test "user can cancel a teaming_instance" do
+    instance = instances(:instance_teaming)
+    # 會發出取消訊息
+    assert_difference 'InviteMsg.count',2 do
+      post cancel_instance_path(instance)
+    end
+    instance.reload
+    assert_equal 'cancel', instance.state
+  end
+
 end
