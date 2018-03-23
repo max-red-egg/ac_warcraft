@@ -20,7 +20,7 @@ production:
 
   port: "587"
 
-  domain: <%=ENV['DOMAIN']%>
+  domain: 'herokuapp.com'
 
   authentication: "plain"
 
