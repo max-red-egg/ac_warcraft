@@ -52,4 +52,17 @@ namespace :dev do
     puts "create #{Mission.count} fake missions"
     puts "Now you have #{Mission.count} missions!"
   end
+
+  task fake_instances: :environment do
+    Instance.destroy_all
+    User.all.each do |user|
+        3.times do 
+            user.instances.create(mission_id: Mission.all.sample.id)
+        end
+    end
+    puts "create #{Instance.count} fake instances"
+    puts "Now you have #{Instance.count} instances!"
+  end
+
+
 end
