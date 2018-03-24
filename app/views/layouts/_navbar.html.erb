@@ -1,13 +1,13 @@
 <nav class="navbar topnavbar" role="navigation">
   <div class="navbar-header ">
-    <a href="#/" class="navbar-brand">
+    <%= link_to root_path, class: "navbar-brand" do%>
       <div class="brand-logo">
         <img src="<%= image_path('logo.png') %>" alt="App Logo" class="img-fluid" />
       </div>
       <div class="brand-logo-collapsed">
         <img src="<%= image_path('logo-single.png') %>" alt="App Logo" class="img-fluid" />
       </div>
-    </a>
+    <% end %>
   </div>
     <% if current_user %>
       <ul class="navbar-nav mr-auto flex-row">
