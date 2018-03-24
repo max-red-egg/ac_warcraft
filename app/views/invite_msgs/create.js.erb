@@ -1,1 +1,2 @@
 $("#invitation_msg").html("<%= j(render partial:'shared/msg_board', locals: {msgs: @invite_msgs}) %>")
+<%= render partial: "shared/notify_for_ajax" %>
