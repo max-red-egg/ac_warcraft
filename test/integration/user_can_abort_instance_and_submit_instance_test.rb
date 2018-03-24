@@ -75,7 +75,9 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
   test "user can cancel a teaming_instance" do
     instance = instances(:instance_teaming)
     # 會發出取消訊息
+
     assert_difference 'InviteMsg.count',1 do
+
       post cancel_instance_path(instance)
     end
     instance.reload
