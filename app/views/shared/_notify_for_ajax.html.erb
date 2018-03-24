@@ -1,0 +1,17 @@
+<% if @notice_msg %>
+$.notify({
+  message : '<%= @notice_msg %>',
+  status  : 'success',
+  timeout : 3000,
+  pos     : 'top-center'
+});
+<% end %>
+<% if @alert_msg %>
+$.notify({
+  message : '<%= @alert_msg %>',
+  status  : 'danger',
+  timeout : 3000,
+  pos     : 'top-center'
+});
+// pos: 'top-center', 'top-left', 'top-right', 'bottom-center', 'bottom-left', 'bottom-right'
+<% end %>

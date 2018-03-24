@@ -1,37 +1,37 @@
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/sidebar' %>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
-      <%= render 'layouts/notice' %>
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-lg-6">
-            <h3>進行中副本</h3>
-            <div class="row">
-              <%= render partial:"shared/instance_card" , locals: {instances: @instances_in_progress} %>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <h3>組隊中副本</h3>
-            <div class="row">
-              <%= render partial:"shared/instance_card" , locals: {instances: @instances_teaming} %>
-            </div>
+<aside class="aside-container">
+  <%= render partial: "layouts/sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3>副本列表</h3>
+      </div>
+      <div class="row mb-5">
+        <div class="col-lg-6">
+          <h3>進行中副本</h3>
+          <div class="row">
+            <%= render partial:"shared/instance_card" , locals: {instances: @instances_in_progress} %>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <h3>歷史副本</h3>
-            <div class="row">
-              <%= render partial:"shared/instance_list" , locals: {instances: @instances_history} %>
-            </div>
-            </div>
+        <div class="col-lg-6">
+          <h3>組隊中副本</h3>
+          <div class="row">
+            <%= render partial:"shared/instance_card" , locals: {instances: @instances_teaming} %>
           </div>
         </div>
       </div>
-    </main>
+      <div class="row">
+        <div class="col-12">
+          <h3>歷史副本</h3>
+          <div class="row">
+            <%= render partial:"shared/instance_list" , locals: {instances: @instances_history} %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-
+</section>
 <script>
   $(document).ready(function() {
     $('#instance_list').DataTable({

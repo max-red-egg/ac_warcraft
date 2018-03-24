@@ -1,17 +1,18 @@
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/admin_sidebar' %>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
-      <%= render 'layouts/notice' %>
-      <div class="container">
-        <div class="row">
-          <div class="col">
-          <h1>admin page</h1>
-          <%= link_to "Create a Mission", new_admin_mission_path, class:"btn btn-primary" %>
-          <%= render partial: "mission_list" %>
-          </div>
+<aside class="aside-container">
+  <%= render partial: "layouts/admin_sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3>任務管理</h3>
+      </div>
+      <div class="row">
+        <div class="col">
+        <%= link_to "Create a Mission", new_admin_mission_path, class:"btn btn-primary" %>
+        <%= render partial: "mission_list" %>
         </div>
       </div>
-    </main>
+    </div>
   </div>
-</div>
+</section>

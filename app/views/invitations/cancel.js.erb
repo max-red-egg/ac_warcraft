@@ -1,3 +1,4 @@
 $("#remaining_invitations").html("<%= @remaining_invitations_count %>");
 $("#invited_list").html("<%= j(render partial: 'instances/invited_list') %>");
 $("#filterrific_results").html("<%= j(render partial: 'instances/candidates_list', locals: { candidates: @candidates }) %>");
+<%= render partial: "shared/notify_for_ajax" %>

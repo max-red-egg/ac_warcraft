@@ -1,22 +1,45 @@
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-  <%=link_to "ALPHACamp Warcraft", root_path, class: "navbar-brand col-sm-3 col-md-2 mr-0"%>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse pr-3" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
+<nav class="navbar topnavbar" role="navigation">
+  <div class="navbar-header ">
+    <%= link_to root_path, class: "navbar-brand" do%>
+      <div class="brand-logo">
+        <img src="<%= image_path('logo.png') %>" alt="App Logo" class="img-fluid" />
+      </div>
+      <div class="brand-logo-collapsed">
+        <img src="<%= image_path('logo-single.png') %>" alt="App Logo" class="img-fluid" />
+      </div>
+    <% end %>
+  </div>
+    <% if current_user %>
+      <ul class="navbar-nav mr-auto flex-row">
+        <li class="nav-item">
+          <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+          <a class="nav-link d-none d-md-block d-lg-block d-xl-block" href="#" data-trigger-resize="" data-toggle-state="aside-collapsed">
+             <em class="fa fa-navicon"></em>
+          </a>
+          <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+          <a class="nav-link sidebar-toggle d-md-none" href="#" data-toggle-state="aside-toggled" data-no-persist="true">
+             <em class="fa fa-navicon"></em>
+          </a>
+        </li>
+      </ul>
+    <% end %>
+    <ul class="navbar-nav flex-row">
       <% if current_user %>
-        <%= link_to "管理後台", admin_root_path, class: "nav-link" if current_user.admin?%>
-        <li class="nav-item text-nowrap dropdown">
-          <%= link_to  "Hello, #{current_user.name}", current_user, class: "nav-link dropdown-toggle", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false" %>
-          <div class="dropdown-menu dropdown-menu-right mt-1">
-            <%= link_to '登出', destroy_user_session_path, method: :delete ,class: "dropdown-item"%>
-          </div>
+        <li class="nav-item">
+          <%= link_to "管理後台", admin_root_path, class: "bg-inverse-dark nav-link" if current_user.admin? %>
+        </li>
+        <li class="nav-item">
+          <%= link_to '登出', destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
       <% else %>
-        <li class="nav-item"><%= link_to '註冊', new_user_registration_path, class: "nav-link"%></li>
+        <li class="nav-item"><%= link_to '註冊', new_user_registration_path, class: "nav-link"  %></li>
         <li class="nav-item"><%= link_to '登入', new_user_session_path, class: "nav-link" %></li>
       <%end%>
+      <!-- Fullscreen (only desktops)-->
+      <li class="nav-item d-none d-md-block">
+        <a class="nav-link" href="#" data-toggle-fullscreen="">
+          <em class="fa fa-expand"></em>
+        </a>
+      </li>
     </ul>
-  </div>
 </nav>
