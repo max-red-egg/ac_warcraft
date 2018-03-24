@@ -49,7 +49,9 @@ class Admin::MissionsController < Admin::BaseController
   private
 
   def mission_params
-    params.require(:mission).permit(:name,:level,:description,:participant_number,:invitation_number,:image, :tag_list)
+
+    params.require(:mission).permit(:name,:level,:description,:participant_number,:invitation_number,:image, :tag_list, :xp)
+
   end
 
   def set_mission

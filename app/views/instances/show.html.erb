@@ -1,37 +1,32 @@
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/sidebar' %>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
-      <%= render 'layouts/notice' %>
-      <div class="container">
-        <div class="row mb-4">
-          <div class="col">
-            <h2><%= instance_title(@instance) %> <span class="ml-3"><%= abort_button(@instance) %><%= cancel_button(@instance) %></span></h2>
-          </div>
-        </div>
-        <%= render partial:'mission_info', locals: {mission: @mission} %>
-
-        <% case @instance.state %>
-          <% when "teaming" %>
-            <%= render partial:'/instances/state/teaming' %>
-          <% when "in_progress" %>
-            <%= render partial:'/instances/state/in_progress' %>
-          <% when "complete" %>
-            <%= render partial:'/instances/state/complete' %>
-          <% when "abort" %>
-            <%= render partial:'/instances/state/abort' %>
-        <% end %>
-
-        <%= render partial: 'leave_review' if @instance.state == 'complete' || @instance.state == 'abort'%>
-
-        <div class="row my-5">
-          <div class="col">
-            <p class="text-center"><%= link_to "回任務列表", instances_path, class:"btn btn-secondary "%></p>
-          </div>
-        </div>
-
+<aside class="aside-container">
+  <%= render partial: "layouts/sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3><%= instance_title(@instance) %><span class="ml-3"><%= abort_button(@instance) %><%= cancel_button(@instance) %></span></h3>
       </div>
-      <div class="modal fade" id="user_model" tabindex="-1" role="dialog" aria-labelledby="ShowMissionModal" aria-hidden="true"></div>
-    </main>
+      <%= render partial:'mission_info', locals: {mission: @mission} %>
+
+      <% case @instance.state %>
+        <% when "teaming" %>
+          <%= render partial:'/instances/state/teaming' %>
+        <% when "in_progress" %>
+          <%= render partial:'/instances/state/in_progress' %>
+        <% when "complete" %>
+          <%= render partial:'/instances/state/complete' %>
+        <% when "abort" %>
+          <%= render partial:'/instances/state/abort' %>
+      <% end %>
+
+      <%= render partial: 'leave_review' if @instance.state == 'complete' || @instance.state == 'abort'%>
+
+      <div class="row my-5">
+        <div class="col">
+          <p class="text-center"><%= link_to "回任務列表", instances_path, class:"btn btn-secondary "%></p>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>

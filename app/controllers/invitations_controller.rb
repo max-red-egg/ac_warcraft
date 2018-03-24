@@ -68,7 +68,7 @@ class InvitationsController < ApplicationController
       @instance = @invitation.instance
       @invitation.send_cancel_msg
       @invitation.update!(state: "cancel")
-      flash[:notice] = "取消邀請"
+      @alert_msg = "取消邀請"
 
       @remaining_invitations_count = @instance.remaining_invitations_count
       @invitations = @instance.inviting_invitations.includes(:user)

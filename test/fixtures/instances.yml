@@ -9,6 +9,7 @@ instance_in_progress:
 instance_complete:
   mission: mission1
   state: complete
+  modifier: user
 
 instance_teaming2:
   mission: mission3

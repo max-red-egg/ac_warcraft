@@ -62,14 +62,14 @@ class UsersController < ApplicationController
     # ------------
     @instance = Instance.find(params[:instance_id])
     user = User.find(params[:id])
-    
+
     #確認該使用者可以接受邀請
     if @instance.can_invite?(user)
       #產生邀請
       # binding.pry
       invitation = current_user.invitations.build(instance_id: @instance.id, invitee_id: user.id)
       invitation.save
-      flash[:notice] = '已送出邀請'
+      @notice_msg = '已送出邀請'
 
       @remaining_invitations_count = @instance.remaining_invitations_count
       @invitations = @instance.inviting_invitations.includes(:user)

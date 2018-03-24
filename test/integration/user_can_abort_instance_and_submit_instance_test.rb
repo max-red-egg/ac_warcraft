@@ -31,14 +31,41 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     assert_includes @user.instances, @instance
   end
 
-  test "user can submit instance" do
+  test "user can save and edit saved answer" do
+    instance = instances(:instance_in_progress)
+    assert instance.modifier.nil?
+    assert instance.answer.empty?
+    post save_instance_path(instance), xhr:true, params: {instance: { answer: "123" }}
+
+    #確認儲存後的狀態
+    instance.reload
+    assert_not instance.modifier.nil?
+    assert_not instance.answer.empty?
+    # 確認最後修改者
+    assert_equal @user, instance.modifier 
+    assert_equal "123", instance.answer 
+
+    # 編輯
+    post save_instance_path(instance), xhr:true, params: {instance: { answer: "456" }}
+    instance.reload
+    assert_equal "456", instance.answer
+  end
+
+  test "user can submit answer" do
     # binding.pry
     # 提交任務時可以產生兩個review
     instance = instances(:instance_in_progress)
-    assert_difference 'Review.count', 2 do
-      post submit_instance_path(instance), params: {instance: { answer: "123" }}
+    assert_difference 'Review.count', 0 do
+      # 需要先儲存答案才可以送出
+      post submit_instance_path(instance)
     end
     
+    assert_difference 'Review.count', 2 do
+      # 需要先儲存答案才可以送出
+      post save_instance_path(instance), xhr:true, params: {instance: { answer: "123" }}
+      post submit_instance_path(instance)
+    end
+    # binding.pry
     instance.reload
     assert_equal "complete", instance.state
     @user.reload
@@ -48,7 +75,9 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
   test "user can cancel a teaming_instance" do
     instance = instances(:instance_teaming)
     # 會發出取消訊息
-    assert_difference 'InviteMsg.count',2 do
+
+    assert_difference 'InviteMsg.count',1 do
+
       post cancel_instance_path(instance)
     end
     instance.reload

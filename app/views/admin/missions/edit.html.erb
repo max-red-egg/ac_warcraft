@@ -1,12 +1,17 @@
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/admin_sidebar' %>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
-      <%= render 'layouts/notice' %>
-      <div class="container">
-        <%= render partial:"form", locals: {mission: @mission} %>
-
+<aside class="aside-container">
+  <%= render partial: "layouts/admin_sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3>編輯任務</h3>
       </div>
-    </main>
+      <div class="row">
+        <div class="col">
+        <%= render partial:"form", locals: {mission: @mission} %>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>

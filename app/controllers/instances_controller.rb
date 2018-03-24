@@ -84,7 +84,7 @@ class InstancesController < ApplicationController
       if !@instance.answer.strip.empty?
         flash[:notice] = "任務完成！"
         # 更改instance狀態
-        # binding.pry
+        
         @instance.complete!(current_user)
         redirect_to instance_path(@instance)
       else

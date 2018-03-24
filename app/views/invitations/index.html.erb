@@ -1,50 +1,47 @@
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/sidebar' %>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
-      <%= render 'layouts/notice' %>
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h3>發出的邀請函</h3>
-            <div class="row mb-4">
-              <% if @sent_invitations.present? %>
-                <div class="col-12 my-3">
-                  <%= render partial:'sent_list' %>
-                </div>
-              <% else %>
-                <div class="col-12 my-3">
-                  <p>無</p>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="row my-4">
-          <div class="col-12">
-              <h3>收到的邀請函</h3>
-              <div class="row">
-                <% if @received_invitations.present? %>
-                  <div class="col-12 my-3">
-                    <%= render partial:'received_list' %>
-                  </div>
-                <% else %>
-                  <div class="col-12 my-3">
-                    <p>無</p>
-                  </div>
-                <% end %>
+<aside class="aside-container">
+  <%= render partial: "layouts/sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3>邀請函列表</h3>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h3>發出的邀請函</h3>
+          <div class="row mb-4">
+            <% if @sent_invitations.present? %>
+              <div class="col-12 my-3">
+                <%= render partial:'sent_list' %>
               </div>
-            </div>
+            <% else %>
+              <div class="col-12 my-3">
+                <p>無</p>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="invitation_model" tabindex="-1" role="dialog" aria-labelledby="ShowInvitationModal" aria-hidden="true"></div>
-      <div class="modal fade" id="user_model" tabindex="-1" role="dialog" aria-labelledby="ShowUserModal" aria-hidden="true"></div>
-      <div class="modal fade" id="mission_model" tabindex="-1" role="dialog" aria-labelledby="ShowMissionModal" aria-hidden="true"></div>
-    </main>
+      <div class="row my-4">
+        <div class="col-12">
+          <h3>收到的邀請函</h3>
+          <div class="row">
+            <% if @received_invitations.present? %>
+              <div class="col-12 my-3">
+                <%= render partial:'received_list' %>
+              </div>
+            <% else %>
+              <div class="col-12 my-3">
+                <p>無</p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-
+</section>
 <script>
   $(document).ready(function() {
     $('#sent_list').DataTable({

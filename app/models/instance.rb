@@ -31,7 +31,7 @@ class Instance < ApplicationRecord
       self.save
       # binding.pry
       # 產生所有隊員的reivew
-      self.members.each do |reviewee| 
+      self.members.each do |reviewee|
         self.members.each do |reviewer|
           if reviewee != reviewer
             new_review = reviewee.reviews.build(instance_id: self.id)
@@ -40,6 +40,13 @@ class Instance < ApplicationRecord
           end
         end
       end
+
+      self.members.each do |member|
+        member.add_xp(self.xp)
+        puts "member #{member.name} add xp #{self.xp}"
+        member.save
+      end
+
 
     end
   end

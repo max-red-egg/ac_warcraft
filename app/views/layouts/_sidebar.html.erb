@@ -1,37 +1,65 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
-  <div class="sidebar-sticky">
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-      <span>任務資訊</span>
-      <a class="d-flex align-items-center text-muted" href="#">
-        <span data-feather="plus-circle"></span>
-      </a>
-    </h6>
-    <ul class="nav flex-column">
-      <li class="nav-item <%= active_class?(missions_path) %>">
-        <%= link_to fa_icon("gavel", text:'任務牆'), missions_path ,class: "nav-link" %>
+<!-- START Sidebar (left)-->
+<div class="aside-inner">
+  <nav class="sidebar">
+    <ul class="sidebar-nav">
+      <!-- START user info-->
+      <li class="has-user-block">
+          <div class="item user-block">
+            <div class="user-block-picture">
+              <div class="user-block-status">
+                <img src="<%= current_user.avatar_url %>" alt="Avatar" width="100" height="100" class="img-thumbnail rounded-circle" />
+                <% if current_user.available %>
+                  <div class="circle bg-success circle-lg"></div>
+                <% else %>
+                  <div class="circle bg-danger circle-lg"></div>
+                <% end %>
+              </div>
+            </div>
+            <div class="user-block-info">
+              <span class="user-block-name">Hello, <%= current_user.name %></span>
+            </div>
+          </div>
       </li>
-      <li class="nav-item <%= active_class?(instances_path) %>">
-        <%= link_to fa_icon("file", text:'副本列表'), instances_path ,class: "nav-link" %>
+      <!-- END user info-->
+
+      <li class="nav-heading">
+        <span data-localize="sidebar.heading.HEADER">任務資訊</span>
       </li>
-      <li class="nav-item <%= active_class?(invitations_path) %>">
-        <%= link_to fa_icon("envelope", text:'邀請函列表'), invitations_path ,class: "nav-link" %>
+      <li class="<%= 'active' if controller?('missions') %>">
+        <%= link_to missions_path do %>
+          <em class="icon-layers"></em>
+          <span>任務牆</span>
+        <% end %>
+      </li>
+      <li class="<%= 'active' if controller?('instances') %>">
+        <%= link_to instances_path do %>
+          <em class="icon-grid"></em>
+          <span>副本列表</span>
+        <% end %>
+      </li>
+      <li class="<%= 'active' if controller?('invitations') %>">
+        <%= link_to invitations_path do %>
+          <em class="icon-envelope"></em>
+          <span>邀請函列表</span>
+        <% end %>
+      </li>
+
+      <li class="nav-heading">
+        <span data-localize="sidebar.heading.HEADER">隊友資訊</span>
+      </li>
+      <li class="<%= active_class?(user_path(current_user)) %>">
+        <%= link_to user_path(current_user) do %>
+          <em class="icon-layers"></em>
+          <span>關於我</span>
+        <% end %>
+      </li>
+      <li class="<%= 'active' if controller?('users') && action?('index') %>">
+        <%= link_to users_path do %>
+          <em class="icon-grid"></em>
+          <span>隊友清單</span>
+        <% end %>
       </li>
     </ul>
-
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-      <span>隊友資訊</span>
-      <a class="d-flex align-items-center text-muted" href="#">
-        <span data-feather="plus-circle"></span>
-      </a>
-    </h6>
-    <ul class="nav flex-column">
-      <li class="nav-item <%= active_class?(user_path(current_user)) %>">
-        <%= link_to fa_icon("user", text:'關於我'), user_path(current_user)  ,class: "nav-link" %>
-      </li>
-      <li class="nav-item <%= active_class?(users_path) %>">
-        <%= link_to fa_icon("users", text:'隊友清單'), users_path ,class: "nav-link" %>
-      </li>
-    </ul>
-
-  </div>
-</nav>
+  </nav>
+</div>
+<!-- END Sidebar (left)-->

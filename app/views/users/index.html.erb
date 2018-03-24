@@ -1,19 +1,20 @@
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/sidebar' %>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
-      <%= render 'layouts/notice' %>
-      <div class="container">
-        <h1>瀏覽隊友</h1>
-        <div class="row">
-          <% @users.each do |user| %>
-            <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-              <%= render partial:"shared/user_card" , locals: {user: user} %>
-            </div>
-          <%end%>
-        </div>
-        <%= paginate @users %>
+<aside class="aside-container">
+  <%= render partial: "layouts/sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3>瀏覽隊友</h3>
       </div>
-    </main>
+      <div class="row">
+        <% @users.each do |user| %>
+          <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3">
+            <%= render partial:"shared/user_card" , locals: {user: user} %>
+          </div>
+        <%end%>
+      </div>
+      <%= paginate @users %>
+    </div>
   </div>
-</div>
+</section>

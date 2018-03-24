@@ -114,6 +114,11 @@ class User < ApplicationRecord
     ]
   end
 
+  def add_xp(xp)
+    self.xp += xp
+    self.level = self.xp / 1000
+    self.save!
+  end
 
   def admin?
     self.role == 'admin'

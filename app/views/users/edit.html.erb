@@ -1,33 +1,35 @@
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/sidebar' %>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
-      <%= render 'layouts/notice' %>
-      <div class='container'>
-        <div class='row'>
-          <%= simple_form_for(@user) do |f| %>
-            <div class='col-md-3'>
-              <%= image_tag @user.avatar_url , class: "img-responsive center-block" if @user.avatar_url %>
-              <%= f.input :avatar, label: "更換大頭貼" %>
-            </div>
-            <div class='col-md-9'>
-              <div class="form-group">
-                <%= f.input :name, label: "名字", class: "form-control" %>
-              </div>
-
-              <div class="form-group">
-                <%= f.input :description, label: "自我介紹", class: "form-control" %>
-              </div>
-
-              <div class="form-group">
-                <%= f.input :available, label: "邀請信箱 ", class: "form-control" ,as: :select, collection: [['開啟', true], ['關閉', false]]%>
-              </div>
-
-              <%= f.submit "送出", class: "btn btn-primary" %>
-            </div>
-          <% end %>
-        </div>
+<aside class="aside-container">
+  <%= render partial: "layouts/sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3>Edit Profile</h3>
       </div>
-    </main>
+      <div class='row'>
+        <%= simple_form_for(@user) do |f| %>
+          <div class='col-md-3'>
+            <%= image_tag @user.avatar_url , class: "img-responsive center-block" if @user.avatar_url %>
+            <%= f.input :avatar, label: "更換大頭貼" %>
+          </div>
+          <div class='col-md-9'>
+            <div class="form-group">
+              <%= f.input :name, label: "名字", class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.input :description, label: "自我介紹", class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.input :available, label: "邀請信箱 ", class: "form-control" ,as: :select, collection: [['開啟', true], ['關閉', false]]%>
+            </div>
+
+            <%= f.submit "送出", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
+</section>
