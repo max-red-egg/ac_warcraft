@@ -8,7 +8,11 @@
             <div class="user-block-picture">
               <div class="user-block-status">
                 <img src="<%= current_user.avatar_url %>" alt="Avatar" width="100" height="100" class="img-thumbnail rounded-circle" />
+                <% if current_user.available %>
                   <div class="circle bg-success circle-lg"></div>
+                <% else %>
+                  <div class="circle bg-danger circle-lg"></div>
+                <% end %>
               </div>
             </div>
             <div class="user-block-info">
