@@ -29,7 +29,10 @@ class Admin::MissionsController < Admin::BaseController
   end
 
   def update
-    if @mission.update(mission_params)
+    update_params = mission_params
+    @mission.tag_list = update_params[:tag_list]
+    update_params.delete(:tag_list)
+    if @mission.update(update_params)
       flash[:notice] = "mission updated!"
       redirect_to admin_mission_path(@mission)
     else
@@ -46,7 +49,7 @@ class Admin::MissionsController < Admin::BaseController
   private
 
   def mission_params
-    params.require(:mission).permit(:name,:level,:description,:participant_number,:invitation_number,:image)
+    params.require(:mission).permit(:name,:level,:description,:participant_number,:invitation_number,:image, :tag_list)
   end
 
   def set_mission
