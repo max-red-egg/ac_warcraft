@@ -1,0 +1,7 @@
+followship1:
+  user: user
+  following: user2
+
+followship2:
+  user: user3
+  following: user

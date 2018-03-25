@@ -24,6 +24,12 @@ class User < ApplicationRecord
   #給予其他user的評價
   has_many :review_to_members, foreign_key: "reviewer_id", class_name:"Review"
 
+  has_many :followships, dependent: :destroy#外鍵預設為user_id
+  has_many :followings, through: :followships#有很多自己追蹤的user
+
+  has_many :inverse_followships, class_name: "Followship", foreign_key: :following_id
+  has_many :followers, through: :inverse_followships, source: :user # 從inverse_followships表裡面的user欄位去找
+
   filterrific(
     default_filter_params: {
       sorted_by: 'name_asc',
@@ -149,5 +155,8 @@ class User < ApplicationRecord
     instance.invitations.where('invitations.invitee_id = ? AND invitations.state = ?', self, 'decline').present?
   end
 
+  def following?(other_user)
+    self.followings.include?(other_user)
+  end
 
 end
