@@ -3,6 +3,7 @@
     <%= f.error_notification %>
     <%= f.input :name %>
     <%= f.input :level %>
+    <%= f.input :tag_list,input_html:{value: mission.tag_list.join(', ')}%>
     <%= f.input :xp %>
     <%= f.input :participant_number %>
     <%= f.input :invitation_number %>
