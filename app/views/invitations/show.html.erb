@@ -1,0 +1,67 @@
+<div class="container">
+    <div>
+      <h4 class="modal-title"> <%= @inviter.name %> 邀請 <%= @invitee.name %> 進行任務 (邀請函狀態：<%= @invitation.state %>)</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    </div>
+    <div>
+      <div class="container-fluid">
+        <div class="row mb-4">
+          <% if @inviter != current_user  %>
+            <div class="col-md-6 mb-3">
+              <h4>邀請者</h4>
+              <%= render partial:'shared/user_card' , locals: {user: @inviter} %>
+            </div>
+          <% end %>
+          <% if @invitee != current_user  %>
+            <div class="col-md-6 mb-3">
+              <h4>受邀者</h4>
+              <%= render partial:'shared/user_card' , locals: {user: @invitee} %>
+            </div>
+          <% end %>
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <h4>對話</h4>
+          </div>
+          <div class="col" id="invitation_msg">
+            <%= render partial:'shared/msg_board', locals: {msgs: @invite_msgs} %>
+          </div>
+        </div>
+        <!-- 訊息留言 -->
+        <% if @invitation.state == 'inviting' %>
+          <%= simple_form_for @invite_msg, remote: true, url: invitation_invite_msgs_path(@invitation) do |f| %>
+            <%= f.input :content, label: false, placeholder:'聊聊天吧...'%>
+            <%= f.button :submit, '送出留言', class:"btn btn-primary submit" %>
+          <%end%>
+        <%end%>
+        <!--===============================-->
+      </div>
+    </div>
+    <% if @invitation.state == 'inviting' %>
+      <div class="modal-footer">
+        <div class="mx-auto">
+          <% if current_user == @invitee %>
+            <%= link_to '接受邀請', accept_invitation_path(@invitation), method: :post, class: "btn btn-primary"  %>
+            <%= link_to '拒絕邀請', decline_invitation_path(@invitation), method: :post, data: {confirm: 'Are you sure?'}, class: "btn btn-danger"  %>
+          <% else %>
+            <%= link_to '取消邀請', cancel_invitation_path(@invitation), method: :post, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+          <% end %>
+        </div>
+      </div>
+    <%end%>
+</div>
+
+<script>
+    // 按enter可以直接送出
+$('#new_invite_msg').keypress(function (e) {
+        if(e.which == 13 && !e.shiftKey) {
+            // e.form.submit();
+            e.preventDefault()
+            $('.submit').click();
+            $('#invite_msg_content').val("");
+        }
+});
+
+</script>
+
+
