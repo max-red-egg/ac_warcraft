@@ -4,6 +4,19 @@ class UsersController < ApplicationController
   def index
     # @users = User.all
     @users = User.page(params[:page]).per(20)
+    @tag = 'all'
+  end
+
+  def following
+    @users = current_user.followings.page(params[:page]).per(20)
+    @tag = 'following'
+    render 'index'
+  end
+
+  def follower
+    @users = current_user.followers.page(params[:page]).per(20)
+    @tag = 'follower'
+    render 'index'
   end
 
   def show

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_23_153846) do
+ActiveRecord::Schema.define(version: 2018_03_25_081216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 2018_03_23_153846) do
     t.integer "instance_id"
     t.string "state", default: "request", null: false
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "followships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "following_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -138,6 +145,8 @@ ActiveRecord::Schema.define(version: 2018_03_23_153846) do
     t.datetime "confirmation_sent_at"
     t.boolean "available", default: true, null: false
     t.integer "xp", default: 0, null: false
+    t.integer "followers_count", default: 0
+    t.integer "followings_count", default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

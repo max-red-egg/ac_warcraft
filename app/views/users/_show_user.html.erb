@@ -9,6 +9,9 @@
         <div class="row">
           <div class="col-sm-4 mb-4">
               <%= image_tag @user.avatar_url, class: "img-thumbnail rounded-circle w-100" if @user.avatar_url %>
+              <% if @user != current_user %>
+                <%= render partial: "shared/follow", locals: {user: @user} %>
+              <%end%>
           </div>
           <div class="col-sm-8">
             <p>自我介紹 <%= @user.description %></p>

@@ -88,4 +88,16 @@ namespace :dev do
       puts mission.tag_list
     end
   end
+
+  task fake_followships: :environment do
+    Followship.destroy_all
+
+    User.all.each do |user|
+      5.times do 
+        user.followships.create(following_id: User.all.sample.id)
+      end
+    end
+    puts "have created 100 fake follow"
+    
+  end
 end
