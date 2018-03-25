@@ -76,6 +76,7 @@ namespace :dev do
     puts "create #{Instance.count} fake instances"
     puts "Now you have #{Instance.count} instances!"
   end
+  
   task fake_mission_tag: :environment do
     missions = Mission.all
     list = ['Rails, Ruby','JavaScript, CSS','python','node.js','HTML, CSS','JavaScript', 'node.js, vue.js','php','php, css']

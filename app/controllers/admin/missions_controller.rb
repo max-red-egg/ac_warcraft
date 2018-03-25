@@ -2,7 +2,7 @@ class Admin::MissionsController < Admin::BaseController
   before_action :set_mission , only:[:show,:edit,:update,:destroy]
 
   def index
-    @missions = Mission.all
+    @missions = Mission.all.order(:id)
   end
 
   def show 
