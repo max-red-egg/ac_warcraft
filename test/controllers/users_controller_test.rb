@@ -60,7 +60,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     post invite_user_path(@user2),xhr: true, params: {instance_id: @instance.id}
     # assert_response :redirect
     # binding.pry
-    assert_not flash[:notice].nil?
+    assert_match '已送出邀請', response.body
   end
   #不能邀請等級低的使用者
   test "cannot invite users with level lower than mission" do
@@ -74,7 +74,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "cannot invite users who are invited" do
     sign_in @user
     post invite_user_path(@user2),xhr: true, params: {instance_id: @instance.id}
-    assert_not flash[:notice].nil?
+    assert_match '已送出邀請', response.body
     
     post invite_user_path(@user2),xhr: true, params: {instance_id: @instance.id}
     # assert_response :redirect
