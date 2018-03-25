@@ -3,6 +3,7 @@
     <th scope="col">id</th>
     <th scope="col">image</th>
     <th scope="col">name</th>
+    <th scope="col">XP</th>
     <th scope="col">level</th>
     <th scope="col">participant_number</th>
     <th scope="col">invitation_number</th>
@@ -17,7 +18,8 @@
        
      <%=image_tag mission.image_url ,class: "img-fluid "%></div></td>
      <td><%=link_to mission.name, admin_mission_path(mission) %></td>
-     <td>等級<%= mission.level %></td>
+     <td>經驗值 <%= mission.xp %></td>
+     <td>等級 <%= mission.level %></td>
      <td><%=mission.participant_number%></td>
      <td><%=mission.invitation_number%></td>
      <td>

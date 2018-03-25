@@ -20,6 +20,7 @@ user:
   gender: male
   confirmed_at: <%= Time.zone.now %>
   level: 15
+  xp: 15600
 
 user2:
   name: user2 example
