@@ -53,7 +53,6 @@ namespace :dev do
     puts "Now you have #{Mission.count} missions!"
   end
 
-
   task fake_xp: :environment do
     Mission.all.each do |mission|
         mission.xp = Random.rand(200..600)
@@ -70,7 +69,10 @@ namespace :dev do
     Instance.destroy_all
     User.all.each do |user|
         3.times do 
-            user.instances.create(mission_id: Mission.all.sample.id)
+          mission = Mission.all.sample
+          instance = user.instances.create(mission_id: mission.id)
+          instance.xp = mission.xp 
+          instance.save
         end
     end
     puts "create #{Instance.count} fake instances"
@@ -85,8 +87,5 @@ namespace :dev do
       mission.save
       puts mission.tag_list
     end
-
   end
-
-
 end
