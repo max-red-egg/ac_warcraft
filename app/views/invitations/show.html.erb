@@ -1,10 +1,15 @@
-<div class="container">
-    <div>
-      <h4 class="modal-title"> <%= @inviter.name %> 邀請 <%= @invitee.name %> 進行任務 (邀請函狀態：<%= @invitation.state %>)</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<aside class="aside-container">
+  <%= render partial: "layouts/sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3> <%= @inviter.name %> 邀請 <%= @invitee.name %> 進行任務 (邀請函狀態：<%= @invitation.state %>)</h3>
+      </div>
     </div>
     <div>
-      <div class="container-fluid">
+      <div class="container">
         <div class="row mb-4">
           <% if @inviter != current_user  %>
             <div class="col-md-6 mb-3">
@@ -35,7 +40,7 @@
           <%end%>
         <%end%>
         <!--===============================-->
-      </div>
+
     </div>
     <% if @invitation.state == 'inviting' %>
       <div class="modal-footer">
@@ -49,7 +54,10 @@
         </div>
       </div>
     <%end%>
-</div>
+    </div>
+  </div>
+</section>
+
 
 <script>
     // 按enter可以直接送出
