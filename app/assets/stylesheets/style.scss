@@ -30,3 +30,20 @@
 .unread-notification {
   background-color: #FAFAFA;
 }
+
+.notification-avatar{
+  height: 30px;
+  width: 30px;
+
+}
+
+.dropdown-list > #notification-manu.dropdown-menu {
+  min-width: 340px;
+}
+
+.notification-item-content{
+  color:#6c757d;
+}
+.list-group-item>a{
+  text-decoration: none;
+}

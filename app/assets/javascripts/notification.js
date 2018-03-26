@@ -36,7 +36,7 @@ class Notifications {
   }
 
   handleClick(e) {
-    console.log('handleClick');
+    //console.log('handleClick');
     $.ajax({
       url: "/notifications/mark_as_checked_all",
       dataType: "JSON",
@@ -50,7 +50,7 @@ class Notifications {
   unreadClick(e){
     let id = e.delegateTarget.id;
     let href = e.delegateTarget.href;
-    console.log(e.delegateTarget.id);
+    //console.log(e.delegateTarget.id);
     e.preventDefault();
     $.ajax({
       url: "/notifications/"+id+"/mark_as_read",
@@ -74,14 +74,14 @@ class Notifications {
 
   handleSuccess(data) {
     const items = $.map(data, notification => notification.template);
-    console.log(items);
+    //console.log(items);
     let unchecked_count = 0;
     $.each(data, function(i, notification) {
       if (notification.unchecked) {
         return unchecked_count += 1;
       }
     });
-    console.log(unchecked_count)
+    //console.log(unchecked_count)
     unchecked_count === 0 ? $("[data-behavior='unchecked-count']").hide() : $("[data-behavior='unchecked-count']").show()
     $("[data-behavior='unchecked-count']").text(unchecked_count);
     $("[data-behavior='notification-items'] > .notification-head").after(items);
