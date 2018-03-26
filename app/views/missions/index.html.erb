@@ -5,7 +5,11 @@
   <div class="section-container">
     <div class="content-wrapper">
       <div class="content-heading">
-        <h3>任務牆</h3>
+        <% if @user %>
+          <h3>和<%= @user.name %>一起組隊</h3>
+        <% else %>
+          <h3>任務牆</h3>
+        <% end %> 
       </div>
       <div class="row">
         <% @missions.each do |mission| %>
@@ -17,8 +21,14 @@
                 <p class="card-text"><span class="badge badge-success">Level <%= mission.level %></span> <span class="badge badge-success">Team# <%= mission.participant_number %></span></p>
                 <p class="card-text"><%= truncate mission.description, length: 60 %></p>
                 <%= link_to "任務詳情", mission_path(mission), remote: true, class: "btn btn-primary" %>
+                
+                <% if @user %>
+                  <%= link_to '組隊', select_user_mission_path(mission, select_user: @user), class: "btn btn-primary" %>
+                <% else %>
                 <!-- 任務狀態，若1人任務，直接建立副本開始挑戰，兩人以上，建立副本，直接進入組隊畫面-->
-                <%= render partial:"challenge" , locals: {mission: mission} %>
+                  <%= render partial:"challenge" , locals: {mission: mission} %>
+                <% end %>
+                
                 <!-- 任務狀態 end -->
               </div>
             </div>

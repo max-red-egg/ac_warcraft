@@ -48,7 +48,13 @@ Rails.application.routes.draw do
     member do
       get :my_mission
       post :challenge
+      
+      get :select_user
       # POST challenge_mission_path 挑戰本任務
+    end
+
+    collection do
+      get :teaming
     end
   end
 
