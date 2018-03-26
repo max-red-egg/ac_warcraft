@@ -44,6 +44,6 @@
 .notification-item-content{
   color:#6c757d;
 }
-.list-group-item>a{
+a[data-behavior='notification-item']{
   text-decoration: none;
 }
