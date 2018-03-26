@@ -5,4 +5,5 @@ class Notification < ApplicationRecord
   default_scope {order('created_at DESC')}
 
   scope :unread, -> { where(read_at: nil) }
+  scope :unchecked, -> {where(checked_at: nil)}
 end

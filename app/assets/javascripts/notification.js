@@ -6,14 +6,16 @@
 class Notifications {
   constructor() {
     this.handleClick = this.handleClick.bind(this);
+    this.unreadClick = this.unreadClick.bind(this);
     this.handleSuccess = this.handleSuccess.bind(this);
+    this.readAll = this.readAll.bind(this);
     this.notifications = $("[data-behavior='notifications']");
 
     if (this.notifications.length > 0) {
       this.handleSuccess(this.notifications.data("notifications"));
       
       $("[data-behavior='notifications-link']").on("click", this.handleClick);
-
+      
       this.getNewNotifications();
       // setInterval((() => {
       //   console.log("getNotifications!!");
@@ -35,12 +37,37 @@ class Notifications {
 
   handleClick(e) {
     console.log('handleClick');
-    return $.ajax({
-      url: "/notifications/mark_as_read",
+    $.ajax({
+      url: "/notifications/mark_as_checked_all",
       dataType: "JSON",
       method: "POST",
       success() {
-        $("[data-behavior='unread-count']").hide();
+        $("[data-behavior='unchecked-count']").hide();
+      }
+    });
+  }
+
+  unreadClick(e){
+    let id = e.delegateTarget.id;
+    let href = e.delegateTarget.href;
+    console.log(e.delegateTarget.id);
+    e.preventDefault();
+    $.ajax({
+      url: "/notifications/"+id+"/mark_as_read",
+      dataType: "JSON",
+      method: "POST",
+      success() {
+        window.location.href = href;
+      }
+    });
+  }
+  readAll(e){
+    $.ajax({
+      url: "/notifications/mark_as_read_all",
+      dataType: "JSON",
+      method: "POST",
+      success() {
+        $(".list-group-item").removeClass("unread-notification");
       }
     });
   }
@@ -48,16 +75,19 @@ class Notifications {
   handleSuccess(data) {
     const items = $.map(data, notification => notification.template);
     console.log(items);
-    let unread_count = 0;
+    let unchecked_count = 0;
     $.each(data, function(i, notification) {
-      if (notification.unread) {
-        return unread_count += 1;
+      if (notification.unchecked) {
+        return unchecked_count += 1;
       }
     });
-    console.log(unread_count)
-    unread_count === 0 ? $("[data-behavior='unread-count']").hide() : $("[data-behavior='unread-count']").show()
-    $("[data-behavior='unread-count']").text(unread_count);
-    $("[data-behavior='notification-items']").html(items);
+    console.log(unchecked_count)
+    unchecked_count === 0 ? $("[data-behavior='unchecked-count']").hide() : $("[data-behavior='unchecked-count']").show()
+    $("[data-behavior='unchecked-count']").text(unchecked_count);
+    $("[data-behavior='notification-items'] > .notification-head").after(items);
+    $(".unread-notification a").on("click",this.unreadClick);
+    $("[data-behavior='notification-readall']").on("click",this.readAll);
+
   }
 }
 

@@ -1,4 +1,4 @@
-<div class="list-group-item list-group-item-action <%='bg-gray-light'  if !notification.read_at %>">
+<div class="list-group-item list-group-item-action <%='unread-notification'  if !notification.read_at %>">
   <%= link_to invitation_path(notification.notifiable.invitation), id: notification.id do %>
   <div class="media">
     <div class="align-self-start mr-2">

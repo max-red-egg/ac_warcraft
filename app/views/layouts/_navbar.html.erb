@@ -32,13 +32,19 @@
         <li class="nav-item dropdown dropdown-list" data-behavior = 'notifications' >
            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-toggle="dropdown" data-behavior='notifications-link'>
               <em class="icon-bell"></em>
-              <span class="badge badge-danger" data-behavior='unread-count'></span>
+              <span class="badge badge-danger" data-behavior='unchecked-count'></span>
            </a>
            <!-- START Dropdown menu-->
-           <div class="dropdown-menu dropdown-menu-right animated flipInX">
-              <div class="dropdown-item" data-behavior='notification-items'>
-                 <!-- START list group-->
-                 <div class="list-group" >
+           <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-item" >
+                <!-- START list group-->
+                <div class="list-group" data-behavior='notification-items'>
+                  <div class="list-group-item list-group-item-action notification-head">
+                    <span class="d-flex align-items-center">
+                    <span class="text-sm btn btn-link p-0" data-behavior='notification-readall'>全部標示已讀</span>
+                    <span class="text-sm"></span>
+                    </span>
+                  </div>
                     <!-- list item-->
 <!--                     <div class="list-group-item list-group-item-action">
                        <div class="media">
@@ -58,6 +64,11 @@
                           <span class="badge badge-danger ml-auto">14</span>
                        </span>
                     </div> -->
+                  <div class="list-group-item list-group-item-action">
+                    <span class="d-flex align-items-center">
+                    <%= link_to '所有通知' , notifications_path, class: 'text-sm' %>
+                    </span>
+                  </div>
                  </div>
                  <!-- END list group-->
               </div>
