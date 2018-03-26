@@ -3,8 +3,23 @@ class UsersController < ApplicationController
 
   def index
     # @users = User.all
-    @users = User.page(params[:page]).per(20)
+    @filterrific = initialize_filterrific(
+            User,
+            params[:filterrific],
+            select_options: {
+              sorted_by: User.options_for_sorted_by,
+              with_gender: ['male', 'female'],
+              range_level: [['0-4', '0'], ['5-9', '5'], ['10-14', '10'], ['15-19', '15']],
+            }
+          ) or return
+    
+    @users = @filterrific.find.page(params[:page]).per(20)
+    # @users = User.page(params[:page]).per(20)
     @tag = 'all'
+    respond_to do |format|
+        format.html
+        format.js
+      end
   end
 
   def following
