@@ -11,7 +11,11 @@ Rails.application.routes.draw do
 
   resources :notifications do
     collection do
-      post :mark_as_read
+      post :mark_as_checked_all
+      post :mark_as_read_all
+    end
+    member do
+      post :mark_as_read      
     end
   end
   resources :invitations, only: [:index, :show] do
