@@ -23,6 +23,12 @@ mission4:
   participant_number: 1
   invitation_number: 1
 
+mission5:
+  name: mission4
+  level: 1
+  participant_number: 2
+  invitation_number: 5
+
 <% 1.upto(50) do |n| %>
 mission_<%= n %>:
   name:  <%= "Mission_#{n}" %>
