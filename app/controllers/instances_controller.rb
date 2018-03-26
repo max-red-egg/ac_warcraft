@@ -9,6 +9,10 @@ class InstancesController < ApplicationController
     @instances_history = current_user.instances.where(state: ['complete', 'abort'])
   end
 
+  def history
+    @instances_history = current_user.instances.where(state: ['complete', 'abort'])
+  end
+
   def show
     @mission = @instance.mission
     @members = @instance.members
@@ -68,7 +72,7 @@ class InstancesController < ApplicationController
       @instance.update!(submit_params)
 
       @instance.modifier = current_user
-      @instance.save  #儲存答案的使用者  
+      @instance.save  #儲存答案的使用者
 
     end
   end
@@ -83,7 +87,7 @@ class InstancesController < ApplicationController
       if !@instance.answer.strip.empty?
         flash[:notice] = "任務完成！"
         # 更改instance狀態
-        
+
         @instance.complete!(current_user)
         redirect_to instance_path(@instance)
       else
