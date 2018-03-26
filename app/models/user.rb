@@ -21,6 +21,8 @@ class User < ApplicationRecord
   #user.reviews 所有參與過的任務的評價
   has_many :reviews, foreign_key: "reviewee_id", class_name: "Review"
 
+  has_many :notifications, foreign_key: :recipient_id
+
   #給予其他user的評價
   has_many :review_to_members, foreign_key: "reviewer_id", class_name:"Review"
 

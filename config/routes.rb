@@ -9,6 +9,11 @@ Rails.application.routes.draw do
 
   root "missions#my_mission"
 
+  resources :notifications do
+    collection do
+      post :mark_as_read
+    end
+  end
   resources :invitations, only: [:index, :show] do
     member do
       post :accept

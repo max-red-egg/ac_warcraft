@@ -19,5 +19,6 @@
 //= require rails-ujs
 //= require activestorage
 //= require filterrific/filterrific-jquery
+//= require notification
 
 

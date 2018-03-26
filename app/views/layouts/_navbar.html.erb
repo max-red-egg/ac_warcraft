@@ -28,6 +28,42 @@
         <li class="nav-item">
           <%= link_to "管理後台", admin_root_path, class: "bg-inverse-dark nav-link" if current_user.admin? %>
         </li>
+        <!-- START notification menu-->
+        <li class="nav-item dropdown dropdown-list" data-behavior = 'notifications' >
+           <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-toggle="dropdown" data-behavior='notifications-link'>
+              <em class="icon-bell"></em>
+              <span class="badge badge-danger" data-behavior='unread-count'></span>
+           </a>
+           <!-- START Dropdown menu-->
+           <div class="dropdown-menu dropdown-menu-right animated flipInX">
+              <div class="dropdown-item" data-behavior='notification-items'>
+                 <!-- START list group-->
+                 <div class="list-group" >
+                    <!-- list item-->
+<!--                     <div class="list-group-item list-group-item-action">
+                       <div class="media">
+                          <div class="align-self-start mr-2">
+                             <em class="fa fa-tasks fa-2x text-success"></em>
+                          </div>
+                          <div class="media-body">
+                             <p class="m-0">Pending Tasks</p>
+                             <p class="m-0 text-muted text-sm">11 pending task</p>
+                          </div>
+                       </div>
+                    </div>
+
+                    <div class="list-group-item list-group-item-action">
+                       <span class="d-flex align-items-center">
+                          <span class="text-sm">More notifications</span>
+                          <span class="badge badge-danger ml-auto">14</span>
+                       </span>
+                    </div> -->
+                 </div>
+                 <!-- END list group-->
+              </div>
+           </div>
+           <!-- END Dropdown menu-->
+        </li>
         <li class="nav-item">
           <%= link_to '登出', destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>

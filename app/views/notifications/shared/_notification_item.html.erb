@@ -1,0 +1,14 @@
+<div class="list-group-item list-group-item-action <%='bg-gray-light'  if !notification.read_at %>">
+  <%= link_to invitation_path(notification.notifiable.invitation), id: notification.id do %>
+  <div class="media">
+    <div class="align-self-start mr-2">
+      <em class="fa fa-envelope fa-2x text-warning"></em>
+    </div>
+    <div class="media-body">
+      <p class="m-0"><%= title %></p>
+      <p class="m-0 text-muted text-sm"><%=content%></p>
+    </div>
+  </div>
+  <%end%>
+</div>
+
