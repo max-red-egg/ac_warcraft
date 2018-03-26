@@ -51,15 +51,16 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     assert_equal "456", instance.answer
   end
 
-  test "user can submit answer" do
-    # binding.pry
-    # 提交任務時可以產生兩個review
+  test "user can submit answer and xp will raise" do
     instance = instances(:instance_in_progress)
+    # binding.pry
     assert_difference 'Review.count', 0 do
       # 需要先儲存答案才可以送出
       post submit_instance_path(instance)
     end
     
+    # 提交任務成功時可以產生兩個review
+    origin_xp = @user.xp
     assert_difference 'Review.count', 2 do
       # 需要先儲存答案才可以送出
       post save_instance_path(instance), xhr:true, params: {instance: { answer: "123" }}
@@ -68,8 +69,24 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     # binding.pry
     instance.reload
     assert_equal "complete", instance.state
+    # binding.pry
     @user.reload
     assert_equal true, @user.available
+    assert_equal origin_xp + 100, @user.xp
+  end
+
+  # 測試XP超過1000等級會提升
+  test "level of user will raise when xp is up to 1000" do
+    instance = instances(:instance_in_progress)
+    instance.xp += 1000
+    instance.save
+    assert_difference '@user.level', 1 do
+      # 需要先儲存答案才可以送出
+      post save_instance_path(instance), xhr:true, params: {instance: { answer: "123" }}
+      post submit_instance_path(instance)
+      @user.reload
+    end
+    # binding.pry
   end
 
   test "user can cancel a teaming_instance" do
@@ -77,7 +94,6 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     # 會發出取消訊息
 
     assert_difference 'InviteMsg.count',1 do
-
       post cancel_instance_path(instance)
     end
     instance.reload

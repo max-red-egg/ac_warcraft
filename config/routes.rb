@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     resources :instance_msgs, only: [:create]
   end
 
+  resources :followships, only: [:create, :destroy]
+
   resources :missions, only: [:index, :show] do
     member do
       get :my_mission
@@ -55,6 +57,11 @@ Rails.application.routes.draw do
   resources :users do
     member do
       post :invite
+    end
+
+    collection do
+      get :following
+      get :follower
     end
   end
 
