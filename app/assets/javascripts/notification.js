@@ -58,6 +58,7 @@ class Notifications {
     unread_count === 0 ? $("[data-behavior='unread-count']").hide() : $("[data-behavior='unread-count']").show()
     $("[data-behavior='unread-count']").text(unread_count);
     $("[data-behavior='notification-items']").html(items);
+    $("[data-behavior='notification-items'] > .notification-head").after(items);
   }
 }
 
