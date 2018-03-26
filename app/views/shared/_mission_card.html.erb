@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-body text-center bg-center" style="background-image: url(<%= mission.image_url %>);">
+    <div class="row">
+      <div class="col-12 text-white" style="height: 100px;">
+
+      </div>
+    </div>
+  </div>
+  <div class="card-body bg-gray-dark">
+  <h4 class="m-0"><%= mission.name %></h4>
+  </div>
+  <div class="row text-center p-2">
+    <div class="col-4">
+      <p class="m-0 text-muted">Level</p>
+      <p class="m-0 h3"><%= mission.level %></p>
+    </div>
+    <div class="col-4">
+      <p class="m-0 text-muted">Team #</p>
+      <p class="m-0 h3"><%= mission.participant_number %></p>
+    </div>
+    <div class="col-4">
+      <p class="m-0 text-muted">XP</p>
+      <p class="m-0 h3"><%= mission.xp %></p>
+    </div>
+  </div>
+  <div class="row px-3 py-1">
+    <div class="col-12">
+      <p><%= truncate mission.description, length: 80 %></p>
+    </div>
+  </div>
+  <div class="row p-2 text-center">
+    <div class="col-12">
+      <p>
+        <%= link_to "任務詳情", mission_path(mission), remote: true, class: "btn btn-secondary mr-2" %>
+        <% if @user %>
+          <%= link_to '組隊', select_user_mission_path(mission, select_user: @user), class: "btn btn-primary" %>
+        <% else %>
+          <%= render partial:"challenge" , locals: {mission: mission} %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
