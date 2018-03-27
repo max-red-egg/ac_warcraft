@@ -54,6 +54,7 @@ gem 'pry'
 gem 'pry-rails'
 gem 'pry-nav'
 gem 'acts-as-taggable-on', '~> 5.0'
+gem 'omniauth-github'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

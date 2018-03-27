@@ -27,15 +27,58 @@
       </li>
       <li class="<%= 'active' if controller?('missions') %>">
         <%= link_to missions_path do %>
-          <em class="icon-layers"></em>
-          <span>任務牆</span>
+          <em class="fa fa-briefcase"></em>
+          <span>秘密任務室</span>
         <% end %>
       </li>
-      <li class="<%= 'active' if controller?('instances') %>">
-        <%= link_to instances_path do %>
-          <em class="icon-grid"></em>
-          <span>副本列表</span>
+      <li class="">
+        <a href="#progress" title="progress" data-toggle="collapse">
+          <em class="fa fa-gavel"></em>
+          <span>進行中任務</span>
+        </a>
+        <ul class="sidebar-nav sidebar-subnav collapse" id="progress">
+          <li class="sidebar-subnav-header">進行中任務</li>
+          <% if current_user.instances_in_progress.present? %>
+            <% current_user.instances_in_progress.each do |instance| %>
+              <li class="<%= active_class?(instance_path(instance)) %>">
+                <%= link_to instance_path(instance) do%>
+                <span class="float-left badge badge-success mr-1">L<%= instance.mission.level %></span> <%= instance.mission.name %>
+                <% end %>
+              </li>
+            <% end %>
+          <% else %>
+            <li><%= link_to '無! 開始新任務 >>', missions_path %></li>
+          <% end %>
+        </ul>
+      </li>
+      <li class="">
+        <a href="#teaming" title="teaming" data-toggle="collapse">
+          <em class="fa fa-refresh"></em>
+          <span>組隊中任務</span>
+        </a>
+        <ul class="sidebar-nav sidebar-subnav collapse" id="teaming">
+          <li class="sidebar-subnav-header">組隊中任務</li>
+          <% if current_user.instances_teaming.present? %>
+            <% current_user.instances_teaming.each do |instance| %>
+            <li class="<%= active_class?(instance_path(instance)) %>">
+              <%= link_to instance_path(instance) do%>
+              <span class="float-left badge badge-success mr-1">L<%= instance.mission.level %></span> <%= instance.mission.name %>
+              <% end %>
+            </li>
+            <% end %>
+          <% else %>
+            <li><%= link_to '無! 開始新任務 >>', missions_path %></li>
+          <% end %>
+        </ul>
+      </li>
+      <li class="<%= active_class?(history_instances_path) %>">
+        <%= link_to history_instances_path do %>
+          <em class="fa fa-archive"></em>
+          <span>任務檔案室</span>
         <% end %>
+      </li>
+      <li class="nav-heading">
+        <span data-localize="sidebar.heading.HEADER">任務通訊</span>
       </li>
       <li class="<%= 'active' if controller?('invitations') %>">
         <%= link_to invitations_path do %>

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
 
   mount_uploader :avatar, AvatarUploader
 
@@ -152,12 +152,32 @@ class User < ApplicationRecord
     missions = self.missions.where('instances.state = ? ', 'in_progress')
   end
 
+  #正在進行中的副本
+  def instances_in_progress
+    instances = self.instances.where(state: 'in_progress')
+  end
+
+  #正在進行中的副本
+  def instances_teaming
+    instances = self.instances.where(state: 'teaming')
+  end
+
   def was_declined?(instance)
     instance.invitations.where('invitations.invitee_id = ? AND invitations.state = ?', self, 'decline').present?
   end
 
   def following?(other_user)
     self.followings.include?(other_user)
+  end
+
+  def self.from_omniauth(auth)  
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.confirmed_at = Time.zone.now
+      user.password = Devise.friendly_token[0,20]
+    end
   end
 
 end
