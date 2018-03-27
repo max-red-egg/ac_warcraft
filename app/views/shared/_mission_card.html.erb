@@ -24,6 +24,13 @@
     </div>
   </div>
   <div class="row px-3 py-1">
+    <div>
+      <p class="col-12">
+        <% mission.tag_list.each do |tag| %>
+          <span class="badge bg-gray"><%= tag %></span>
+        <% end %>
+      </p>
+    </div>
     <div class="col-12">
       <p><%= truncate mission.description, length: 80 %></p>
     </div>
