@@ -12,7 +12,7 @@
           <div class="card card-default">
             <div class="card-body text-center">
               <div class="py-4">
-                <%= image_tag @user.avatar_url, class: "img-fluid rounded-circle img-thumbnail thumb96" if @user.avatar_url %>
+                <%= gravatar_for(@user, "img-fluid rounded-circle img-thumbnail thumb96") %>
               </div>
               <h3 class="m-0 text-bold"><%= @user.name %></h3>
               <div class="my-3">
