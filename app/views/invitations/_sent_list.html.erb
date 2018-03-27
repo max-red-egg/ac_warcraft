@@ -21,7 +21,7 @@
             <%= link_to '邀請紀錄', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
           <% end %>
           </td>
-        <td><span style="display:none;"><%= invitation.updated_at %></span><%= time_ago_in_words(invitation.updated_at) + ' ago' %></td>
+        <td><span style="display:none;"><%= invitation.updated_at %></span><%= time_ago_in_words(invitation.updated_at) + '前' %></td>
       </tr>
     <% end %>
   </tbody>
