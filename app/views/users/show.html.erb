@@ -35,16 +35,18 @@
                 </div>
               </div>
             </div>
-            <% if @user == current_user %>
               <div class="card-body bt">
                 <div class="row">
-                  <div class="col-12">
-                    <div class="text-center"><%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-success" %>
-                    </div>
+                  <div class="col-12 text-center">
+                    <% if @user == current_user %>
+                      <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-success" %>
+                    <% else %>
+                      <%= render partial: "shared/follow", locals: {user: @user} %>
+                      <%= link_to "邀請組隊", teaming_missions_path(user_id: @user.id), class: "btn btn-success" %>
+                    <% end %>
                   </div>
                 </div>
               </div>
-            <% end %>
           </div>
           <div class="card card-default d-none d-lg-block">
             <div class="card-header">
