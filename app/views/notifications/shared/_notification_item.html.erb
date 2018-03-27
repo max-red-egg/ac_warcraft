@@ -1,5 +1,5 @@
 <div class="list-group-item list-group-item-action <%='unread-notification'  if !notification.read_at %>">
-  <%= link_to invitation_path(notification.notifiable.invitation), id: notification.id do %>
+
   <div class="media">
     <div class="align-self-start mr-2">
       <div class="notification-avatar"><%= image_tag avatar , class: 'rounded-circle img-fluid'%></div>
@@ -9,6 +9,6 @@
       <p class="m-0 notification-item-content"><strong><%=content%></strong><small class = "text-muted ml-2"> <em><%= time_ago_in_words notification.created_at %> ago</em></small></p>
     </div>
   </div>
-  <%end%>
+
 </div>
 

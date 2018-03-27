@@ -5,8 +5,19 @@ $("#invitation_model").modal("show")
 $('#new_invite_msg').keypress(function (e) {
         if(e.which == 13 && !e.shiftKey) {
             // e.form.submit();
-            e.preventDefault()
-            $('.submit').click();
+            e.preventDefault();
+            // $('#new_invite_msg').trigger('submit.rails');;
+            //$('.submit').click();
+            var elem = document.getElementById('new_invite_msg')
+            Rails.fire(elem, 'submit');
             $('#invite_msg_content').val("");
         }
+});
+$('.submit').click(
+  function(e){
+    //$('#new_invite_msg').submit();
+    e.preventDefault();
+    var elem = document.getElementById('new_invite_msg')
+    Rails.fire(elem, 'submit');
+    $('#invite_msg_content').val("");
 });

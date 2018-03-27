@@ -15,7 +15,7 @@ class Notifications {
       this.handleSuccess(this.notifications.data("notifications"));
       
       $("[data-behavior='notifications-link']").on("click", this.handleClick);
-      
+      console.log("2");
       this.getNewNotifications();
       // setInterval((() => {
       //   console.log("getNotifications!!");
@@ -85,7 +85,7 @@ class Notifications {
     unchecked_count === 0 ? $("[data-behavior='unchecked-count']").hide() : $("[data-behavior='unchecked-count']").show()
     $("[data-behavior='unchecked-count']").text(unchecked_count);
     $("[data-behavior='notification-items'] > .notification-head").after(items);
-    $(".unread-notification a").on("click",this.unreadClick);
+    $("a[data-behavior='notification-item']").on("click",this.unreadClick);
     $("[data-behavior='notification-readall']").on("click",this.readAll);
 
   }

@@ -1,5 +1,6 @@
 class Invitation < ApplicationRecord
   after_commit :setup_state!
+  after_commit :create_notifications
   belongs_to :user
   belongs_to :instance
   belongs_to :invitee, class_name: "User"
@@ -46,6 +47,29 @@ class Invitation < ApplicationRecord
       self.state = 'cancel'
       self.save
     end
+  end
+
+
+  # for notification
+  def recipient
+    case self.state
+    when 'inviting'
+      self.invitee
+    when 'cancel'
+      self.invitee
+    when 'accept'
+      self.user
+    when 'decline'
+      self.user
+    end
+        
+  end
+
+  # for notification
+  def create_notifications
+    actor =  ( recipient == self.user ? self.invitee : self.user )        
+    Notification.create(recipient: recipient, actor: actor,
+        action: self.state, notifiable: self)
   end
 
   private
