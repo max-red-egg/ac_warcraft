@@ -2,11 +2,12 @@
   <div class="row">
     <div class="col text-center">
       <%= link_to user_path(user), remote: true do%>
-        <%= image_tag user.avatar_url, class: "img-thumbnail rounded-circle thumb80" if user.avatar_url  %><br>
+        <%= gravatar_for(@user, "img-thumbnail rounded-circle thumb80")  %><br>
       <% end %>
       <span><%= link_to user.name, user_path(user), remote: true %></span>
     </div>
   </div>
 </div>
+
 
 
