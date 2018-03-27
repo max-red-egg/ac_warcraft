@@ -12,7 +12,7 @@ class UsersController < ApplicationController
               range_level: [['0-4', '0'], ['5-9', '5'], ['10-14', '10'], ['15-19', '15']],
             }
           ) or return
-    
+
     @users = @filterrific.find.page(params[:page]).per(20)
     # @users = User.page(params[:page]).per(20)
     @tag = 'all'
@@ -45,8 +45,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @missions = @user.missions_compeleted
     @instances = @user.instances.find_complete
-    @reviews = @user.reviews.submited
+    @reviews = @user.reviews.submited.order(updated_at: :desc)
     @unsended_reviews = @user.review_to_members.unsubmit
+
+    @followings = @user.followings.last(3)
 
     respond_to do |format|
       format.html

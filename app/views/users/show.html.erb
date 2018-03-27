@@ -1,66 +1,139 @@
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'layouts/sidebar' %>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 py-3 px-4">
-      <%= render 'layouts/notice' %>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-              <%= image_tag @user.avatar_url, class: "img-responsive center-block" if @user.avatar_url %>
-          </div>
-          <div class="col-md-2"></div>
-
-          <div class="col-md-7">
-            <h4>名字 <%= @user.name %></h4>
-            <p>自我介紹 <%= @user.description %></p>
-            <p>性別 <%= @user.gender %></p>
-            <p>等級 <%= @user.level %></p>
-            <p>XP值 <%= @user.xp %></p>
-            <p>角色 <%= @user.role %></p>
-            <p>邀請信箱 <%= transcript_user_state(@user.available) %></p>
-
-
+<aside class="aside-container">
+  <%= render partial: "layouts/sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3>探員檔案</h3>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card card-default">
+            <div class="card-body text-center">
+              <div class="py-4">
+                <%= image_tag @user.avatar_url, class: "img-fluid rounded-circle img-thumbnail thumb96" if @user.avatar_url %>
+              </div>
+              <h3 class="m-0 text-bold"><%= @user.name %></h3>
+              <div class="my-3">
+                <p><%= @user.description %></p>
+              </div>
+            </div>
+            <div class="card-body bt text-center">
+              <div class="row">
+                <div class="col-4 br">
+                  <strong class="text-primary">Level</strong><br>
+                  <strong><%= @user.level %></strong>
+                </div>
+                <div class="col-4 br">
+                  <strong class="text-success">XP</strong><br>
+                  <strong><%= @user.xp %></strong>
+                </div>
+                <div class="col-4">
+                  <strong class="text-purple">邀請狀態</strong><br>
+                  <strong><%= transcript_user_state(@user.available) %></strong>
+                </div>
+              </div>
+            </div>
             <% if @user == current_user %>
-              <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-primary" %>
+              <div class="card-body bt">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="text-center"><%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-success" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <% end %>
-
-            <h4>完成的任務</h4>
-            <ul>
-            <% @missions.each  do|mission| %>
-              <li><%= link_to mission.name, mission_path(mission) %></li>
-              <%end %>
-            </ul>
-            <ul>
-            <% @instances.each  do|instance| %>
-              <li><%= link_to instance.mission.name + '(副本:' + instance.id.to_s + ')', instance_path(instance) %></li>
-              <%end %>
-            </ul>
-
-            <h4>大家對 <%= @user.name %>的評價：</h4>
-            <ul>
-              <% @reviews.each do |review| %>
-                <li>
-                  <%= review.reviewer.name %>： <%= review.comment %>
-                </li>
-              <%end%>
-            </ul>
-            <h4>尚未評論的評價</h4>
-            <p>你還有<%= @unsended_reviews.count %> 則評價尚未送出</p>
-            <% if current_user == @user %>
-              <ul>
-                <% @unsended_reviews.each do |review| %>
-                <li>你在 <%=link_to review.instance.mission.name , instance_path(review.instance)%> 任務中還沒送出對於<%= review.reviewee.name %> 的評價</li>
+          </div>
+          <div class="card card-default d-none d-lg-block">
+            <div class="card-header">
+              <div class="card-title text-center">近期追蹤的探員</div>
+            </div>
+            <div class="card-body">
+              <% @followings.each do |following| %>
+                <div class="media">
+                  <%= image_tag following.avatar_url, class: "align-self-center mr-2 rounded-circle img-thumbnail thumb48" if following.avatar_url %>
+                  <div class="media-body py-2">
+                    <div class="text-bold"><%= following.name %>
+                      <div class="text-sm text-muted"><%= truncate(following.description, length: 80) %></div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card card-default">
+            <div class="card-header d-flex align-items-center">
+              <div class="d-flex justify-content-center col">
+                <div class="h4 m-0 text-center">獲得的評價</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row p-3 justify-content-center">
+                <% @reviews.each do |review| %>
+                  <div class="card col-12 bg-light">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td class="b0 wd-xs d-none d-md-table-cell text-center">
+                              <%= link_to user_path(review.reviewer), remote: true do %>
+                                <%= image_tag review.reviewer.avatar_url, class: "img-fluid rounded-circle img-thumbnail " %>
+                                <span><%= review.reviewer.name %></span>
+                              <% end %>
+                            </td>
+                            <td class="b0">
+                              <p class="h4 mt-0">
+                                <a href="#"><%= link_to review.instance.mission.name ,mission_path(review.instance.mission), remote: true %></a>
+                                <span class="rounded badge bg-gray px-2 mr-2 text-sm d-none d-lg-inline text-muted">
+                                <span class="text-muted">Mission <%= review.instance.state %></span>
+                                </span>
+                              </p>
+                              <div><%= review.comment %></div>
+                              <div class="text-muted mt-1"> - <%= time_ago_in_words(review.updated_at) + ' ago' %></div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+          <div class="card card-default">
+            <div class="card-header d-flex align-items-center">
+              <div class="d-flex justify-content-center col">
+                <div class="h4 m-0 text-center">執行過的任務</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row py-4 justify-content-center">
+                <% @missions.each  do|mission| %>
+                  <div class="col-6 col-sm-4 col-xl-3">
+                    <div class="card border-dark">
+                      <div class="card-body text-center">
+                        <p class="mb-3">
+                          <%= link_to mission_path(mission), remote: true do%>
+                            <%= image_tag mission.image_url, class: "rounded thumb96"%>
+                          <% end %>
+                        </p>
+                        <p class="m-0">
+                          <strong><%= mission.name %></strong><br>
+                          <span>L<%= mission.level %> / Team <%= mission.participant_number %></span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 <% end %>
-              </ul>
-            <% end %>
-
-
-
-
-
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
   </div>
-</div>
+</section>
