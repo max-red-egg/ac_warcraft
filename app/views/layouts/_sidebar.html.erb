@@ -7,16 +7,18 @@
           <div class="item user-block">
             <div class="user-block-picture">
               <div class="user-block-status">
-                <img src="<%= current_user.avatar_url %>" alt="Avatar" width="100" height="100" class="img-thumbnail rounded-circle" />
-                <% if current_user.available %>
-                  <div class="circle bg-success circle-lg"></div>
-                <% else %>
-                  <div class="circle bg-danger circle-lg"></div>
+                <%= link_to user_path(current_user) do %>
+                  <img src="<%= current_user.avatar_url %>" alt="Avatar" width="100" height="100" class="img-thumbnail rounded-circle" />
                 <% end %>
+                  <% if current_user.available %>
+                    <div class="circle bg-success circle-lg"></div>
+                  <% else %>
+                    <div class="circle bg-danger circle-lg"></div>
+                  <% end %>
               </div>
             </div>
             <div class="user-block-info">
-              <span class="user-block-name">Hello, <%= current_user.name %></span>
+              <span class="user-block-name">Hello：<%= current_user.name %> 探員</span>
             </div>
           </div>
       </li>
@@ -78,28 +80,34 @@
         <% end %>
       </li>
       <li class="nav-heading">
-        <span data-localize="sidebar.heading.HEADER">任務通訊</span>
+        <span data-localize="sidebar.heading.HEADER">秘密通訊</span>
+      </li>
+      <li class="<%= 'active' if controller?('notifications') %>">
+        <%= link_to notifications_path do %>
+          <em class="fa fa-bell"></em>
+          <span>任務通知</span>
+        <% end %>
       </li>
       <li class="<%= 'active' if controller?('invitations') %>">
         <%= link_to invitations_path do %>
-          <em class="icon-envelope"></em>
-          <span>邀請函列表</span>
+          <em class="fa fa-envelope"></em>
+          <span>任務邀請</span>
         <% end %>
       </li>
 
       <li class="nav-heading">
-        <span data-localize="sidebar.heading.HEADER">隊友資訊</span>
-      </li>
-      <li class="<%= active_class?(user_path(current_user)) %>">
-        <%= link_to user_path(current_user) do %>
-          <em class="icon-layers"></em>
-          <span>關於我</span>
-        <% end %>
+        <span data-localize="sidebar.heading.HEADER">探員資訊</span>
       </li>
       <li class="<%= 'active' if controller?('users') && action?('index') %>">
         <%= link_to users_path do %>
-          <em class="icon-grid"></em>
-          <span>隊友清單</span>
+          <em class="fa fa-users"></em>
+          <span>探員資料庫</span>
+        <% end %>
+      </li>
+      <li class="<%= active_class?(user_path(current_user)) %>">
+        <%= link_to user_path(current_user) do %>
+          <em class="fa fa-user"></em>
+          <span>個人檔案</span>
         <% end %>
       </li>
     </ul>

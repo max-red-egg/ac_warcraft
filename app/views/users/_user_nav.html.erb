@@ -1,22 +1,22 @@
 <div class="col-md-2">
   <% if @tag == 'all' %>
-    <h4>全部隊友</h4>
+    <h4>全部探員</h4>
   <% else %>
-    <h4><%= link_to '全部隊友', users_path %></h4>
+    <h4><%= link_to '全部探員', users_path %></h4>
   <% end %>
 </div>
 <div class="col-md-2">
   <% if @tag == 'following' %>
-    <h4>我追蹤的隊友</h4>
+    <h4>我追蹤的探員</h4>
   <% else %>
-    <h4><%= link_to '我追蹤的隊友', following_users_path %></h4>
+    <h4><%= link_to '我追蹤的探員', following_users_path %></h4>
   <% end %>
 </div>
 
 <div class="col-md-2">
   <% if @tag == 'follower' %>
-    <h4>追蹤我的隊友</h4>
+    <h4>追蹤我的探員</h4>
   <% else %>
-     <h4><%= link_to '追蹤我的隊友', follower_users_path %></h4>
+     <h4><%= link_to '追蹤我的探員', follower_users_path %></h4>
   <% end %>
 </div>
