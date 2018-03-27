@@ -32,11 +32,7 @@
     <div class="col-12">
       <p>
         <%= link_to "任務詳情", mission_path(mission), remote: true, class: "btn btn-secondary mr-2" %>
-        <% if @user %>
-          <%= link_to '組隊', select_user_mission_path(mission, select_user: @user), class: "btn btn-primary" %>
-        <% else %>
-          <%= render partial:"challenge" , locals: {mission: mission} %>
-        <% end %>
+        <%= challenge_button(mission,@user) %>
       </p>
     </div>
   </div>
