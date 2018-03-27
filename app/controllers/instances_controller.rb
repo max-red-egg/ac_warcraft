@@ -9,14 +9,17 @@ class InstancesController < ApplicationController
     @instances_history = current_user.instances.where(state: ['complete', 'abort'])
   end
 
+  def history
+    @instances_history = current_user.instances.where(state: ['complete', 'abort'])
+  end
+
   def show
     @mission = @instance.mission
     @members = @instance.members
 
     if @instance.state == "teaming"
-      # binding.pry
+      
       # 篩選使用者 & 列出所有可被邀請的使用者
-      # binding.pry
       @filterrific = initialize_filterrific(
             User,
             params[:filterrific],
@@ -84,7 +87,7 @@ class InstancesController < ApplicationController
       if !@instance.answer.strip.empty?
         flash[:notice] = "任務完成！"
         # 更改instance狀態
-        
+
         @instance.complete!(current_user)
         redirect_to instance_path(@instance)
       else

@@ -11,6 +11,7 @@
               <%= image_tag @user.avatar_url, class: "img-thumbnail rounded-circle w-100" if @user.avatar_url %>
               <% if @user != current_user %>
                 <%= render partial: "shared/follow", locals: {user: @user} %>
+                <%= link_to "一起組隊", teaming_missions_path(user_id: @user.id), class: "btn btn-primary" %>
               <%end%>
           </div>
           <div class="col-sm-8">

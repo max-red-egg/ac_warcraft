@@ -10,13 +10,41 @@
       <div class= row>
         <%= render 'user_nav' %>
       </div>
-      <div class="row">
-        <% @users.each do |user| %>
-          <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-            <%= render partial:"shared/user_card" , locals: {user: user} %>
+      <% if @tag == 'all' %>
+        <div class="row mb-4 ">
+          <div class="col bg-light card mx-3">
+            <%= form_for_filterrific @filterrific do |f| %>
+            <div class="form-row card-body">
+                <div class="col-md-3 form-group" data-intro="Search by name or email." data-position="top">
+                  <label>Search</label>
+                  <%= f.text_field :search_query, class: "form-control" %>
+                </div>
+
+                <div class="form-group col-md-3" >
+                  <label>Gender</label>
+                  <%= f.select(:with_gender, @filterrific.select_options[:with_gender],
+                    { include_blank: '- 不限 -' }, {class: "form-control"}
+                  ) %>
+                </div>
+
+                <div class="form-group col-md-3" >
+                  <label>Level</label>
+                  <%= f.select(:range_level, @filterrific.select_options[:range_level],
+                    { include_blank: '- 不限 -' }, {class: "form-control"}
+                  ) %>
+                </div>
+
+                <div class="form-group col-md-3" >
+                  <label>Sorted by</label>
+                  <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by],{}, {class: "form-control"} ) %>
+                </div>
+              </div>
+              <%= render_filterrific_spinner %>
+            <% end %>
           </div>
-        <%end%>
-      </div>
+        </div>
+      <% end %>
+      <%= render( partial: 'users_list', locals: { users: @users } ) %>
       <%= paginate @users %>
     </div>
   </div>
