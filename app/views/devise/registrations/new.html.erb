@@ -1,29 +1,48 @@
-<h2>Sign up</h2>
+<div class="block-center mt-4 wd-xl">
+   <div class="card card-flat">
+      <div class="card-header text-center bg-success">
+        加入組織？請填寫申請書
+      </div>
+      <div class="card-body">
+        <p class="text-center py-2">註冊後繼續</p>
+        <p><%= devise_error_messages! %></p>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'mb-3'}) do |f| %>
+          <div class="form-group">
+            <div class="input-group with-focus">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", required: true, class: "form-control border-right-0"%>
+              <div class="input-group-append">
+                 <span class="input-group-text fa fa-envelope text-muted bg-transparent border-left-0"></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group with-focus">
+              <%= f.password_field :password, autocomplete: "off", placeholder: "密碼", required: true, class: "form-control border-right-0" %>
+              <div class="input-group-append">
+                <span class="input-group-text fa fa-lock text-muted bg-transparent border-left-0"></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group with-focus">
+              <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "再次輸入密碼", required: true, class: "form-control border-right-0" %>
+              <div class="input-group-append">
+                <span class="input-group-text fa fa-lock text-muted bg-transparent border-left-0"></span>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix">
+          </div>
+            <%= f.submit "註冊", class: "btn btn-block btn-primary mt-3" %>
+            <%- if devise_mapping.omniauthable? %>
+              <%- resource_class.omniauth_providers.each do |provider| %>
+                <%= link_to "使用 #{OmniAuth::Utils.camelize(provider)} 註冊", omniauth_authorize_path(resource_name, provider), class: "btn btn-block btn-success mt-3" %>
+              <% end -%>
+            <% end -%>
+         <% end %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+         <%= render "devise/shared/links" %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+      </div>
+   </div>
+</div>
