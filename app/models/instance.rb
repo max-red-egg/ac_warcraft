@@ -171,6 +171,8 @@ class Instance < ApplicationRecord
     # complete: modifier
     if(self.modifier)
       return_actor = modifier
+    else
+      return_actor = User.find_by(email: 'admin@admin.com')
     end
     return_actor
   end

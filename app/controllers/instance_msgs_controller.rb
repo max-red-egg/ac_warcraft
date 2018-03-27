@@ -1,6 +1,6 @@
 class InstanceMsgsController < ApplicationController
-    before_action :authenticate_user!
-  
+  before_action :authenticate_user!
+    
   def create
     # 新增副本的留言
     instance = Instance.find(params[:instance_id])
