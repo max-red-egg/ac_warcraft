@@ -27,7 +27,7 @@
     <% if request.referrer == missions_url %>
       <div class="modal-footer">
         <div class="mx-auto">
-        <%= render partial:"challenge" , locals: {mission: @mission} %>
+          <%= challenge_button(@mission) %>
         </div>
       </div>
     <% end %>
