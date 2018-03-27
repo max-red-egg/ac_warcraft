@@ -6,7 +6,7 @@ class CanInviteUserForMissionFromUsersListTest < ActionDispatch::IntegrationTest
     @admin = users(:admin)
     @user = users(:user)
     @user1 = users(:user_1)
-    @mission_high = missions(:mission1)
+    @mission_high = missions(:mission6)
     @mission_low = missions(:mission5)
   end
 
@@ -15,6 +15,7 @@ class CanInviteUserForMissionFromUsersListTest < ActionDispatch::IntegrationTest
     sign_in @user
     get teaming_missions_path(user_id: @admin.id)
     assert_response :success
+    # binding.pry
     assert_no_match @mission_high.name, response.body
     assert_match @mission_low.name, response.body
   end
