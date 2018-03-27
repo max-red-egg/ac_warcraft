@@ -1,5 +1,6 @@
 class Instance < ApplicationRecord
   after_commit :setup_state!
+  after_commit :create_notifications
   has_many :user_instances, dependent: :destroy
 
   #instance.members 表示此副本的所有成員
@@ -20,6 +21,10 @@ class Instance < ApplicationRecord
   scope :find_complete ,-> {
     where(state: 'complete')
   }
+
+  def update_answer!(ans_params,user)
+    self.update!(answer: ans_params[:answer], modifier: user)
+  end
 
 
   # ::instance method:: 任務副本instance完成
@@ -134,6 +139,68 @@ class Instance < ApplicationRecord
   def remaining_invitations_count
     self.mission.invitation_number - self.inviting_invitations.count
   end
+
+  def recipients
+    # in_progress 有 save和沒save的狀況：
+    #   save:除了自己的所有人
+    # abort 
+    #   除了自己的所有人
+    # complete
+    #   所有人
+    return_recipients = []
+    return_recipients += self.members
+    case self.state
+    when 'in_progress'
+      if self.modifier
+        return_recipients.delete(self.modifier)
+      end
+    when 'abort'
+      return_recipients.delete(self.modifier)
+    end
+
+    return_recipients
+  end
+
+  def actor
+    return_actor = self.members.first
+    #第一個member 通常是發起者
+
+    # in_progress 有 save和沒save的狀況
+    #  save: modifier
+    # abort: modifier
+    # complete: modifier
+    if(self.modifier)
+      return_actor = modifier
+    end
+    return_actor
+  end
+
+  def create_notifications
+    # 通知
+    # in_progress 有 save和沒save的狀況
+    # abort 
+    # complete
+    action = self.state
+    if action == 'in_progress' ||action == 'abort' || action == 'complete'
+      if self.modifier && action == 'in_progress' # save的狀況
+        action = 'update_answer'
+      end
+      if self.members.count >1 
+        recipients.each do |recipient|
+          Notification.create(recipient: recipient, actor: actor,
+            action: action, notifiable: self)
+      end
+    end
+
+  end
+
+
+
+
+  end
+
+
+
 
   private
   # ::instance method:: 自動設定任務副本instance狀態

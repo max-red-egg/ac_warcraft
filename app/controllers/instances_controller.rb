@@ -66,15 +66,15 @@ class InstancesController < ApplicationController
 
   def save
     if @instance.state == "in_progress"
-      @instance.update!(submit_params)
-
-      @instance.modifier = current_user
-      @instance.save  #儲存答案的使用者  
-
+      @instance.update_answer!(submit_params,current_user)
+    else
+      flash[:alert] = "存取禁止"
+      redirect_back(fallback_location: root_path)
     end
+
   end
   def edit
-
+    render :edit
   end
 
   def submit
