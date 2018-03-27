@@ -83,7 +83,7 @@ namespace :dev do
     missions = Mission.all
     list = ['Rails, Ruby','JavaScript, CSS','python','node.js','HTML, CSS','JavaScript', 'node.js, vue.js','php','php, css']
     missions.each do |mission|
-      mission.tag_list.add list.sample
+      mission.tag_list = list.sample
       mission.save
       puts mission.tag_list
     end

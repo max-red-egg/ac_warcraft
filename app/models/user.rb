@@ -44,7 +44,6 @@ class User < ApplicationRecord
       :range_level
     ]
   )
-
   scope :can_be_invited, ->(instance){
     where('level >= ? AND available = ?',instance.mission.level,true
       ).where.not(

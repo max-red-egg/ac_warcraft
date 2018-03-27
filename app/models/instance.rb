@@ -162,15 +162,14 @@ class Instance < ApplicationRecord
   end
 
   def actor
-    return_actor = self.members.first
-    #第一個member 通常是發起者
-
     # in_progress 有 save和沒save的狀況
     #  save: modifier
     # abort: modifier
     # complete: modifier
     if(self.modifier)
       return_actor = modifier
+    else
+      return_actor = User.find_by(email: 'admin@admin.com')
     end
     return_actor
   end
