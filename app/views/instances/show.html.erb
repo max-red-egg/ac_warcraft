@@ -5,26 +5,26 @@
   <div class="section-container">
     <div class="content-wrapper">
       <div class="content-heading">
-        <h3><%= instance_title(@instance) %><span class="ml-3"><%= abort_button(@instance) %><%= cancel_button(@instance) %></span></h3>
+        <h3><%= @instance.mission.name %> <%= instance_title(@instance) %><span class="ml-3"><%= abort_button(@instance) %><%= cancel_button(@instance) %></span></h3>
       </div>
-      <%= render partial:'mission_info', locals: {mission: @mission} %>
-
-      <% case @instance.state %>
-        <% when "teaming" %>
-          <%= render partial:'/instances/state/teaming' %>
-        <% when "in_progress" %>
-          <%= render partial:'/instances/state/in_progress' %>
-        <% when "complete" %>
-          <%= render partial:'/instances/state/complete' %>
-        <% when "abort" %>
-          <%= render partial:'/instances/state/abort' %>
-      <% end %>
-
-      <%= render partial: 'leave_review' if @instance.state == 'complete' || @instance.state == 'abort'%>
-
-      <div class="row my-5">
-        <div class="col">
-          <p class="text-center"><%= link_to "回任務列表", instances_path, class:"btn btn-secondary "%></p>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-8">
+            <% case @instance.state %>
+              <% when "teaming" %>
+                <%= render partial:'/instances/state/teaming' %>
+              <% when "in_progress" %>
+                <%= render partial:'/instances/state/in_progress' %>
+              <% when "complete" %>
+                <%= render partial:'/instances/state/complete' %>
+              <% when "abort" %>
+                <%= render partial:'/instances/state/abort' %>
+            <% end %>
+          </div>
+          <div class="col-xl-4">
+            <%= render partial: 'leave_review' if @instance.state == 'complete' || @instance.state == 'abort'%>
+            <%= render partial:'mission_info', locals: {mission: @mission} %>
+          </div>
         </div>
       </div>
     </div>
