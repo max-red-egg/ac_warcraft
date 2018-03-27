@@ -1,7 +1,7 @@
-<h3>已經送出邀請</h3>
+<h4>正在邀請</h4>
 <div class="row mt-3">
   <% @invitations.each do |invitation| %>
-    <div class="col-4 col-xl-3 text-center mb-3">
+    <div class="col-4 col-md-3 col-lg-2 text-center mb-3">
       <%= render partial:"shared/user_head" , locals: {user: invitation.invitee} %>
       <%= link_to fa_icon("comments"), invitation_path(invitation), remote: true, class: 'btn btn-primary btn-sm' %>
       <%= link_to '取消', cancel_invitation_path(invitation), remote: true, data: { disable_with: '...' }, method: :post, class: 'btn btn-danger btn-sm' %>

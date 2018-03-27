@@ -1,22 +1,33 @@
-<h1>評價</h1>
-<% @reviews_to_other.each do |review| %>
-  <% if review.submit? %>
-    <h3>你對<%=review.reviewee.name%>的評價</h3>
-    <%= review.comment %>
-  <% else %>
-    <h3>關於這次的任務，你覺得<%= review.reviewee.name %> ...</h3>
-    <%= simple_form_for review, url: submit_review_path(review) do |f| %>
-      <%= f.input :comment, label: false, placeholder:'評價一下吧...'%>
-      <%= f.button :submit, '送出', class:"btn btn-primary" %>
+<div class="card b">
+  <div class="card-body bb">
+    <div class="clearfix">
+      <div class="float-left">
+        <h4>評價</h4>
+      </div>
+    </div>
+  </div>
+  <div class="card-body bb">
+    <% @reviews_to_other.each do |review| %>
+      <% if review.submit? %>
+        <h4>你對<%=review.reviewee.name%>的評價</h4>
+        <%= review.comment %>
+      <% else %>
+        <h4>關於這次的任務，你覺得<%= review.reviewee.name %> ...</h4>
+        <%= simple_form_for review, url: submit_review_path(review) do |f| %>
+          <%= f.input :comment, label: false, placeholder:'評價一下吧...'%>
+          <%= f.button :submit, '送出', class:"btn btn-primary" %>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-<% end %>
-    
-<h3>其他人對你的評價：</h3>
-<ul>
-  <% @reviews.each do |review| %>
-    <li>
-      <%= review.reviewer.name %> 說：<%= review.comment %>
-    </li>
-  <%end%>    
-</ul>
+  </div>
+  <div class="card-body bb">
+    <h4>其他人對你的評價：</h4>
+    <ul>
+      <% @reviews.each do |review| %>
+        <li>
+          <%= review.reviewer.name %> 說：<%= review.comment %>
+        </li>
+      <%end%>
+    </ul>
+  </div>
+</div>

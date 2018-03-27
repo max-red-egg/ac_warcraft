@@ -1,17 +1,24 @@
-<div class="row mb-4">
-  <div class="col-md-6">
-    <%= render partial: "member_list", locals:{members: @members} %>
+<div class="card b">
+  <div class="card-body bb">
+    <div class="row">
+      <div class="col-12">
+        <%= render partial: "member_list", locals:{members: @members} %>
+      </div>
+    </div>
+  </div>
+  <div class="card-body bb">
+    <div class="row mb-4">
+      <div class="col-12">
+        <h4>任務成果</h4><div class="info d-inline float-right">
+          <small><em><%=@instance.modifier.name%> 於 <%= @instance.updated_at%> 提交了任務</em></small>
+        </div>
+      </div>
+      <div class="col-12">
+        <%= @instance.answer %>
+      </div>
+    </div>
+  </div>
+  <div class="card-body bb">
+    <%= render partial:'msgs_board' %>
   </div>
 </div>
-
-<div class="row mb-4">
-  <div class="col-12">
-    <h3>任務成果</h3><div class="info d-inline float-right"><small><em><%=@instance.modifier.name%> 於 <%= @instance.updated_at%> 提交了任務</em></div>
-  </div>
-  <div class="col-12">
-    <%= @instance.answer %>
-  </div>
-  
-</div>
-
-<%= render partial:'msgs_board' %>
