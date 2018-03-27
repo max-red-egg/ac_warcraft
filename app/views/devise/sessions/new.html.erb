@@ -1,26 +1,48 @@
-<h2>Log in</h2>
+<div class="block-center mt-4 wd-xl">
+   <div class="card card-flat">
+      <div class="card-header text-center bg-success">
+        下班了嗎？請驗證你的身份
+      </div>
+      <div class="card-body">
+        <p class="text-center py-2">登入後繼續</p>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'mb-3'}) do |f| %>
+          <div class="form-group">
+            <div class="input-group with-focus">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "輸入 email", required: true, class: "form-control border-right-0"%>
+              <div class="input-group-append">
+                 <span class="input-group-text fa fa-envelope text-muted bg-transparent border-left-0"></span>
+            </div>
+          </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group with-focus">
+              <%= f.password_field :password, autocomplete: "off", placeholder: "輸入密碼", required: true, class: "form-control border-right-0" %>
+              <div class="input-group-append">
+                <span class="input-group-text fa fa-lock text-muted bg-transparent border-left-0"></span>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix">
+            <div class="checkbox c-checkbox float-left mt-0">
+              <label>
+                <%= f.check_box :remember_me %>
+                <span class="fa fa-check"></span>記住我</label>
+            </div>
+            <div class="float-right">
+              <%= link_to "忘記密碼?", new_password_path(resource_name), class: "text-muted"  %>
+            </div>
+          </div>
+            <%= f.submit "登入", class: "btn btn-block btn-primary mt-3" %>
+            <%- if devise_mapping.omniauthable? %>
+              <%- resource_class.omniauth_providers.each do |provider| %>
+                <%= link_to "使用 #{OmniAuth::Utils.camelize(provider)} 登入", omniauth_authorize_path(resource_name, provider), class: "btn btn-block btn-success mt-3" %>
+              <% end -%>
+            <% end -%>
+         <% end %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+         <%= render "devise/shared/links" %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+      </div>
+   </div>
+</div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

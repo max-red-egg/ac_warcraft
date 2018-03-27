@@ -1,21 +1,57 @@
-<div class="row mb-4">
-  <div class="col-12">
-    <h3>任務詳情</h3>
-  </div>
-  <div class="col-12 my-2">
-    <div class="card" >
-      <div class="row">
-        <div class="col-4 pr-0">
-          <div class="card-body h-100 card-img-left" style="background-image: url(<%= mission.image_url %>);" ></div>
-        </div>
-        <div class="col-8 pl-0">
-          <div class="card-body">
-            <h5 class="card-title"><%= mission.name %></h5>
-            <p class="card-text"><span class="badge badge-success">Level <%= mission.level %></span> <span class="badge badge-success">Team# <%= mission.participant_number %></span> <span class="badge badge-info">XP+ <%= @instance.xp %></span></p>
-            <p class="card-text"><%= mission.description %></p>
-          </div>
-        </div>
+<div class="card b">
+  <div class="card-body bb">
+    <div class="clearfix">
+      <div class="float-left">
+        <h4><%= mission.name %></h4>
+        <ul class="list-inline my-2">
+          <% mission.tag_list.each do |tag| %>
+            <li class="list-inline-item">
+              <div class="badge px-2 bg-warning"><%= tag %></div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="float-right">
+        <button class="btn btn-danger btn-oval" type="button">Cancel</button>
       </div>
     </div>
   </div>
+  <div class="card-body bb">
+    <%= image_tag mission.image_url, class: "rounded img-fluid my-3" %>
+    <p><%= mission.description %></p>
+  </div>
+  <div class="card-body">
+    <div class="d-flex align-items-center">
+      <div class="w-100">
+        <div class="progress progress-xs m-0">
+          <div class="progress-bar bg-info" style="width:50%;"></div>
+        </div>
+      </div>
+      <div class="wd-xxs text-right">
+        <div class="text-bold text-muted">50%</div>
+      </div>
+    </div>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <strong>Level</strong>
+        </td>
+        <td><%= mission.level %></td>
+      </tr>
+      <tr>
+        <td>
+          <strong>任務人數</strong>
+        </td>
+        <td><%= mission.participant_number %></td>
+      </tr>
+      <tr>
+        <td>
+          <strong>XP</strong>
+        </td>
+        <td><%= @instance.xp %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

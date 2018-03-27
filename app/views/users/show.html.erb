@@ -7,130 +7,132 @@
       <div class="content-heading">
         <h3>探員檔案</h3>
       </div>
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="card card-default">
-            <div class="card-body text-center">
-              <div class="py-4">
-                <%= gravatar_for(@user, "img-fluid rounded-circle img-thumbnail thumb96") %>
-              </div>
-              <h3 class="m-0 text-bold"><%= @user.name %></h3>
-              <div class="my-3">
-                <p><%= @user.description %></p>
-              </div>
-            </div>
-            <div class="card-body bt text-center">
-              <div class="row">
-                <div class="col-4 br">
-                  <strong class="text-primary">Level</strong><br>
-                  <strong><%= @user.level %></strong>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card card-default">
+              <div class="card-body text-center">
+                <div class="py-4">
+                  <%= gravatar_for(@user, "img-fluid rounded-circle img-thumbnail thumb96") %>
                 </div>
-                <div class="col-4 br">
-                  <strong class="text-success">XP</strong><br>
-                  <strong><%= @user.xp %></strong>
-                </div>
-                <div class="col-4">
-                  <strong class="text-purple">邀請狀態</strong><br>
-                  <strong><%= transcript_user_state(@user.available) %></strong>
+                <h3 class="m-0 text-bold"><%= @user.name %></h3>
+                <div class="my-3">
+                  <p><%= @user.description %></p>
                 </div>
               </div>
-            </div>
-              <div class="card-body bt">
+              <div class="card-body bt text-center">
                 <div class="row">
-                  <div class="col-12 text-center">
-                    <% if @user == current_user %>
-                      <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-success" %>
-                    <% else %>
-                      <%= render partial: "shared/follow", locals: {user: @user} %>
-                      <%= link_to "邀請組隊", teaming_missions_path(user_id: @user.id), class: "btn btn-success" %>
-                    <% end %>
+                  <div class="col-4 br">
+                    <strong class="text-primary">Level</strong><br>
+                    <strong><%= @user.level %></strong>
+                  </div>
+                  <div class="col-4 br">
+                    <strong class="text-success">XP</strong><br>
+                    <strong><%= @user.xp %></strong>
+                  </div>
+                  <div class="col-4">
+                    <strong class="text-purple">邀請狀態</strong><br>
+                    <strong><%= transcript_user_state(@user.available) %></strong>
                   </div>
                 </div>
               </div>
-          </div>
-          <div class="card card-default d-none d-lg-block">
-            <div class="card-header">
-              <div class="card-title text-center">近期追蹤的探員</div>
-            </div>
-            <div class="card-body">
-              <% @followings.each do |following| %>
-                <div class="media">
-                  <%= image_tag following.avatar_url, class: "align-self-center mr-2 rounded-circle img-thumbnail thumb48" if following.avatar_url %>
-                  <div class="media-body py-2">
-                    <div class="text-bold"><%= following.name %>
-                      <div class="text-sm text-muted"><%= truncate(following.description, length: 80) %></div>
+                <div class="card-body bt">
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <% if @user == current_user %>
+                        <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-success" %>
+                      <% else %>
+                        <%= render partial: "shared/follow", locals: {user: @user} %>
+                        <%= link_to "邀請組隊", teaming_missions_path(user_id: @user.id), class: "btn btn-success" %>
+                      <% end %>
                     </div>
                   </div>
                 </div>
-              <% end %>
             </div>
-          </div>
-        </div>
-        <div class="col-lg-8">
-          <div class="card card-default">
-            <div class="card-header d-flex align-items-center">
-              <div class="d-flex justify-content-center col">
-                <div class="h4 m-0 text-center">獲得的評價</div>
+            <div class="card card-default d-none d-lg-block">
+              <div class="card-header">
+                <div class="card-title text-center">近期追蹤的探員</div>
               </div>
-            </div>
-            <div class="card-body">
-              <div class="row p-3 justify-content-center">
-                <% @reviews.each do |review| %>
-                  <div class="card col-12 bg-light">
-                    <div class="table-responsive">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td class="b0 wd-xs d-none d-md-table-cell text-center">
-                              <%= link_to user_path(review.reviewer), remote: true do %>
-                                <%= image_tag review.reviewer.avatar_url, class: "img-fluid rounded-circle img-thumbnail " %>
-                                <span><%= review.reviewer.name %></span>
-                              <% end %>
-                            </td>
-                            <td class="b0">
-                              <p class="h4 mt-0">
-                                <a href="#"><%= link_to review.instance.mission.name ,mission_path(review.instance.mission), remote: true %></a>
-                                <span class="rounded badge bg-gray px-2 mr-2 text-sm d-none d-lg-inline text-muted">
-                                <span class="text-muted">Mission <%= review.instance.state %></span>
-                                </span>
-                              </p>
-                              <div><%= review.comment %></div>
-                              <div class="text-muted mt-1"> - <%= time_ago_in_words(review.updated_at) + ' ago' %></div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                <%end%>
-              </div>
-            </div>
-          </div>
-          <div class="card card-default">
-            <div class="card-header d-flex align-items-center">
-              <div class="d-flex justify-content-center col">
-                <div class="h4 m-0 text-center">執行過的任務</div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="row py-4 justify-content-center">
-                <% @missions.each  do|mission| %>
-                  <div class="col-6 col-sm-4 col-xl-3">
-                    <div class="card border-dark">
-                      <div class="card-body text-center">
-                        <p class="mb-3">
-                          <%= link_to mission_path(mission), remote: true do%>
-                            <%= image_tag mission.image_url, class: "rounded thumb96"%>
-                          <% end %>
-                        </p>
-                        <p class="m-0">
-                          <strong><%= mission.name %></strong><br>
-                          <span>L<%= mission.level %> / Team <%= mission.participant_number %></span>
-                        </p>
+              <div class="card-body">
+                <% @followings.each do |following| %>
+                  <div class="media">
+                    <%= image_tag following.avatar_url, class: "align-self-center mr-2 rounded-circle img-thumbnail thumb48" if following.avatar_url %>
+                    <div class="media-body py-2">
+                      <div class="text-bold"><%= following.name %>
+                        <div class="text-sm text-muted"><%= truncate(following.description, length: 80) %></div>
                       </div>
                     </div>
                   </div>
                 <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card card-default">
+              <div class="card-header d-flex align-items-center">
+                <div class="d-flex justify-content-center col">
+                  <div class="h4 m-0 text-center">獲得的評價</div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row p-3 justify-content-center">
+                  <% @reviews.each do |review| %>
+                    <div class="card col-12 bg-light">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <tbody>
+                            <tr>
+                              <td class="b0 wd-xs d-none d-md-table-cell text-center">
+                                <%= link_to user_path(review.reviewer), remote: true do %>
+                                  <%= image_tag review.reviewer.avatar_url, class: "img-fluid rounded-circle img-thumbnail " %>
+                                  <span><%= review.reviewer.name %></span>
+                                <% end %>
+                              </td>
+                              <td class="b0">
+                                <p class="h4 mt-0">
+                                  <a href="#"><%= link_to review.instance.mission.name ,mission_path(review.instance.mission), remote: true %></a>
+                                  <span class="rounded badge bg-gray px-2 mr-2 text-sm d-none d-lg-inline text-muted">
+                                  <span class="text-muted">Mission <%= review.instance.state %></span>
+                                  </span>
+                                </p>
+                                <div><%= review.comment %></div>
+                                <div class="text-muted mt-1"> - <%= time_ago_in_words(review.updated_at) + '前' %></div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  <%end%>
+                </div>
+              </div>
+            </div>
+            <div class="card card-default">
+              <div class="card-header d-flex align-items-center">
+                <div class="d-flex justify-content-center col">
+                  <div class="h4 m-0 text-center">執行過的任務</div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row py-4 justify-content-center">
+                  <% @missions.each  do|mission| %>
+                    <div class="col-6 col-sm-4 col-xl-3">
+                      <div class="card border-dark">
+                        <div class="card-body text-center">
+                          <p class="mb-3">
+                            <%= link_to mission_path(mission), remote: true do%>
+                              <%= image_tag mission.image_url, class: "rounded thumb96"%>
+                            <% end %>
+                          </p>
+                          <p class="m-0">
+                            <strong><%= mission.name %></strong><br>
+                            <span>L<%= mission.level %> / Team <%= mission.participant_number %></span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
