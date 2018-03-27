@@ -2,12 +2,15 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'instances/index'
   end
-  namespace :admin do
-  end
+
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root "missions#my_mission"
+  authenticated :user do
+    root "missions#my_mission"
+  end
+
+  root 'public#landing'
 
   resources :notifications do
     collection do
@@ -15,7 +18,7 @@ Rails.application.routes.draw do
       post :mark_as_read_all
     end
     member do
-      post :mark_as_read      
+      post :mark_as_read
     end
   end
   resources :invitations, only: [:index, :show] do
@@ -48,7 +51,7 @@ Rails.application.routes.draw do
     member do
       get :my_mission
       post :challenge
-      
+
       get :select_user
       # POST challenge_mission_path 挑戰本任務
     end
