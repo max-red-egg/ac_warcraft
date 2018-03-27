@@ -8,6 +8,21 @@ class InviteMsg < ApplicationRecord
   end
 
   def create_notifications
+    #找到尚未閱讀的通知並刪除
+    #太多訊息會很煩
+    invitation_temp =  self.invitation
+    invite_msgs = invitation_temp.invite_msgs
+    if invite_msgs.count > 1
+      msg_id = invitation_temp.invite_msgs.last(2)[0].id
+    end
+    remove_notification = Notification.find_by(actor_id: self.user_id, notifiable_type:"InviteMsg", notifiable_id: msg_id)
+    if remove_notification
+      puts "delete"
+      remove_notification.delete
+    end
+
+    #byebug
+    #remove_notifications.destroy_all
     Notification.create(recipient: recipient, actor: self.user,
         action: 'send_msg', notifiable: self)
   end

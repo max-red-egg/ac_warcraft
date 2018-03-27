@@ -2,11 +2,11 @@
   <%= link_to invitation_path(notification.notifiable.invitation), id: notification.id do %>
   <div class="media">
     <div class="align-self-start mr-2">
-      <em class="fa fa-envelope fa-2x text-warning"></em>
+      <div class="notification-avatar"><%= image_tag avatar , class: 'rounded-circle img-fluid'%></div>
     </div>
     <div class="media-body">
       <p class="m-0"><%= title %></p>
-      <p class="m-0 text-muted text-sm"><%=content%></p>
+      <p class="m-0 notification-item-content"><strong><%=content%></strong><small class = "text-muted ml-2"> <em><%= time_ago_in_words notification.created_at %> ago</em></small></p>
     </div>
   </div>
   <%end%>

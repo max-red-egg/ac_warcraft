@@ -1,62 +1,62 @@
-// TRANSLATION
-// -----------------------------------
+// // TRANSLATION
+// // -----------------------------------
 
-(function(window, document, $, undefined) {
+// (function(window, document, $, undefined) {
 
-    var preferredLang = 'en';
-    var pathPrefix = 'server/i18n'; // folder of json files
-    var packName = 'site';
-    var storageKey = 'jq-appLang';
+//     var preferredLang = 'en';
+//     var pathPrefix = 'server/i18n'; // folder of json files
+//     var packName = 'site';
+//     var storageKey = 'jq-appLang';
 
-    $(function() {
+//     $(function() {
 
-        if (!$.fn.localize) return;
+//         if (!$.fn.localize) return;
 
-        // detect saved language or use default
-        var currLang = $.localStorage.get(storageKey) || preferredLang;
-        // set initial options
-        var opts = {
-            language: currLang,
-            pathPrefix: pathPrefix,
-            callback: function(data, defaultCallback) {
-                $.localStorage.set(storageKey, currLang); // save the language
-                defaultCallback(data);
-            }
-        };
+//         // detect saved language or use default
+//         var currLang = $.localStorage.get(storageKey) || preferredLang;
+//         // set initial options
+//         var opts = {
+//             language: currLang,
+//             pathPrefix: pathPrefix,
+//             callback: function(data, defaultCallback) {
+//                 $.localStorage.set(storageKey, currLang); // save the language
+//                 defaultCallback(data);
+//             }
+//         };
 
-        // Set initial language
-        setLanguage(opts);
+//         // Set initial language
+//         setLanguage(opts);
 
-        // Listen for changes
-        $('[data-set-lang]').on('click', function() {
+//         // Listen for changes
+//         $('[data-set-lang]').on('click', function() {
 
-            currLang = $(this).data('setLang');
+//             currLang = $(this).data('setLang');
 
-            if (currLang) {
+//             if (currLang) {
 
-                opts.language = currLang;
+//                 opts.language = currLang;
 
-                setLanguage(opts);
+//                 setLanguage(opts);
 
-                activateDropdown($(this));
-            }
+//                 activateDropdown($(this));
+//             }
 
-        });
+//         });
 
 
-        function setLanguage(options) {
-            $("[data-localize]").localize(packName, options);
-        }
+//         function setLanguage(options) {
+//             $("[data-localize]").localize(packName, options);
+//         }
 
-        // Set the current clicked text as the active dropdown text
-        function activateDropdown(elem) {
-            var menu = elem.parents('.dropdown-menu');
-            if (menu.length) {
-                var toggle = menu.prev('button, a');
-                toggle.text(elem.text());
-            }
-        }
+//         // Set the current clicked text as the active dropdown text
+//         function activateDropdown(elem) {
+//             var menu = elem.parents('.dropdown-menu');
+//             if (menu.length) {
+//                 var toggle = menu.prev('button, a');
+//                 toggle.text(elem.text());
+//             }
+//         }
 
-    });
+//     });
 
-})(window, document, window.jQuery);
+// })(window, document, window.jQuery);
