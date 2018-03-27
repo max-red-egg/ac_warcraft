@@ -26,7 +26,7 @@
     <ul class="navbar-nav flex-row">
       <% if current_user %>
         <li class="nav-item">
-          <%= link_to "管理後台", admin_root_path, class: "bg-inverse-dark nav-link" if current_user.admin? %>
+          <%= link_to "管理後台", admin_root_path, class: "bg-green-dark nav-link" if current_user.admin? %>
         </li>
         <!-- START notification menu-->
         <li class="nav-item dropdown dropdown-list" data-behavior = 'notifications' >

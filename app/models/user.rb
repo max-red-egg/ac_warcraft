@@ -153,6 +153,16 @@ class User < ApplicationRecord
     missions = self.missions.where('instances.state = ? ', 'in_progress')
   end
 
+  #正在進行中的副本
+  def instances_in_progress
+    instances = self.instances.where(state: 'in_progress')
+  end
+
+  #正在進行中的副本
+  def instances_teaming
+    instances = self.instances.where(state: 'teaming')
+  end
+
   def was_declined?(instance)
     instance.invitations.where('invitations.invitee_id = ? AND invitations.state = ?', self, 'decline').present?
   end

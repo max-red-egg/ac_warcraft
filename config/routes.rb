@@ -29,16 +29,16 @@ Rails.application.routes.draw do
   resources :instances, only: [:index, :show,:edit] do
     member do
       post :submit
-      patch :submit
-      #任務完成，提交答案
+      patch :submit  #任務完成，提交答案
       post :save
-
-      post :cancel
-      #取消組隊
-      post :abort
-      #放棄任務
-
+      post :cancel   #取消組隊
+      post :abort    #放棄任務
     end
+
+    collection do
+      get :history
+    end
+
     resources :instance_msgs, only: [:create]
   end
 
@@ -59,9 +59,9 @@ Rails.application.routes.draw do
   end
 
   resources :reviews, only: [:index, :show] do
-    member do 
+    member do
       patch :submit
-    end        
+    end
   end
 
   resources :users do
