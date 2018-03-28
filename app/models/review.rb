@@ -24,6 +24,7 @@ class Review < ApplicationRecord
   def actor
     self.reviewer
   end
+
   def create_notifications
     if self.submit
       Notification.create(recipient: recipient, actor: actor, action: 'left_review', notifiable: self)

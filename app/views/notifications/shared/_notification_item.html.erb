@@ -2,7 +2,7 @@
 
   <div class="media">
     <div class="align-self-start mr-2">
-      <div class="notification-avatar"><%= image_tag avatar , class: 'rounded-circle img-fluid'%></div>
+      <div class="notification-avatar"><%= gravatar_for(user, "rounded-circle img-fluid") %></div>
     </div>
     <div class="media-body">
       <p class="m-0 notification-item-title"><%= title %></p>

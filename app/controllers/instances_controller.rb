@@ -18,7 +18,7 @@ class InstancesController < ApplicationController
     @members = @instance.members
 
     if @instance.state == "teaming"
-      
+
       # 篩選使用者 & 列出所有可被邀請的使用者
       @filterrific = initialize_filterrific(
             User,
@@ -56,6 +56,7 @@ class InstancesController < ApplicationController
       # 組隊完成後，才可以瀏覽留言
       @instance_msgs = @instance.instance_msgs
     end
+
     if @instance.state == 'abort' || @instance.state == 'complete'
       # 完成後才可到評論頁面
       # 其他人對current_user的review

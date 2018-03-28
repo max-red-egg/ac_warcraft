@@ -5,7 +5,7 @@
   <div class="section-container">
     <div class="content-wrapper">
       <div class="content-heading">
-        <h3><%= @instance.mission.name %> <%= instance_title(@instance) %><span class="ml-3"><%= abort_button(@instance) %><%= cancel_button(@instance) %></span></h3>
+        <h3><%= @instance.mission.name %> <%= instance_title(@instance) %></h3>
       </div>
       <div class="container">
         <div class="row">
@@ -17,13 +17,15 @@
                 <%= render partial:'/instances/state/in_progress' %>
               <% when "complete" %>
                 <%= render partial:'/instances/state/complete' %>
+                <div class="text-center"><%= link_to '回任務檔案室', history_instances_path, class: 'btn bg-gray' %></div>
               <% when "abort" %>
                 <%= render partial:'/instances/state/abort' %>
+                <div class="text-center"><%= link_to '回任務檔案室', history_instances_path, class: 'btn bg-gray' %></div>
             <% end %>
           </div>
           <div class="col-xl-4">
-            <%= render partial: 'leave_review' if @instance.state == 'complete' || @instance.state == 'abort'%>
-            <%= render partial:'mission_info', locals: {mission: @mission} %>
+            <%= render partial: 'leave_review' if @mission.participant_number > 1 && (@instance.state == 'complete' || @instance.state == 'abort')%>
+            <%= render partial:'mission_info' %>
           </div>
         </div>
       </div>

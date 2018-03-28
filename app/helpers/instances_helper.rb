@@ -2,7 +2,7 @@ module InstancesHelper
   def abort_button(instance)
     if instance.present?
       if instance.state == 'in_progress'
-        link_to('放棄任務', abort_instance_path, method: :post, class: "btn btn-danger btn-sm", data: { confirm: "跟夥伴溝通過了嗎，確定要放棄任務？" })
+        link_to('放棄任務', abort_instance_path, method: :post, class: "btn btn-danger btn-oval", data: { confirm: "跟組員溝通過了嗎，確定要放棄任務？" })
       end
     end
   end
@@ -10,18 +10,27 @@ module InstancesHelper
   def cancel_button(instance)
     if instance.present?
       if instance.state == 'teaming'
-        link_to('放棄組隊', cancel_instance_path, method: :post, class: "btn btn-danger btn-sm", data: { confirm: "放棄組隊後，所有邀請函皆會失效。\n\n確定要放棄組隊？" })
+        link_to('放棄組隊', cancel_instance_path, method: :post, class: "btn btn-danger btn-oval", data: { confirm: "放棄組隊後，所有邀請函皆會失效。\n\n確定要放棄組隊？" })
       end
     end
   end
 
   def instance_title(instance)
     case instance.state
-    when 'teaming' then '夥伴招募中'
+    when 'teaming' then '組員招募中'
     when 'in_progress' then '任務進行中'
     when 'complete' then '任務已完成'
     when 'cancel' then '取消組隊'
     when 'abort' then '任務已放棄'
+    end
+  end
+
+  def transcript_instance_state(instance)
+    case instance.state
+    when 'teaming' then '組隊中'
+    when 'in_progress' then '進行中'
+    when 'complete' then '已完成'
+    when 'abort' then '已放棄'
     end
   end
 
@@ -34,15 +43,6 @@ module InstancesHelper
       else
         link_to "任務詳情", instance_path(instance), class: "btn btn-primary"
       end
-  end
-
-  def transcript_instance_state(instance)
-    case instance.state
-    when 'teaming' then '組隊中'
-    when 'in_progress' then '進行中'
-    when 'complete' then '已完成'
-    when 'abort' then '已放棄'
-    end
   end
 
   def user_already_done(instance, user)
@@ -65,6 +65,22 @@ module InstancesHelper
 
   def instance_member_names(instance)
     instance.members.map {|member| member.name }.join(", ")
+  end
+
+  def progress_num(instance)
+    if instance.state == 'teaming'
+      '25'
+    elsif instance.state == 'in_progress' && instance.answer == ''
+      '50'
+    elsif instance.state == 'in_progress' && instance.answer != ''
+      '75'
+    elsif instance.state == 'complete' && instance.reviews.where(submit: false).present?
+      '90'
+    elsif instance.state == 'complete'
+      '100'
+    else
+      '0'
+    end
   end
 
 end

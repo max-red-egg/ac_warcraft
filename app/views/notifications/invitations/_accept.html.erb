@@ -1,3 +1,3 @@
 <%= link_to invitation_path(notification.notifiable), id: notification.id, data:{behavior:'notification-item'} do %>
-  <%= render partial:"notifications/shared/notification_item", locals:{title:'同意邀請通知',content:"#{notification.actor.name} 同意你邀請的 #{notification.notifiable.instance.mission.name}任務", notification: notification, avatar: notification.actor.avatar_url} %>
+  <%= render partial:"notifications/shared/notification_item", locals:{title:'同意邀請通知',content:"#{notification.actor.name} 同意你邀請的 #{notification.notifiable.instance.mission.name}任務", notification: notification, user: notification.actor} %>
 <%end%>

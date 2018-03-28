@@ -1,33 +1,38 @@
-<div class="card b">
-  <div class="card-body bb">
+<div class="card card-default">
+  <div class="card-body bb pb-0">
     <div class="clearfix">
       <div class="float-left">
-        <h4>評價</h4>
+        <h4>任務評價</h4>
       </div>
     </div>
   </div>
   <div class="card-body bb">
     <% @reviews_to_other.each do |review| %>
       <% if review.submit? %>
-        <h4>你對<%=review.reviewee.name%>的評價</h4>
-        <%= review.comment %>
+        <h4>你對 <%=review.reviewee.name%> 的評價：</h4>
+        <p><%= review.comment %></p>
       <% else %>
-        <h4>關於這次的任務，你覺得<%= review.reviewee.name %> ...</h4>
+        <p>這次的任務，你覺得 <%= review.reviewee.name %> 的表現如何?</p>
         <%= simple_form_for review, url: submit_review_path(review) do |f| %>
-          <%= f.input :comment, label: false, placeholder:'評價一下吧...'%>
+          <%= f.input :comment, label: false, placeholder:'給個評語吧...'%>
           <%= f.button :submit, '送出', class:"btn btn-primary" %>
         <% end %>
       <% end %>
     <% end %>
   </div>
+
   <div class="card-body bb">
-    <h4>其他人對你的評價：</h4>
-    <ul>
+    <h4>組員對你的評價：</h4>
+    <% if @reviews_to_other.first.submit? %>
       <% @reviews.each do |review| %>
-        <li>
-          <%= review.reviewer.name %> 說：<%= review.comment %>
-        </li>
+        <% if review.submit? %>
+          <%= render partial: 'shared/review_card', locals:{review: review} %>
+        <% else %>
+          <p><%= review.reviewer.name %> 尚未提供評價</p>
+        <% end %>
       <%end%>
-    </ul>
+    <% else %>
+      <p>雙方皆提供評價後，才會顯示組員給你的評語喔！</p>
+    <% end %>
   </div>
 </div>
