@@ -18,6 +18,7 @@
                 </span>
               </p>
             <% end %>
+            <div><%= print_rating_stars review.rating %></div>
             <div><%= review.comment %></div>
             <div class="text-muted mt-1"> - <%= time_ago_in_words(review.updated_at) + '前' %></div>
           </td>
