@@ -17,13 +17,13 @@
                     <li class="nav-item p-2">
                       <small class="text-muted">Invitation Boxs</small>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                       <%= link_to invitations_path, class: "nav-link d-flex align-items-center" do%>
                         <em class="fa fa-fw fa-lg fa-inbox mr-2"></em>
                         <span>收到的邀請</span>
                       <% end %>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                       <%= link_to sent_index_invitations_path , class: "nav-link d-flex align-items-center" do%>
                         <em class="fa fa-fw fa-lg fa-paper-plane-o mr-2"></em>
                         <span>寄出的邀請</span>
@@ -39,14 +39,14 @@
               <div class="card-body" id="invitaions_list">
                 <table class="table table-hover mb-mails">
                   <tbody>
-                    <% @received_invitations.each do |invitation| %>
+                    <% @sent_invitations.each do |invitation| %>
                     <tr>
                       <td>
                         <div class="d-flex">
-                          <%= gravatar_for(invitation.user, "mb-mail-avatar mr-2") %>
+                          <%= gravatar_for(invitation.invitee, "mb-mail-avatar mr-2") %>
                           <div class="mb-mail-meta ml-3">
                             <div class="mb-mail-subject">
-                              <%= invitation.user.name %> 邀請你一起加入 <%= link_to invitation.instance.mission.name, mission_path(invitation.instance.mission), remote: true%> <%= cross_invite_badges(invitation) %> 任務
+                              你邀請 <%= invitation.invitee.name %> 一起加入 <%= link_to invitation.instance.mission.name, mission_path(invitation.instance.mission), remote: true%> <%= cross_invite_badges(invitation) %> 任務
                             </div>
                             <div class="mb-mail-from">
                               <span class="badge bg-green">L<%= invitation.instance.mission.level %></span>
@@ -56,7 +56,7 @@
                           </div>
                           <div class="mb-mail-date ml-auto">
                             <% if invitation.state == 'inviting' %>
-                              <%= link_to '回覆邀請', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
+                              <%= link_to '邀請對話', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
                               <% else %>
                                 <%= link_to '對話紀錄', invitation_path(invitation), remote: true, class: 'btn bg-gray' %>
                             <% end %>

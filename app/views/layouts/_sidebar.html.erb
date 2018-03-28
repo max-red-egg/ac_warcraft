@@ -82,12 +82,6 @@
       <li class="nav-heading">
         <span data-localize="sidebar.heading.HEADER">秘密通訊</span>
       </li>
-      <li class="<%= 'active' if controller?('notifications') %>">
-        <%= link_to notifications_path do %>
-          <em class="fa fa-bell"></em>
-          <span>任務通知</span>
-        <% end %>
-      </li>
       <li class="<%= 'active' if controller?('invitations') %>">
         <%= link_to invitations_path do %>
           <em class="fa fa-envelope"></em>

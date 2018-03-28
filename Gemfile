@@ -37,7 +37,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rails-i18n', '~> 5.1', '>= 5.1.1'
 
-
 gem 'pg', '~> 0.20.0'
 gem 'devise', '~> 4.2'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
@@ -57,6 +56,8 @@ gem 'pry-nav'
 gem 'acts-as-taggable-on', '~> 5.0'
 gem 'omniauth-github'
 gem 'figaro'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.3'
+gem 'simple-line-icons-rails', '~> 0.1.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

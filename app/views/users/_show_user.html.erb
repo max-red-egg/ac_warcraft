@@ -38,15 +38,5 @@
         </div>
       </div>
     </div>
-    <div class="modal-footer">
-      <div class="mx-auto">
-        <% if @user != current_user %>
-          <%= render partial: "shared/follow", locals: {user: @user} %>
-          <%= link_to "邀請組隊", teaming_missions_path(user_id: @user.id), class: "btn btn-success" %>
-        <% else %>
-          <button type="button" class="btn btn-light" data-dismiss="modal">It's Me</button>
-        <%end%>
-      </div>
-    </div>
   </div>
 </div>

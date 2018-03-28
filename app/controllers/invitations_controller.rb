@@ -1,12 +1,15 @@
 class InvitationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_invitation, except: [:index]
+  before_action :set_invitation, except: [:index, :sent_index]
   before_action :auth_invitee, only: [:accept, :decline]
   before_action :check_inviting, only: [:accept, :decline, :cancel]
 
   def index
-    @sent_invitations = Invitation.where(user_id: current_user)
-    @received_invitations = Invitation.where(invitee_id: current_user)
+    @received_invitations = Invitation.where(invitee_id: current_user).order(id: :desc)
+  end
+
+  def sent_index
+    @sent_invitations = Invitation.where(user_id: current_user).order(id: :desc)
   end
 
   def show
