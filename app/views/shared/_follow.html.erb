@@ -1,5 +1,5 @@
 <% if current_user.following?(user) %>
-  <%= link_to '停止追蹤', followship_path(user), method: :delete, class: "btn btn-danger" %>
+  <%= link_to '停止追蹤', followship_path(user), method: :delete, class: "btn btn-outline-danger" %>
 <% else %>
-  <%= link_to '開始追蹤', followships_path(following_id: user), method: :post, class: "btn btn-primary" %>
+  <%= link_to '開始追蹤', followships_path(following_id: user), method: :post, class: "btn btn-outline-primary" %>
 <% end %>
