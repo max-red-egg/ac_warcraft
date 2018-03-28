@@ -56,7 +56,7 @@
               <div class="card-body">
                 <% @followings.each do |following| %>
                   <div class="media">
-                    <%= image_tag following.avatar_url, class: "align-self-center mr-2 rounded-circle img-thumbnail thumb48" if following.avatar_url %>
+                    <%= gravatar_for(following, "align-self-center mr-2 rounded-circle img-thumbnail thumb48") %>
                     <div class="media-body py-2">
                       <div class="text-bold"><%= following.name %>
                         <div class="text-sm text-muted"><%= truncate(following.description, length: 80) %></div>
@@ -84,7 +84,7 @@
                             <tr>
                               <td class="b0 wd-xs d-none d-md-table-cell text-center">
                                 <%= link_to user_path(review.reviewer), remote: true do %>
-                                  <%= image_tag review.reviewer.avatar_url, class: "img-fluid rounded-circle img-thumbnail " %>
+                                  <%= gravatar_for(review.reviewer, "img-fluid rounded-circle img-thumbnail") %>
                                   <span><%= review.reviewer.name %></span>
                                 <% end %>
                               </td>

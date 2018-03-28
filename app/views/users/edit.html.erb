@@ -53,10 +53,14 @@
               <div class="row py-4 justify-content-center">
                 <%= simple_form_for @user ,html: { class: "form-horizontal"}  do |f| %>
                   <div class="form-group row">
-                    <div class="col-12">
-                    <%= image_tag @user.avatar_url , class: "img-fluid img-thumbnail w-50 mb-3" if @user.avatar_url %>
-                    <%= f.input :avatar, label: "更換大頭貼" %>
+                    <div class="col-12 text-center">
+                      <%= gravatar_for(@user, "img-fluid img-thumbnail w-50 mb-3") %>
+                      <p>
+                        更換照片?<br>
+                        (本站採用 <a href='https://zh-tw.gravatar.com/' target='_blank'>Gravatar</a> 頭像系統)
+                      </p>
                     </div>
+
                   </div>
                   <div class="form-group row">
                     <div class="col-12">

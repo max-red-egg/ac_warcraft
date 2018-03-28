@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col text-center">
       <%= link_to user_path(user), remote: true do%>
-        <%= gravatar_for(@user, "img-thumbnail rounded-circle thumb80")  %><br>
+        <%= gravatar_for(user, "img-thumbnail rounded-circle thumb80")  %><br>
       <% end %>
       <span><%= link_to user.name, user_path(user), remote: true %></span>
     </div>
