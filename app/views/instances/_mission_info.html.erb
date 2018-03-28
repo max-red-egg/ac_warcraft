@@ -2,9 +2,9 @@
   <div class="card-body bb">
     <div class="clearfix">
       <div class="float-left">
-        <h4><%= mission.name %></h4>
+        <h4><%= @mission.name %></h4>
         <ul class="list-inline my-2">
-          <% mission.tag_list.each do |tag| %>
+          <% @mission.tag_list.each do |tag| %>
             <li class="list-inline-item">
               <div class="badge px-2 bg-warning"><%= tag %></div>
             </li>
@@ -12,23 +12,24 @@
         </ul>
       </div>
       <div class="float-right">
-        <button class="btn btn-danger btn-oval" type="button">Cancel</button>
+        <%= abort_button(@instance) %><%= cancel_button(@instance) %>
       </div>
     </div>
   </div>
   <div class="card-body bb">
-    <%= image_tag mission.image_url, class: "rounded img-fluid my-3" %>
-    <p><%= mission.description %></p>
+    <%= image_tag @mission.image_url, class: "rounded img-fluid my-3" %>
+    <p><%= @mission.description %></p>
   </div>
   <div class="card-body">
+    <p ><strong>任務進度<strong></p>
     <div class="d-flex align-items-center">
       <div class="w-100">
         <div class="progress progress-xs m-0">
-          <div class="progress-bar bg-info" style="width:50%;"></div>
+          <div class="progress-bar bg-info" style="width:<%= progress_num(@instance) %>%;"></div>
         </div>
       </div>
       <div class="wd-xxs text-right">
-        <div class="text-bold text-muted">50%</div>
+        <div class="text-bold text-muted"><%= progress_num(@instance) %>%</div>
       </div>
     </div>
   </div>
@@ -38,13 +39,13 @@
         <td>
           <strong>Level</strong>
         </td>
-        <td><%= mission.level %></td>
+        <td><%= @mission.level %></td>
       </tr>
       <tr>
         <td>
           <strong>任務人數</strong>
         </td>
-        <td><%= mission.participant_number %></td>
+        <td><%= @mission.participant_number %></td>
       </tr>
       <tr>
         <td>
