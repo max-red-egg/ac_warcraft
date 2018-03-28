@@ -142,6 +142,11 @@ class User < ApplicationRecord
     user_instance.reviewers.include?(user)
   end
 
+  # 尚未給的評論數
+  def unsubmited_review_count
+    self.review_to_members.where(submit: false).count
+  end
+
   #所有完成過的任務
   def missions_compeleted
     missions = self.missions.where('instances.state = ? ', 'complete')
@@ -170,7 +175,7 @@ class User < ApplicationRecord
     self.followings.include?(other_user)
   end
 
-  def self.from_omniauth(auth)  
+  def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
