@@ -22,7 +22,7 @@
             <% end %>
           </div>
           <div class="col-xl-4">
-            <%= render partial: 'leave_review' if @instance.state == 'complete' || @instance.state == 'abort'%>
+            <%= render partial: 'leave_review' if @mission.participant_number > 1 && (@instance.state == 'complete' || @instance.state == 'abort')%>
             <%= render partial:'mission_info', locals: {mission: @mission} %>
           </div>
         </div>
