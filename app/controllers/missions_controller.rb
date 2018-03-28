@@ -5,7 +5,7 @@ class MissionsController < ApplicationController
     current_instances = current_user.instances.where(state: ['in_progress','teaming'])
 
     if current_instances.count > 0
-      redirect_to instances_path
+      redirect_to instance_path(current_instances.last) # 未來改為導向 mission dashbaord
     else
       redirect_to missions_path
     end
@@ -99,6 +99,6 @@ class MissionsController < ApplicationController
       flash[:alert] = "無法挑戰該任務"
       redirect_back(fallback_location: root_path)
     end
-    
+
   end
 end
