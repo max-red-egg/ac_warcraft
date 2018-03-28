@@ -3,7 +3,7 @@ namespace :dev do
     User.destroy_all
     20.times do |i|
 
-      file = File.open("#{Rails.root}/public/avatar/user#{i+1}.jpg")
+      # file = File.open("#{Rails.root}/public/avatar/user#{i+1}.jpg")
       User.create!(
         email: (User.count+1).to_s+".user@gmail.com",
         password:"12345678",
@@ -11,7 +11,7 @@ namespace :dev do
         level: rand(15)+1,
         gender: FFaker::Gender.random,
         description:FFaker::Lorem.paragraph,
-        avatar: file,
+        # avatar: file,
         confirmed_at: Time.zone.now
         )
     end
