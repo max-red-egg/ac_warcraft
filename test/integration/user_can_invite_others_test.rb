@@ -22,6 +22,30 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
     end
     assert_includes @instance.invitees, @user2
   end
+
+  # 可以新增邀請留言
+  test "user can leave invite_msgs" do
+    sign_in @user
+    assert_difference 'InviteMsg.count', 1 do
+      post invitation_invite_msgs_path(@invitation), xhr: true, params: {invite_msg: {content: 'hihi123'} }
+    end
+    assert_match 'hihi123', response.body
+    # binding.pry
+
+    # 新增留言時也會新增通知
+    assert_difference 'Notification.count', 1 do
+      post invitation_invite_msgs_path(@invitation), xhr: true, params: {invite_msg: {content: 'hihi456'} }
+    end
+    # binding.pry
+  end
+
+  # 邀請別人時會新增一個notification
+  test "will create a notification when invite someone" do
+    sign_in @user
+    assert_difference 'Notification.count', 1 do
+      post invite_user_path(@user2), xhr: true, params: {instance_id: @instance.id}
+    end
+  end
   # 發出邀請時此副本的可邀請次數會減少
   test "remaining_invitations_count of instance will decrease when send a invitation" do
     sign_in @user
@@ -49,7 +73,11 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
   test "invited user can accept an invite" do
     sign_in @user3
     assert_equal 'inviting', @invitation.state
-    post accept_invitation_path(@invitation)
+    # 任務開始會產生通知
+    assert_difference 'Notification.count', 2 do
+      post accept_invitation_path(@invitation)
+    end
+
     @invitation.reload
     assert_equal 'accept', @invitation.state
   end
@@ -112,7 +140,4 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
     assert_equal 'cancel', @invitation.state
   end
 
-  test "invited user will listed in invitees" do
-    
-  end
 end
