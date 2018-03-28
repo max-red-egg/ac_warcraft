@@ -4,11 +4,18 @@
 <section>
   <div class="section-container">
     <div class="content-wrapper">
-      
-        <h1>所有通知</h1>
-        <%@notifications.each do  |notification| %>
-        <%=render partial: "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}", locals: {notification: notification} %>
-        <%end%>
-
+      <div class="content-heading">
+        <h3>所有通知</h3>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <%@notifications.each do  |notification| %>
+            <%=render partial: "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}", locals: {notification: notification} %>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
