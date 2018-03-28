@@ -77,6 +77,7 @@ class InstancesController < ApplicationController
     end
 
   end
+  
   def edit
     render :edit
   end

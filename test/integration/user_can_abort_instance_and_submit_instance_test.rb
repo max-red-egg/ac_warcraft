@@ -62,9 +62,12 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     # 提交任務成功時可以產生兩個review
     origin_xp = @user.xp
     assert_difference 'Review.count', 2 do
-      # 需要先儲存答案才可以送出
-      post save_instance_path(instance), xhr:true, params: {instance: { answer: "123" }}
-      post submit_instance_path(instance)
+      # 提交同時也會產生通知
+      assert_difference 'Notification.count', 3 do
+        # 需要先儲存答案才可以送出
+        post save_instance_path(instance), xhr:true, params: {instance: { answer: "123" }}
+        post submit_instance_path(instance)
+      end
     end
     # binding.pry
     instance.reload

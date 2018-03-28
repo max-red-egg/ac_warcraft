@@ -30,7 +30,10 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
   test "user cannot sent review multiple times" do
     sign_in @user
     # binding.pry
-    patch submit_review_path(@review2), params: { review: { comment: '123' }}
+    #送出review也會新增通知
+    assert_difference 'Notification.count', 1 do
+      patch submit_review_path(@review2), params: { review: { comment: '123' }}
+    end
     assert_response :redirect
     assert_not flash[:notice].nil?
     @review2.reload
