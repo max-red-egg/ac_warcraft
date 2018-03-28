@@ -5,55 +5,60 @@
   <div class="section-container">
     <div class="content-wrapper">
       <div class="content-heading">
-        <h3> <%= @inviter.name %> 邀請 <%= @invitee.name %> 進行任務 (邀請函狀態：<%= @invitation.state %>)</h3>
+        <h3><%= @inviter.name %> 邀請 <%= @invitee.name %> 進行任務 (邀請函狀態：<%= @invitation.state %>)</h3>
       </div>
-    </div>
-    <div>
       <div class="container">
-        <div class="row mb-4">
-          <% if @inviter != current_user  %>
-            <div class="col-md-6 mb-3">
-              <h4>邀請者</h4>
-              <%= render partial:'shared/user_card' , locals: {user: @inviter} %>
+        <div class="row justify-content-center">
+          <div class="col-xl-8">
+            <div class="card card-default">
+              <div class="card-body bb">
+                <% if @inviter != current_user  %>
+                  <div class="col-md-6 mb-3">
+                    <h4>邀請者</h4>
+                    <%= render partial:'shared/user_card' , locals: {user: @inviter} %>
+                  </div>
+                <% end %>
+                <% if @invitee != current_user  %>
+                  <div class="col-md-6 mb-3">
+                    <h4>受邀者</h4>
+                    <%= render partial:'shared/user_card' , locals: {user: @invitee} %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="card-body">
+                <div class="col-12">
+                  <h4>邀請對話</h4>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="col-11 bg-light py-4" id="invitation_msg">
+                    <%= render partial:'invite_msg_board', locals: {msgs: @invite_msgs} %>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body bb">
+                <div class="col-12">
+                  <% if @invitation.state == 'inviting' %>
+                    <%= simple_form_for @invite_msg, remote: true, url: invitation_invite_msgs_path(@invitation) do |f| %>
+                      <%= f.input :content, label: false, placeholder:'聊聊天吧...'%>
+                      <%= f.button :submit, '送出留言', class:"btn btn-primary submit" %>
+                    <%end%>
+                  <%end%>
+                </div>
+              </div>
+              <% if @invitation.state == 'inviting' %>
+                <div class="card-body text-center">
+                  <% if current_user == @invitee %>
+                    <%= link_to '接受邀請', accept_invitation_path(@invitation), method: :post, class: "btn btn-primary"  %>
+                    <%= link_to '拒絕邀請', decline_invitation_path(@invitation), method: :post, data: {confirm: 'Are you sure?'}, class: "btn btn-danger"  %>
+                  <% else %>
+                    <%= link_to '取消邀請', cancel_invitation_path(@invitation), method: :post, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
-          <% if @invitee != current_user  %>
-            <div class="col-md-6 mb-3">
-              <h4>受邀者</h4>
-              <%= render partial:'shared/user_card' , locals: {user: @invitee} %>
-            </div>
-          <% end %>
-        </div>
-        <div class="row mb-4">
-          <div class="col-12">
-            <h4>對話</h4>
           </div>
-          <div class="col" id="invitation_msg">
-            <%= render partial:'invite_msg_board', locals: {msgs: @invite_msgs} %>
-          </div>
-        </div>
-        <!-- 訊息留言 -->
-        <% if @invitation.state == 'inviting' %>
-          <%= simple_form_for @invite_msg, remote: true, url: invitation_invite_msgs_path(@invitation) do |f| %>
-            <%= f.input :content, label: false, placeholder:'聊聊天吧...'%>
-            <%= f.button :submit, '送出留言', class:"btn btn-primary submit" %>
-          <%end%>
-        <%end%>
-        <!--===============================-->
-
-    </div>
-    <% if @invitation.state == 'inviting' %>
-      <div class="modal-footer">
-        <div class="mx-auto">
-          <% if current_user == @invitee %>
-            <%= link_to '接受邀請', accept_invitation_path(@invitation), method: :post, class: "btn btn-primary"  %>
-            <%= link_to '拒絕邀請', decline_invitation_path(@invitation), method: :post, data: {confirm: 'Are you sure?'}, class: "btn btn-danger"  %>
-          <% else %>
-            <%= link_to '取消邀請', cancel_invitation_path(@invitation), method: :post, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
-          <% end %>
         </div>
       </div>
-    <%end%>
     </div>
   </div>
 </section>
