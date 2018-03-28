@@ -77,32 +77,7 @@
               <div class="card-body">
                 <div class="row p-3 justify-content-center">
                   <% @reviews.each do |review| %>
-                    <div class="card col-12 bg-light">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <tbody>
-                            <tr>
-                              <td class="b0 wd-xs d-none d-md-table-cell text-center">
-                                <%= link_to user_path(review.reviewer), remote: true do %>
-                                  <%= gravatar_for(review.reviewer, "img-fluid rounded-circle img-thumbnail") %>
-                                  <span><%= review.reviewer.name %></span>
-                                <% end %>
-                              </td>
-                              <td class="b0">
-                                <p class="h4 mt-0">
-                                  <a href="#"><%= link_to review.instance.mission.name ,mission_path(review.instance.mission), remote: true %></a>
-                                  <span class="rounded badge bg-gray px-2 mr-2 text-sm d-none d-lg-inline text-muted">
-                                  <span class="text-muted">Mission <%= review.instance.state %></span>
-                                  </span>
-                                </p>
-                                <div><%= review.comment %></div>
-                                <div class="text-muted mt-1"> - <%= time_ago_in_words(review.updated_at) + '前' %></div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                    <%= render partial: 'shared/review_card', locals:{review: review} %>
                   <%end%>
                 </div>
               </div>
