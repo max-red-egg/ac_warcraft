@@ -14,9 +14,7 @@ class ReviewsController < ApplicationController
       flash[:alert] = '你已經送過評價，無法再次評論'
       redirect_back(fallback_location: root_path)
     else
-      if review.update!(review_params)
-        review.submit = true
-        review.save
+      if review.update!(comment: review_params[:comment], rating: review_params[:rating].to_i, submit: true)
         flash[:notice] = '成功送出評價'
         redirect_back(fallback_location: root_path)
       else
@@ -29,6 +27,6 @@ class ReviewsController < ApplicationController
 
     private
   def review_params
-    params.require(:review).permit(:comment)
+    params.require(:review).permit(:comment,:rating)
   end
 end
