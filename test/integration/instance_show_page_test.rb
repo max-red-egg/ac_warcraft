@@ -39,14 +39,14 @@ class InstanceShowPageTest < ActionDispatch::IntegrationTest
   test "msg view only shows in in_progress instances" do
     sign_in @user
     get instance_path(@instance_teaming)
-    assert_select 'h4', false
+    assert_no_match '留言', response.body
 
     # binding.pry
     get instance_path(@instance_complete)
-    assert_select 'h4'
+    assert_match '留言', response.body
 
     get instance_path(@instance_in_progress)
-    assert_select 'h4'
+    assert_match '留言', response.body
   end
 
   # 只有成員可以在副本裡面留言
