@@ -99,10 +99,12 @@ class UsersController < ApplicationController
       # binding.pry
       invitation = current_user.invitations.build(instance_id: @instance.id, invitee_id: user.id)
       invitation.save
-      @notice_msg = '已送出邀請'
-
       @remaining_invitations_count = @instance.remaining_invitations_count
       @invitations = @instance.inviting_invitations.includes(:user)
+
+      @alert_msg = '你剛送出最後 1 張邀請' if @remaining_invitations_count == 0
+      @notice_msg = '已送出邀請'
+
       @filterrific = initialize_filterrific(
             User,
             params[:filterrific],
