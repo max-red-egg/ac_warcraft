@@ -7,16 +7,59 @@
       <div class="content-heading">
         <h3>任務檔案室</h3>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="row">
-            <%= render partial:"shared/instance_list" , locals: {instances: @instances_history} %>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-11 col-sm-10 card card-default">
+            <div class="card-header d-flex align-items-center">
+              <div class="d-flex justify-content-center col">
+                <div class="h4 m-0 text-center">執行過的任務</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row py-4 justify-content-center">
+                <% @instances_history.each do|instance| %>
+                  <div class="col-6 col-lg-4 col-xl-3">
+                    <div class="card border-dark">
+                      <div class="card-body text-center bb">
+                        <p class="mb-3">
+                          <%= link_to instance_path(instance) do%>
+                            <%= image_tag instance.mission.image_url, class: "rounded thumb96"%>
+                          <% end %>
+                        </p>
+                        <p class="m-0">
+                          <h4><%= link_to instance.mission.name, instance_path(instance) %></h4>
+                          <span class="badge bg-gray">L<%= instance.mission.level %></span>
+                          <span class="badge bg-gray">Mission <%= instance.state %></span>
+                        </p>
+                      </div>
+                      <div class="card-body">
+                          <div class="row">
+                            <% instance.members.each do |member| %>
+                            <div class="col text-center">
+                              <%= link_to user_path(member), remote: true do%>
+                                <%= gravatar_for(member, "img-thumbnail rounded-circle thumb32") %><br>
+                                <%= member.name %>
+                              <% end %>
+                               </div>
+                            <% end %>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
+
+
+
 <script>
   $(document).ready(function() {
     $('#instance_list').DataTable({
