@@ -5,8 +5,8 @@
       <div class="notification-avatar"><%= image_tag avatar , class: 'rounded-circle img-fluid'%></div>
     </div>
     <div class="media-body">
-      <p class="m-0"><%= title %></p>
-      <p class="m-0 notification-item-content"><strong><%=content%></strong><small class = "text-muted ml-2"> <em><%= time_ago_in_words notification.created_at %>前</em></small></p>
+      <p class="m-0 notification-item-title"><%= title %></p>
+      <p class="m-0 notification-item-content"><%=content%><small class = "text-muted ml-2"> <em><%= time_ago_in_words notification.created_at %>前</em></small></p>
     </div>
   </div>
 

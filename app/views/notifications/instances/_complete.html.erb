@@ -1,3 +1,3 @@
 <%= link_to instance_path(notification.notifiable), id: notification.id, data:{behavior:'notification-item'} do %>
-  <%= render partial:"notifications/shared/notification_item", locals:{title:'任務完成',content:"#{notification.actor.name}已經提交了 #{notification.notifiable.mission.name}任務的答案", notification: notification, avatar: notification.actor.avatar_url} %>
+  <%= render partial:"notifications/shared/notification_item", locals:{title:'任務完成',content:"#{notification.actor.name}已經提交了 #{notification.notifiable.mission.name}任務的答案，請記得去給隊友一個評價", notification: notification, avatar: notification.actor.avatar_url} %>
 <%end%>

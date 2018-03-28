@@ -44,6 +44,13 @@
 .notification-item-content{
   color:#6c757d;
 }
+.unread-notification p.notification-item-content{
+  font-weight: bold;
+}
+.unread-notification p.notification-item-title{
+  color: #5D9CE9;
+}
+
 a[data-behavior='notification-item']{
   text-decoration: none;
 }
