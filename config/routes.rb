@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get 'instances/index'
   end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks", confirmations: "confirmations" }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   authenticated :user do
