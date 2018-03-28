@@ -8,8 +8,9 @@
   </div>
   <div class="card-body bb">
     <div class="row mb-4">
-      <div class="col-12">
-        <h4>任務成果</h4><div class="info d-inline float-right">
+      <div class="col-12 my-3">
+        <h4>任務成果</h4>
+        <div class="info d-inline float-right">
           <small><em><%=@instance.modifier.name%> 於 <%= @instance.updated_at%> 提交了任務</em></small>
         </div>
       </div>
@@ -19,6 +20,6 @@
     </div>
   </div>
   <div class="card-body bb">
-    <%= render partial:'msgs_board' %>
+    <%= render partial:'instance_msg_board' %>
   </div>
 </div>
