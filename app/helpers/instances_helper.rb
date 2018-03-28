@@ -2,7 +2,7 @@ module InstancesHelper
   def abort_button(instance)
     if instance.present?
       if instance.state == 'in_progress'
-        link_to('放棄任務', abort_instance_path, method: :post, class: "btn btn-danger btn-sm", data: { confirm: "跟夥伴溝通過了嗎，確定要放棄任務？" })
+        link_to('放棄任務', abort_instance_path, method: :post, class: "btn btn-danger btn-sm", data: { confirm: "跟組員溝通過了嗎，確定要放棄任務？" })
       end
     end
   end
@@ -17,7 +17,7 @@ module InstancesHelper
 
   def instance_title(instance)
     case instance.state
-    when 'teaming' then '夥伴招募中'
+    when 'teaming' then '組員招募中'
     when 'in_progress' then '任務進行中'
     when 'complete' then '任務已完成'
     when 'cancel' then '取消組隊'
