@@ -27,6 +27,9 @@ Rails.application.routes.draw do
       post :decline
       post :cancel
     end
+    collection do
+      get :sent_index
+    end
     resources :invite_msgs, only: [:create]
   end
   resources :instances, only: [:index, :show,:edit] do
