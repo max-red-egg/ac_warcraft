@@ -46,7 +46,7 @@
                           <%= gravatar_for(invitation.invitee, "mb-mail-avatar mr-2") %>
                           <div class="mb-mail-meta ml-3">
                             <div class="mb-mail-subject">
-                              你邀請 <%= invitation.invitee.name %> 一起加入 <%= link_to invitation.instance.mission.name, mission_path(invitation.instance.mission), remote: true%> <%= cross_invite_badges(invitation) %> 任務
+                              你邀請 <%= invitation.invitee.name %> 一起加入 <%= link_to invitation.instance.mission.name, mission_path(invitation.instance.mission), remote: true%> 任務 <%= cross_invite_badges(invitation) %>
                             </div>
                             <div class="mb-mail-from">
                               <span class="badge bg-green">L<%= invitation.instance.mission.level %></span>
