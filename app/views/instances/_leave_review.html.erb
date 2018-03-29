@@ -10,10 +10,25 @@
     <% @reviews_to_other.each do |review| %>
       <% if review.submit? %>
         <h4>你對 <%=review.reviewee.name%> 的評價：</h4>
+        <p><%= print_rating_stars review.rating%></p>
         <p><%= review.comment %></p>
       <% else %>
         <p>這次的任務，你覺得 <%= review.reviewee.name %> 的表現如何?</p>
+
+
         <%= simple_form_for review, url: submit_review_path(review) do |f| %>
+          <div class="review_rating from-group">  
+            <label for="star5" title="Excellent!">
+            <%=f.radio_button :rating, 5, :id => "star5" %>5 Stars</label>
+            <label for="star5" title="Good!">
+            <%=f.radio_button :rating, 4, :id => "star4" %> 4 Stars</label>
+            <label for="star3" title="Average!">
+            <%=f.radio_button :rating, 3, :id => "star3" %> 5 Stars</label>
+             <label for="star5" title="Poor!">
+            <%=f.radio_button :rating, 2, :id => "star2" %>2 Stars</label>
+            <label for="star1" title="Very Poor!">
+            <%=f.radio_button :rating, 1, :id => "star1" %> 1 Stars</label>
+          </div>        
           <%= f.input :comment, label: false, placeholder:'給個評語吧...'%>
           <%= f.button :submit, '送出', class:"btn btn-primary" %>
         <% end %>
@@ -36,3 +51,12 @@
     <% end %>
   </div>
 </div>
+<script>
+$('.review_rating input').change(function () {
+
+  var $radio = $(this);
+  //console.log($radio.closest('label'));
+  $('.review_rating .selected').removeClass('selected');
+  $radio.closest('label').addClass('selected');
+});
+</script>

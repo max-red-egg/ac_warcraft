@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_27_014224) do
+ActiveRecord::Schema.define(version: 2018_03_28_074123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2018_03_27_014224) do
     t.integer "reviewee_id"
     t.integer "instance_id"
     t.boolean "submit", default: false, null: false
+    t.integer "rating", default: 0, null: false
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
