@@ -180,7 +180,11 @@ class User < ApplicationRecord
     total_rating = reviews.submited.inject(0){|sum,review|
         sum + review.rating
     }
-    (total_rating.to_f / reviews.submited.count.to_f).round(1)
+    if(reviews.submited.count > 0)
+      (total_rating.to_f / reviews.submited.count.to_f).round(1)
+    else
+      return 0
+    end
   end
 
 

@@ -69,16 +69,18 @@
 <script>
   $(document).ready(function() {
   $('.rating-bar span').hide();
-  $('#rating-bar-five').animate({
-     width: '<%= ((rating_count[4].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
-  $('#rating-bar-four').animate({
-     width: '<%= ((rating_count[3].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
-  $('#rating-bar-three').animate({
-     width: '<%= ((rating_count[2].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
-  $('#rating-bar-two').animate({
-     width: '<%= ((rating_count[1].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
-  $('#rating-bar-one').animate({
-     width: '<%= ((rating_count[0].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+  <% if rating_count.sum > 0 %>
+    $('#rating-bar-five').animate({
+       width: '<%= ((rating_count[4].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+    $('#rating-bar-four').animate({
+       width: '<%= ((rating_count[3].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+    $('#rating-bar-three').animate({
+       width: '<%= ((rating_count[2].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+    $('#rating-bar-two').animate({
+       width: '<%= ((rating_count[1].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+    $('#rating-bar-one').animate({
+       width: '<%= ((rating_count[0].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+  <%end%>
   
   setTimeout(function() {
     $('.rating-bar span').fadeIn('slow');
