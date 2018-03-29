@@ -124,6 +124,9 @@ class User < ApplicationRecord
   def add_xp(xp)
     self.xp += xp
     self.level = self.xp / 1000
+    if self.level == 0
+      self.level =1 
+    end
     self.save!
   end
 
