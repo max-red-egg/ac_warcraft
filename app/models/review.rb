@@ -16,6 +16,9 @@ class Review < ApplicationRecord
   scope :unsubmit, ->{
     where(submit: false)
   }
+  scope :find_by_rating, ->(rating){
+    where(rating: rating)
+  }
 
 
   def recipient

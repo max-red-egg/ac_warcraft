@@ -175,6 +175,15 @@ class User < ApplicationRecord
     self.followings.include?(other_user)
   end
 
+  def average_rating
+    #所有星星/ 所有評論數
+    total_rating = reviews.submited.inject(0){|sum,review|
+        sum + review.rating
+    }
+    (total_rating.to_f / reviews.submited.count.to_f).round(1)
+  end
+
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
