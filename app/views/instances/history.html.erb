@@ -33,8 +33,15 @@
                         </p>
                         <p class="m-0">
                           <h4><%= link_to instance.mission.name, instance_path(instance) %></h4>
-                          <span class="badge bg-gray">L<%= instance.mission.level %></span>
-                          <span class="badge bg-gray">Mission <%= instance.state %></span>
+                          <span class="badge bg-success">L<%= instance.mission.level %></span>
+                          <% if instance.state == 'complete' %>
+                            <span class="badge bg-success">Mission <%= instance.state %></span>
+                          <% else %>
+                            <span class="badge bg-gray">Mission <%= instance.state %></span>
+                          <% end %>
+                        </p>
+                        <p class="m-0">
+                          <%= render partial: 'shared/mission_tags', locals: {mission: instance.mission} %>
                         </p>
                       </div>
                       <div class="card-body">
