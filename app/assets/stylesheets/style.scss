@@ -104,13 +104,6 @@ a[data-behavior='notification-item']{
 
 /* _user_rating.html.erb */
 
-body {
-  font-family: 'Roboto', Helvetica;
-  color: #737373;
-  font-weight: 300;
-}
-
-
 .inner {
   padding: 1em;
   background-color: white;
@@ -122,9 +115,7 @@ body {
 }
 
 .rating {
-  float: left;
   width: 45%;
-  margin-right: 5%;
   text-align: center;
 }
 
