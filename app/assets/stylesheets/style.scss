@@ -102,4 +102,112 @@ a[data-behavior='notification-item']{
   color: #f0ad4e;
 }
 
+/* _user_rating.html.erb */
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400);
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+body {
+  font-family: 'Roboto', Helvetica;
+  color: #737373;
+  font-weight: 300;
+}
+
+
+.inner {
+  padding: 1em;
+  background-color: white;
+  overflow: hidden;
+  position: relative;
+  -webkit-border-radius: 4px; 
+  -moz-border-radius: 4px; 
+  border-radius: 4px; 
+}
+
+.rating {
+  float: left;
+  width: 45%;
+  margin-right: 5%;
+  text-align: center;
+}
+
+.rating-num {
+  color: #333333;
+  font-size: 72px;
+  font-weight: 100;
+  line-height: 1em; 
+}
+
+.rating-stars {
+  font-size: 20px;
+  color: #E3E3E3;
+  margin-bottom: .5em;
+}
+.rating-stars .active {
+  color: #737373;
+}
+
+.rating-users {
+  font-size: 14px;
+}
+
+.histo {
+  float: left;
+  width: 50%;
+  font-size: 13px;
+}
+
+.histo-star {
+  float: left;
+  padding: 3px;
+
+}
+
+.histo-rate {
+  width: 100%;
+  display: block;
+  clear: both;
+}
+
+.rating-bar-block {
+  word-wrap: normal;
+  margin-left: 5px;
+  color: black;
+  display: block;
+  float: left;
+  width: 75%;
+  position: relative;
+}
+
+.rating-bar {
+  padding: 4px;
+  display: block;
+}
+
+#rating-bar-five {
+  width: 0;
+  background-color: #9FC05A;
+}
+
+#rating-bar-four {
+  width: 0;
+  background-color: #ADD633;
+}
+
+#rating-bar-three {
+  width: 0;
+  background-color: #FFD834;
+}
+
+#rating-bar-two {
+  width: 0;
+  background-color: #FFB234;
+}
+
+#rating-bar-one {
+  width: 0;
+  background-color: #FF8B5A;
+}
+
+
+
 

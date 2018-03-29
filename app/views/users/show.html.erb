@@ -76,6 +76,9 @@
               </div>
               <div class="card-body">
                 <div class="row p-3 justify-content-center">
+                  <%= render partial: 'shared/user_rating', locals:{user: @user, reviews: @reviews, rating_count: @rating_count} %>
+                </div>
+                <div class="row p-3 justify-content-center">
                   <% @reviews.each do |review| %>
                     <%= render partial: 'shared/review_card', locals:{review: review} %>
                   <%end%>

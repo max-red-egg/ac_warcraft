@@ -1,0 +1,88 @@
+<div class="card col-12">
+    <div class="inner">
+    <div class="rating">
+      <span class="rating-num"><%=user.average_rating%></span>
+      <div class="rating-stars">
+        <%= print_rating_stars user.average_rating.round.to_i %>
+      </div>
+      <div class="rating-users">
+        <i class="icon-user"></i> 共有<%=rating_count.sum%>則評價
+      </div>
+    </div>
+    
+    <div class="histo">
+      <div class="five histo-rate">
+        <span class="histo-star">
+          <i class="active icon-star"></i> 5</span>
+        <span class="rating-bar-block">
+          <span id="rating-bar-five" class="rating-bar">
+            <span><%=rating_count[4]%></span>&nbsp;</span> 
+        </span>
+      </div>
+      
+      <div class="four histo-rate">
+        <span class="histo-star">
+          <i class="active icon-star"></i> 4 </span>
+        <span class="rating-bar-block">
+          <span id="rating-bar-four" class="rating-bar">
+            <span><%=rating_count[3]%></span>&nbsp;
+          </span> 
+        </span>
+      </div> 
+      
+      <div class="three histo-rate">
+        <span class="histo-star">
+          <i class="active icon-star"></i> 3</span>
+        <span class="rating-bar-block">
+          <span id="rating-bar-three" class="rating-bar">
+            <span><%=rating_count[2]%></span>&nbsp;
+          </span> 
+        </span>
+      </div>
+      
+      <div class="two histo-rate">
+        <span class="histo-star">
+          <i class="active icon-star"></i> 2</span>
+        <span class="rating-bar-block">
+          <span id="rating-bar-two" class="rating-bar">
+            <span><%=rating_count[1]%></span>&nbsp;
+          </span> 
+        </span>
+      </div>
+      
+      <div class="one histo-rate">
+        <span class="histo-star">
+          <i class="active icon-star"></i> 1</span>
+        <span class="rating-bar-block">
+          <span id="rating-bar-one" class="rating-bar">
+            <span><%=rating_count[0]%></span>&nbsp;
+          </span> 
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<script>
+  $(document).ready(function() {
+  $('.rating-bar span').hide();
+  $('#rating-bar-five').animate({
+     width: '<%= ((rating_count[4].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+  $('#rating-bar-four').animate({
+     width: '<%= ((rating_count[3].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+  $('#rating-bar-three').animate({
+     width: '<%= ((rating_count[2].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+  $('#rating-bar-two').animate({
+     width: '<%= ((rating_count[1].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+  $('#rating-bar-one').animate({
+     width: '<%= ((rating_count[0].to_f / rating_count.sum.to_f) * 100.0).round %>%'}, 1000);
+  
+  setTimeout(function() {
+    $('.rating-bar span').fadeIn('slow');
+  }, 1000);
+  
+});
+</script>

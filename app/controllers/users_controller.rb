@@ -47,8 +47,13 @@ class UsersController < ApplicationController
     @instances = @user.instances.find_complete
     @reviews = @user.reviews.submited.order(updated_at: :desc)
     @unsended_reviews = @user.review_to_members.unsubmit
-
     @followings = @user.followings.last(3)
+    @rating_count = []
+    for i in 0 .. 4
+      @rating_count[i]= @reviews.find_by_rating(i+1).count
+    end
+
+
 
     respond_to do |format|
       format.html
