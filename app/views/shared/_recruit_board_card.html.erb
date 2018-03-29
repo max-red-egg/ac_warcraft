@@ -1,0 +1,27 @@
+
+<div class="card b text-center mb-2">
+  <div class="card-body">
+    <%= gravatar_for(recruit_board.user, "rounded-circle thumb64 mb-2") %>
+    <p class="h4 text-bold">發起人：<%= link_to recruit_board.user.name, user_path(recruit_board.user), remote: true %></p>
+  </div>
+  <div class="card-body bt">
+    <div class="row">
+      <div class="col-4 br">
+        
+        <strong class="text-success">
+        <%= link_to '任務詳情', recruit_board.instance.mission, remote: true  %>
+        </strong><br>
+        
+      </div>
+      <div class="col-4 br">
+        
+        <%= link_to '接受徵招', accept_recruit_board_path(recruit_board), method: :post, class: 'btn btn-primary' %>
+
+        <% if recruit_board.user == current_user %>
+          <%= link_to '取消本次徵招', recruit_board_path(recruit_board), method: :delete, class: 'btn btn-danger' %>
+        <% end %>
+        
+      </div>
+    </div>
+  </div>
+</div>

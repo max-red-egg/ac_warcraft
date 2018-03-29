@@ -31,6 +31,7 @@ class User < ApplicationRecord
 
   has_many :inverse_followships, class_name: "Followship", foreign_key: :following_id
   has_many :followers, through: :inverse_followships, source: :user # 從inverse_followships表裡面的user欄位去找
+  has_many :recruit_boards
 
   filterrific(
     default_filter_params: {

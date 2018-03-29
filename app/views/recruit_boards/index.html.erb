@@ -1,0 +1,21 @@
+<aside class="aside-container">
+  <%= render partial: "layouts/sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3>緊急招募任務</h3>
+      </div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <% @recruit_boards.each do |recruit_board| %>
+            <div class="col-sm-6 col-lg-4 col-xl-3 my-3">
+              <%= render 'shared/recruit_board_card', recruit_board: recruit_board %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
