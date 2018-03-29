@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   authenticated :user do
-    root "missions#my_mission"
+    root "missions#dashboard"
   end
 
   root 'public#landing'
@@ -52,9 +52,8 @@ Rails.application.routes.draw do
 
   resources :missions, only: [:index, :show] do
     member do
-      get :my_mission
+      get :dashboard
       post :challenge
-
       get :select_user
       # POST challenge_mission_path 挑戰本任務
     end
