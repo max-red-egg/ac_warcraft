@@ -86,7 +86,9 @@ module InstancesHelper
   def review_submited?(instance,user)
     reviews = instance.reviews.find_by(reviewer_id: user)
     if reviews.present? && !reviews.submit?
-      '尚未給評'
+      true
+    else
+      false
     end
   end
 
