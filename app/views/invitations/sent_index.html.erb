@@ -51,6 +51,7 @@
                             <div class="mb-mail-from">
                               <span class="badge bg-green">L<%= invitation.instance.mission.level %></span>
                               <span class="badge bg-info"> XP+ <%= invitation.instance.mission.xp %></span>
+                              <%= render partial: 'shared/mission_tags', locals: {mission: invitation.instance.mission} %>
                             </div>
                             <div class="mb-mail-preview"><%= time_ago_in_words(invitation.updated_at) + '前' %></div>
                           </div>
