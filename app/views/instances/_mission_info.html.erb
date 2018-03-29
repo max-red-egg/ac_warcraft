@@ -3,13 +3,7 @@
     <div class="clearfix">
       <div class="float-left">
         <h4><%= @mission.name %></h4>
-        <ul class="list-inline my-2">
-          <% @mission.tag_list.each do |tag| %>
-            <li class="list-inline-item">
-              <div class="badge px-2 bg-warning"><%= tag %></div>
-            </li>
-          <% end %>
-        </ul>
+        <%= render partial: 'shared/mission_tags', locals: {mission: @mission} %>
       </div>
       <div class="float-right">
         <%= abort_button(@instance) %><%= cancel_button(@instance) %>

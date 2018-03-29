@@ -20,6 +20,11 @@
                 <% @instances_history.each do|instance| %>
                   <div class="col-6 col-lg-4 col-xl-3">
                     <div class="card border-dark">
+                      <% if review_submited?(instance,current_user) %>
+                        <div class="ribbon-wrapper">
+                          <div class="ribbon bg-danger">尚未給評</div>
+                        </div>
+                      <% end %>
                       <div class="card-body text-center bb">
                         <p class="mb-3">
                           <%= link_to instance_path(instance) do%>
@@ -28,9 +33,15 @@
                         </p>
                         <p class="m-0">
                           <h4><%= link_to instance.mission.name, instance_path(instance) %></h4>
-                          <span class="badge bg-gray">L<%= instance.mission.level %></span>
-                          <span class="badge bg-gray">Mission <%= instance.state %></span>
-                          <span class="badge bg-danger"><%= review_submited?(instance,current_user) %></span>
+                          <span class="badge bg-success">L<%= instance.mission.level %></span>
+                          <% if instance.state == 'complete' %>
+                            <span class="badge bg-success">Mission <%= instance.state %></span>
+                          <% else %>
+                            <span class="badge bg-gray">Mission <%= instance.state %></span>
+                          <% end %>
+                        </p>
+                        <p class="m-0">
+                          <%= render partial: 'shared/mission_tags', locals: {mission: instance.mission} %>
                         </p>
                       </div>
                       <div class="card-body">

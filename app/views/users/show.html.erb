@@ -74,10 +74,12 @@
                   <div class="h4 m-0 text-center">獲得的評價</div>
                 </div>
               </div>
-              <div class="card-body">
-                <div class="row p-3 justify-content-center">
+              <div class="card-body bb">
+                <div class="row p-3 justify-content-center inner">
                   <%= render partial: 'shared/user_rating', locals:{user: @user, reviews: @reviews, rating_count: @rating_count} %>
                 </div>
+              </div>
+              <div class="card-body">
                 <div class="row p-3 justify-content-center">
                   <% @reviews.each do |review| %>
                     <%= render partial: 'shared/review_card', locals:{review: review} %>

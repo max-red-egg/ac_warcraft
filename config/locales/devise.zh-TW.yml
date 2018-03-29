@@ -3,8 +3,8 @@
 zh-TW:
   devise:
     confirmations:
-      confirmed: "Your email address has been successfully confirmed."
-      send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
+      confirmed: "已完成探員身份驗證"
+      send_instructions: "你在本信箱中，收到身份驗證信"
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
       already_authenticated: "You are already signed in."
@@ -15,7 +15,7 @@ zh-TW:
       not_found_in_database: "Invalid %{authentication_keys} or password."
       timeout: "Your session expired. Please sign in again to continue."
       unauthenticated: "You need to sign in or sign up before continuing."
-      unconfirmed: "You have to confirm your email address before continuing."
+      unconfirmed: "你需要到信箱收，收取驗證信，依信件內容完成驗證"
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"
@@ -38,27 +38,27 @@ zh-TW:
       updated_not_active: "Your password has been changed successfully."
     registrations:
       destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
-      signed_up: "Welcome! You have signed up successfully."
+      signed_up: "歡迎您! 您的探員身份已完成驗證，授權成功！"
       signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
       signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
-      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+      signed_up_but_unconfirmed: "探員身份審核作業中，請到你填寫的信箱，依信箱內步驟完成身份審核。"
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
       updated: "Your account has been updated successfully."
     sessions:
-      signed_in: "登入成功."
-      signed_out: "Signed out successfully."
-      already_signed_out: "Signed out successfully."
+      signed_in: "身份授權通過，歡迎進入總部！"
+      signed_out: "解除身份授權，下次見！"
+      already_signed_out: "已解除身份授權！"
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
   errors:
     messages:
-      already_confirmed: "was already confirmed, please try signing in"
+      already_confirmed: "已通過身份驗證，請重新登入。"
       confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
       expired: "has expired, please request a new one"
       not_found: "not found"
       not_locked: "was not locked"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "1 個關於 %{resource} 的錯誤:"
+        other: "%{count} 個關於 %{resource} 的錯誤:"

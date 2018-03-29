@@ -24,6 +24,9 @@
     </div>
   </div>
   <div class="row px-3 py-1">
+    <div class="col-12 mb-2">
+      <%= render partial: 'shared/mission_tags', locals: {mission: mission} %>
+    </div>
     <div class="col-12">
       <p><%= truncate mission.description, length: 80 %></p>
     </div>
