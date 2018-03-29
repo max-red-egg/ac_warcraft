@@ -1,7 +1,7 @@
 <div class="col-12 col-sm-6 mb-3 mb-sm-0 rating">
-  <span class="rating-num"><%=user.average_rating%></span>
+  <span class="rating-num"><%=user.average_rating_count%></span>
   <div class="rating-stars">
-    <%= print_rating_stars user.average_rating.round.to_i %>
+    <%= print_rating_stars user.average_rating_count.round.to_i %>
   </div>
   <div class="rating-users">
     <i class="icon-user"></i> 共有<%=rating_count.sum%>則評價
