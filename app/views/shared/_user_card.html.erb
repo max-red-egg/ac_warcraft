@@ -20,16 +20,16 @@
         <strong class="text-success">XP</strong><br>
         <strong><%= user.xp %></strong>
       </div>
-      <% if @instance.present? %>
+      <% if @instance.present? || @invitation.present? %>
         <div class="col-4">
           <strong class="text-warning">評價</strong><br>
           <strong><%= user.average_rating.round(1) %></strong>
         </div>
       <% else %>
-          <div class="col-4">
-            <strong class="text-purple">邀請狀態</strong><br>
-            <strong><%= transcript_user_state(user.available) %></strong>
-          </div>
+        <div class="col-4">
+          <strong class="text-purple">邀請狀態</strong><br>
+          <strong><%= transcript_user_state(user.available) %></strong>
+        </div>
       <% end %>
     </div>
   </div>
