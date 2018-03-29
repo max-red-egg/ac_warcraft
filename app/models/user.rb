@@ -195,6 +195,8 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
+      # binding.pry
+      user.name = auth.info.name ? auth.info.name : auth.info.nickname
       user.email = auth.info.email
       user.confirmed_at = Time.zone.now
       user.password = Devise.friendly_token[0,20]
