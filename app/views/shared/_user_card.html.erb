@@ -22,8 +22,8 @@
       </div>
       <% if @instance.present? %>
         <div class="col-4">
-          <strong class="text-purple">保留</strong><br>
-          <strong>XXX</strong>
+          <strong class="text-warning">評價</strong><br>
+          <strong><%= user.average_rating.round(1) %></strong>
         </div>
       <% else %>
           <div class="col-4">
