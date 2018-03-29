@@ -5,11 +5,11 @@ class InvitationsController < ApplicationController
   before_action :check_inviting, only: [:accept, :decline, :cancel]
 
   def index
-    @received_invitations = Invitation.where(invitee_id: current_user).order(id: :desc)
+    @received_invitations = Invitation.where(invitee_id: current_user).order(id: :desc).page(params[:page]).per(8)
   end
 
   def sent_index
-    @sent_invitations = Invitation.where(user_id: current_user).order(id: :desc)
+    @sent_invitations = Invitation.where(user_id: current_user).order(id: :desc).page(params[:page]).per(8)
   end
 
   def show

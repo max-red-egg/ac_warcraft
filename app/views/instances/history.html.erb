@@ -30,6 +30,7 @@
                           <h4><%= link_to instance.mission.name, instance_path(instance) %></h4>
                           <span class="badge bg-gray">L<%= instance.mission.level %></span>
                           <span class="badge bg-gray">Mission <%= instance.state %></span>
+                          <span class="badge bg-danger"><%= review_submited?(instance,current_user) %></span>
                         </p>
                       </div>
                       <div class="card-body">

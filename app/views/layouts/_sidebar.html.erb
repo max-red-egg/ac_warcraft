@@ -75,6 +75,7 @@
       </li>
       <li class="<%= active_class?(history_instances_path) %>">
         <%= link_to history_instances_path do %>
+          <div class="float-right badge badge-danger"><%= current_user.unsubmited_review_count %></div>
           <em class="fa fa-archive"></em>
           <span>任務檔案室</span>
         <% end %>
