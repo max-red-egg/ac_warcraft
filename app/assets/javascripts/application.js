@@ -16,9 +16,11 @@
 //= require_tree ./angle/modules
 //= require_tree ./angle/custom
 
+//--- Angle Vender Scripts
+//= require easy-pie-chart/dist/jquery.easypiechart
+//= require jquery-knob/dist/jquery.knob.min
+
 //= require rails-ujs
 //= require activestorage
 //= require filterrific/filterrific-jquery
 //= require notification
-
-
