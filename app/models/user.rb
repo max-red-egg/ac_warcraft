@@ -137,7 +137,7 @@ class User < ApplicationRecord
 
   # 確認該任務可不可以執行
   def take_mission?(mission)
-    self.level >= mission.level
+    self.level >= mission.level && not_in_banned_mission_list(mission)
   end
 
   # 是否有被user評論過instance副本？
@@ -203,5 +203,22 @@ class User < ApplicationRecord
     end
   end
 
+  private
+
+  def not_in_banned_mission_list(mission)
+    # 先找出正在進行中或組隊中的副本
+    in_progress_instances = self.instances.select do |instance|
+      instance.state == 'in_progress' || instance.state == 'teaming'
+    end.uniq
+    # binding.pry
+    # 從正在進行的副本中找出自己發起的副本
+    self_initiated_instances = in_progress_instances.select do |instance|
+      initiate_user = UserInstance.where(instance_id: instance.id).order(created_at: :desc)[0].user
+      # 如果自己是任務發起人的話此任務會被挑選出來
+      self == initiate_user
+    end
+    banned_missions = self_initiated_instances.map { |instance| instance.mission }.uniq
+    !banned_missions.include?(mission)
+  end
 
 end

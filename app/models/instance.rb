@@ -188,19 +188,10 @@ class Instance < ApplicationRecord
         recipients.each do |recipient|
           Notification.create(recipient: recipient, actor: actor,
             action: action, notifiable: self)
+        end
       end
     end
-
   end
-
-
-
-
-  end
-
-
-
-
   private
   # ::instance method:: 自動設定任務副本instance狀態
   def setup_state!
