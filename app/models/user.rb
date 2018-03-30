@@ -137,7 +137,7 @@ class User < ApplicationRecord
 
   # 確認該任務可不可以執行
   def take_mission?(mission)
-    self.level >= mission.level && not_in_banned_mission_list(mission)
+    self.level >= mission.level 
   end
 
   # 是否有被user評論過instance副本？
@@ -203,7 +203,7 @@ class User < ApplicationRecord
     end
   end
 
-  private
+  
 
   def not_in_banned_mission_list(mission)
     # 先找出正在進行中或組隊中的副本
