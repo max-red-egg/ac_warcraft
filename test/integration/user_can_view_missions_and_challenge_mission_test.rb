@@ -41,5 +41,11 @@ class UserCanViewMissionsAndChallengeMissionTest < ActionDispatch::IntegrationTe
     end
     # 確認產生副本後user的狀態不會改變
     assert_equal true, @user.available
+
+    # 在任務完成或放棄前不能主動挑戰正在組隊或進行中的任務
+    assert_difference 'Instance.count', 0 do
+      post challenge_mission_path(@mission2)
+    end
+    assert_response :redirect
   end
 end

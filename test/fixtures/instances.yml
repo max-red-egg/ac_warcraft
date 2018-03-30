@@ -24,6 +24,6 @@ instance_abort:
   state: abort
 
 instance_recruit:
-  mission: mission5
+  mission: mission7
   state: teaming
 
