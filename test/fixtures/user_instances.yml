@@ -33,3 +33,7 @@ user_instance8:
 user_instance9:
   user: user2
   instance: instance_abort
+
+user_instance9:
+  user: user
+  instance: instance_recruit

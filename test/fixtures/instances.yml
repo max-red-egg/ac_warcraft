@@ -23,3 +23,7 @@ instance_abort:
   mission: mission1
   state: abort
 
+instance_recruit:
+  mission: mission5
+  state: teaming
+

@@ -14,13 +14,11 @@
         
       </div>
       <div class="col-4 br">
-        
-        <%= link_to '接受徵招', accept_recruit_board_path(recruit_board), method: :post, class: 'btn btn-primary' %>
-
         <% if recruit_board.user == current_user %>
           <%= link_to '取消本次徵招', recruit_board_path(recruit_board), method: :delete, class: 'btn btn-danger' %>
+        <% else %>
+          <%= link_to '接受徵招', accept_recruit_board_path(recruit_board), method: :post, class: 'btn btn-primary' %>
         <% end %>
-        
       </div>
     </div>
   </div>
