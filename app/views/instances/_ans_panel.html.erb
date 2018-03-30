@@ -8,9 +8,7 @@
         <%end%>
       <input type="text" id="disabledTextInput" class="form-control" placeholder="<%=instance.answer%>">
     </div>
-</fieldset>
+  </fieldset>
 </form>
-<div class="d-flex justify-content-between">
-  <%= link_to '編輯', edit_instance_path(instance),remote: true, class: "btn btn-outline-primary " %>
-<%= link_to "提交任務成果", submit_instance_path(@instance),method: :post, class: "btn btn-outline-danger" ,data: {confirm: '提交任務後就不能修改，你有跟組員充分溝通嗎？'}%>
-</div>
+<%= link_to '再次編輯', edit_instance_path(instance),remote: true, class: "btn btn-outline-primary " %>
+<%= link_to "提交任務成果", submit_instance_path(@instance),method: :post, class: "btn btn-primary ml-2" ,data: {confirm: '提交任務後就不能修改，你有跟組員充分溝通嗎？'}%>

@@ -49,7 +49,7 @@
             <% current_user.instances_in_progress.each do |instance| %>
               <li class="<%= active_class?(instance_path(instance)) %>">
                 <%= link_to instance_path(instance) do%>
-                <span class="float-left badge badge-success mr-1">L<%= instance.mission.level %></span> <%= instance.mission.name %>
+                <span class="float-left badge bg-warning-dark mr-1">L<%= instance.mission.level %></span> <%= instance.mission.name %>
                 <% end %>
               </li>
             <% end %>
@@ -69,7 +69,7 @@
             <% current_user.instances_teaming.each do |instance| %>
             <li class="<%= active_class?(instance_path(instance)) %>">
               <%= link_to instance_path(instance) do%>
-              <span class="float-left badge badge-success mr-1">L<%= instance.mission.level %></span> <%= instance.mission.name %>
+              <span class="float-left badge bg-warning-dark mr-1">L<%= instance.mission.level %></span> <%= instance.mission.name %>
               <% end %>
             </li>
             <% end %>

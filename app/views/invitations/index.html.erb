@@ -57,9 +57,9 @@
                           </div>
                           <div class="mb-mail-date ml-auto">
                             <% if invitation.state == 'inviting' %>
-                              <%= link_to '回覆邀請', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
+                                <%= link_to '回覆邀請', invitation_path(invitation), remote: true, class: 'btn btn-primary' %>
                               <% else %>
-                                <%= link_to '對話紀錄', invitation_path(invitation), remote: true, class: 'btn bg-gray' %>
+                                <%= link_to '對話紀錄', invitation_path(invitation), remote: true, class: 'btn bg-gray-darker' %>
                             <% end %>
                           </div>
                         </div>

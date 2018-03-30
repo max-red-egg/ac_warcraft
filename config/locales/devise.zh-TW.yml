@@ -7,14 +7,14 @@ zh-TW:
       send_instructions: "你在本信箱中，收到身份驗證信"
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
-      already_authenticated: "You are already signed in."
-      inactive: "Your account is not activated yet."
-      invalid: "Invalid %{authentication_keys} or password."
+      already_authenticated: "你已通過授權"
+      inactive: "你的身份尚未完成驗證"
+      invalid: "授權失敗，錯誤的 %{authentication_keys} 或 密碼"
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account is locked."
-      not_found_in_database: "Invalid %{authentication_keys} or password."
+      not_found_in_database: "授權失敗，錯誤的 %{authentication_keys} 或 密碼"
       timeout: "Your session expired. Please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
+      unauthenticated: "你需要先註冊並登入，通過身份驗證"
       unconfirmed: "你需要到信箱收，收取驗證信，依信件內容完成驗證"
     mailer:
       confirmation_instructions:

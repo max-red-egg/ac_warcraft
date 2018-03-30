@@ -1,6 +1,6 @@
 <% if msgs %>
   <% msgs.each do |msg| %>
-    <div class="col-12 m-0 bg-light ">
+    <div class="col-12 m-0 ">
       <div class="table-responsive">
         <table class="table m-0">
           <tbody>
@@ -12,7 +12,7 @@
                 </td>
               <% end %>
               <td class="b0 <%= 'd-flex flex-column align-items-end' if msg.user == current_user %> ">
-                <div class="w-50 bg-gray-light px-3 py-2 rounded ">
+                <div class="w-50 bg-gray-darker px-3 py-2 rounded ">
                   <span><%= msg.content %></span>
                 </div>
                 <span class="text-muted mt-1"><%= time_ago_in_words(msg.updated_at) + '前' %></span>

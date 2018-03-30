@@ -23,7 +23,7 @@
       <% if @instance.present? || @invitation.present? %>
         <div class="col-4">
           <strong class="text-warning">評價</strong><br>
-          <strong><%= user.average_rating.round(1) %></strong>
+          <strong>XX</strong>
         </div>
       <% else %>
         <div class="col-4">
@@ -44,7 +44,7 @@
   <div class='text-center my-4'>
     <% if @user != current_user %>
       <%= render partial: "shared/follow", locals: {user: user} %>
-      <%= link_to "邀請組隊", teaming_missions_path(user_id: user.id), class: "ml-2 btn btn-success" %>
+      <%= link_to "邀請組隊", teaming_missions_path(user_id: user.id), class: "ml-2 btn btn-primary" %>
     <% else %>
       <button type="button" class="btn btn-light" data-dismiss="modal">It's Me</button>
     <%end%>

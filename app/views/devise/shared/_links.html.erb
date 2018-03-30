@@ -1,11 +1,11 @@
 <%- if controller_name != 'sessions' %>
   <p class="pt-3 text-center">已經有帳號了?</p>
-  <%= link_to "登入帳號", new_session_path(resource_name), class: "btn btn-block btn-secondary" %><br>
+  <%= link_to "登入帳號", new_session_path(resource_name), class: "btn btn-block btn-dark" %><br>
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
  <p class="pt-3 text-center">還沒有帳號嗎?</p>
- <%= link_to "現在註冊", new_registration_path(resource_name), class: "btn btn-block btn-secondary" %><br>
+ <%= link_to "現在註冊", new_registration_path(resource_name), class: "btn btn-block btn-dark" %><br>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

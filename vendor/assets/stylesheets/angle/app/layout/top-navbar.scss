@@ -18,12 +18,12 @@ $nav-header-wd-toggled:         $aside-wd-collapsed;
 
 $nav-header-wd-toggled-text:    $aside-wd-collapsed-text;
 
-$nav-top-bg:                    $success-dark;
+$nav-top-bg:                    $inverse;
 $nav-top-bg-start:              $nav-top-bg;
-$nav-top-bg-end:                $green-light;
+$nav-top-bg-end:                $inverse-light;
 $nav-header-bg:                 transparent;
 
-$nav-top-item-mobile:           $nav-top-bg;
+$nav-top-item-mobile:           $warning-light;
 $nav-top-item-mobile-active:    darken($nav-top-item-mobile, 20%);
 
 $nav-top-item-desktop:          #fff;
@@ -273,7 +273,7 @@ $nav-top-item-desktop-active:   $nav-top-item-mobile-active;
             @include gradient-remove();
         } // Dropdown link open style
         .navbar-nav>a {
-            box-shadow: 0 0 0 #000 inset;
+            box-shadow: 0 0 0 #fff inset;
             @include transition(all .2s);
         }
 
