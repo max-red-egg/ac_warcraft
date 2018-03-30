@@ -67,6 +67,9 @@ class Invitation < ApplicationRecord
 
   # for notification
   def create_notifications
+    # 如果是藉由徵招的邀請函不要產生邀請訊息
+    # binding.pry
+    return if RecruitBoard.all.any? { |recruit_board| recruit_board.instance == self.instance}
     actor =  ( recipient == self.user ? self.invitee : self.user )        
     Notification.create(recipient: recipient, actor: actor,
         action: self.state, notifiable: self)
@@ -75,9 +78,12 @@ class Invitation < ApplicationRecord
   private
 
   def setup_state!
+
     if self.state == 'accept' && !instance.is_member?(self.invitee)
       #join invitee into instance
+
       instance.members << invitee
+      # binding.pry
       #要save才會呼叫after_commit
       instance.save
     end

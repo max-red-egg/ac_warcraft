@@ -208,6 +208,7 @@ class Instance < ApplicationRecord
 
     #如果設定在after_commit 會造成查詢次數過多
     #這裡要想一下怎麼改會比較好
+    # binding.pry
     if self.state == 'teaming'
     # 如果是人數已經滿了，則副本開始
       if self.members.length == self.mission.participant_number

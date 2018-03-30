@@ -24,7 +24,7 @@ mission4:
   invitation_number: 1
 
 mission5:
-  name: mission4
+  name: mission5
   level: 1
   participant_number: 2
   invitation_number: 5

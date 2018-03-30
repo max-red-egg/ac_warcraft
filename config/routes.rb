@@ -86,4 +86,10 @@ Rails.application.routes.draw do
     resources :instances, only: [:index]
   end
 
+  resources :recruit_boards, only: [:index, :create, :destroy] do
+    member do
+      post :accept
+    end
+  end
+
 end
