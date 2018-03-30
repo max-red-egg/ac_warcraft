@@ -82,7 +82,30 @@ namespace :dev do
   #   puts "create #{Instance.count} fake instances"
   #   puts "Now you have #{Instance.count} instances!"
   # end
-  
+  task fake_instances: :environment do 
+    Instance.destroy_all
+    Review.destroy_all
+    Mission.where('participant_number >= ? ', 2).each do |mission|
+      3.times do
+       members = User.where('level >= ?', mission.level).sample(2)   
+       instance = mission.instances.build(state: 'teaming', answer:FFaker::Lorem.sentence, xp: mission.xp)
+       instance.members << members
+       instance.save
+       instance.complete!(instance.members[0])
+       puts "generate instance #{instance.mission.name}"
+       instance.reviews.each do |review|
+        review.update!(rating: rand(1..5),submit: true, comment:FFaker::Lorem.sentence)
+        puts "#{review.reviewer.name} give #{review.reviewee.name} #{review.rating} star"
+       end
+
+      end
+    end
+
+  end
+
+
+
+
   task fake_mission_tag: :environment do
     missions = Mission.all
     list = ['Rails, Ruby','JavaScript, CSS','python','node.js','HTML, CSS','JavaScript', 'node.js, vue.js','php','php, css']
