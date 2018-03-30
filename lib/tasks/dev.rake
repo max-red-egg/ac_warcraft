@@ -112,5 +112,12 @@ namespace :dev do
     system 'rails dev:fake_mission_tag'
     system 'rails dev:fake_followships'
   end
+  task reset_average_rating: :environment do 
+    User.all.each do |user|
+      user.set_average_rating_count!
+      puts "#{user.name} : #{user.average_rating_count}"
+    end
+  end
+
 
 end

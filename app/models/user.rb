@@ -178,17 +178,16 @@ class User < ApplicationRecord
     self.followings.include?(other_user)
   end
 
-  def average_rating
-    #所有星星/ 所有評論數
-    total_rating = reviews.submited.inject(0){|sum,review|
-        sum + review.rating
-    }
+  def set_average_rating_count!
+    total_rating = reviews.submited.inject(0){|sum,review|sum + review.rating}
     if(reviews.submited.count > 0)
-      (total_rating.to_f / reviews.submited.count.to_f).round(1)
+      self.average_rating_count = (total_rating.to_f / reviews.submited.count.to_f).round(1)
     else
-      return 0
+      self.average_rating_count = 0
     end
+    self.save
   end
+
 
 
   def self.from_omniauth(auth)
@@ -202,5 +201,6 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
+
 
 end
