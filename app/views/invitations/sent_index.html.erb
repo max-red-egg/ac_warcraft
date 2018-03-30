@@ -36,7 +36,7 @@
           </div>
           <div class="col-xl-9 col-lg-8">
             <div class="card card-default">
-              <div class="card-body" id="invitaions_list">
+              <div class="card-body bb" id="invitaions_list">
                 <table class="table table-hover mb-mails">
                   <tbody>
                     <% @sent_invitations.each do |invitation| %>
@@ -70,9 +70,7 @@
                 </table>
               </div>
               <div class="card-body" >
-                <div class="row justify-content-center">
-                  <%= paginate @sent_invitations %>
-                </div>
+                <%= paginate @sent_invitations %>
               </div>
             </div>
           </div>
