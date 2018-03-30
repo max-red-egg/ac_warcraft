@@ -4,12 +4,12 @@
 (function(window, document, $, undefined) {
 
     $(function() {
-
-        if (!$.fn.easyPieChart) return;
-
+        //console.log("load easypiechart.js")
+        //if (!$.fn.easyPieChart) return;
         // Usage via data attributes
         // <div class="easypie-chart" data-easypiechart data-percent="X" data-optionName="value"></div>
         $('[data-easypiechart]').each(function() {
+            console.log("chart")
             var $elem = $(this);
             var options = $elem.data();
             $elem.easyPieChart(options || {});
