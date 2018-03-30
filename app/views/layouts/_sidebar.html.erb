@@ -23,19 +23,24 @@
           </div>
       </li>
       <!-- END user info-->
-
+      <li class="<%= active_class?(root_path) %>">
+        <%= link_to root_path do %>
+          <em class="icon-shield"></em>
+          <span>戰情中心</span>
+        <% end %>
+      </li>
       <li class="nav-heading">
         <span data-localize="sidebar.heading.HEADER">任務資訊</span>
       </li>
-      <li class="<%= 'active' if controller?('missions') %>">
+      <li class="<%= active_class?(missions_path) %>">
         <%= link_to missions_path do %>
-          <em class="fa fa-briefcase"></em>
+          <em class="icon-layers"></em>
           <span>秘密任務室</span>
         <% end %>
       </li>
       <li class="">
         <a href="#progress" title="progress" data-toggle="collapse">
-          <em class="fa fa-gavel"></em>
+          <em class="icon-fire"></em>
           <span>進行中任務</span>
         </a>
         <ul class="sidebar-nav sidebar-subnav collapse" id="progress">
@@ -55,7 +60,7 @@
       </li>
       <li class="">
         <a href="#teaming" title="teaming" data-toggle="collapse">
-          <em class="fa fa-refresh"></em>
+          <em class="icon-refresh"></em>
           <span>組隊中任務</span>
         </a>
         <ul class="sidebar-nav sidebar-subnav collapse" id="teaming">
@@ -76,7 +81,7 @@
       <li class="<%= active_class?(history_instances_path) %>">
         <%= link_to history_instances_path do %>
           <%= content_tag :div, current_user.unsubmited_review_count, class: "float-right badge badge-danger" if current_user.unsubmited_review_count > 0 %>
-          <em class="fa fa-archive"></em>
+          <em class="icon-grid"></em>
           <span>任務檔案室</span>
         <% end %>
       </li>
@@ -85,7 +90,7 @@
       </li>
       <li class="<%= 'active' if controller?('invitations') %>">
         <%= link_to invitations_path do %>
-          <em class="fa fa-envelope"></em>
+          <em class="icon-envelope"></em>
           <span>任務邀請</span>
         <% end %>
       </li>
@@ -95,13 +100,13 @@
       </li>
       <li class="<%= 'active' if controller?('users') && action?('index') %>">
         <%= link_to users_path do %>
-          <em class="fa fa-users"></em>
+          <em class="icon-people"></em>
           <span>探員資料庫</span>
         <% end %>
       </li>
       <li class="<%= active_class?(user_path(current_user)) %>">
         <%= link_to user_path(current_user) do %>
-          <em class="fa fa-user"></em>
+          <em class="icon-user"></em>
           <span>個人檔案</span>
         <% end %>
       </li>

@@ -1,14 +1,8 @@
 class MissionsController < ApplicationController
   before_action :authenticate_user!
 
-  def my_mission
-    current_instances = current_user.instances.where(state: ['in_progress','teaming'])
+  def dashboard
 
-    if current_instances.count > 0
-      redirect_to instance_path(current_instances.last) # 未來改為導向 mission dashbaord
-    else
-      redirect_to missions_path
-    end
   end
 
   def index

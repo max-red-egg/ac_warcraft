@@ -2,6 +2,7 @@ class Review < ApplicationRecord
   validates :reviewer_id, uniqueness: { scope: [:reviewee_id, :instance_id] }
   validate :rating_validator
   after_commit :create_notifications
+  after_commit :update_user_rating_count!
   belongs_to :instance
   belongs_to :reviewer, class_name: "User"
   belongs_to :reviewee, class_name: "User"
@@ -32,6 +33,11 @@ class Review < ApplicationRecord
   def create_notifications
     if self.submit
       Notification.create(recipient: recipient, actor: actor, action: 'left_review', notifiable: self)
+    end
+  end
+  def update_user_rating_count!
+    if self.submit
+      self.reviewee.set_average_rating_count!
     end
   end
 
