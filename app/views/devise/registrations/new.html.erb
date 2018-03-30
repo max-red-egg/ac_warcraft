@@ -1,6 +1,6 @@
 <div class="block-center mt-4 wd-xl">
    <div class="card card-flat">
-      <div class="card-header text-center bg-success">
+      <div class="card-header text-center bg-dark">
         加入組織？請填寫申請書
       </div>
       <div class="card-body">
@@ -36,7 +36,7 @@
             <%= f.submit "註冊", class: "btn btn-block btn-primary mt-3" %>
             <%- if devise_mapping.omniauthable? %>
               <%- resource_class.omniauth_providers.each do |provider| %>
-                <%= link_to "使用 #{OmniAuth::Utils.camelize(provider)} 註冊", omniauth_authorize_path(resource_name, provider), class: "btn btn-block btn-success mt-3" %>
+                <%= link_to "使用 #{OmniAuth::Utils.camelize(provider)} 註冊", omniauth_authorize_path(resource_name, provider), class: "btn btn-block bg-green-dark mt-3" %>
               <% end -%>
             <% end -%>
          <% end %>

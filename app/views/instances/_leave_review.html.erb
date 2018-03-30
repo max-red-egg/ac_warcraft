@@ -17,7 +17,7 @@
 
 
         <%= simple_form_for review, url: submit_review_path(review) do |f| %>
-          <div class="review_rating from-group">  
+          <div class="review_rating from-group">
             <label for="star5" title="Excellent!">
             <%=f.radio_button :rating, 5, :id => "star5" %>5 Stars</label>
             <label for="star4" title="Good!">
@@ -28,7 +28,7 @@
             <%=f.radio_button :rating, 2, :id => "star2" %>2 Stars</label>
             <label for="star1" title="Very Poor!">
             <%=f.radio_button :rating, 1, :id => "star1" %> 1 Stars</label>
-          </div>        
+          </div>
           <%= f.input :comment, label: false, placeholder:'給個評語吧...'%>
           <%= f.button :submit, '送出', class:"btn btn-primary" %>
         <% end %>

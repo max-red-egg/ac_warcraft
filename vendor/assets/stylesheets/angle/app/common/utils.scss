@@ -32,7 +32,7 @@
   }
 }
 
-@mixin make-bg($bgcolor, $text-color: #fff) {
+@mixin make-bg($bgcolor, $text-color: #eee) {
   background-color: $bgcolor;
   color: $text-color !important;
 }

@@ -17,10 +17,10 @@
                 <%= render partial:'/instances/state/in_progress' %>
               <% when "complete" %>
                 <%= render partial:'/instances/state/complete' %>
-                <div class="text-center"><%= link_to '回任務檔案室', history_instances_path, class: 'btn bg-gray' %></div>
+                <div class="text-center"><%= link_to '回任務檔案室', history_instances_path, class: 'btn bg-gray-darker' %></div>
               <% when "abort" %>
                 <%= render partial:'/instances/state/abort' %>
-                <div class="text-center"><%= link_to '回任務檔案室', history_instances_path, class: 'btn bg-gray' %></div>
+                <div class="text-center"><%= link_to '回任務檔案室', history_instances_path, class: 'btn bg-gray-darker' %></div>
             <% end %>
           </div>
           <div class="col-xl-4">

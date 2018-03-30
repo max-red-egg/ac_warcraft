@@ -37,6 +37,9 @@ hr {
     &.badge-warning {
         color: #fff !important;
     }
+    &.badge-primary {
+        color: #fff !important;
+    }
     &.badge-secondary {
         background-color: $gray-dark;
         color: #fff;
@@ -72,7 +75,7 @@ hr {
 }
 
 .card {
-    border-color: transparent;
+    border-color: $card-default-border-color;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     .card-header {
         border-bottom: 0;
@@ -100,7 +103,7 @@ hr {
     border-color: $card-default-border-color;
 
     .card-header {
-        background-color: #fff;
+        background-color: $gray-700;
     }
 }
 
@@ -178,7 +181,15 @@ hr {
     &.btn-warning {
         color: #fff;
     }
+    &.btn-primary {
+        color: #fff;
+    }
     &.btn-outline-warning {
+        @include hover-focus-active {
+            color: #fff;
+        }
+    }
+    &.btn-outline-primary {
         @include hover-focus-active {
             color: #fff;
         }

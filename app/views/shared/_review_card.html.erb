@@ -1,4 +1,4 @@
-<div class="card col-12 bg-light">
+<div class="card col-12 ">
   <div class="table-responsive">
     <table class="table">
       <tbody>
@@ -12,8 +12,8 @@
           <td class="b0">
             <% if controller?('users') && action?('show') %>
               <p class="h4 mt-0">
-                <a href="#"><%= link_to review.instance.mission.name ,mission_path(review.instance.mission), remote: true %></a>
-                <span class="rounded badge bg-gray px-2 mr-2 text-sm d-none d-lg-inline text-muted">
+                <%= link_to review.instance.mission.name ,mission_path(review.instance.mission), remote: true %>
+                <span class="rounded badge bg-gray-dark px-2 ml-2 text-sm d-none d-lg-inline text-muted">
                 <span class="text-muted">Mission <%= review.instance.state %></span>
                 </span>
               </p>

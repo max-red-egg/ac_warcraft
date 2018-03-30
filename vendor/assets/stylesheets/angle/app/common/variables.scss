@@ -56,7 +56,7 @@ $btn-secondary-bg:                 #fff;
 $btn-secondary-border:             #eaeaea;
 
 // Top Border color for custom default cards (.card-default)
-$card-default-border-color:        #cfdbe2;
+$card-default-border-color:        #8c979a;
 
 
 // ---------------------
@@ -71,7 +71,7 @@ $text-sm:               $font-size-base * 0.74375;
 $text-md:               $font-size-base * 1.6625;
 $text-lg:               $font-size-base * 2.625;
 
-$border-color:          rgba(0,0,0,.12);
+$border-color:          rgba(255,255,255, .32);
 
 $wd-xxs:                60px;
 $wd-xs:                 90px;
@@ -128,8 +128,8 @@ $colors: (
 
 
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
+  "primary":    $warning-dark,
+  "secondary":  $gray-darker,
   "success":    $success,
   "info":       $info,
   "warning":    $warning,
@@ -138,8 +138,8 @@ $theme-colors: (
 
 // Body
 
-$body-bg:                   #f5f7fa;
-$body-color:                #656565;
+$body-bg:                   $gray-darker;
+$body-color:                darken($gray, 5%);
 
 $border-radius:               .25rem;
 $border-radius-lg:            .375rem;
@@ -148,14 +148,14 @@ $line-height-base:            1.528571429;
 
 $headings-line-height:        1.1;
 
-$text-muted:                  #909FA7;
+$text-muted:                  #9eb0b9;
 
 // Tables
 
 $table-accent-bg:             #fafbfc;
-$table-hover-bg:              #fafbfc;
+$table-hover-bg:              $gray-dark;
 
-$table-border-color:          #eee;
+$table-border-color:          $gray-dark;
 
 // Buttons + Forms
 
@@ -170,14 +170,14 @@ $input-btn-padding-x-lg:      1.25rem;
 
 // Forms
 
-$input-disabled-bg:                     $gray-lighter;
-$input-border-color:                    $gray;
-$input-focus-border-color:              #66afe9;
+$input-disabled-bg:                     #495057;
+$input-border-color:                    #999;
+$input-focus-border-color:              $warning;
 $input-placeholder-color:               #b7bac9;
 
 // Dropdowns
 
-$dropdown-border-color:             #e1e1e1;
+$dropdown-border-color:             #848484;
 
 // Navs
 
@@ -189,7 +189,7 @@ $jumbotron-bg:                      #fcfcfc;
 
 // List group
 
-$list-group-border-color:           #e4eaec;
+$list-group-border-color:           #848484;
 
 // Image thumbnails
 

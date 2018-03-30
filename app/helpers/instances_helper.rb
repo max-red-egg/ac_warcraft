@@ -2,7 +2,7 @@ module InstancesHelper
   def abort_button(instance)
     if instance.present?
       if instance.state == 'in_progress'
-        link_to('放棄任務', abort_instance_path, method: :post, class: "btn btn-danger btn-oval", data: { confirm: "跟組員溝通過了嗎，確定要放棄任務？" })
+        link_to('放棄任務', abort_instance_path, method: :post, class: "btn bg-danger-dark btn-oval", data: { confirm: "跟組員溝通過了嗎，確定要放棄任務？" })
       end
     end
   end
@@ -10,7 +10,7 @@ module InstancesHelper
   def cancel_button(instance)
     if instance.present?
       if instance.state == 'teaming'
-        link_to('放棄組隊', cancel_instance_path, method: :post, class: "btn btn-danger btn-oval", data: { confirm: "放棄組隊後，所有邀請函皆會失效。\n\n確定要放棄組隊？" })
+        link_to('放棄組隊', cancel_instance_path, method: :post, class: "btn bg-danger-dark btn-oval", data: { confirm: "放棄組隊後，所有邀請函皆會失效。\n\n確定要放棄組隊？" })
       end
     end
   end

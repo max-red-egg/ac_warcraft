@@ -13,14 +13,17 @@
 // If modified or removed make sure to check the variable
 // shared with other components
 // -------------------------------------------------------------
+
+
 $aside-wd:                                220px;
 $aside-wd-collapsed:                      70px;
 $aside-wd-collapsed-text:                 90px;
-$aside-bg:                                #fff;
+$aside-bg:                                $inverse-light;
 
-$content-bg:                              $body-bg;
-$content-heading-bg:                      #fafbfc;
-$content-heading-border:                  #cfdbe2;
+$wrapper-bg:                              darken($aside-bg, 10%);
+$content-bg:                              $wrapper-bg;
+$content-heading-bg:                      $content-bg;
+$content-heading-border:                  $gray-dark;
 $content-padding:                         20px;
 
 $footer-hg:                               60px;
@@ -53,6 +56,7 @@ body {
     height: auto;
     min-height: 100%;
     overflow-x: hidden;
+    background-color: $wrapper-bg;
     &.ng-leave {
         display: none;
     }
@@ -139,7 +143,7 @@ body {
         align-items: center;
         font-size: 1.5rem;
         line-height: $headings-line-height;
-        color: #929292;
+        color: darken($gray, 10%);
         margin: -15px;
         margin-bottom: 20px;
         padding: 15px;

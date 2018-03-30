@@ -19,7 +19,7 @@
               <div class="row py-4 justify-content-center">
                 <% @instances_history.each do|instance| %>
                   <div class="col-6 col-lg-4 col-xl-3">
-                    <div class="card border-dark">
+                    <div class="card">
                       <% if review_submited?(instance,current_user) %>
                         <div class="ribbon-wrapper">
                           <div class="ribbon bg-danger">尚未給評</div>

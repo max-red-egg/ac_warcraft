@@ -1,10 +1,10 @@
 <div class="block-center mt-4 wd-xl">
    <div class="card card-flat">
-      <div class="card-header text-center bg-success">
-        下班了嗎？請驗證你的身份
+      <div class="card-header text-center bg-dark">
+        開始進行 ERM 身份驗證
       </div>
       <div class="card-body">
-        <p class="text-center py-2">登入後繼續</p>
+        <p class="text-center py-2">輸入後繼續</p>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'mb-3'}) do |f| %>
           <div class="form-group">
             <div class="input-group with-focus">
@@ -35,7 +35,7 @@
             <%= f.submit "登入", class: "btn btn-block btn-primary mt-3" %>
             <%- if devise_mapping.omniauthable? %>
               <%- resource_class.omniauth_providers.each do |provider| %>
-                <%= link_to "使用 #{OmniAuth::Utils.camelize(provider)} 登入", omniauth_authorize_path(resource_name, provider), class: "btn btn-block btn-success mt-3" %>
+                <%= link_to "使用 #{OmniAuth::Utils.camelize(provider)} 登入", omniauth_authorize_path(resource_name, provider), class: "btn btn-block bg-green-dark mt-3" %>
               <% end -%>
             <% end -%>
          <% end %>
