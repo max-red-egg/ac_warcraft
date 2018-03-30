@@ -18,5 +18,3 @@
 //= require jquery-slimscroll/jquery.slimscroll
 //--- Screenfull
 //= require screenfull/dist/screenfull
-//--- Localize
-//= require jquery-localize/dist/jquery.localize
