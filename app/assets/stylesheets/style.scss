@@ -206,3 +206,21 @@ a[data-behavior='notification-item']{
     color: #fff;
   }
 }
+
+
+/* dashboard */
+.dashboard{
+}
+.dashboard-moniter{
+
+}
+.dashboard .card, .dashboard .card.card-default{
+ margin-bottom: 1px;
+ border-radius: 0px;
+ border: 0px;
+ background-color: #262626;
+}
+.dashboard .card .card-footer{
+  background-color: #1f1f1f;
+}
+
