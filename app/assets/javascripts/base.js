@@ -1,6 +1,8 @@
 // This is a manifest file that'll be compiled into base.js, which will include all the files
 // listed below.
 
+//--- Google Tag Manager
+//= require gtm
 //--- Modernizr
 //= require modernizr/modernizr
 //--- jQuery
