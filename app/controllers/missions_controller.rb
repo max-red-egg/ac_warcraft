@@ -7,11 +7,16 @@ class MissionsController < ApplicationController
     @instance_complete_count = instances.find_complete.count
     @reviews = Review.all
     @users = User.all
-
+    
     # 任務達成率
     @achievement_rate = ((@instance_complete_count.to_f / instances.count.to_f )*100).round
 
+    # 探員龍虎榜
     @top_agents = @users.ordered_by_xp.limit(5)
+
+    # 前線戰情匯報
+    @followings_instance_activities = UserInstance.find_by_followings(current_user).limit(10).includes(:instance).includes(:user).includes(:mission).order('instances.updated_at DESC')
+
 
   end
 
