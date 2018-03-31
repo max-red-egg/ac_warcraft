@@ -11,6 +11,7 @@ class MissionsController < ApplicationController
     # 任務達成率
     @achievement_rate = ((@instance_complete_count.to_f / instances.count.to_f )*100).round
 
+    @top_agents = @users.ordered_by_xp.limit(5)
 
   end
 

@@ -14,7 +14,6 @@ class User < ApplicationRecord
   has_many :instances, through: :user_instances
   has_many :missions, through: :instances
 
-
   has_many :invitations
   has_many :invite_msgs
 
@@ -33,6 +32,17 @@ class User < ApplicationRecord
   has_many :followers, through: :inverse_followships, source: :user # 從inverse_followships表裡面的user欄位去找
   has_many :recruit_boards
 
+
+scope :ordered_by_xp, ->{ order(xp: :desc) }
+
+scope :can_be_invited, ->(instance){
+  where('level >= ? AND available = ?',instance.mission.level,true
+    ).where.not(
+      id: User.joins(:user_instances).where('user_instances.instance_id = ? ',instance.id)
+    ).where.not(
+      id: User.joins('JOIN invitations ON invitations.invitee_id = users.id').where('invitations.instance_id = ? AND invitations.state = ?',instance.id,'inviting')
+    )
+}
   filterrific(
     default_filter_params: {
       sorted_by: 'name_asc',
@@ -45,14 +55,7 @@ class User < ApplicationRecord
       :range_level
     ]
   )
-  scope :can_be_invited, ->(instance){
-    where('level >= ? AND available = ?',instance.mission.level,true
-      ).where.not(
-        id: User.joins(:user_instances).where('user_instances.instance_id = ? ',instance.id)
-      ).where.not(
-        id: User.joins('JOIN invitations ON invitations.invitee_id = users.id').where('invitations.instance_id = ? AND invitations.state = ?',instance.id,'inviting')
-      )
-  }
+
 
   scope :search_query, lambda { |query|
     return nil  if query.blank?
@@ -202,8 +205,6 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
-
-  
 
   def not_in_banned_mission_list(mission)
     # 先找出正在進行中或組隊中的副本

@@ -297,26 +297,28 @@
 
           </div>  <!-- col-lg-8 end -->
 
+          <!-- 探員龍虎榜 start -->
           <div class="col">
             <div class="card">
               <div class="card-header">
                 <div class="card-title">探員龍虎榜</div>
               </div>
             </div>
-            <% 5.times do %>
+            <% @top_agents.each do |agent| %>
             <div class="card">
               <div class="card-body">
                 <div class="row align-items-center">
                   <div class="col-5 text-center">
-                    <img class="img-thumbnail circle img-fluid thumb96" src="http://facemood.grtimed.com/media/user/img/0dcf898f8c58496a86f42293f1ab397b.png" alt="Image">
+                    <%= image_tag agent.avatar_url, class: 'img-thumbnail circle img-fluid thumb96'%>
+                    <!-- <img class="img-thumbnail circle img-fluid thumb96" src="http://facemood.grtimed.com/media/user/img/0dcf898f8c58496a86f42293f1ab397b.png" alt="Image"> -->
                   </div>
                   <div class="col-7">
-                    <div class="text-right"><a class="btn btn-success btn-sm" href="#">Follow</a>
+                    <div class="text-right"><%= render partial: "shared/follow", locals: {user: agent} if agent != current_user %>
                     </div>
                     <div class="d-flex">
                       <div class="text-left">
-                        <h3 class="mt-0">Sarah Pierce</h3>
-                        <p class="text-muted">150 Following / 100 Followers</p>
+                        <h3 class="mt-0"><%=link_to agent.name, user_path(agent) %></h3>
+                        <p class="text-muted"><%= agent.xp %> xp / 已剷除<%= agent.instances_completed_count %>隻霸閣</p>
                       </div>
                     </div>
                   </div>
@@ -325,6 +327,7 @@
             </div>
             <%end%>
           </div>  <!-- col end -->
+          <!-- 探員龍虎榜 end -->
         </div>  <!-- row end -->
       
         <div class="row mt-3">
