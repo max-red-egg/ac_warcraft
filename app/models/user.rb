@@ -229,6 +229,7 @@ scope :can_be_invited, ->(instance){
     self.save
   end
 
+
   # 拿repos的名字與網址
   def github_repos
     user = Octokit.user "#{self.github_username}"
@@ -252,5 +253,6 @@ scope :can_be_invited, ->(instance){
     repos = user.rels[:repos].get.data
     repos.count
   end
+
 
 end

@@ -137,6 +137,16 @@ namespace :dev do
     end
   end
 
+  task reset_instances_count_user: :environment do 
+    User.all.each do |user|
+      user.update_instances_completed_count!
+      user.instances_count = user.instances.count
+      puts "#{user.name} : #{user.instances_completed_count}: #{user.instances_count}"
+    end
+  end
+
+
+
   task fake_all: :environment do
     system 'rails db:reset' if Rails.env == 'development'
     system 'rails db:migrate'
