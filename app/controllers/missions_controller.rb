@@ -2,6 +2,15 @@ class MissionsController < ApplicationController
   before_action :authenticate_user!
 
   def dashboard
+    @missions = Mission.all
+    instances = Instance.all
+    @instance_complete_count = instances.find_complete.count
+    @reviews = Review.all
+    @users = User.all
+
+    # 任務達成率
+    @achievement_rate = ((@instance_complete_count.to_f / instances.count.to_f )*100).round
+
 
   end
 
