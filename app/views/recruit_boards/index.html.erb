@@ -15,6 +15,22 @@
             </div>
           <% end %>
         </div>
+        <!--github相關helper使用範例-->
+        <% if current_user.have_github_username? %>
+        <!-- 列出使用者全部repos的連結 -->
+          <div class="col-sm-6 col-lg-4 col-xl-3 my-3">
+            <ul>
+              <% repo_links(current_user, "btn btn-primary").each do |repo_link| %>
+                <!-- 此方法第一個參數是user, 第二個參數為class value -->
+                <li><%= repo_link %></li>
+              <% end %>
+            </ul>
+
+            <br>
+            <!-- 顯示使用者的repo -->
+            <%= link_to "#{current_user.name}(#{current_user.github_repos_count} repos)", current_user.github_url %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
