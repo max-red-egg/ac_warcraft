@@ -1,0 +1,7 @@
+zh-TW:
+  views:
+    pagination:
+      first: '&laquo;'
+      previous: '<'
+      next: '>'
+      last: '&raquo;'
