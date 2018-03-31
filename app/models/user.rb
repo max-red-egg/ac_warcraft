@@ -221,4 +221,10 @@ class User < ApplicationRecord
     !banned_missions.include?(mission)
   end
 
+  def update_instances_completed_count!
+    self.instances_completed_count = self.instances.find_complete.count
+    self.save
+  end
+
+
 end

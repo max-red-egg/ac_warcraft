@@ -141,6 +141,12 @@ namespace :dev do
       puts "#{user.name} : #{user.average_rating_count}"
     end
   end
-
+  task reset_instances_count_user: :environment do 
+    User.all.each do |user|
+      user.update_instances_completed_count!
+      user.instances_count = user.instances.count
+      puts "#{user.name} : #{user.instances_completed_count}: #{user.instances_count}"
+    end
+  end
 
 end
