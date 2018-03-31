@@ -16,7 +16,10 @@ class InstancesController < ApplicationController
   def show
     @mission = @instance.mission
     @members = @instance.members
-
+    # if current_user.github_username
+    #   @repos = current_user.github_repos
+    # end
+    # binding.pry
     if @instance.state == "teaming"
 
       # 篩選使用者 & 列出所有可被邀請的使用者

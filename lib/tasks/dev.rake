@@ -140,7 +140,7 @@ namespace :dev do
 
 
   task fake_all: :environment do
-    system 'rails db:reset'
+    system 'rails db:reset' if Rails.env == 'development'
     system 'rails db:migrate'
     system 'rails dev:fake_user'
     system 'rails dev:fake_mission'
