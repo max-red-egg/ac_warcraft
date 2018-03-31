@@ -23,7 +23,8 @@ class MissionsController < ApplicationController
   def challenge
     #挑戰一個任務
     mission = Mission.find(params[:id])
-    if current_user.take_mission?(mission)
+    # binding.pry
+    if current_user.take_mission?(mission) && current_user.not_in_banned_mission_list(mission)
       #如果user可以挑戰這個任務
       #產生一個新副本
       instance = current_user.instances.create(mission_id: params[:id])
@@ -59,7 +60,8 @@ class MissionsController < ApplicationController
     # 抓出要邀請的user
     user = User.find(params[:select_user])
     # 先建立instance
-    if current_user.take_mission?(mission)
+    # binding.pry
+    if current_user.take_mission?(mission) && current_user.not_in_banned_mission_list(mission)
       instance = current_user.instances.create(mission_id: params[:id])
       instance.xp = mission.xp
       instance.save!
