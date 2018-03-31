@@ -197,13 +197,12 @@ class User < ApplicationRecord
       user.uid = auth.uid
       # binding.pry
       user.name = auth.info.name ? auth.info.name : auth.info.nickname
+      user.github_username = auth.info.nickname
       user.email = auth.info.email
       user.confirmed_at = Time.zone.now
       user.password = Devise.friendly_token[0,20]
     end
   end
-
-  
 
   def not_in_banned_mission_list(mission)
     # 先找出正在進行中或組隊中的副本
@@ -219,6 +218,30 @@ class User < ApplicationRecord
     end
     banned_missions = self_initiated_instances.map { |instance| instance.mission }.uniq
     !banned_missions.include?(mission)
+  end
+
+  # 拿repos的名字與網址
+  def github_repos
+    user = Octokit.user "#{self.github_username}"
+    repos = user.rels[:repos].get.data.sort_by { |repo| repo.updated_at }.reverse
+    repo_names = repos.map { |repo| repo.name }
+    repo_urls = repos.map { |repo| repo.html_url }
+    repo_names.zip(repo_urls)
+  end
+  # 確認此user是用github登入
+  def have_github_username?
+    self.github_username
+  end
+  # 拿user的github網址
+  def github_url
+    user = Octokit.user "#{self.github_username}"
+    user.html_url
+  end
+  # 算user的repo數量
+  def github_repos_count
+    user = Octokit.user "#{self.github_username}"
+    repos = user.rels[:repos].get.data
+    repos.count
   end
 
 end

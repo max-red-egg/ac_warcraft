@@ -18,5 +18,11 @@ module UsersHelper
       gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
     end
   end
+
+  def repo_links(user, class_value = '')
+    user.github_repos.map do |repo|
+      link_to repo[0], repo[1], class: class_value
+    end
+  end
 end
  
