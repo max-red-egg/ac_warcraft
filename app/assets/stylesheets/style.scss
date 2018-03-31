@@ -214,7 +214,7 @@ a[data-behavior='notification-item']{
 .dashboard-moniter{
 
 }
-.dashboard .card, .dashboard .card.card-default{
+.dashboard .card, .dashboard .card.card-default, .dashboard .card .card-header{
  margin-bottom: 1px;
  border-radius: 0px;
  border: 0px;
@@ -223,4 +223,14 @@ a[data-behavior='notification-item']{
 .dashboard .card .card-footer{
   background-color: #1f1f1f;
 }
+.fa-stack .icon-fire, .fa-stack .icon-refresh,.fa-stack .icon-check,.fa-stack .icon-fire,.fa-stack .icon-info {
+  line-height: inherit;
+}
+.dashboard .activity-board-content{
+  height: 330px;
+  overflow: scroll;
+}
 
+.dashboard .activity-board-content .list-group-item{
+  border: 0px;
+}

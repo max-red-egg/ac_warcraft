@@ -164,131 +164,22 @@
               <!-- ERM放送台 end -->
               
               <!-- 前線戰情彙報 start -->
-              <div class="card card-default mt-3">
+              <div class="card card-default mt-3 activity-board">
                 <div class="card-header">
                   <div class="card-title">前線戰情彙報</div>
                 </div>
+                <div class="activity-board-content">
                  <!-- START list group-->
                 <div class="list-group">
                   <!-- START list group item-->
-                  <div class="list-group-item">
-                      <div class="media">
-                        <div class="align-self-start mr-2">
-                          <span class="fa-stack">
-                            <em class="fa fa-circle fa-stack-2x text-purple"></em>
-                            <em class="fa fa-cloud-upload fa-stack-1x fa-inverse text-white"></em>
-                          </span>
-                        </div>
-                        <div class="media-body text-truncate">
-                           <p class="mb-1"><a class="text-purple m-0" href="#">NEW FILE</a>
-                           </p>
-                           <p class="m-0">
-                              <small><a href="#">Bootstrap.xls</a>
-                              </small>
-                           </p>
-                        </div>
-                        <div class="ml-auto">
-                          <small class="text-muted ml-2">15m</small>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- END list group item-->
-                    <!-- START list group item-->
-                    <div class="list-group-item">
-                       <div class="media">
-                          <div class="align-self-start mr-2">
-                             <span class="fa-stack">
-                                <em class="fa fa-circle fa-stack-2x text-info"></em>
-                                <em class="fa fa-file-text-o fa-stack-1x fa-inverse text-white"></em>
-                             </span>
-                          </div>
-                          <div class="media-body text-truncate">
-                             <p class="mb-1"><a class="text-info m-0" href="#">NEW DOCUMENT</a>
-                             </p>
-                             <p class="m-0">
-                                <small><a href="#">Bootstrap.doc</a>
-                                </small>
-                             </p>
-                          </div>
-                          <div class="ml-auto">
-                             <small class="text-muted ml-2">2h</small>
-                          </div>
-                       </div>
-                    </div>
-                    <!-- END list group item-->
-                    <!-- START list group item-->
-                    <div class="list-group-item">
-                       <div class="media">
-                          <div class="align-self-start mr-2">
-                             <span class="fa-stack">
-                                <em class="fa fa-circle fa-stack-2x text-danger"></em>
-                                <em class="fa fa-exclamation fa-stack-1x fa-inverse text-white"></em>
-                             </span>
-                          </div>
-                          <div class="media-body text-truncate">
-                             <p class="mb-1"><a class="text-danger m-0" href="#">BROADCAST</a>
-                             </p>
-                             <p class="m-0"><a href="#">Read</a>
-                             </p>
-                          </div>
-                          <div class="ml-auto">
-                             <small class="text-muted ml-2">5h</small>
-                          </div>
-                       </div>
-                    </div>
-                    <!-- END list group item-->
-                    <!-- START list group item-->
-                    <div class="list-group-item">
-                       <div class="media">
-                          <div class="align-self-start mr-2">
-                             <span class="fa-stack">
-                                <em class="fa fa-circle fa-stack-2x text-success"></em>
-                                <em class="fa fa-clock-o fa-stack-1x fa-inverse text-white"></em>
-                             </span>
-                          </div>
-                          <div class="media-body text-truncate">
-                             <p class="mb-1"><a class="text-success m-0" href="#">NEW MEETING</a>
-                             </p>
-                             <p class="m-0">
-                                <small>On
-                                   <em>10/12/2015 09:00 am</em>
-                                </small>
-                             </p>
-                          </div>
-                          <div class="ml-auto">
-                             <small class="text-muted ml-2">15h</small>
-                          </div>
-                       </div>
-                    </div>
-                    <!-- END list group item-->
-                    <!-- START list group item-->
-                    <div class="list-group-item">
-                       <div class="media">
-                          <div class="align-self-start mr-2">
-                             <span class="fa-stack">
-                                <em class="fa fa-circle fa-stack-2x text-warning"></em>
-                                <em class="fa fa-tasks fa-stack-1x fa-inverse text-white"></em>
-                             </span>
-                          </div>
-                          <div class="media-body text-truncate">
-                             <p class="mb-1"><a class="text-warning m-0" href="#">TASKS COMPLETION</a>
-                             </p>
-                             <div class="progress progress-xs m-0">
-                                <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" style="width: 22%;">
-                                   <span class="sr-only">22% Complete</span>
-                                </div>
-                             </div>
-                          </div>
-                          <div class="ml-auto">
-                             <small class="text-muted ml-2">1w</small>
-                          </div>
-                       </div>
-                    </div>
-                    <!-- END list group item-->
+                  <% @followings_instance_activities.each do |user_instance| %>
+                    <%=render partial:'following_activity',locals: {user_instance: user_instance} %>
+                  <%end%>
                  </div>
                  <!-- END list group-->
                  <!-- START card footer-->
-                 <div class="card-footer"><a class="text-sm" href="#">Load more</a>
+                 </div>
+                 <div class="card-footer"><p class="text-right"><small class="text-muted text-right">前線資料傳送於<%= Time.now.strftime("%Y-%m-%d %H:%M")%></small></p>
                  </div>
                  <!-- END card-footer-->
               </div>

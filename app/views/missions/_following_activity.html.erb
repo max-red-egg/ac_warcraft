@@ -1,0 +1,102 @@
+<div class="list-group-item">
+  <div class="media">
+
+  <% case user_instance.instance.state%>
+  <% when 'teaming' %>
+
+    <!-- 組隊中 -->
+    <div class="align-self-start mr-2">
+      <span class="fa-stack">
+        <em class="fa fa-circle fa-stack-2x text-purple"></em>
+        <em class="fa icon-refresh fa-stack-1x fa-inverse text-white"></em>
+      </span>
+    </div>
+    <div class="media-body text-truncate">
+       <p class="mb-1 text-purple"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user),class: 'text-purple m-0' %> 探員正準備挑戰 <%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission) ,class: 'text-purple m-0' %>任務 </a>
+       </p>
+       <p class="m-0">
+          <small> 組隊中
+          </small>
+       </p>
+    </div>
+
+
+  <% when 'cancel' %>
+  <!-- 任務取消 -->
+  <div class="align-self-start mr-2">
+    <span class="fa-stack">
+      <em class="fa fa-circle fa-stack-2x text-info"></em>
+      <em class="fa fa-certificate fa-stack-1x fa-inverse text-white"></em>
+    </span>
+  </div>
+  <div class="media-body text-truncate">
+     <p class="mb-1 text-info"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user),class: 'text-info m-0' %> 探員已經取消<%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission) ,class: 'text-info m-0' %> 任務組隊</a>
+     </p>
+     <p class="m-0">
+        <small>
+          是不是找不到人呢？試著約約看他吧？
+        </small>
+     </p>
+  </div>
+
+
+  <% when 'in_progress' %>
+  <!-- 任務進行中 -->
+  <div class="align-self-start mr-2">
+    <span class="fa-stack">
+      <em class="fa fa-circle fa-stack-2x text-danger"></em>
+      <em class="fa icon-fire fa-stack-1x fa-inverse text-white"></em>
+    </span>
+  </div>
+  <div class="media-body text-truncate">
+     <p class="mb-1 text-danger"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user),class: 'text-danger m-0' %> 探員正在執行 <%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission) ,class: 'text-danger m-0' %> 任務，與霸閣熱烈決鬥中 </a>
+     </p>
+     <p class="m-0">
+        <small>祈禱任務順利進行吧
+        </small>
+     </p>
+  </div>
+
+  <% when 'complete' %>
+  <!-- 任務完成 -->
+  <div class="align-self-start mr-2">
+    <span class="fa-stack">
+      <em class="fa fa-circle fa-stack-2x text-success"></em>
+      <em class="fa icon-check fa-stack-1x fa-inverse text-white"></em>
+    </span>
+  </div>
+  <div class="media-body text-truncate">
+     <p class="mb-1 text-success"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user),class: 'text-success m-0' %> 探員已經解了 <%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission) ,class: 'text-success m-0' %> 任務的霸閣 </a>
+     </p>
+     <p class="m-0 text-success-dark">
+        <small><% user_instance.user.name%> 經驗值+ <%= user_instance.instance.xp %>
+        </small>
+     </p>
+  </div>
+
+
+  <% when 'abort' %>
+  <!-- 任務中止 -->
+  <div class="align-self-start mr-2">
+    <span class="fa-stack">
+      <em class="fa fa-circle fa-stack-2x text-warning"></em>
+      <em class="fa icon-info fa-stack-1x fa-inverse text-white"></em>
+    </span>
+  </div>
+  <div class="media-body text-truncate">
+     <p class="mb-1 text-warning"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user),class: 'text-warning m-0' %> 探員參與的 <%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission) ,class: 'text-warning m-0' %> 任務已終止，宣告失敗。 </a>
+     </p>
+     <p class="m-0 text-warning-dark">
+        <small> 這隻霸閣太刁鑽...
+        </small>
+     </p>
+  </div>
+
+  <%end%>
+
+
+    <div class="ml-auto">
+      <small class="text-muted ml-2"><%= time_ago_in_words user_instance.instance.updated_at %></small>
+    </div>
+  </div>
+</div>
