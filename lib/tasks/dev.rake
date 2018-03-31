@@ -97,14 +97,9 @@ namespace :dev do
         review.update!(rating: rand(1..5),submit: true, comment:FFaker::Lorem.sentence)
         puts "#{review.reviewer.name} give #{review.reviewee.name} #{review.rating} star"
        end
-
       end
     end
-
   end
-
-
-
 
   task fake_mission_tag: :environment do
     missions = Mission.all
@@ -127,14 +122,6 @@ namespace :dev do
     puts "have created 100 fake follow" 
   end
 
-  task fake_all: :environment do
-    system 'rails dev:fake_user'
-    system 'rails dev:fake_mission'
-    system 'rails dev:fake_xp'
-    # system 'rails dev:fake_instances'
-    system 'rails dev:fake_mission_tag'
-    system 'rails dev:fake_followships'
-  end
   task reset_average_rating: :environment do 
     User.all.each do |user|
       user.set_average_rating_count!
@@ -142,5 +129,15 @@ namespace :dev do
     end
   end
 
-
+  task fake_all: :environment do
+    system 'rails db:reset'
+    system 'rails db:migrate'
+    system 'rails dev:fake_user'
+    system 'rails dev:fake_mission'
+    system 'rails dev:fake_xp'
+    system 'rails dev:fake_instances'
+    system 'rails dev:fake_mission_tag'
+    system 'rails dev:fake_followships'
+    system 'rails dev:reset_average_rating'
+  end
 end
