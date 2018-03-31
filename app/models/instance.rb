@@ -4,7 +4,7 @@ class Instance < ApplicationRecord
   has_many :user_instances, dependent: :destroy
 
   #instance.members 表示此副本的所有成員
-  has_many :members, through: :user_instances, source: :user
+  has_many :members, through: :user_instances, source: :user, counter_cache: :instances_count
 
   #instance.mission 表示本隊的任務
   belongs_to :mission
@@ -47,9 +47,12 @@ class Instance < ApplicationRecord
       end
 
       self.members.each do |member|
+        # 更新xp
         member.add_xp(self.xp)
         puts "member #{member.name} add xp #{self.xp}"
         member.save
+        # 更新complete count
+        member.update_instances_completed_count!
       end
 
 
@@ -214,5 +217,6 @@ class Instance < ApplicationRecord
       end
     end
   end
+
 
 end

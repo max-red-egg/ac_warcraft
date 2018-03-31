@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2018_03_31_051034) do
 
   # These are extensions that must be enabled in order to support this database
@@ -172,6 +173,8 @@ ActiveRecord::Schema.define(version: 2018_03_31_051034) do
     t.string "provider"
     t.string "uid"
     t.float "average_rating_count", default: 0.0, null: false
+    t.integer "instances_count", default: 0
+    t.integer "instances_completed_count", default: 0
     t.string "github_username"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
