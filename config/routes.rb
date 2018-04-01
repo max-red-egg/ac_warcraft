@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       post :invite
+      get :repos
     end
 
     collection do

@@ -117,6 +117,10 @@ class UsersController < ApplicationController
 
   end
 
+  def repos
+    @repos = current_user.github_repos
+  end
+
   private
 
   def user_params
