@@ -1,5 +1,5 @@
 class UserInstance < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, counter_cache: :instances_count
   belongs_to :instance
   has_one :mission, through: :instance
 
