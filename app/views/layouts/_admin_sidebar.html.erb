@@ -29,6 +29,12 @@
           <span>副本管理</span>
         <% end %>
       </li>
+      <li class="<%= active_class?(admin_announcements_path) %>">
+        <%= link_to admin_announcements_path do %>
+          <em class="icon-microphone"></em>
+          <span>公告管理</span>
+        <% end %>
+      </li>
     </ul>
   </nav>
 </div>
