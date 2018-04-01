@@ -37,6 +37,12 @@ class Admin::AnnouncementsController < ApplicationController
     end
   end
 
+  def destroy
+    @announcement.destroy
+    flash[:notice] = "announcement delete"
+    redirect_to admin_announcements_path
+  end
+
   private
 
   def announcement_params
