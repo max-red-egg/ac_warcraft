@@ -13,45 +13,16 @@
   <div class="card-body bb">
 
     <div class="row mb-4">
+      <div class="col-12 d-flex justify-content-between">
+        <h4>尋找想要合作的探員</h4>
+        <span class="btn bg-inverse-light btn-sm btn-oval">你還可發送 <span class="font-weight-bold" id="remaining_invitations"><%=@remaining_invitations_count%></span> 張邀請</span>
+      </div>
       <div class="col-12">
-        <h3>可選隊員</h3>
-        <h5><span class="badge badge-info">你還可發送 <span id="remaining_invitations"><%=@remaining_invitations_count%></span> 張邀請</span></h5>
+        不想慢慢邀請？你還可以選擇： <%= link_to '發動緊急招募', recruit_boards_path(instance_id: params[:id]), method: :post, class: 'btn btn-sm btn-primary btn-oval ml-1 px-2 py-1' if @instance.state == "teaming" %>
       </div>
     </div>
 
-    <div class="row mb-4 ">
-      <div class="col bg-inverse-light card mx-3">
-        <%= form_for_filterrific @filterrific do |f| %>
-        <div class="form-row card-body">
-            <div class="col-md-3 form-group" data-intro="Search by name or email." data-position="top">
-              <label>Search</label>
-              <%= f.text_field :search_query, class: "form-control" %>
-            </div>
-
-            <div class="form-group col-md-3" >
-              <label>Gender</label>
-              <%= f.select(:with_gender, @filterrific.select_options[:with_gender],
-                { include_blank: '- 不限 -' }, {class: "form-control"}
-              ) %>
-            </div>
-
-            <div class="form-group col-md-3" >
-              <label>Level</label>
-              <%= f.select(:range_level, @filterrific.select_options[:range_level],
-                { include_blank: '- 不限 -' }, {class: "form-control"}
-              ) %>
-            </div>
-
-            <div class="form-group col-md-3" >
-              <label>Sorted by</label>
-              <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by],{}, {class: "form-control"} ) %>
-            </div>
-          </div>
-          <%= render_filterrific_spinner %>
-        <% end %>
-      </div>
-    </div>
-
+    <%= render( partial: 'shared/filterrific_user_form' ) %>
     <%= render( partial: 'candidates_list', locals: { candidates: @candidates } ) %>
   </div>
 </div>
