@@ -33,16 +33,17 @@ class User < ApplicationRecord
   has_many :recruit_boards
 
 
-scope :ordered_by_xp, ->{ order(xp: :desc) }
+  scope :ordered_by_xp, ->{ order(xp: :desc) }
 
-scope :can_be_invited, ->(instance){
-  where('level >= ? AND available = ?',instance.mission.level,true
-    ).where.not(
-      id: User.joins(:user_instances).where('user_instances.instance_id = ? ',instance.id)
-    ).where.not(
-      id: User.joins('JOIN invitations ON invitations.invitee_id = users.id').where('invitations.instance_id = ? AND invitations.state = ?',instance.id,'inviting')
-    )
-}
+  scope :can_be_invited, ->(instance){
+    where('level >= ? AND available = ?',instance.mission.level,true
+      ).where.not(
+        id: User.joins(:user_instances).where('user_instances.instance_id = ? ',instance.id)
+      ).where.not(
+        id: User.joins('JOIN invitations ON invitations.invitee_id = users.id').where('invitations.instance_id = ? AND invitations.state = ?',instance.id,'inviting')
+      )
+  }
+
   filterrific(
     default_filter_params: {
       sorted_by: 'name_asc',
@@ -51,11 +52,10 @@ scope :can_be_invited, ->(instance){
       :sorted_by,
       :search_query,
       :with_gender,
-      :with_following,
+      :with_followtype,
       :with_level
     ]
   )
-
 
   scope :search_query, lambda { |query|
     return nil  if query.blank?
@@ -104,10 +104,21 @@ scope :can_be_invited, ->(instance){
     where(gender: [*genders])
   }
 
-  scope :with_following, lambda { |user_id|
-    where(
-      id: User.joins(:followships).where('followships.user_id = ? ', user_id ).pluck(:following_id)
-    )
+  scope :with_followtype, lambda { |followtype|
+
+    user_id = followtype.split("_")[0]
+    type = followtype.split("_")[1]
+
+    if type == 'following'
+      where(
+        id: User.joins(:followships).where('followships.user_id = ? ', user_id ).select(:following_id)
+      )
+    elsif type == 'follower'
+      where(
+        id: User.joins(:followships).where('followships.following_id = ? ', user_id ).select(:user_id)
+      )
+    else
+    end
   }
 
   # always include the lower boundary for semi open intervals

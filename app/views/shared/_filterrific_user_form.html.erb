@@ -9,11 +9,14 @@
         <div class="form-group col-md-4" >
           <h5>追蹤狀態</h5>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-dark <%= 'active' if @filterrific.with_following.blank? %> ">
-              <%= f.radio_button :with_following, '' %> 不限
+            <label class="btn btn-dark <%= 'active' if @filterrific.with_followtype.blank? %> ">
+              <%= f.radio_button :with_followtype, '' %> 不限
             </label>
-            <label class="btn btn-dark <%= 'active' if @filterrific.with_following.present? %> ">
-              <%= f.radio_button :with_following, current_user.id %> 正在追蹤
+            <label class="btn btn-dark <%= 'active' if @filterrific.with_followtype == "#{current_user.id}_following" %> ">
+              <%= f.radio_button :with_followtype, "#{current_user.id}_following" %> 我追蹤的人
+            </label>
+            <label class="btn btn-dark <%= 'active' if @filterrific.with_followtype == "#{current_user.id}_follower" %> ">
+              <%= f.radio_button :with_followtype, "#{current_user.id}_follower" %> 追蹤我的人
             </label>
           </div>
         </div>

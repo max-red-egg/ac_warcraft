@@ -14,4 +14,4 @@ zh-TW:
           one: "共有 <b>1</b> 筆資料"
           other: "共有 <b> %{count}</b> 筆資料"
       more_pages:
-        display_entries: "顯示 <b>%{total}</b> 筆 %{entry_name} 中的第 <b>%{first}&nbsp;-&nbsp;%{last}</b> 筆"
+        display_entries: "共有 <b>%{total}</b> 筆資料，目前顯示 <b>%{first}&nbsp;-&nbsp;%{last}</b> 筆"
