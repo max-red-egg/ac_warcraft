@@ -34,7 +34,6 @@ class User < ApplicationRecord
 
   has_many :announcements, foreign_key: "author_id"
 
-
   scope :ordered_by_xp, ->{ order(xp: :desc) }
 
   scope :can_be_invited, ->(instance){
