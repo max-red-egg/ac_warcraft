@@ -82,109 +82,63 @@
           <div class="col-lg-8">
 
               <!-- ERM放送台 start -->
-              <div class="card card-dark pt-2">
-                <div class="card-header">
-                  <div class="card-title">ERM放送台</div>
-                </div>
-                <div class="card-body">
-                  <table class="table">
-                    <thead>
-                       <tr>
-                          <th class="h4" style="width: 50%;">Starting</th>
-                          <th class="h4 text-center d-none d-lg-table-cell">Topics</th>
-                          <th class="h4 text-center d-none d-lg-table-cell">Posts</th>
-                          <th class="h4 d-none d-lg-table-cell">Updated</th>
-                       </tr>
-                    </thead>
-                    <tbody>
-                       <tr>
-                          <td>
-                             <h4>
-                                <a href="">
-                                   <strong>Welcome</strong>
-                                </a>
-                             </h4>
-                             <div class="text-muted">Feel free to come inside and introduce yourself!</div>
-                          </td>
-                          <td class="text-muted text-center d-none d-lg-table-cell">
-                             <strong>789</strong>
-                          </td>
-                          <td class="text-muted text-center d-none d-lg-table-cell">
-                             <strong>254</strong>
-                          </td>
-                          <td class="d-none d-lg-table-cell"><a href="">Arnold Gray</a>
-                             <br>
-                             <small>March 10, 2015</small>
-                          </td>
-                       </tr>
-                       <tr>
-                          <td>
-                             <h4>
-                                <a href="">
-                                   <strong>Forum Rules</strong>
-                                </a>
-                             </h4>
-                             <div class="text-muted">Please read the rules before post</div>
-                          </td>
-                          <td class="text-muted text-center d-none d-lg-table-cell">
-                             <strong>15</strong>
-                          </td>
-                          <td class="text-muted text-center d-none d-lg-table-cell">
-                             <strong>28</strong>
-                          </td>
-                          <td class="d-none d-lg-table-cell"><a href="">Erika Mckinney</a>
-                             <br>
-                             <small>March 10, 2015</small>
-                          </td>
-                       </tr>
-                       <tr>
-                          <td>
-                             <h4>
-                                <a href="">
-                                   <strong>Announcements</strong>
-                                </a>
-                             </h4>
-                             <div class="text-muted">Latest udpates and news about this forum</div>
-                          </td>
-                          <td class="text-muted text-center d-none d-lg-table-cell">
-                             <strong>300</strong>
-                          </td>
-                          <td class="text-muted text-center d-none d-lg-table-cell">
-                             <strong>561</strong>
-                          </td>
-                          <td class="d-none d-lg-table-cell"><a href="">Annette Ruiz</a>
-                             <br>
-                             <small>March 10, 2015</small>
-                          </td>
-                       </tr>
-                    </tbody> 
-                  </table>
-                </div> 
+            <div class="card card-dark pt-2 announcement">
+              <div class="card-header">
+                <div class="card-title">ERM放送台</div>
               </div>
-              <!-- ERM放送台 end -->
+              <div class="card-body">
+                <table class="table">
+                  <thead>
+                     <tr>
+                        <th class="h4" style="width: 75%;">標題</th>
+                        <th class="h4 d-none d-lg-table-cell">發布</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                    <% @announcements.each do |announcement| %>    
+                    <tr>
+                      <td>
+                         <h4>
+                            <a href="">
+                               <strong><%= announcement.title %></strong>
+                            </a>
+                         </h4>
+                         <div class="content text-muted"><%= announcement.content%></div>
+                      </td>
+                      <td class="d-none d-lg-table-cell"><%=link_to announcement.author.name, user_path(announcement.author) %></a>
+                         <br>
+                         <small><%=announcement.updated_at.strftime("%Y-%m-%d %H:%M")%></small>
+                      </td>
+                    </tr>
+                    <%end%>
+                  </tbody> 
+                </table>
+              </div> 
+            </div>
+            <!-- ERM放送台 end -->
               
-              <!-- 前線戰情彙報 start -->
-              <div class="card card-default mt-3 activity-board">
-                <div class="card-header">
-                  <div class="card-title">前線戰情彙報</div>
-                </div>
-                <div class="activity-board-content">
-                 <!-- START list group-->
-                <div class="list-group">
-                  <!-- START list group item-->
-                  <% @followings_instance_activities.each do |user_instance| %>
-                    <%=render partial:'following_activity',locals: {user_instance: user_instance} %>
-                  <%end%>
-                 </div>
-                 <!-- END list group-->
-                 <!-- START card footer-->
-                 </div>
-                 <div class="card-footer"><p class="text-right"><small class="text-muted text-right">前線資料傳送於<%= Time.now.strftime("%Y-%m-%d %H:%M")%></small></p>
-                 </div>
-                 <!-- END card-footer-->
+            <!-- 前線戰情彙報 start -->
+            <div class="card card-default mt-3 activity-board">
+              <div class="card-header">
+                <div class="card-title">前線戰情彙報</div>
               </div>
+              <div class="activity-board-content">
+               <!-- START list group-->
+              <div class="list-group">
+                <!-- START list group item-->
+                <% @followings_instance_activities.each do |user_instance| %>
+                  <%=render partial:'following_activity',locals: {user_instance: user_instance} %>
+                <%end%>
+               </div>
+               <!-- END list group-->
+               <!-- START card footer-->
+               </div>
+               <div class="card-footer"><p class="text-right"><small class="text-muted text-right">前線資料傳送於<%= Time.now.strftime("%Y-%m-%d %H:%M")%></small></p>
+               </div>
+               <!-- END card-footer-->
+            </div>
 
-              <!-- 前線戰情會報 end -->
+            <!-- 前線戰情會報 end -->
 
           </div>  <!-- col-lg-8 end -->
 
