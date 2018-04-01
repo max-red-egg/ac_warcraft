@@ -1,0 +1,17 @@
+<aside class="aside-container">
+  <%= render partial: "layouts/admin_sidebar" %>
+</aside>
+<section>
+  <div class="section-container">
+    <div class="content-wrapper">
+      <div class="content-heading">
+        <h3>編輯公告</h3>
+      </div>
+      <div class="row">
+        <div class="col">
+        <%= render partial:"form", locals: {announcement: @announcement} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

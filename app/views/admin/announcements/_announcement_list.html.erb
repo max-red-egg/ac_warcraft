@@ -1,0 +1,24 @@
+<table class="table">
+  <thead>
+    <th scope="col">id</th>
+    <th scope="col">title</th>
+    <th scope="col">author</th>
+    <th scope="col">date</th>
+    <th> control </th>
+
+
+  </thead>
+ <tbody>
+  <% @announcements.each do |announcement| %>
+   <tr>
+     <th scope="row"><%= announcement.id%></th>
+     <td><%= link_to announcement.title,admin_announcement_path(announcement) %></td>
+     <td><%= announcement.author.name %></td>
+     <td><%= announcement.updated_at%></td>
+     <td>
+       <%= link_to "x", admin_announcement_path(announcement), method: :delete, data:{confirm:"確定刪除?"},class: "btn btn-danger" %>
+     </td>
+   </tr>
+  <%end%>
+ </tbody>
+</table>

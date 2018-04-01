@@ -1,0 +1,8 @@
+<div class="container">
+  <%= simple_form_for [:admin ,announcement] do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :title %>
+    <%= f.input :content %>
+    <%= f.button :submit, 'ok', class: 'btn btn-primary' %>
+  <%end%>
+</div>
