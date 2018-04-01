@@ -115,8 +115,8 @@ class UsersController < ApplicationController
             params[:filterrific],
             select_options: {
               sorted_by: User.options_for_sorted_by,
-              with_gender: ['male', 'female'],
-              range_level: [['0-4', '0'], ['5-9', '5'], ['10-14', '10'], ['15-19', '15']],
+              with_gender: User.options_for_gender,
+              with_level: User.options_for_level,
             }
           ) or return
       @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page])

@@ -5,3 +5,13 @@ zh-TW:
       previous: '<'
       next: '>'
       last: '&raquo;'
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "沒有任何資料"
+          one: "共有 <b>1</b> 筆資料"
+          other: "共有 <b> %{count}</b> 筆資料"
+      more_pages:
+        display_entries: "顯示 <b>%{total}</b> 筆 %{entry_name} 中的第 <b>%{first}&nbsp;-&nbsp;%{last}</b> 筆"
