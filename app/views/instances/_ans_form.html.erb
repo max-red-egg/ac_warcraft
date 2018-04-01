@@ -1,4 +1,94 @@
 <%=simple_form_for instance, remote: true, url: save_instance_path(instance),method: :post do |f| %>
   <%= f.input :answer, required: true %>
-  <%= f.button :submit, '儲存', class: "btn btn-primary mt-4" %>
+  <div class="mt-4">
+  <%= f.button :submit, '儲存', class: "btn btn-primary" %>
+  <%if current_user.have_github_username? %>
+    <div id="get_repos" class='btn btn-inverse' ><a href="#github_form_window"><span class='fa fa-github fa-lg'></span></a></div>
+
+  <%end%>
+  </div>
+<%end%>
+
+
+
+<%if current_user.have_github_username? %>
+<div id="github_form_window" class="github-overlay ">
+  <div class="github-popup ">
+    <h3>從你的github選答案</h3>
+    <span class="close" href="#">&times;</span>
+    <div class="content">
+      <form class="form-inline" id="repos_select_show">
+        <div class="sk-circle">
+          <div class="sk-circle1 sk-child"></div>
+          <div class="sk-circle2 sk-child"></div>
+          <div class="sk-circle3 sk-child"></div>
+          <div class="sk-circle4 sk-child"></div>
+          <div class="sk-circle5 sk-child"></div>
+          <div class="sk-circle6 sk-child"></div>
+          <div class="sk-circle7 sk-child"></div>
+          <div class="sk-circle8 sk-child"></div>
+          <div class="sk-circle9 sk-child"></div>
+          <div class="sk-circle10 sk-child"></div>
+          <div class="sk-circle11 sk-child"></div>
+          <div class="sk-circle12 sk-child"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+$(document).ready(function(){
+
+  var input = document.getElementById("instance_answer");
+  var select_show = document.getElementById("repos_select_show");
+  var getReposBtn =document.getElementById("get_repos");
+  var loading_template = document.getElementById("loading_template");
+  var popupWindow = document.getElementById("github_form_window");
+  var closepopup = document.querySelector(".github-popup span.close");
+  closepopup.addEventListener('click',(e)=>{popupWindow.classList.remove('show')});
+  var formTemplate = document.getElementById("github_select_template");
+  getReposBtn.addEventListener('click', getGithubRepo);
+  function getGithubRepo(e){
+    // console.log("click getGithubRepo");
+    popupWindow.classList.toggle('show');
+
+    $.ajax({
+      url: "/users/<%=current_user.id%>/repos.json",
+      dataType: "JSON",
+      method: "GET",
+      success: (data)=>{
+        let new_select = document.createElement("select");
+        new_select.id = 'repos_input';
+        data.forEach((repo_data)=>{
+          let new_option = document.createElement('option');
+          new_option.value = repo_data.repo_url;
+          new_option.textContent = repo_data.repo_name;
+          // console.log(new_option);
+          new_select.appendChild(new_option);
+        });
+        new_select.className="form-control";
+        new_btn = document.createElement("button");
+        new_btn.addEventListener('click',selectRepo);
+        new_btn.className = 'btn btn-primary m-2';
+        new_btn.innerHTML = '確定';
+        select_show.innerHTML=new_select.outerHTML;
+        select_show.appendChild(new_btn);
+
+      }
+    });
+  }
+
+  function selectRepo(e){
+    e.preventDefault();
+    let repos_input = document.getElementById('repos_input');
+    input.value = repos_input.value;
+    popupWindow.classList.toggle('show');
+  }
+})
+  
+</script>
 <%end%>
