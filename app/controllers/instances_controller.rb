@@ -1,13 +1,7 @@
 class InstancesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_instance, only: [:show, :submit, :abort, :review, :cancel, :save,:edit]
-  before_action :authenticate_instance_member, only: [:show, :submit, :abort, :review, :cancel, :save, :edit]
-
-  def index
-    @instances_in_progress = current_user.instances.where(state: 'in_progress')
-    @instances_teaming = current_user.instances.where(state: 'teaming')
-    @instances_history = current_user.instances.where(state: ['complete', 'abort'])
-  end
+  before_action :set_instance, except: [:history]
+  before_action :authenticate_instance_member, except: [:history]
 
   def history
     @instances_history = current_user.instances.where(state: ['complete', 'abort'])
@@ -21,17 +15,8 @@ class InstancesController < ApplicationController
     # end
     # binding.pry
     if @instance.state == "teaming"
-
       # 篩選使用者 & 列出所有可被邀請的使用者
-      @filterrific = initialize_filterrific(
-            User,
-            params[:filterrific],
-            select_options: {
-              sorted_by: User.options_for_sorted_by,
-              with_gender: ['male', 'female'],
-              range_level: [['0-4', '0'], ['5-9', '5'], ['10-14', '10'], ['15-19', '15']],
-            }
-          ) or return
+      @filterrific = filterrific_user or return
       @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page])
       # binding.pry
       # @instance.inviting_users 是正在邀請的使用者
@@ -80,7 +65,7 @@ class InstancesController < ApplicationController
     end
 
   end
-  
+
   def edit
     render :edit
   end

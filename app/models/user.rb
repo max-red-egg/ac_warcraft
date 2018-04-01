@@ -33,16 +33,17 @@ class User < ApplicationRecord
   has_many :recruit_boards
 
 
-scope :ordered_by_xp, ->{ order(xp: :desc) }
+  scope :ordered_by_xp, ->{ order(xp: :desc) }
 
-scope :can_be_invited, ->(instance){
-  where('level >= ? AND available = ?',instance.mission.level,true
-    ).where.not(
-      id: User.joins(:user_instances).where('user_instances.instance_id = ? ',instance.id)
-    ).where.not(
-      id: User.joins('JOIN invitations ON invitations.invitee_id = users.id').where('invitations.instance_id = ? AND invitations.state = ?',instance.id,'inviting')
-    )
-}
+  scope :can_be_invited, ->(instance){
+    where('level >= ? AND available = ?',instance.mission.level,true
+      ).where.not(
+        id: User.joins(:user_instances).where('user_instances.instance_id = ? ',instance.id)
+      ).where.not(
+        id: User.joins('JOIN invitations ON invitations.invitee_id = users.id').where('invitations.instance_id = ? AND invitations.state = ?',instance.id,'inviting')
+      )
+  }
+
   filterrific(
     default_filter_params: {
       sorted_by: 'name_asc',
@@ -51,11 +52,10 @@ scope :can_be_invited, ->(instance){
       :sorted_by,
       :search_query,
       :with_gender,
-      :with_oldfriend,
-      :range_level
+      :with_followtype,
+      :with_level
     ]
   )
-
 
   scope :search_query, lambda { |query|
     return nil  if query.blank?
@@ -86,42 +86,72 @@ scope :can_be_invited, ->(instance){
     # extract the sort direction from the param value.
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
     case sort_option.to_s
-    when /^created_at_/
-      order("users.created_at #{ direction }")
     when /^name_/
       order("LOWER(users.name) #{ direction }")
     when /^level_/
       order("users.level #{ direction }")
+    when /^average_rating_/
+      order("users.average_rating_count #{ direction }")
+    when /^followers_count_/
+      order("users.followers_count #{ direction }")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
+
   }
 
   scope :with_gender, lambda { |genders|
     where(gender: [*genders])
   }
 
-  scope :with_oldfriend, lambda { |boolean|
-    if boolean == true # 待完成
-      where()
+  scope :with_followtype, lambda { |followtype|
+
+    user_id = followtype.split("_")[0]
+    type = followtype.split("_")[1]
+
+    if type == 'following'
+      where(
+        id: User.joins(:followships).where('followships.user_id = ? ', user_id ).select(:following_id)
+      )
+    elsif type == 'follower'
+      where(
+        id: User.joins(:followships).where('followships.following_id = ? ', user_id ).select(:user_id)
+      )
     else
-      whrer()
     end
   }
 
   # always include the lower boundary for semi open intervals
-  scope :range_level, lambda { |level|
-    where('users.level >= ? AND users.level < ?', level , level+5)
+  scope :with_level, lambda { |level|
+    where('users.level >= ? AND users.level <= ?', level-2 , level+2)
   }
+
+  def self.options_for_gender
+    [
+      ['男', 'male'],
+      ['女', 'female']
+    ]
+  end
+
+  def self.options_for_level
+
+    [
+      ['1-5', '3'],
+      ['6-10', '8'],
+      ['11-15', '13'],
+      ['16-20', '18'],
+    ]
+  end
 
   def self.options_for_sorted_by
     [
-      ['Name (a-z)', 'name_asc'],
-      ['Name (z-a)', 'name_desc'],
-      ['Level (a-z)', 'level_asc'],
-      ['Level (z-a)', 'level_desc'],
-      ['Registration date (newest first)', 'created_at_desc'],
-      ['Registration date (oldest first)', 'created_at_asc']
+      ['名字 正序', 'name_asc'],
+      ['名字 反序', 'name_desc'],
+      ['等級 高', 'level_desc'],
+      ['等級 低', 'level_asc'],
+      ['評價 高', 'average_rating_desc'],
+      ['評價 低', 'average_rating_asc'],
+      ['追蹤者 多', 'followers_count_desc'],
     ]
   end
 
@@ -129,7 +159,7 @@ scope :can_be_invited, ->(instance){
     self.xp += xp
     self.level = self.xp / 1000
     if self.level == 0
-      self.level =1 
+      self.level =1
     end
     self.save!
   end
@@ -140,7 +170,7 @@ scope :can_be_invited, ->(instance){
 
   # 確認該任務可不可以執行
   def take_mission?(mission)
-    self.level >= mission.level 
+    self.level >= mission.level
   end
 
   # 是否有被user評論過instance副本？
