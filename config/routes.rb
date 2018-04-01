@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     end
     resources :invite_msgs, only: [:create]
   end
-  resources :instances, only: [:index, :show,:edit] do
+  resources :instances, only: [:show, :edit] do
     member do
       post :submit
       patch :submit  #任務完成，提交答案

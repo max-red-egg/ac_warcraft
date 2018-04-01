@@ -13,45 +13,72 @@
   <div class="card-body bb">
 
     <div class="row mb-4">
+      <div class="col-12 d-flex justify-content-between">
+        <h4>尋找想要合作的探員</h4>
+        <span class="btn bg-inverse-light btn-sm btn-oval">你還可發送 <span class="font-weight-bold" id="remaining_invitations"><%=@remaining_invitations_count%></span> 張邀請</span>
+      </div>
       <div class="col-12">
-        <h3>可選隊員</h3>
-        <h5><span class="badge badge-info">你還可發送 <span id="remaining_invitations"><%=@remaining_invitations_count%></span> 張邀請</span></h5>
+        不想慢慢邀請？你還可以選擇： <%= link_to '發動緊急招募', recruit_boards_path(instance_id: params[:id]), method: :post, class: 'btn btn-sm btn-primary btn-oval ml-1 px-2 py-1' if @instance.state == "teaming" %>
       </div>
     </div>
 
-    <div class="row mb-4 ">
+    <div class="row mb-0">
       <div class="col bg-inverse-light card mx-3">
-        <%= form_for_filterrific @filterrific do |f| %>
-        <div class="form-row card-body">
-            <div class="col-md-3 form-group" data-intro="Search by name or email." data-position="top">
-              <label>Search</label>
+        <%= form_for_filterrific @filterrific, remote: true do |f| %>
+          <div class="form-row card-body">
+            <div class="col-md-4 form-group" data-intro="Search by name or email." data-position="top">
+              <h5>搜尋</h5>
               <%= f.text_field :search_query, class: "form-control" %>
             </div>
-
-            <div class="form-group col-md-3" >
-              <label>Gender</label>
-              <%= f.select(:with_gender, @filterrific.select_options[:with_gender],
-                { include_blank: '- 不限 -' }, {class: "form-control"}
-              ) %>
+            <div class="form-group col-md-4" >
+              <h5>追蹤狀態</h5>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-dark <%= 'active' if @filterrific.with_following.blank? %> ">
+                  <%= f.radio_button :with_following, '' %> 不限
+                </label>
+                <label class="btn btn-dark <%= 'active' if @filterrific.with_following.present? %> ">
+                  <%= f.radio_button :with_following, current_user.id %> 正在追蹤
+                </label>
+              </div>
             </div>
-
-            <div class="form-group col-md-3" >
-              <label>Level</label>
-              <%= f.select(:range_level, @filterrific.select_options[:range_level],
-                { include_blank: '- 不限 -' }, {class: "form-control"}
-              ) %>
+            <div class="form-group col-md-4" >
+              <h5>性別</h5>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-dark <%= 'active' if @filterrific.with_gender.blank? %> ">
+                  <%= f.radio_button :with_gender, '' %> 不限
+                </label>
+                <% @filterrific.select_options[:with_gender].each do |gender| %>
+                    <%= f.label gender[0] ,class: "btn btn-dark #{'active' if @filterrific.with_gender == gender[1]}" do %>
+                      <%= f.radio_button :with_gender, gender[1] %> <%= gender[0] %>
+                    <% end %>
+                <% end %>
+              </div>
             </div>
-
-            <div class="form-group col-md-3" >
-              <label>Sorted by</label>
+            <div class="form-group col-md-4" >
+              <h5>排序</h5>
               <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by],{}, {class: "form-control"} ) %>
             </div>
+
+            <div class="form-group col-md-8" >
+              <h5>等級</h5>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-dark <%= 'active' if @filterrific.with_level.blank? %> ">
+                  <%= f.radio_button :with_level, '' %> 不限
+                </label>
+                <% @filterrific.select_options[:with_level].each do |level| %>
+                    <%= f.label level[0] ,class: "btn btn-dark #{'active' if @filterrific.with_level.to_s == level[1]}" do %>
+                      <%= f.radio_button :with_level, level[1] %> <%= level[0] %>
+                    <% end %>
+                <% end %>
+              </div>
+            </div>
+
+
           </div>
           <%= render_filterrific_spinner %>
         <% end %>
       </div>
     </div>
-
     <%= render( partial: 'candidates_list', locals: { candidates: @candidates } ) %>
   </div>
 </div>
