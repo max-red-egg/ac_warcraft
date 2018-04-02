@@ -1,0 +1,76 @@
+<nav>
+  <div role="tabpanel">
+    <!-- Nav tabs-->
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" href="#recruit_boards" aria-controls="app-settings" role="tab" data-toggle="tab">
+                        <em class="icon-fire fa-lg"></em>
+                     </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" href="#my-recruit" aria-controls="app-chat" role="tab" data-toggle="tab">
+                        <em class="icon-user fa-lg"></em>
+                     </a>
+      </li>
+    </ul>
+    <!-- Tab panes-->
+    <div class="tab-content">
+      <div class="tab-pane fade active show" id="recruit_boards" role="tabpanel">
+        <h3 class="text-center text-thin mt-4">緊急招募看板</h3>
+        <div class="list-group">
+          <% @recruit_boards.each do |recruit_board| %>
+            <div class="list-group-item list-group-item-action border-0">
+              <div class="media">
+                <%= link_to user_path(recruit_board.user), remote: true do%>
+                  <%= gravatar_for(recruit_board.user, "align-self-center mr-3 rounded-circle thumb48") %>
+                <% end %>
+                <div class="media-body text-truncate">
+                  <a href="#">
+                    <strong><%= link_to recruit_board.user.name, user_path(recruit_board.user), remote: true %></strong> 緊急招募中
+                  </a>
+                  <br>
+                  任務：<%= link_to recruit_board.instance.mission.name, recruit_board.instance.mission, remote: true  %>
+                </div>
+              </div>
+              <div class="media-body text-center mt-1">
+                <% if recruit_board.user == current_user %>
+                  <%= link_to '取消本次徵招', recruit_board_path(recruit_board), method: :delete, class: 'badge bg-danger px-3 py-2' %>
+                <% else %>
+                  <%= link_to '接受徵招', accept_recruit_board_path(recruit_board), method: :post, class: 'badge bg-primary px-3 py-2' %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="my-recruit" role="tabpanel">
+        <h3 class="text-center text-thin mt-4">我的緊急招募</h3>
+                <div class="list-group">
+          <% @my_recruit_boards.each do |recruit_board| %>
+            <div class="list-group-item list-group-item-action border-0">
+              <div class="media">
+                <%= link_to user_path(recruit_board.user), remote: true do%>
+                  <%= gravatar_for(recruit_board.user, "align-self-center mr-3 rounded-circle thumb48") %>
+                <% end %>
+                <div class="media-body text-truncate">
+                  <a href="#">
+                    <strong><%= link_to recruit_board.user.name, user_path(recruit_board.user), remote: true %></strong> 緊急招募中
+                  </a>
+                  <br>
+                  任務：<%= link_to recruit_board.instance.mission.name, recruit_board.instance.mission, remote: true  %>
+                </div>
+              </div>
+              <div class="media-body text-center mt-1">
+                <% if recruit_board.user == current_user %>
+                  <%= link_to '取消本次徵招', recruit_board_path(recruit_board), method: :delete, class: 'badge bg-danger px-3 py-2' %>
+                <% else %>
+                  <%= link_to '接受徵招', accept_recruit_board_path(recruit_board), method: :post, class: 'badge bg-primary px-3 py-2' %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

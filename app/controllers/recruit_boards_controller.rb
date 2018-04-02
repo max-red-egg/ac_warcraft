@@ -9,7 +9,8 @@ class RecruitBoardsController < ApplicationController
     recruit_board = current_user.recruit_boards.build(user_id: current_user.id, instance_id: params[:instance_id])
     # binding.pry
     recruit_board.save
-    redirect_to recruit_boards_path
+    flash[:notice] = "成功發動本次招募"
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
@@ -17,17 +18,18 @@ class RecruitBoardsController < ApplicationController
     if current_user == recruit_board.user
       recruit_board.delete
       flash[:notice] = "成功刪除此招募"
-      redirect_to recruit_boards_path
     else
       flash[:alert] = "無法執行本操作"
-      redirect_back(fallback_location: root_path)
     end
+
+    redirect_back(fallback_location: root_path)
+
   end
 
   def accept
 
     recruit_board = RecruitBoard.find(params[:id])
-     
+
     instance = recruit_board.instance
     inviter = recruit_board.user
     # binding.pry

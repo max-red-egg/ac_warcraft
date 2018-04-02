@@ -1,6 +1,9 @@
 <aside class="aside-container">
   <%= render partial: "layouts/sidebar" %>
 </aside>
+<aside class="offsidebar d-none">
+  <%= render partial: "layouts/right_sidebar" %>
+</aside>
 <section>
   <div class="section-container">
     <div class="content-wrapper">
@@ -10,7 +13,7 @@
       <div class="container dashboard">
 
         <!-- 全站監控版 -->
-        
+
         <div class="row ">
         <!-- 全站完成率 -->
           <div class="col-lg-3">
@@ -68,7 +71,7 @@
                   <div class="col-4 d-flex align-items-center bg-info-dark justify-content-center rounded-left">
                     <em class="fa fa-comment-o fa-5x"></em>
                   </div>
-                  <div class="col-8 py-3 bg-info rounded-right text-center"> 
+                  <div class="col-8 py-3 bg-info rounded-right text-center">
                     <div class="display-4 mt-0 "><%= @reviews.count %></div>
                     <div class="text-uppercase">個任務評價</div>
                   </div>
@@ -95,7 +98,7 @@
                      </tr>
                   </thead>
                   <tbody>
-                    <% @announcements.each do |announcement| %>    
+                    <% @announcements.each do |announcement| %>
                     <tr>
                       <td>
                          <h4>
@@ -111,12 +114,12 @@
                       </td>
                     </tr>
                     <%end%>
-                  </tbody> 
+                  </tbody>
                 </table>
-              </div> 
+              </div>
             </div>
             <!-- ERM放送台 end -->
-              
+
             <!-- 前線戰情彙報 start -->
             <div class="card card-default mt-3 activity-board">
               <div class="card-header">
@@ -174,7 +177,7 @@
           </div>  <!-- col end -->
           <!-- 探員龍虎榜 end -->
         </div>  <!-- row end -->
-      
+
         <div class="row mt-3">
           <% 4.times do %>
           <div class="col-3">
@@ -200,7 +203,7 @@
           </div>  <!-- col-3 end -->
           <%end%>
         </div>
-        
+
 
 
 
