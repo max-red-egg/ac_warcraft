@@ -20,7 +20,7 @@ production:
 
   port: "587"
 
-  domain: 'herokuapp.com'
+  domain: 'erm.zone'
 
   authentication: "plain"
 
