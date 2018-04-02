@@ -1,7 +1,14 @@
 class ApplicationController < ActionController::Base
   #skip_before_action :verify_authenticity_token, raise: false
+  before_action :recruit_boards_index
+
 
   private
+
+  def recruit_boards_index
+    @recruit_boards = RecruitBoard.where(state: true).where.not(user_id: current_user)
+    @my_recruit_boards = RecruitBoard.where(state: true).where(user_id: current_user)
+  end
 
   def filterrific_user
     initialize_filterrific(

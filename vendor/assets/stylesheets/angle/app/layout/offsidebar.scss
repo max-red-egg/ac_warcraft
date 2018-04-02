@@ -7,7 +7,7 @@
 // Open status toggled via JS
 // -----------------------------------------
 
-$offsidebar-bg:           #fff;
+$offsidebar-bg:           $aside-bg;
 $offsidebar-border-color: grayscale(darken($offsidebar-bg, 20%));
 $offsidebar-color:        $body-color;
 $offsidebar-wd:           $aside-wd + 15px;      // match the width with the main aside component
@@ -43,13 +43,13 @@ $offsidebar-wd:           $aside-wd + 15px;      // match the width with the mai
     .nav-tabs {
         border-bottom: 1px solid rgba(0, 0, 0, .05);
         >.nav-item>.nav-link {
-            background-color: transparent;
+            background-color: $gray-dark;
             border: 0;
             border-right: 1px solid rgba(0, 0, 0, .05);
             border-radius: 0;
             color: $text-muted;
             &.active {
-                color: $primary;
+                color: $warning;
             }
         }
     }

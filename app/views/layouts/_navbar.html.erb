@@ -77,6 +77,11 @@
            <!-- END Dropdown menu-->
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle-state="offsidebar-open" data-no-persist="true">
+             <em class="icon-fire"></em>
+          </a>
+        </li>
+        <li class="nav-item">
           <%= link_to '登出', destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
       <% else %>
