@@ -2,11 +2,11 @@
   <div class="col bg-inverse-light card mx-3">
     <%= form_for_filterrific @filterrific, remote: true do |f| %>
       <div class="form-row card-body">
-        <div class="col-md-4 form-group" data-intro="Search by name or email." data-position="top">
+        <div class="col-md-3 form-group" data-intro="Search by name or email." data-position="top">
           <h5>搜尋</h5>
           <%= f.text_field :search_query, class: "form-control" %>
         </div>
-        <div class="form-group col-md-4" >
+        <div class="col-md-6 form-group" >
           <h5>追蹤狀態</h5>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-dark <%= 'active' if @filterrific.with_followtype.blank? %> ">
@@ -20,7 +20,7 @@
             </label>
           </div>
         </div>
-        <div class="form-group col-md-4" >
+        <div class="col-md-3 form-group" >
           <h5>性別</h5>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-dark <%= 'active' if @filterrific.with_gender.blank? %> ">
@@ -33,12 +33,12 @@
             <% end %>
           </div>
         </div>
-        <div class="form-group col-md-4" >
+        <div class="form-group col-md-3" >
           <h5>排序</h5>
           <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by],{}, {class: "form-control"} ) %>
         </div>
 
-        <div class="form-group col-md-8" >
+        <div class="form-group col-md-9" >
           <h5>等級</h5>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-dark <%= 'active' if @filterrific.with_level.blank? %> ">

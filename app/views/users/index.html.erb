@@ -8,12 +8,7 @@
         <h3>探員資料庫</h3>
       </div>
       <div class="container">
-        <div class="row justify-content-center">
-          <%= render 'user_nav' %>
-        </div>
-        <% if @tag == 'all' %>
-          <%= render( partial: 'shared/filterrific_user_form' ) %>
-        <% end %>
+        <%= render( partial: 'shared/filterrific_user_form' ) %>
         <%= render( partial: 'users_list', locals: { users: @users } ) %>
         <%= paginate @users %>
       </div>
