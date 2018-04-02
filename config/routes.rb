@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
   root 'public#landing'
-
+  resources :announcements, only: [:show]
   resources :notifications do
     collection do
       post :mark_as_checked_all
