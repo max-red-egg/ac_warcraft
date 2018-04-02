@@ -7,7 +7,7 @@ class Instance < ApplicationRecord
   has_many :members, through: :user_instances, source: :user
 
   #instance.mission 表示本隊的任務
-  belongs_to :mission
+  belongs_to :mission, counter_cache: true
 
   has_many :invitations
   has_many :invitees, through: :invitations
