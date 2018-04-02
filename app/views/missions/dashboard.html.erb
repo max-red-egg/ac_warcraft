@@ -175,31 +175,16 @@
           </div>  <!-- col end -->
           <!-- 探員龍虎榜 end -->
         </div>  <!-- row end -->
-
-        <div class="row mt-3">
-          <% 4.times do %>
-          <div class="col-3">
-            <div class="card">
-              <img class="img-fluid" src="https://pmcvariety.files.wordpress.com/2015/12/warcraft-movie.jpg?w=1000&h=563&crop=1" alt="Image">
-              <div class="card-body">
-                <div class="row text-center">
-                   <div class="col-4">
-                      <p>Comments</p>
-                      <h3 class="m-0 text-primary">700</h3>
-                   </div>
-                   <div class="col-4">
-                      <p>Likes</p>
-                      <h3 class="m-0 text-primary">1500</h3>
-                   </div>
-                   <div class="col-4">
-                      <p>Shots</p>
-                      <h3 class="m-0 text-primary">300</h3>
-                   </div>
-                </div>
-              </div>
+        <div class="row mt-5">
+          <h2>熱門任務</h2>
+        </div>
+        <div class="row mt-1">
+          <% @hot_missions.each do |mission| %>
+            <div class="col-sm-6 col-lg-4 col-xl-3 my-3">
+              <%= render partial:"shared/mission_card" , locals: {mission: mission} %>
             </div>
-          </div>  <!-- col-3 end -->
-          <%end%>
+          <% end %>
+          
         </div>
 
 

@@ -18,6 +18,8 @@ class MissionsController < ApplicationController
     # 前線戰情匯報
     @followings_instance_activities = UserInstance.find_by_followings(current_user).limit(10).includes(:instance).includes(:user).includes(:mission).order('instances.updated_at DESC')
 
+    # 熱門任務
+    @hot_missions = @missions.order(instances_count: :desc).limit(4)
 
   end
 
