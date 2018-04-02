@@ -1,0 +1,21 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title"><%=@announcement.title%></h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid">
+        <div class="row mb-4">
+          <div class="col-12">
+
+            <p><%=link_to @announcement.author.name, user_path(@announcement.author)%> 公告於<%= @announcement.updated_at.strftime("%Y-%m-%d %H:%M") %> </p>
+
+              <p><%=simple_format @announcement.content %></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -93,8 +93,8 @@
                 <table class="table">
                   <thead>
                      <tr>
-                        <th class="h4" style="width: 75%;">標題</th>
-                        <th class="h4 d-none d-lg-table-cell">發布</th>
+                        <th class="h4" style="width: 75%;"></th>
+                        <th class="h4 d-none d-lg-table-cell"></th>
                      </tr>
                   </thead>
                   <tbody>
@@ -102,9 +102,7 @@
                     <tr>
                       <td>
                          <h4>
-                            <a href="">
-                               <strong><%= announcement.title %></strong>
-                            </a>
+                          <strong><%= link_to announcement.title, announcement_path(announcement), remote: true%><%=  %></strong>
                          </h4>
                          <div class="content text-muted"><%= announcement.content%></div>
                       </td>
