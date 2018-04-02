@@ -180,9 +180,9 @@ ActiveRecord::Schema.define(version: 2018_04_01_152909) do
     t.string "provider"
     t.string "uid"
     t.float "average_rating_count", default: 0.0, null: false
+    t.string "github_username"
     t.integer "instances_count", default: 0
     t.integer "instances_completed_count", default: 0
-    t.string "github_username"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
