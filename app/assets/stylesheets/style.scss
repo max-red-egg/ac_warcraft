@@ -228,7 +228,8 @@ a[data-behavior='notification-item']{
 }
 .dashboard .activity-board-content{
   height: 330px;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .dashboard .activity-board-content .list-group-item{
@@ -236,7 +237,8 @@ a[data-behavior='notification-item']{
 }
 .dashboard .announcement .card-body{
     height: 250px;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .dashboard .announcement .card-body .content{
   display: block; /* Fallback for non-webkit */
