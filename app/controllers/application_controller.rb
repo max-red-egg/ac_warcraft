@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   private
 
   def recruit_boards_index
-    @recruit_boards = RecruitBoard.where(state: true).where.not(user_id: current_user)
-    @my_recruit_boards = RecruitBoard.where(state: true).where(user_id: current_user)
+    @recruit_boards = RecruitBoard.where(state: true).where.not(user_id: current_user).order(id: :desc)
+    @my_recruit_boards = RecruitBoard.where(state: true).where(user_id: current_user).order(id: :desc)
   end
 
   def filterrific_user
