@@ -85,6 +85,7 @@ Rails.application.routes.draw do
     root "missions#index"
     resources :missions
     resources :instances, only: [:index]
+    resources :announcements
   end
 
   resources :recruit_boards, only: [:index, :create, :destroy] do

@@ -4,6 +4,7 @@ class MissionsController < ApplicationController
   def dashboard
     @missions = Mission.all
     instances = Instance.all
+    @announcements = Announcement.all.order(updated_at: :desc)
     @instance_complete_count = instances.find_complete.count
     @reviews = Review.all
     @users = User.all
