@@ -145,8 +145,6 @@ namespace :dev do
     end
   end
 
-
-
   task fake_all: :environment do
     system 'rails db:reset' if Rails.env == 'development'
     system 'rails db:migrate'
@@ -157,6 +155,13 @@ namespace :dev do
     system 'rails dev:fake_mission_tag'
     system 'rails dev:fake_followships'
     system 'rails dev:reset_average_rating'
+  end
+
+  task reset_instances_count_mission: :environment do 
+    Mission.all.each do |mission|
+      mission.instances_count = mission.instances.count
+      puts "#{mission.name} : #{mission.instances_count}"
+    end
   end
 
 end
