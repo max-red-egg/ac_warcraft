@@ -72,7 +72,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: 'https://pacific-dawn-73107.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'http://www.erm.zone/' }
   config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
 
   # Ignore bad email addresses and do not raise email delivery errors.
