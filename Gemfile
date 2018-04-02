@@ -63,6 +63,9 @@ gem 'octokit', '~> 4.8'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'capybara', '~> 2.18'
+  gem 'selenium-webdriver', '~> 3.11'
+  gem 'chromedriver-helper', '~> 1.2'
 end
 
 group :development do
@@ -80,7 +83,7 @@ group :test do
   gem 'minitest-reporters',       '1.1.14'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
-  gem 'capybara', '~> 2.18'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
