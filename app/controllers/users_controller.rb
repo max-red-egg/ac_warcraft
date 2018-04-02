@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     # @users = User.all
+    # binding.pry
     @filterrific = filterrific_user or return
     @users = @filterrific.find.page(params[:page]).per(20)
     # @users = User.page(params[:page]).per(20)
@@ -124,6 +125,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :description, :avatar, :state, :available)
+    params.require(:user).permit(:name, :description, :avatar, :state, :available, :github_username)
   end
 end
