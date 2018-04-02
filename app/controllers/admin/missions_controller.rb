@@ -14,7 +14,17 @@ class Admin::MissionsController < Admin::BaseController
   end
 
   def create
-    @mission = Mission.new(mission_params)
+    @mission = Mission.new
+    @mission.name = mission_params[:name]
+    @mission.level = mission_params[:level]
+    @mission.description = mission_params[:description]
+    @mission.participant_number = mission_params[:participant_number]
+    @mission.invitation_number = mission_params[:invitation_number]
+    @mission.image = mission_params[:image]
+    @mission.xp = mission_params[:xp]
+    new_tags = mission_params[:tag_list].split(",").reject { |c| c.empty? }
+    @mission.tag_list.add(new_tags)
+
     if @mission.save
       flash[:notice] = "mission created!"
       redirect_to admin_mission_path(@mission)
