@@ -53,7 +53,7 @@ class User < ApplicationRecord
       :sorted_by,
       :search_query,
       :with_gender,
-      :with_followtype,
+      :with_friendtype,
       :with_level
     ]
   )
@@ -105,19 +105,18 @@ class User < ApplicationRecord
     where(gender: [*genders])
   }
 
-  scope :with_followtype, lambda { |followtype|
+  scope :with_friendtype, lambda { |friendtype|
 
-    user_id = followtype.split("_")[0]
-    type = followtype.split("_")[1]
+    user_id = friendtype.split("_")[0]
+    type = friendtype.split("_")[1]
 
-    if type == 'following'
-      where(
-        id: User.joins(:followships).where('followships.user_id = ? ', user_id ).select(:following_id)
-      )
-    elsif type == 'follower'
-      where(
-        id: User.joins(:followships).where('followships.following_id = ? ', user_id ).select(:user_id)
-      )
+    case type
+    when 'following'
+      User.find(user_id).followings
+    when 'follower'
+      User.find(user_id).followers
+    when 'oldteam'
+      where(id: User.find(user_id).instances.map{|instance| instance.members}.flatten.uniq )
     else
     end
   }

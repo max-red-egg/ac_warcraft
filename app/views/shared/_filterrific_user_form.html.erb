@@ -7,16 +7,19 @@
           <%= f.text_field :search_query, class: "form-control" %>
         </div>
         <div class="col-md-6 form-group" >
-          <h5>追蹤狀態</h5>
+          <h5>探員類型</h5>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-dark <%= 'active' if @filterrific.with_followtype.blank? %> ">
-              <%= f.radio_button :with_followtype, '' %> 不限
+            <label class="btn btn-dark <%= 'active' if @filterrific.with_friendtype.blank? %> ">
+              <%= f.radio_button :with_friendtype, '' %> 不限
             </label>
-            <label class="btn btn-dark <%= 'active' if @filterrific.with_followtype == "#{current_user.id}_following" %> ">
-              <%= f.radio_button :with_followtype, "#{current_user.id}_following" %> 我追蹤的人
+            <label class="btn btn-dark <%= 'active' if @filterrific.with_friendtype == "#{current_user.id}_oldteam" %> ">
+              <%= f.radio_button :with_friendtype, "#{current_user.id}_oldteam" %> 老隊友
             </label>
-            <label class="btn btn-dark <%= 'active' if @filterrific.with_followtype == "#{current_user.id}_follower" %> ">
-              <%= f.radio_button :with_followtype, "#{current_user.id}_follower" %> 追蹤我的人
+            <label class="btn btn-dark <%= 'active' if @filterrific.with_friendtype == "#{current_user.id}_following" %> ">
+              <%= f.radio_button :with_friendtype, "#{current_user.id}_following" %> 我在追蹤
+            </label>
+            <label class="btn btn-dark <%= 'active' if @filterrific.with_friendtype == "#{current_user.id}_follower" %> ">
+              <%= f.radio_button :with_friendtype, "#{current_user.id}_follower" %> 追蹤我
             </label>
           </div>
         </div>
