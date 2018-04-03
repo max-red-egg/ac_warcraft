@@ -1,8 +1,7 @@
-console.log('load notification action');
 App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
   connected: function() {
     // Called when the subscription is ready for use on the server
-    console.log('load notification action');
+    // console.log('load notification action');
   },
 
   disconnected: function() {
