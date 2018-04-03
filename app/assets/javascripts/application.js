@@ -24,3 +24,4 @@
 //= require activestorage
 //= require filterrific/filterrific-jquery
 //= require notification
+//= require cable
