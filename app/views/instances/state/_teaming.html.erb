@@ -18,10 +18,6 @@
         <span class="btn bg-inverse-light btn-sm btn-oval">你還可發送 <span class="font-weight-bold" id="remaining_invitations"><%=@remaining_invitations_count%></span> 張邀請</span>
       </div>
       <div class="col-12">
-        <%= @instance.id %>
-        <% if @my_recruit_boards.include?(instance_id: @instance.id) %>
-          eee
-        <% end %>
         不想慢慢邀請？你還可以選擇： <%= link_to '發動緊急招募', recruit_boards_path(instance_id: params[:id]), method: :post, class: 'btn btn-sm btn-primary btn-oval ml-1 px-2 py-1' if @instance.state == "teaming" %>
       </div>
     </div>
