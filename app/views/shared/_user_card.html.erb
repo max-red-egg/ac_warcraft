@@ -10,7 +10,7 @@
         <% end %>
       </div>
     </div>
-    <p class="h4 text-bold"><%= link_to user.name, user_path(user), remote: true %></p>
+    <p class="h4 text-bold"><%= link_to user.name, user_path(user), remote: true %><%= content_tag(:span, 'Me' , class: "badge bg-gray-darker ml-2") if user == current_user%></p>
     <% if @instance.present? %>
       <p class="mb-0">
         <%= user_already_done(@instance, user) %>
