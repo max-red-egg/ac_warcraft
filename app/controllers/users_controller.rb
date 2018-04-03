@@ -106,7 +106,7 @@ class UsersController < ApplicationController
       @notice_msg = '已送出邀請'
 
       @filterrific = filterrific_user or return
-      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page])
+      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page]).per(20)
 
       respond_to do |format|
         format.html
