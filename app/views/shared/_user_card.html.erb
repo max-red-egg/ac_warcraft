@@ -1,6 +1,15 @@
 <div class="card b text-center mb-2">
-  <div class="card-body">
-    <%= gravatar_for(user, "rounded-circle thumb64 mb-2") %>
+  <div class="card-body user-block">
+    <div class="user-block-picture">
+      <%= link_to gravatar_for(user,"img-thumbnail rounded-circle thumb80 mb-2"), user_path(user), remote: true %>
+      <div class='user-block-status'>
+        <% if user.available %>
+          <div class="circle bg-success circle-lg"></div>
+        <% else %>
+          <div class="circle bg-danger circle-lg"></div>
+        <% end %>
+      </div>
+    </div>
     <p class="h4 text-bold"><%= link_to user.name, user_path(user), remote: true %></p>
     <% if @instance.present? %>
       <p class="mb-0">
@@ -20,33 +29,24 @@
         <strong class="text-success">XP</strong><br>
         <strong><%= user.xp %></strong>
       </div>
-      <% if @instance.present? || @invitation.present? %>
-        <div class="col-4">
-          <strong class="text-warning">評價</strong><br>
-          <strong><%= user.average_rating_count %></strong>
-        </div>
-      <% else %>
-        <div class="col-4">
-          <strong class="text-purple">邀請狀態</strong><br>
-          <strong><%= transcript_user_state(user.available) %></strong>
-        </div>
-      <% end %>
+      <div class="col-4">
+        <strong class="text-warning">評價</strong><br>
+        <strong><%= user.average_rating_count %></strong>
+      </div>
     </div>
   </div>
 </div>
-<% if @instance.present? %>
-  <div class='text-center m-0'>
-    <%= button_to "邀請" , invite_user_path(user), params: {instance_id: @instance.id }, remote: true, data: { disable_with: '送出邀請...' }, class: "btn btn-primary" if @remaining_invitations_count > 0 %>
-  </div>
-<% elsif @invitation.present? %>
-  <!-- 不顯示任何項目 -->
-<% else %>
-  <div class='text-center my-4'>
+<div class='d-flex justify-content-center my-3'>
+  <%= render partial: "shared/follow", locals: {user: user} %>
+    <% if @instance.present? %>
+    <%= button_to "邀請" , invite_user_path(user), params: {instance_id: @instance.id }, remote: true, data: { disable_with: '送出邀請...' }, class: "ml-2 btn btn-primary" if @remaining_invitations_count > 0 %>
+  <% elsif @invitation.present? %>
+    <!-- 不顯示任何項目 -->
+  <% else %>
     <% if @user != current_user %>
-      <%= render partial: "shared/follow", locals: {user: user} %>
       <%= link_to "邀請組隊", teaming_missions_path(user_id: user.id), class: "ml-2 btn btn-primary" %>
     <% else %>
       <button type="button" class="btn btn-light" data-dismiss="modal">It's Me</button>
     <%end%>
-  </div>
-<% end %>
+  <% end %>
+</div>

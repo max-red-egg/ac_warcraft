@@ -56,16 +56,21 @@
               <div class="card-header">
                 <div class="card-title text-center">近期追蹤的探員</div>
               </div>
+
               <div class="card-body">
-                <% @followings.each do |following| %>
-                  <div class="media">
-                    <%= gravatar_for(following, "align-self-center mr-2 rounded-circle img-thumbnail thumb48") %>
-                    <div class="media-body py-2">
-                      <div class="text-bold"><%= following.name %>
-                        <div class="text-sm text-muted"><%= truncate(following.description, length: 80) %></div>
+                <% if not @followings.present? %>
+                  <div class="text-center">尚未追蹤任何探員。<%= link_to "開始追蹤首位探員？", users_path if @user == current_user %> </div>
+                <% else %>
+                  <% @followings.each do |following| %>
+                    <div class="media">
+                      <%= gravatar_for(following, "align-self-center mr-2 rounded-circle img-thumbnail thumb48") %>
+                      <div class="media-body py-2">
+                        <div class="text-bold"><%= following.name %>
+                          <div class="text-sm text-muted"><%= truncate(following.description, length: 80) %></div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  <% end %>
                 <% end %>
               </div>
             </div>
