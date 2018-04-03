@@ -14,18 +14,6 @@ class UsersController < ApplicationController
       end
   end
 
-  def following
-    @users = current_user.followings.page(params[:page]).per(20)
-    @tag = 'following'
-    render 'index'
-  end
-
-  def follower
-    @users = current_user.followers.page(params[:page]).per(20)
-    @tag = 'follower'
-    render 'index'
-  end
-
   def show
     # 使用者頁面可顯示：
     #   已經完成的任務
