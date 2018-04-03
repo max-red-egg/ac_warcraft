@@ -75,16 +75,9 @@ class InvitationsController < ApplicationController
 
       @remaining_invitations_count = @instance.remaining_invitations_count
       @invitations = @instance.inviting_invitations.includes(:user)
-      @filterrific = initialize_filterrific(
-            User,
-            params[:filterrific],
-            select_options: {
-              sorted_by: User.options_for_sorted_by,
-              with_gender: ['male', 'female'],
-              range_level: [['0-4', '0'], ['5-9', '5'], ['10-14', '10'], ['15-19', '15']],
-            }
-          ) or return
-      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page])
+
+      @filterrific = filterrific_user or return
+      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page]).per(20)
 
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
