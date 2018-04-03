@@ -74,11 +74,6 @@ Rails.application.routes.draw do
       post :invite
       get :repos
     end
-
-    collection do
-      get :following
-      get :follower
-    end
   end
 
   namespace :admin do

@@ -13,7 +13,6 @@
       <div class="container">
         <%= render( partial: 'shared/filterrific_user_form' ) %>
         <%= render( partial: 'users_list', locals: { users: @users } ) %>
-        <%= paginate @users %>
       </div>
     </div>
   </div>

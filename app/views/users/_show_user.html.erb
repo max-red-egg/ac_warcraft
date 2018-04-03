@@ -9,8 +9,17 @@
         <div class="row justify-content-center">
           <div class="card card-default col-10">
             <div class="card-body text-center">
-              <div class="py-4">
-                <%= gravatar_for(@user, "img-fluid rounded-circle img-thumbnail thumb96") %>
+              <div class="user-block py-4">
+                <div class="user-block-picture">
+                  <%= gravatar_for(@user,"rounded-circle img-thumbnail thumb96") %>
+                  <div class='user-block-status'>
+                    <% if @user.available %>
+                      <div class="circle bg-success circle-lg"></div>
+                    <% else %>
+                      <div class="circle bg-danger circle-lg"></div>
+                    <% end %>
+                  </div>
+                </div>
               </div>
               <h3 class="m-0 text-bold"><%= @user.name %></h3>
               <div class="my-3">
@@ -29,12 +38,13 @@
                   <strong><%= @user.xp %></strong>
                 </div>
                 <div class="col-4">
-                  <strong class="text-purple">邀請狀態</strong><br>
-                  <strong><%= transcript_user_state(@user.available) %></strong>
+                  <strong class="text-warning">評價</strong><br>
+                  <strong><%= @user.average_rating_count %></strong>
                 </div>
               </div>
             </div>
           </div>
+          <%= render partial: "shared/follow", locals: {user: @user} %>
         </div>
       </div>
     </div>

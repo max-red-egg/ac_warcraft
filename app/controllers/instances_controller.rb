@@ -17,7 +17,7 @@ class InstancesController < ApplicationController
     if @instance.state == "teaming"
       # 篩選使用者 & 列出所有可被邀請的使用者
       @filterrific = filterrific_user or return
-      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page])
+      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page]).per(20)
       # binding.pry
       # @instance.inviting_users 是正在邀請的使用者
       #所有邀情函
