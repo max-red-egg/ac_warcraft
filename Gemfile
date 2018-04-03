@@ -59,6 +59,7 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.3'
 gem 'simple-line-icons-rails', '~> 0.1.3'
 gem 'octokit', '~> 4.8'
+gem 'meta-tags', '~> 2.9'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
