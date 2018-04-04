@@ -23,7 +23,7 @@ gem 'coffee-rails', '~> 4.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -59,6 +59,7 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.3'
 gem 'simple-line-icons-rails', '~> 0.1.3'
 gem 'octokit', '~> 4.8'
+gem 'meta-tags', '~> 2.9'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

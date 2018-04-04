@@ -10,6 +10,9 @@ class Invitation < ApplicationRecord
   scope :find_inviting, -> {
     where(state: 'inviting')
   }
+  scope :order_by_invite_msg, ->{
+    includes(:invite_msgs).order('invite_msgs.created_at DESC') 
+  }
 
   def time_updated!
     self.updated_at = Time.now

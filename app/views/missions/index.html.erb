@@ -9,9 +9,9 @@
     <div class="content-wrapper">
       <div class="content-heading">
         <% if @user %>
-          <h3>邀請 <%= @user.name %> 一起組隊</h3>
+          <h3><%= title '邀請 '+@user.name+' 一起組隊' %></h3>
         <% else %>
-          <h3>任務牆</h3>
+          <h3><%= title '任務牆' %></h3>
         <% end %>
       </div>
       <div class="container">

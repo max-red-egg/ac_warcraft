@@ -5,11 +5,11 @@ class InvitationsController < ApplicationController
   before_action :check_inviting, only: [:accept, :decline, :cancel]
 
   def index
-    @received_invitations = Invitation.where(invitee_id: current_user).order(id: :desc).page(params[:page]).per(8)
+    @received_invitations = Invitation.where(invitee_id: current_user).order_by_invite_msg.page(params[:page]).per(8)
   end
 
   def sent_index
-    @sent_invitations = Invitation.where(user_id: current_user).order(id: :desc).page(params[:page]).per(8)
+    @sent_invitations = Invitation.where(user_id: current_user).order_by_invite_msg.page(params[:page]).per(8)
   end
 
   def show
@@ -75,16 +75,9 @@ class InvitationsController < ApplicationController
 
       @remaining_invitations_count = @instance.remaining_invitations_count
       @invitations = @instance.inviting_invitations.includes(:user)
-      @filterrific = initialize_filterrific(
-            User,
-            params[:filterrific],
-            select_options: {
-              sorted_by: User.options_for_sorted_by,
-              with_gender: ['male', 'female'],
-              range_level: [['0-4', '0'], ['5-9', '5'], ['10-14', '10'], ['15-19', '15']],
-            }
-          ) or return
-      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page])
+
+      @filterrific = filterrific_user or return
+      @candidates = @filterrific.find.can_be_invited(@instance).page(params[:page]).per(20)
 
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
