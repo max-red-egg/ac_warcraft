@@ -8,7 +8,7 @@ class MissionsController < ApplicationController
     @instance_complete_count = instances.find_complete.count
     @reviews = Review.all
     @users = User.all
-    
+
     # 任務達成率
     @achievement_rate = ((@instance_complete_count.to_f / instances.count.to_f )*100).round
 
@@ -69,11 +69,17 @@ class MissionsController < ApplicationController
   # 由使用者找任務組隊
   def teaming
     @user = User.find(params[:user_id])
-    # 找出目前使用者跟欲組隊使用者之間最低的等級
-    level = [@user.level, current_user.level].min
-    # 撈出參與者大於一人且等級低於兩個使用者的任務
-    @missions = Mission.order(level: :asc).where("participant_number > 1 and level <= ?", level).page(params[:page]).per(20)
-    render 'index'
+
+    if @user != current_user && @user.available == true
+      # 找出目前使用者跟欲組隊使用者之間最低的等級
+      level = [@user.level, current_user.level].min
+      # 撈出參與者大於一人且等級低於兩個使用者的任務
+      @missions = Mission.order(level: :asc).where("participant_number > 1 and level <= ?", level).page(params[:page]).per(20)
+      render 'index'
+    else
+      flash[:alert] = "無法執行本操作"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def select_user

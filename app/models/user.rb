@@ -116,7 +116,7 @@ class User < ApplicationRecord
     when 'follower'
       User.find(user_id).followers
     when 'oldteam'
-      where(id: User.find(user_id).instances.map{|instance| instance.members}.flatten.uniq )
+      where(id: User.find(user_id).instances.map{|instance| instance.members}.flatten.uniq ).where.not(id: user_id)
     else
     end
   }

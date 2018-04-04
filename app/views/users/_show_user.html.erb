@@ -22,6 +22,7 @@
                 </div>
               </div>
               <h3 class="m-0 text-bold"><%= @user.name %></h3>
+              <%= content_tag(:span, "It's Me" , class: "badge bg-gray-darker mt-2") if @user == current_user%>
               <div class="my-3">
                 <p><%= @user.description %></p>
                 <p><%= link_to '探員詳細資訊', user_path(@user) %></p>

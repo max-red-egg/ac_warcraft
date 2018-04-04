@@ -10,7 +10,7 @@
         <% end %>
       </div>
     </div>
-    <p class="h4 text-bold"><%= link_to user.name, user_path(user), remote: true %></p>
+    <p class="h4 text-bold"><%= link_to user.name, user_path(user), remote: true %><%= content_tag(:span, 'Me' , class: "badge bg-gray-darker ml-2") if user == current_user%></p>
     <% if @instance.present? %>
       <p class="mb-0">
         <%= user_already_done(@instance, user) %>
@@ -43,10 +43,12 @@
   <% elsif @invitation.present? %>
     <!-- 不顯示任何項目 -->
   <% else %>
-    <% if @user != current_user %>
-      <%= link_to "邀請組隊", teaming_missions_path(user_id: user.id), class: "ml-2 btn btn-primary" %>
-    <% else %>
-      <button type="button" class="btn btn-light" data-dismiss="modal">It's Me</button>
-    <%end%>
+    <% if user != current_user%>
+      <% if  user.available == true  %>
+        <%= link_to "邀請組隊", teaming_missions_path(user_id: user.id), class: "btn btn-primary ml-2" %>
+      <% else %>
+        <button class="btn btn-dark ml-2 disabled" >探員忙碌中</button>
+      <% end %>
+    <% end %>
   <% end %>
 </div>

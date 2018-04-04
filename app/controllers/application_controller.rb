@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
     initialize_filterrific(
       User,
       params[:filterrific],
+      persistence_id: 'user_filter',
       select_options: {
         sorted_by: User.options_for_sorted_by,
         with_gender: User.options_for_gender,
