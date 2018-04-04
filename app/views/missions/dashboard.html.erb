@@ -186,20 +186,19 @@
           <% end %>
 
         </div>
-        <div class="row mt-5">
-          <h2>你曾經成功挑戰<%= @recommended_tag %>任務，推薦給你...</h2>
-        </div>
-        <div class="row mt-1">
-          <% @recommended_missions.each do |mission| %>
-            <div class="col-sm-6 col-lg-4 col-xl-3 my-3">
-              <%= render partial:"shared/mission_card" , locals: {mission: mission} %>
-            </div>
-          <% end %>
-
-        </div>
-
-
-
+        <% unless @recommended_tag == '' %>
+          <div class="row mt-5">
+            <h2>你曾經成功挑戰<%= @recommended_tag %>任務，推薦給你...</h2>
+          </div>
+          <div class="row mt-1">
+            <% @recommended_missions.each do |mission| %>
+              <div class="col-sm-6 col-lg-4 col-xl-3 my-3">
+                <%= render partial:"shared/mission_card" , locals: {mission: mission} %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        
 
       </div>
     </div>

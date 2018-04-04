@@ -41,7 +41,11 @@ class AdminMissionCrudTest < ActionDispatch::IntegrationTest
       
       post admin_missions_path, params: { mission: { name:  "new mission",
                                          description: "new mission here",
-                                         level: 1 } }
+                                         level: 1,
+                                         participant_number: 2,
+                                         invitation_number: 5,
+                                         xp: 100,
+                                         tag_list: "ruby" } }
                                                      
     end 
     new_mission = Mission.last

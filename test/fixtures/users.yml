@@ -7,6 +7,7 @@
 admin:
   name: Egg example
   email: eggyy@email.com
+  # password: password
   description: testtesttest
   gender: male
   role: admin
