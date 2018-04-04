@@ -20,9 +20,11 @@ class MissionsController < ApplicationController
 
     # 熱門任務
     @hot_missions = @missions.order(instances_count: :desc).limit(4)
-
+    # binding.pry
     # 推薦任務
-    @recommended_tag = (current_user.missions.tag_counts_on(:tags).sample)[:name]
+    tag_sample = current_user.missions.tag_counts_on(:tags).sample
+    @recommended_tag = tag_sample ? tag_sample[:name] : '' 
+    # binding.pry
     @recommended_missions = Mission.tagged_with(@recommended_tag).where('level <= ?', current_user.level).sample(4)
 
   end
