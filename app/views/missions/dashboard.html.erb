@@ -8,7 +8,7 @@
   <div class="section-container">
     <div class="content-wrapper">
       <div class="content-heading">
-        <h3>戰情中心</h3>
+        <h3><%= title '戰情中心' %></h3>
       </div>
       <div class="container dashboard">
 
@@ -184,7 +184,7 @@
               <%= render partial:"shared/mission_card" , locals: {mission: mission} %>
             </div>
           <% end %>
-          
+
         </div>
         <div class="row mt-5">
           <h2>你曾經成功挑戰<%= @recommended_tag %>任務，推薦給你...</h2>
@@ -195,7 +195,7 @@
               <%= render partial:"shared/mission_card" , locals: {mission: mission} %>
             </div>
           <% end %>
-          
+
         </div>
 
 
