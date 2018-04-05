@@ -15,15 +15,28 @@
         <% end %>
       </div>
       <div class="container">
-        <div class="row">
-          <% @missions.each do |mission| %>
-            <div class="col-sm-6 col-lg-4 col-xl-3 my-3">
-              <%= render partial:"shared/mission_card" , locals: {mission: mission} %>
+        <% if controller?('missions') && action?('index') %>
+          <div class="row mb-0">
+            <div class="col bg-inverse-light card mx-3">
+              <div class="card-body">
+                <%= form_for_filterrific @filterrific, remote: true do |f| %>
+                  <div class="form-group row" >
+                      <label class="col-2">排序方式：</label>
+                      <div class="col-10 btn-group btn-group-toggle" data-toggle="buttons">
+                        <% @filterrific.select_options[:sorted_by].each do |sorted_by| %>
+                            <%= f.label sorted_by[0] ,class: "btn btn-dark #{'active' if @filterrific.sorted_by == sorted_by[1]}" do %>
+                              <%= f.radio_button :sorted_by, sorted_by[1] %> <%= sorted_by[0] %>
+                            <% end %>
+                        <% end %>
+                      </div>
+                    </div>
+                  <%= render_filterrific_spinner %>
+                <% end %>
+              </div>
             </div>
-          <% end %>
-
-        </div>
-        <%= paginate @missions %>
+          </div>
+        <% end %>
+        <%= render partial: 'missions_list', locals: { missions: @missions } %>
       </div>
     </div>
   </div>

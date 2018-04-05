@@ -1,0 +1,11 @@
+<div id="filterrific_results" >
+  <div class="row">
+    <div class="col-12 text-center my-2"><%= page_entries_info missions %></div>
+    <% missions.each do |mission| %>
+      <div class="col-sm-6 col-lg-4 col-xl-3 my-3">
+        <%= render partial:"shared/mission_card" , locals: {mission: mission} %>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate missions %>
+</div>
