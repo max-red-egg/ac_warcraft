@@ -19,6 +19,16 @@
 //--- Angle Vender Scripts
 //= require easy-pie-chart/dist/jquery.easypiechart
 //= require jquery-knob/dist/jquery.knob.min
+//--- SPARKLINE
+//= require jquery-sparkline/jquery.sparkline
+//--- FLOT CHART
+//= require flot/jquery.flot
+//= require jquery.flot.tooltip/js/jquery.flot.tooltip
+//= require flot/jquery.flot.resize
+//= require flot/jquery.flot.pie
+//= require flot/jquery.flot.time
+//= require flot/jquery.flot.categories
+//= require jquery.flot.spline/jquery.flot.spline
 
 //= require rails-ujs
 //= require activestorage
