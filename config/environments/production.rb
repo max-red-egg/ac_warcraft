@@ -47,7 +47,7 @@ Rails.application.configure do
   # config.action_cable.url = 'wss://erm.zone/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
   config.web_socket_server_url = "wss://erm.zone/cable"
-  config.action_cable.allowed_request_origins = ['https://www.erm.zone', 'http://www.erm.zone/']
+  config.action_cable.allowed_request_origins = ['https://pacific-dawn-73107.herokuapp.com','http://pacific-dawn-73107.herokuapp.com', 'http://www.erm.zone', 'https://www.erm.zone']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
