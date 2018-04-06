@@ -7,7 +7,7 @@ class Mission < ApplicationRecord
 
   filterrific(
     default_filter_params: {
-      sorted_by: 'level_desc',
+      sorted_by: 'level_asc',
     },
     available_filters: [
       :sorted_by,
@@ -37,10 +37,10 @@ class Mission < ApplicationRecord
 
   def self.options_for_sorted_by
     [
-      ['等級 高至低', 'level_desc'],
       ['等級 低至高', 'level_asc'],
-      ['XP 高至低', 'xp_desc'],
+      ['等級 高至低', 'level_desc'],
       ['XP 低至高', 'xp_asc'],
+      ['XP 高至低', 'xp_desc'],
       ['新任務優先', 'created_at_desc']
     ]
   end
