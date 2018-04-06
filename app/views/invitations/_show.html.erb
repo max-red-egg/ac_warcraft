@@ -24,7 +24,7 @@
           <div class="col-12 ">
             <h4>邀請對話</h4>
           </div>
-          <div class="col-12" id="invitation_msg">
+          <div class="col-12" id="invitation_msg" data-invitation-id = "<%= @invitation.id %>">
             <%= render partial:'invite_msg_board', locals: {msgs: @invite_msgs} %>
           </div>
         </div>
@@ -52,4 +52,10 @@
     <%end%>
   </div>
 </div>
+
+<script>
+  startInviteMsgs();
+  //註冊action cable channel
+  //invite_msgs.js
+</script>
 
