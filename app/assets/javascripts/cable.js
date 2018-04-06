@@ -3,7 +3,7 @@
 //
 //= require action_cable
 //= require_self
-//= require ./channels/notifications
+//= require_tree ./channels
 
 
 (function() {
