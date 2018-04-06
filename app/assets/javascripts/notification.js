@@ -17,7 +17,6 @@ class Notifications {
       $("[data-behavior='notifications-link']").on("click", this.handleClick);
       this.notifications.on("hide.bs.dropdown",this.handleDropdownClose);
       //$("[data-behavior='notifications-link']").on("click", this.handleClick);
-      console.log("2");
       this.getNewNotifications();
       // setInterval((() => {
       //   console.log("getNotifications!!");
@@ -29,7 +28,7 @@ class Notifications {
   }
 
   getNewNotifications() {
-    console.log('load');
+    //console.log('load');
     $.ajax({
       url: "/notifications.json",
       dataType: "JSON",
@@ -86,7 +85,7 @@ class Notifications {
 
   handleSuccess(data) {
     const items = $.map(data, notification => notification.template);
-    console.log('handleSuccess');
+    //console.log('handleSuccess');
     let unchecked_count = 0;
     $.each(data, function(i, notification) {
       if (notification.unchecked) {
