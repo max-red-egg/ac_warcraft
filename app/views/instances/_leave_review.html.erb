@@ -1,4 +1,4 @@
-<div class="card card-default">
+<div class="card card-default" id="<%= 'card-anim-bounce' if review_submited?(@instance,current_user) %>" >
   <div class="card-body bb pb-0">
     <div class="clearfix">
       <div class="float-left">
@@ -6,6 +6,7 @@
       </div>
     </div>
   </div>
+
   <div class="card-body bb">
     <% @reviews_to_other.each do |review| %>
       <% if review.submit? %>
@@ -52,11 +53,11 @@
   </div>
 </div>
 <script>
-$('.review_rating input').change(function () {
-
-  var $radio = $(this);
-  //console.log($radio.closest('label'));
-  $('.review_rating .selected').removeClass('selected');
-  $radio.closest('label').addClass('selected');
-});
+  $('.review_rating input').change(function () {
+    var $radio = $(this);
+    //console.log($radio.closest('label'));
+    $('.review_rating .selected').removeClass('selected');
+    $radio.closest('label').addClass('selected');
+  });
+  $('#card-anim-bounce').animo({ animation: "bounce", delay: 0.5 });
 </script>
