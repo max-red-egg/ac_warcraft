@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     end
     resources :invite_msgs, only: [:create]
   end
+  resources :invite_msgs, only: [:show]
   resources :instances, only: [:show, :edit] do
     member do
       post :submit
@@ -44,7 +45,6 @@ Rails.application.routes.draw do
     collection do
       get :history
     end
-
     resources :instance_msgs, only: [:create]
   end
 

@@ -1,26 +1,5 @@
 <% if msgs %>
   <% msgs.each do |msg| %>
-    <div class="col-12 m-0 ">
-      <div class="table-responsive">
-        <table class="table m-0">
-          <tbody>
-            <tr>
-              <% if msg.user != current_user %>
-                <td class="b0 wd-xs d-md-table-cell text-center">
-                  <%= gravatar_for(msg.user, "img-fluid rounded-circle img-thumbnail thumb48") %>
-                  <span><%= msg.user.name %></span>
-                </td>
-              <% end %>
-              <td class="b0 <%= 'd-flex flex-column align-items-end' if msg.user == current_user %> ">
-                <div class="w-50 bg-gray-darker px-3 py-2 rounded ">
-                  <span><%= msg.content %></span>
-                </div>
-                <span class="text-muted mt-1"><%= time_ago_in_words(msg.updated_at) + '前' %></span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <%= render partial: 'invitations/invite_msg_show', locals: {msg: msg}%>
   <% end %>
 <% end %>
