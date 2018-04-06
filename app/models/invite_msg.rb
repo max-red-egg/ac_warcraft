@@ -2,6 +2,7 @@ class InviteMsg < ApplicationRecord
   belongs_to :user
   belongs_to :invitation
   after_create :create_notifications
+  after_create_commit :relay_msg
 
   def recipient
     self.invitation.user == self.user ? self.invitation.invitee : self.invitation.user
@@ -27,4 +28,8 @@ class InviteMsg < ApplicationRecord
         action: 'send_msg', notifiable: self)
   end
 
+  private 
+  def relay_msg
+    InviteMsgsRelayJob.perform_later(self)
+  end
 end
