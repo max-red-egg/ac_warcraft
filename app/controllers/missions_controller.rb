@@ -23,14 +23,20 @@ class MissionsController < ApplicationController
     # binding.pry
     # 推薦任務
     tag_sample = current_user.missions.tag_counts_on(:tags).sample
-    @recommended_tag = tag_sample ? tag_sample[:name] : '' 
+    @recommended_tag = tag_sample ? tag_sample[:name] : ''
     # binding.pry
     @recommended_missions = Mission.tagged_with(@recommended_tag).where('level <= ?', current_user.level).sample(4)
 
   end
 
   def index
-    @missions = Mission.order(level: :asc).page(params[:page]).per(20)
+    @filterrific = filterrific_mission or return
+    @missions = @filterrific.find.page(params[:page]).per(20)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
   def show
