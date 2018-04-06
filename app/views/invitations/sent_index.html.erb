@@ -56,7 +56,11 @@
                               <span class="badge bg-info"> XP+ <%= invitation.instance.mission.xp %></span>
                               <%= render partial: 'shared/mission_tags', locals: {mission: invitation.instance.mission} %>
                             </div>
-                            <div class="mb-mail-preview"><%= time_ago_in_words(invitation.updated_at) + '前' %></div>
+                            <div class="mb-mail-preview"><% if invitation.invite_msgs.count > 0%>
+                              <%= time_ago_in_words(invitation.invite_msgs.first.created_at) + '前更新' %></div>
+                              <% else %>
+                              <%= time_ago_in_words(invitation.created_at) + '前更新' %>
+                              <% end %></div>
                           </div>
                           <div class="mb-mail-date ml-auto">
                             <% if invitation.state == 'inviting' %>

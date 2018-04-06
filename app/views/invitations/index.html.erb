@@ -40,6 +40,7 @@
           <div class="col-xl-9 col-lg-8">
             <div class="card card-default" id="invitaions_list">
               <div class="card-body bb">
+                <%= %>
                 <table class="table table-hover mb-mails">
                   <tbody>
                     <% @received_invitations.each do |invitation| %>
@@ -56,7 +57,12 @@
                               <span class="badge bg-info"> XP+ <%= invitation.instance.mission.xp %></span>
                               <%= render partial: 'shared/mission_tags', locals: {mission: invitation.instance.mission} %>
                             </div>
-                            <div class="mb-mail-preview"><%= time_ago_in_words(invitation.invite_msgs.first.created_at) + '前更新' %></div>
+                            <div class="mb-mail-preview">
+                              <% if invitation.invite_msgs.count > 0%>
+                              <%= time_ago_in_words(invitation.invite_msgs.first.created_at) + '前更新' %></div>
+                              <% else %>
+                              <%= time_ago_in_words(invitation.created_at) + '前更新' %>
+                              <% end %>
                           </div>
                           <div class="mb-mail-date ml-auto">
                             <% if invitation.state == 'inviting' %>
