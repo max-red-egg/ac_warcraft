@@ -32,7 +32,6 @@ class MissionsController < ApplicationController
   def index
     @filterrific = filterrific_mission or return
     @missions = @filterrific.find.page(params[:page]).per(20)
-
     respond_to do |format|
       format.html
       format.js

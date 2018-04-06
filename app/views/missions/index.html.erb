@@ -30,6 +30,16 @@
                         <% end %>
                       </div>
                     </div>
+                    <div class="form-group row" >
+                      <label class="col-2">任務標籤：</label>
+                      <div class="col-10 btn-group btn-group-toggle" data-toggle="buttons">
+                        <% @filterrific.select_options[:with_tag].each do |tag| %>
+                            <%= f.label tag ,class: "btn btn-dark #{'active' if @filterrific.with_tag == tag }" do %>
+                              <%= f.radio_button :with_tag, tag %> <%= tag %>
+                            <% end %>
+                        <% end %>
+                      </div>
+                    </div>
                   <%= render_filterrific_spinner %>
                 <% end %>
               </div>

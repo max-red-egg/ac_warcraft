@@ -32,7 +32,7 @@ class Mission < ApplicationRecord
   }
 
   scope :with_tag, lambda { |tag|
-    where(tag: [*tag])
+    Mission.tagged_with(tag)
   }
 
   def self.options_for_sorted_by
@@ -46,9 +46,6 @@ class Mission < ApplicationRecord
   end
 
   def self.options_for_tag
-    [
-      ['Rails', 'rails'],
-      ['Ruby', 'ruby']
-    ]
+    tags = Mission.tag_counts_on(:tags).map {|tag| tag.name }
   end
 end
