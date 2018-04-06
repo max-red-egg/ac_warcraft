@@ -39,18 +39,30 @@
                   </div>
                 </div>
               </div>
+             <% if @user.have_github_username? %>
                 <div class="card-body bt">
                   <div class="row">
-                    <div class="col-12 text-center">
-                      <% if @user == current_user %>
-                        <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn bg-warning" %>
-                      <% else %>
-                        <%= render partial: "shared/follow", locals: {user: @user} %>
-                        <%= link_to "邀請組隊", teaming_missions_path(user_id: @user.id), class: "btn btn-primary" %>
-                      <% end %>
+                    <div class="col-6 text-center">
+                      <%= link_to "Github", @user.github_url, class: "fa fa-github fa-lg" %>
+                    </div>
+                    <div class="col-6 text-center">
+                      <%= link_to "Repos(#{@user.github_repos_count})", @user.github_repos_url, class: "icon-layers fa-lg" %>
                     </div>
                   </div>
                 </div>
+              <% end %>
+              <div class="card-body bt">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <% if @user == current_user %>
+                      <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn bg-warning" %>
+                    <% else %>
+                      <%= render partial: "shared/follow", locals: {user: @user} %>
+                      <%= link_to "邀請組隊", teaming_missions_path(user_id: @user.id), class: "btn btn-primary" %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="card card-default d-none d-lg-block">
               <div class="card-header">

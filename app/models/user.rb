@@ -284,5 +284,7 @@ class User < ApplicationRecord
     repos.count
   end
 
-
+  def github_repos_url
+    "https://github.com/#{self.github_username}?tab=repositories"
+  end
 end
