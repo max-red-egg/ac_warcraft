@@ -10,14 +10,14 @@ App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
 
   received: function(data) {
     // Called when there's incoming data on the websocket for this channel
-    console.log('action cable');
+    //console.log('action cable');
     $.ajax({
       url: "/notifications.json",
       dataType: "JSON",
       method: "GET",
       success: (data)=>{
           const items = $.map(data, notification => notification.template);
-          console.log('action cable ajax');
+          //console.log('action cable ajax');
           let unchecked_count = 0;
           $.each(data, function(i, notification) {
             if (notification.unchecked) {
