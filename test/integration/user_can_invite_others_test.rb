@@ -31,14 +31,6 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
         post invitation_invite_msgs_path(@invitation), xhr: true, params: {invite_msg: {content: 'hihi123'} }
       end
     end
-    assert_match 'hihi123', response.body
-    # binding.pry
-
-    # 新增留言時也會新增通知
-    # assert_difference 'Notification.count', 1 do
-    # post invitation_invite_msgs_path(@invitation), xhr: true, params: {invite_msg: {content: 'hihi456'} }
-    # end
-    # binding.pry
   end
 
   # 邀請別人時會新增一個notification

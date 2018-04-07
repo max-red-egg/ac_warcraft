@@ -29,6 +29,4 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     get invitation_path(@invitation), xhr: true
     assert_response :redirect
   end
-
-
 end

@@ -21,20 +21,6 @@ class MissionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  #如果有副本正在進行中進去首頁會被導向任務頁面
-  # test "if user has instances will redirected to instances/index page when entering root" do
-  #   # 有在打副本的成員
-  #   sign_in @user
-
-  #   get root_path
-  #   assert_redirected_to instances_path
-
-  #   # 目前沒有副本的成員
-  #   sign_in @user1
-  #   get root_path
-  #   assert_redirected_to missions_path
-  # end
-
   test "only sign_in can access mission/show" do
     get mission_path(@mission1), xhr:true
     assert_response 401

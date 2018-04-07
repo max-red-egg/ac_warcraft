@@ -37,18 +37,4 @@ class UserCanFollowAndUnfollowOtherUsersTest < ActionDispatch::IntegrationTest
 
     assert_not flash[:alert].nil?
   end
-
-  # test "user following view" do
-  #   # binding.pry
-  #   sign_in @user
-  #   get following_users_path
-  #   assert_template 'users/index'
-  #   assert_match @user2.name, response.body
-  #   assert_no_match @user3.name, response.body
-    
-  #   get follower_users_path
-  #   assert_template 'users/index'
-  #   assert_match @user3.name, response.body
-  #   assert_no_match @user2.name, response.body
-  # end
 end

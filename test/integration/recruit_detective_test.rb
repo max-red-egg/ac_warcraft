@@ -16,10 +16,7 @@ class RecruitDetectiveTest < ActionDispatch::IntegrationTest
     assert_difference 'RecruitBoard.count', 1 do
       post recruit_boards_path(instance_id: @instance_recruit.id)
     end
-    # assert_redirected_to recruit_boards_path
-    # binding.pry
   end
-
   # 不可以招募自己
   test "cannot recruit by self" do
     sign_in @user
@@ -49,7 +46,6 @@ class RecruitDetectiveTest < ActionDispatch::IntegrationTest
     @recruit_board.reload
     assert_not @recruit_board.state
   end
-
   # 發起者可以取消招募訊息
   test "user can cancel a recruit" do
     # 不可以取消別人發起的招募訊息
@@ -62,6 +58,5 @@ class RecruitDetectiveTest < ActionDispatch::IntegrationTest
     assert_difference 'RecruitBoard.count', -1 do
       delete recruit_board_path(@recruit_board)
     end
-  end
-  
+  end  
 end

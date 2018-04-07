@@ -36,7 +36,6 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     assert instance.modifier.nil?
     assert instance.answer.empty?
     post save_instance_path(instance), xhr:true, params: {instance: { answer: "123" }}
-
     #確認儲存後的狀態
     instance.reload
     assert_not instance.modifier.nil?
@@ -44,7 +43,6 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     # 確認最後修改者
     assert_equal @user, instance.modifier 
     assert_equal "123", instance.answer 
-
     # 編輯
     post save_instance_path(instance), xhr:true, params: {instance: { answer: "456" }}
     instance.reload
@@ -53,12 +51,10 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
 
   test "user can submit answer and xp will raise" do
     instance = instances(:instance_in_progress)
-    # binding.pry
     assert_difference 'Review.count', 0 do
       # 需要先儲存答案才可以送出
       post submit_instance_path(instance)
     end
-    
     # 提交任務成功時可以產生兩個review
     origin_xp = @user.xp
     assert_difference 'Review.count', 2 do
@@ -69,10 +65,8 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
         post submit_instance_path(instance)
       end
     end
-    # binding.pry
     instance.reload
     assert_equal "complete", instance.state
-    # binding.pry
     @user.reload
     assert_equal true, @user.available
     assert_equal origin_xp + 100, @user.xp
@@ -89,12 +83,10 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
       post submit_instance_path(instance)
       @user.reload
     end
-    # binding.pry
   end
 
   test "user can cancel a teaming_instance" do
     instance = instances(:instance_teaming)
-    # 會發出取消訊息
 
     assert_difference 'InviteMsg.count',1 do
       post cancel_instance_path(instance)
