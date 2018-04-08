@@ -20,6 +20,7 @@ user:
   description: testtesttest
   gender: male
   confirmed_at: <%= Time.zone.now %>
+  github_username: eggyy1224
   level: 15
   xp: 15600
 
