@@ -30,7 +30,7 @@ function startInviteMsgs(){
             success: (data)=>{
               //console.log(data);
               msgs_board.append(data);
-              
+              readInviteMsgs(msgs_board.data('invitation-id'));
 
             }
           });
