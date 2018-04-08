@@ -17,17 +17,17 @@
               <div class="card card-default">
                 <div class="card-body">
                   <ul class="nav nav-pills flex-column">
-                    <li class="nav-item p-2">
+                    <li class="nav-item p-2 ">
                       <small class="text-muted">Invitation Boxs</small>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item active invite_msg_nav">
                       <%= link_to invitations_path, class: "nav-link d-flex align-items-center" do%>
                         <em class="fa fa-fw fa-lg fa-inbox mr-2"></em>
                         <span>收到的邀請</span>
                         <%= content_tag :div, @received_invitations_msgs_unread_count, class: "ml-2 badge badge-danger" if @received_invitations_msgs_unread_count > 0 %>
                       <% end %>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item invite_msg_nav">
                       <%= link_to sent_index_invitations_path , class: "nav-link d-flex align-items-center" do%>
                         <em class="fa fa-fw fa-lg fa-paper-plane-o mr-2"></em>
                         <span>寄出的邀請</span>
