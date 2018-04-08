@@ -16,16 +16,12 @@ class InvatationMsgsTest < ActionDispatch::IntegrationTest
       post invitation_invite_msgs_path(@invitation), xhr: true, params: { invite_msg: { content: 'hihi123' } }
     end
     assert_response :success
-    assert_match "hihi123", response.body
-
     # 被邀請者可以留言
-
     sign_in @user3
     assert_difference 'InviteMsg.count', 1 do
       post invitation_invite_msgs_path(@invitation), xhr: true, params: { invite_msg: { content: 'hihi456' } }
     end
     assert_response :success
-    assert_match "hihi456", response.body
     
     # 非邀請者或被邀請者不可以留言
     sign_in @user2
