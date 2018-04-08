@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   has_many :invitations
   has_many :invite_msgs
+  has_many :recived_invite_msgs, foreign_key: "recipient_id", class_name: "InviteMsg"
 
   #user.reviews 所有參與過的任務的評價
   has_many :reviews, foreign_key: "reviewee_id", class_name: "Review"
@@ -284,7 +285,21 @@ class User < ApplicationRecord
     repos.count
   end
 
+  # def unread_invite_msg
+  #   if self.instances.count > 0 
+      
+  # end
+  def msg_read!(invitation)
+    msgs = self.recived_invite_msgs.where(invitation_id: invitation.id).unread
+    msgs.each do |msg|
+      msg.read_at = Time.now
+      msg.save
+    end
+  end
+
+
   def github_repos_url
     "https://github.com/#{self.github_username}?tab=repositories"
   end
+
 end

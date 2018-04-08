@@ -164,4 +164,24 @@ namespace :dev do
     end
   end
 
+  task reset_invite_msg_recipient: :environment do
+    Invitation.all.each do |invitation|
+      invite_msgs = invitation.invite_msgs
+      inviter = invitation.user
+      invitee = invitation.invitee
+      invite_msgs.each do |msg|
+        if msg.user == inviter
+          msg.recipient = invitee
+        else
+          msg.recipient = inviter
+        end
+        msg.save
+        puts "invite_msg id = #{msg.id}, content = #{msg.content}, user_id = #{msg.user_id}, recipient_id #{msg.recipient_id}"
+      end
+
+      puts "inviter : #{inviter.name}. invitee : #{invitee.name}"
+    end
+  end
+
+
 end

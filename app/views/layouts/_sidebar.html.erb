@@ -90,6 +90,7 @@
       </li>
       <li class="<%= 'active' if controller?('invitations') %>">
         <%= link_to invitations_path do %>
+          <%= content_tag :div, current_user.recived_invite_msgs.unread.count, class: "float-right badge badge-danger", id:"invitation_badge" if current_user.recived_invite_msgs.unread.count > 0 %>
           <em class="icon-envelope"></em>
           <span>任務邀請</span>
         <% end %>

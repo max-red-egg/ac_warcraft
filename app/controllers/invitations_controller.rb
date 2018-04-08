@@ -5,11 +5,16 @@ class InvitationsController < ApplicationController
   before_action :check_inviting, only: [:accept, :decline, :cancel]
 
   def index
-    @received_invitations = Invitation.where(invitee_id: current_user).order_by_invite_msg.page(params[:page]).per(8)
+    @received_invitations = Invitation.where(invitee_id: current_user).order(updated_at: :desc).page(params[:page]).per(8)
+    #byebug.order_by_invite_msg
+    @received_invitations_msgs_unread_count = current_user.recived_invite_msgs.joins(:invitation).where('invitations.invitee_id = ?', current_user.id).unread.count
+    @sent_invitations_msgs_unread_count = current_user.recived_invite_msgs.joins(:invitation).where('invitations.user_id = ?', current_user.id).unread.count
   end
 
   def sent_index
-    @sent_invitations = Invitation.where(user_id: current_user).order_by_invite_msg.page(params[:page]).per(8)
+    @sent_invitations = Invitation.where(user_id: current_user).order(updated_at: :desc).page(params[:page]).per(8)
+    @received_invitations_msgs_unread_count = current_user.recived_invite_msgs.joins(:invitation).where('invitations.invitee_id = ?', current_user.id).unread.count
+    @sent_invitations_msgs_unread_count = current_user.recived_invite_msgs.joins(:invitation).where('invitations.user_id = ?', current_user.id).unread.count
   end
 
   def show
@@ -18,8 +23,9 @@ class InvitationsController < ApplicationController
     @invitee = @invitation.invitee                 #受邀者
     if current_user == @inviter || current_user == @invitee
       #只有邀請者或受邀者才可以瀏覽
+      current_user.msg_read!(@invitation)
       @mission = @invitation.instance.mission
-      @invite_msgs = @invitation.invite_msgs.includes(:user)
+      @invite_msgs = @invitation.invite_msgs.order(id: :asc).includes(:user)
       if @invitation.state == 'inviting'
         @invite_msg = InviteMsg.new
       end
@@ -88,6 +94,11 @@ class InvitationsController < ApplicationController
       flash[:alert] = "操作失敗"
       redirect_back(fallback_location: root_path)
     end
+  end
+
+  def read_all_msg
+    invitation = Invitation.find(params[:id])
+    current_user.msg_read!(invitation)
   end
 
   private

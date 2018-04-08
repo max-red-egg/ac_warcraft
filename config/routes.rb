@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       post :accept
       post :decline
       post :cancel
+      post :read_all_msg
     end
     collection do
       get :sent_index

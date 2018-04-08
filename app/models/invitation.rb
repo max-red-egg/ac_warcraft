@@ -1,6 +1,6 @@
 class Invitation < ApplicationRecord
   after_commit :setup_state!
-  after_commit :create_notifications
+  after_create_commit :create_notifications
   belongs_to :user
   belongs_to :instance
   belongs_to :invitee, class_name: "User"
@@ -10,9 +10,9 @@ class Invitation < ApplicationRecord
   scope :find_inviting, -> {
     where(state: 'inviting')
   }
-  scope :order_by_invite_msg, ->{
-    includes(:invite_msgs).order('invite_msgs.created_at DESC') 
-  }
+  # scope :order_by_invite_msg, ->{
+  #   joins(:invite_msgs).order('invite_msgs.created_at DESC') 
+  # }
 
   def time_updated!
     self.updated_at = Time.now

@@ -1,8 +1,16 @@
 class InviteMsg < ApplicationRecord
   belongs_to :user
+  belongs_to :recipient, class_name: "User"
   belongs_to :invitation
   after_create :create_notifications
   after_create_commit :relay_msg
+
+  scope :unread, ->{
+    where('read_at IS NULL ')
+  }
+  scope :unread_by, ->(user){
+    where('read_at IS NULL AND recipient_id = ?', user.id)
+  }
 
   def recipient
     self.invitation.user == self.user ? self.invitation.invitee : self.invitation.user
