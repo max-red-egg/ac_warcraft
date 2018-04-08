@@ -10,8 +10,9 @@ class InviteMsgsController < ApplicationController
   def create
     # 新增邀請函的留言
     invitation = Invitation.find(params[:invitation_id])
+    recipient = ( invitation.user == current_user ? invitation.invitee : invitation.user )
     if (current_user == invitation.user || current_user == invitation.invitee) && invitation.state == 'inviting'
-      invite_msg = invitation.invite_msgs.create(content: msg_params[:content],user_id: current_user.id )
+      invite_msg = invitation.invite_msgs.create(content: msg_params[:content],user_id: current_user.id, recipient_id: recipient.id )
 
       #@invite_msgs = invitation.invite_msgs.includes(:user)
 
