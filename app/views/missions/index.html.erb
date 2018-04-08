@@ -7,11 +7,17 @@
 <section>
   <div class="section-container">
     <div class="content-wrapper">
-      <div class="content-heading">
+      <div class="content-heading d-flex justify-content-between">
+
         <% if @user %>
-          <h3><%= title '邀請 '+@user.name+' 一起組隊' %></h3>
+          <div class=""><h3><%= title '邀請 '+@user.name+' 一起組隊' %></h3></div>
+          <div ><span class="fa fa-question-circle  " title="" data-container="body" data-trigger='hover' data-toggle="popover" data-placement="top" data-content="可以直接挑選任務，對該探員送出組隊邀請！"> </span></div>
         <% else %>
-          <h3><%= title '任務牆' %></h3>
+        
+          <div>
+            <h3><%= title '任務牆' %></h3>
+          </div>
+          <div ><span class="fa fa-question-circle  " title="" data-container="body" data-trigger='hover' data-toggle="popover" data-placement="top" data-content="挑選一個任務挑戰：如果任務人數為2人，請邀請探員共同組隊挑戰，如果等級不足或者已經正在挑戰任務者，無法挑戰該任務。"> </span></div>
         <% end %>
       </div>
       <div class="container">

@@ -18,7 +18,7 @@
         <span class="btn bg-inverse-light btn-sm btn-oval">你還可發送 <span class="font-weight-bold" id="remaining_invitations"><%=@remaining_invitations_count%></span> 張邀請</span>
       </div>
       <div class="col-12">
-        不想慢慢邀請？你還可以選擇： <%= link_to '發動緊急招募', recruit_boards_path(instance_id: params[:id]), method: :post, class: 'btn btn-sm btn-primary btn-oval ml-1 px-2 py-1' if @instance.state == "teaming" %>
+        不想慢慢邀請？你還可以選擇： <%= link_to '發動緊急招募', recruit_boards_path(instance_id: params[:id]), method: :post, class: 'btn btn-sm btn-primary btn-oval ml-1 px-2 py-1' if @instance.state == "teaming" %><span class="ml-2 fa fa-question-circle  " title="" data-container="body" data-trigger='hover' data-toggle="popover" data-placement="top" data-content="緊急招募會在本局右上角的緊急招募看板出現該任務。如有任何探員願意參加，則任務立即啟動，並不需要透過邀請函同意。"> </span>
       </div>
     </div>
 

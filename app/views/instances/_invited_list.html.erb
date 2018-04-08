@@ -1,5 +1,8 @@
 <% if @invitations.present? %>
-  <h4>正在邀請</h4>
+  <div class="d-flex justify-content-between">
+  <div class=""><h4>正在邀請</h4></div>
+  <div class=""><span class="ml-2 fa fa-question-circle  " title="" data-container="body" data-trigger='hover' data-toggle="popover" data-placement="top" data-content="你可以篩選你想要邀請的探員，並且對他送出任務邀請，並可在邀請函內傳送訊息。一但有探員接受你的邀請，則組隊成功並且立即啟動任務。"> </span></div>
+  </div>
   <div class="row mt-3">
     <% @invitations.each do |invitation| %>
       <div class="col-4 col-md-3 col-lg-2 text-center mb-3">
