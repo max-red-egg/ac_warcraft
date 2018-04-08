@@ -284,6 +284,16 @@ class User < ApplicationRecord
     repos = user.rels[:repos].get.data
     repos.count
   end
-
+  # def unread_invite_msg
+  #   if self.instances.count > 0 
+      
+  # end
+  def msg_read!(invitation)
+    msgs = self.recived_invite_msgs.where(invitation_id: invitation.id).unread
+    msgs.each do |msg|
+      msg.read_at = Time.now
+      msg.save
+    end
+  end
 
 end

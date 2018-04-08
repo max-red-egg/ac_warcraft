@@ -91,6 +91,11 @@ class InvitationsController < ApplicationController
     end
   end
 
+  def read_all_msg
+    invitation = Invitation.find(params[:id])
+    current_user.msg_read!(invitation)
+  end
+
   private
   def set_invitation
     @invitation = Invitation.find(params[:id])
