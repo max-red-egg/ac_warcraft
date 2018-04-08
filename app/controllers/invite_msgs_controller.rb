@@ -15,7 +15,7 @@ class InviteMsgsController < ApplicationController
 
       #@invite_msgs = invitation.invite_msgs.includes(:user)
 
-      #invitation.time_updated!
+      invitation.time_updated!
       @notice_msg = '已送出留言'
     else
       flash[:alert] = '無法送出留言'
