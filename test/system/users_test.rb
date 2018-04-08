@@ -81,4 +81,19 @@ class UsersTest < ApplicationSystemTestCase
     # binding.pry
   end
 
+  test "admin mission index and create a mission" do
+    sign_in @admin
+    visit admin_root_path
+    click_on "Create a Mission"
+    fill_in "mission_name", with: "test mission"
+    fill_in "mission_level", with: 15
+    fill_in "mission_tag_list", with: "Ruby"
+    fill_in "mission_xp", with: "100"
+    fill_in "mission_participant_number", with: 2
+    fill_in "mission_invitation_number", with: 5
+    fill_in "mission_description", with: "hihi123"
+    click_on "ok"
+    binding.pry
+  end
+
 end

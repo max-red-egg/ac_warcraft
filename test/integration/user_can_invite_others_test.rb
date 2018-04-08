@@ -23,19 +23,21 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
     assert_includes @instance.invitees, @user2
   end
 
-  # 可以新增邀請留言
+  # 可以新增邀請留言，新增同時會增加通知
   test "user can leave invite_msgs" do
     sign_in @user
     assert_difference 'InviteMsg.count', 1 do
-      post invitation_invite_msgs_path(@invitation), xhr: true, params: {invite_msg: {content: 'hihi123'} }
+      assert_difference 'Notification.count', 1 do
+        post invitation_invite_msgs_path(@invitation), xhr: true, params: {invite_msg: {content: 'hihi123'} }
+      end
     end
     assert_match 'hihi123', response.body
     # binding.pry
 
     # 新增留言時也會新增通知
-    assert_difference 'Notification.count', 1 do
-      post invitation_invite_msgs_path(@invitation), xhr: true, params: {invite_msg: {content: 'hihi456'} }
-    end
+    # assert_difference 'Notification.count', 1 do
+    # post invitation_invite_msgs_path(@invitation), xhr: true, params: {invite_msg: {content: 'hihi456'} }
+    # end
     # binding.pry
   end
 

@@ -284,6 +284,7 @@ class User < ApplicationRecord
     repos = user.rels[:repos].get.data
     repos.count
   end
+
   # def unread_invite_msg
   #   if self.instances.count > 0 
       
@@ -294,6 +295,11 @@ class User < ApplicationRecord
       msg.read_at = Time.now
       msg.save
     end
+  end
+
+
+  def github_repos_url
+    "https://github.com/#{self.github_username}?tab=repositories"
   end
 
 end

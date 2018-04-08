@@ -23,4 +23,16 @@ class ApplicationController < ActionController::Base
     )
   end
 
+  def filterrific_mission
+    initialize_filterrific(
+      Mission,
+      params[:filterrific],
+      persistence_id: 'mission_filter',
+      select_options: {
+        sorted_by: Mission.options_for_sorted_by,
+        with_tag: Mission.options_for_tag,
+      }
+    )
+  end
+
 end
