@@ -6,11 +6,15 @@ class InvitationsController < ApplicationController
 
   def index
     @received_invitations = Invitation.where(invitee_id: current_user).order(updated_at: :desc).page(params[:page]).per(8)
+    #byebug.order_by_invite_msg
+    @received_invitations_msgs_unread_count = current_user.recived_invite_msgs.joins(:invitation).where('invitations.invitee_id = ?', current_user.id).unread.count
+    @sent_invitations_msgs_unread_count = current_user.recived_invite_msgs.joins(:invitation).where('invitations.user_id = ?', current_user.id).unread.count
   end
 
   def sent_index
-    @sent_invitations = Invitation.where(user_id: current_user).order_by_invite_msg.page(params[:page]).per(8)
     @sent_invitations = Invitation.where(user_id: current_user).order(updated_at: :desc).page(params[:page]).per(8)
+    @received_invitations_msgs_unread_count = current_user.recived_invite_msgs.joins(:invitation).where('invitations.invitee_id = ?', current_user.id).unread.count
+    @sent_invitations_msgs_unread_count = current_user.recived_invite_msgs.joins(:invitation).where('invitations.user_id = ?', current_user.id).unread.count
   end
 
   def show

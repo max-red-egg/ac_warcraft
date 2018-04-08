@@ -24,12 +24,14 @@
                       <%= link_to invitations_path, class: "nav-link d-flex align-items-center" do%>
                         <em class="fa fa-fw fa-lg fa-inbox mr-2"></em>
                         <span>收到的邀請</span>
+                        <%= content_tag :div, @received_invitations_msgs_unread_count, class: "ml-2 badge badge-danger" if @received_invitations_msgs_unread_count > 0 %>
                       <% end %>
                     </li>
                     <li class="nav-item">
                       <%= link_to sent_index_invitations_path , class: "nav-link d-flex align-items-center" do%>
                         <em class="fa fa-fw fa-lg fa-paper-plane-o mr-2"></em>
                         <span>寄出的邀請</span>
+                        <%= content_tag :div, @sent_invitations_msgs_unread_count, class: "ml-2 badge badge-danger" if @sent_invitations_msgs_unread_count > 0 %>
                       <% end %>
                     </li>
                   </ul>
@@ -50,7 +52,8 @@
                           <%= gravatar_for(invitation.user, "mb-mail-avatar mr-2") %>
                           <div class="mb-mail-meta ml-3">
                             <div class="mb-mail-subject">
-                              <%= invitation.user.name %> 邀請你一起加入 <%= link_to invitation.instance.mission.name, mission_path(invitation.instance.mission), remote: true%> 任務 <%= cross_invite_badges(invitation) %>
+                              <%= invitation.user.name %> 邀請你一起加入 <%= link_to invitation.instance.mission.name, mission_path(invitation.instance.mission), remote: true%> 任務 <%= cross_invite_badges(invitation) %> 
+                                <%= content_tag :div, invitation.invite_msgs.unread_by(current_user).count, class: "ml-2 badge badge-danger",id: "unread_#{invitation.id}" if invitation.invite_msgs.unread_by(current_user).count > 0 %>
                             </div>
                             <div class="mb-mail-from">
                               <span class="badge bg-green">L<%= invitation.instance.mission.level %></span>
