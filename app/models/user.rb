@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   has_many :invitations
   has_many :invite_msgs
+  has_many :recived_invite_msgs, foreign_key: "recipient_id", class_name: "InviteMsg"
 
   #user.reviews 所有參與過的任務的評價
   has_many :reviews, foreign_key: "reviewee_id", class_name: "Review"

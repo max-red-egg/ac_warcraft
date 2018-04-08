@@ -1,5 +1,6 @@
 class InviteMsg < ApplicationRecord
   belongs_to :user
+  belongs_to :recipient, class_name: "User"
   belongs_to :invitation
   after_create :create_notifications
   after_create_commit :relay_msg
