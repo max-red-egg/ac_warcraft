@@ -23,8 +23,9 @@ class InvitationsController < ApplicationController
     @invitee = @invitation.invitee                 #受邀者
     if current_user == @inviter || current_user == @invitee
       #只有邀請者或受邀者才可以瀏覽
+      current_user.msg_read!(@invitation)
       @mission = @invitation.instance.mission
-      @invite_msgs = @invitation.invite_msgs.includes(:user)
+      @invite_msgs = @invitation.invite_msgs.order(id: :asc).includes(:user)
       if @invitation.state == 'inviting'
         @invite_msg = InviteMsg.new
       end
