@@ -4,9 +4,9 @@
       <%= link_to gravatar_for(user,"img-thumbnail rounded-circle thumb80 mb-2"), user_path(user), remote: true %>
       <div class='user-block-status'>
         <% if user.available %>
-          <div class="circle bg-success circle-lg"></div>
+          <div class="circle bg-success circle-lg" data-toggle="tooltip" data-placement="right" title="狀態：接受任務邀請"></div>
         <% else %>
-          <div class="circle bg-danger circle-lg"></div>
+          <div class="circle bg-danger circle-lg" data-toggle="tooltip" data-placement="right" title="狀態：不接受邀請"></div>
         <% end %>
       </div>
     </div>
