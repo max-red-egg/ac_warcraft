@@ -59,9 +59,11 @@ class Instance < ApplicationRecord
   end
 
   def cancel!
-    if self.state == 'teaming'
+    return false if self.state != 'teaming'
+
+    ActiveRecord::Base.transaction do
       self.state = 'cancel'
-      self.save
+      self.save!
 
       #取消所有人的邀請函
       self.invitations.find_inviting.each do |invitation|
@@ -69,6 +71,7 @@ class Instance < ApplicationRecord
         invitation.send_cancel_msg
       end
     end
+
   end
 
 
