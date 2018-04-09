@@ -7,7 +7,7 @@
           <div class="item user-block">
             <div class="user-block-picture">
               <%= link_to user_path(current_user) do %>
-                <%= gravatar_for(current_user, "img-thumbnail rounded-circle thumb96") %>
+                <%= gravatar_for(current_user, "img-thumbnail rounded-circle") %>
               <% end %>
               <div class="user-block-status">
                 <% if current_user.available %>
