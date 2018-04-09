@@ -77,10 +77,12 @@ class Instance < ApplicationRecord
 
   # ::instance method::  任務副本instance終止
   def abort!(user)
-    if self.state == 'in_progress'
+    return false if self.state != 'in_progress'
+
+    ActiveRecord::Base.transaction do
       self.state = 'abort'
       self.modifier = user  #觸發的使用者
-      self.save
+      self.save!
 
       # 產生所有隊員的reivew
       self.members.each do |reviewee| 
@@ -88,11 +90,12 @@ class Instance < ApplicationRecord
           if reviewee != reviewer
             new_review = reviewee.reviews.build(instance_id: self.id)
             new_review.reviewer = reviewer
-            new_review.save
+            new_review.save!
           end
         end
       end
     end
+
   end
 
 
