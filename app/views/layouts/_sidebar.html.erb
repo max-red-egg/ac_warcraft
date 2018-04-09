@@ -11,9 +11,9 @@
               <% end %>
               <div class="user-block-status">
                 <% if current_user.available %>
-                  <div class="circle bg-success circle-lg"></div>
+                  <div class="circle bg-success circle-lg" data-toggle="tooltip" data-placement="bottom" title="狀態：接受任務邀請"></div>
                 <% else %>
-                  <div class="circle bg-danger circle-lg"></div>
+                  <div class="circle bg-danger circle-lg" data-toggle="tooltip" data-placement="bottom" title="狀態：不接受邀請"></div>
                 <% end %>
               </div>
             </div>
