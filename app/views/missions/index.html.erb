@@ -13,7 +13,7 @@
           <div class=""><h3><%= title '邀請 '+@user.name+' 一起組隊' %></h3></div>
           <div ><span class="fa fa-question-circle  " title="" data-container="body" data-trigger='hover' data-toggle="popover" data-placement="top" data-content="可以直接挑選任務，對該探員送出組隊邀請！"> </span></div>
         <% else %>
-        
+
           <div>
             <h3><%= title '任務牆' %></h3>
           </div>
@@ -27,20 +27,23 @@
               <div class="card-body">
                 <%= form_for_filterrific @filterrific, remote: true do |f| %>
                   <div class="form-group row" >
-                      <label class="col-2">排序方式：</label>
-                      <div class="col-10 btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="col-12 col-sm-2">排序方式：</label>
+                      <div class="col-12 col-sm-10 btn-group-toggle" data-toggle="buttons">
                         <% @filterrific.select_options[:sorted_by].each do |sorted_by| %>
-                            <%= f.label sorted_by[0] ,class: "btn btn-dark #{'active' if @filterrific.sorted_by == sorted_by[1]}" do %>
+                            <%= f.label sorted_by[0] ,class: "btn btn-dark mb-1 #{'active' if @filterrific.sorted_by == sorted_by[1]}" do %>
                               <%= f.radio_button :sorted_by, sorted_by[1] %> <%= sorted_by[0] %>
                             <% end %>
                         <% end %>
                       </div>
                     </div>
                     <div class="form-group row" >
-                      <label class="col-2">任務標籤：</label>
-                      <div class="col-10 btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="col-12 col-sm-2">任務標籤：</label>
+                      <div class="col-12 col-sm-10 btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-dark mb-1 <%= 'focus active' if @filterrific.with_tag.blank? %> ">
+                          <%= f.radio_button :with_tag, '' %> All
+                        </label>
                         <% @filterrific.select_options[:with_tag].each do |tag| %>
-                            <%= f.label tag ,class: "btn btn-dark #{'active' if @filterrific.with_tag == tag }" do %>
+                            <%= f.label tag ,class: "btn btn-dark mb-1 #{'active' if @filterrific.with_tag == tag }" do %>
                               <%= f.radio_button :with_tag, tag %> <%= tag %>
                             <% end %>
                         <% end %>
