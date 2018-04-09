@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   root 'public#landing'
+  get 'story', :to => 'public#story'
   resources :announcements, only: [:show]
   resources :notifications do
     collection do

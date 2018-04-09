@@ -1,0 +1,44 @@
+<div id="fullpage">
+
+  <div class="section" data-anchor="whoami">
+    <div class="whoami-bg ">
+      <div class="row justify-content-md-center">
+        <div class=" col-md-auto text-center mt-3 ml-2 public-text">
+        <p>你好，我是Mr.E。</p>
+        <p>國家星際防衛部發現，有一個外星物種「霸格」已經入侵本國。「霸格」他神出鬼沒，潛入我們的生活中，近日發生的少子化、空氣汙染、人口老化，所有證據都指向是「霸格」所引起的。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" data-anchor="bugs">
+    <div class="bugs-bg"><div class="mt-3 ml-5 public-text">
+      <p>經過防衛部多年來調查。「霸格」最害怕的就是乾淨無瑕的程式碼。由於防衛部被立法院砍預算，替代役又退場，人力嚴重不足，因此指派我Mr.E，成立一個秘密ERM暗碼局，希望能秘密招募探員抵(抗)霸格，維護世界和平。</p>
+      </div>
+    </div>
+  </div>
+  <div class="section" data-anchor="join_us">
+    <div class="joinus-bg"><div class="mt-3 ml-5 public-text">
+      <p>暗碼局的探員們平時隱藏身分，白天是菜販、工人、上班族、家庭主婦、學生，夜晚的時間便打開電腦，兩人組隊領取任務，撰寫乾淨無瑕的程式碼來消滅霸格。</p>
+      <p>抵霸格過程漫長且許辛苦，ERM暗碼局希望能號招你一起加入！<%= link_to '申請成為探員', new_user_registration_path, class: "ml-2 btn btn-oval btn-primary"  %>  </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  $(document).ready(function() {
+  $('#fullpage').fullpage({
+    anchors:['whoami', 'bugs', 'join_us']
+  });
+  $("[data-anchor='whoami']").on('click',()=>{
+    console.log("hihi");
+    window.location.href = '#bugs';
+  });
+  $("[data-anchor='bugs']").on('click',()=>{
+    console.log("hihi");
+    window.location.href = '#join_us';
+  });
+});
+</script>

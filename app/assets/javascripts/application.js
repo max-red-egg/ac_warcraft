@@ -16,6 +16,9 @@
 //= require_tree ./angle/modules
 //= require_tree ./angle/custom
 
+//-- fullpage
+//= require_tree ./fullpage
+
 //--- Angle Vender Scripts
 //= require easy-pie-chart/dist/jquery.easypiechart
 //= require jquery-knob/dist/jquery.knob.min
