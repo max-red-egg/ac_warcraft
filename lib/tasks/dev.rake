@@ -183,5 +183,36 @@ namespace :dev do
     end
   end
 
+  task mission_fake: :environment do
+    fake_data = [{
+        name: "HTML大霸閣",
+        level: 12,
+        description: "請解釋「從你在瀏覽器裡輸入 www.facebook.com ，按下 Enter 到你的臉書牆出現在瀏覽器裡」，你的電腦跟 facebook 的伺服器做了什麼溝通？請引用 HTTP，client side vs. server side 等概念，以你知道的，盡可能把步驟描述出來。",
+        participant_number: 1,
+        xp:200,
+        tag: "HTML/CSS, Javascript"
+    },{
+        name: "HTML大霸閣2",
+        level: 2,
+        description: "請解釋「從你在瀏覽器裡輸入 www.facebook.com ，按下 Enter 到你的臉書牆出現在瀏覽器裡」，你的電腦跟 facebook 的伺服器做了什麼溝通？請引用 HTTP，client side vs. server side 等概念，以你知道的，盡可能把步驟描述出來。",
+        participant_number: 2,
+        xp:200,
+        tag: "Ruby, Rails"
+    }]
+    fake_data.each do |newfake|
+      mission = Mission.new
+      mission.name = newfake[:name]
+      mission.level =newfake[:level]
+      mission.description = newfake[:description]
+      mission.participant_number = newfake[:participant_number]
+      mission.invitation_number = 5
+      mission.xp = newfake[:xp]
+      new_tags = newfake[:tag].split(",").reject { |c| c.empty? }
+      mission.tag_list.add(new_tags)
+      mission.save
+      puts "create mission #{mission.name}"
+    end
+  end
+
 
 end
