@@ -12,7 +12,7 @@
   </div>
   <div class="card-body bb">
     <%= image_tag @mission.image_url, class: "rounded img-fluid my-3" %>
-    <p><%= @mission.description %></p>
+    <p><%= truncate @mission.description, length: 300 %> <%= link_to "任務詳情", mission_path(@mission), remote: true %></p>
   </div>
   <div class="card-body">
     <p ><strong>任務進度<strong></p>
