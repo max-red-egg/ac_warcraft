@@ -271,10 +271,16 @@ class User < ApplicationRecord
   end
   # 確認此user是用github登入
   def have_github_username?
-    self.github_username
+    begin
+      Octokit.user "#{self.github_username}"
+    rescue 
+      return false
+    end
+    self.github_username && self.github_username != '' 
   end
   # 拿user的github網址
   def github_url
+    # binding.pry
     user = Octokit.user "#{self.github_username}"
     user.html_url
   end
