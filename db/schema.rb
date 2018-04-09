@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_06_154616) do
+ActiveRecord::Schema.define(version: 2018_04_09_132433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["instance_id"], name: "index_abort_requests_on_instance_id"
+    t.index ["user_id"], name: "index_abort_requests_on_user_id"
   end
 
   create_table "announcements", force: :cascade do |t|
@@ -30,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.integer "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_announcements_on_author_id"
   end
 
   create_table "followships", force: :cascade do |t|
@@ -37,6 +40,7 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.integer "following_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "following_id"], name: "index_followships_on_user_id_and_following_id", unique: true
   end
 
   create_table "instance_msgs", force: :cascade do |t|
@@ -45,6 +49,8 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["instance_id"], name: "index_instance_msgs_on_instance_id"
+    t.index ["user_id"], name: "index_instance_msgs_on_user_id"
   end
 
   create_table "instances", force: :cascade do |t|
@@ -55,6 +61,7 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.string "answer", default: "", null: false
     t.integer "modifier_id"
     t.integer "xp", default: 100, null: false
+    t.index ["mission_id"], name: "index_instances_on_mission_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -64,6 +71,9 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.string "state", default: "inviting", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["instance_id"], name: "index_invitations_on_instance_id"
+    t.index ["invitee_id"], name: "index_invitations_on_invitee_id"
+    t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
   create_table "invite_msgs", force: :cascade do |t|
@@ -74,6 +84,9 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.integer "invitation_id"
     t.datetime "read_at"
     t.integer "recipient_id"
+    t.index ["invitation_id"], name: "index_invite_msgs_on_invitation_id"
+    t.index ["recipient_id"], name: "index_invite_msgs_on_recipient_id"
+    t.index ["user_id"], name: "index_invite_msgs_on_user_id"
   end
 
   create_table "missions", force: :cascade do |t|
@@ -99,6 +112,9 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "checked_at"
+    t.index ["actor_id"], name: "index_notifications_on_actor_id"
+    t.index ["notifiable_id"], name: "index_notifications_on_notifiable_id"
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
   create_table "recruit_boards", force: :cascade do |t|
@@ -108,6 +124,8 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "state", default: true
+    t.index ["instance_id"], name: "index_recruit_boards_on_instance_id"
+    t.index ["user_id"], name: "index_recruit_boards_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -119,6 +137,8 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.integer "instance_id"
     t.boolean "submit", default: false, null: false
     t.integer "rating", default: 0, null: false
+    t.index ["reviewee_id"], name: "index_reviews_on_reviewee_id"
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -151,6 +171,8 @@ ActiveRecord::Schema.define(version: 2018_04_06_154616) do
     t.integer "instance_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["instance_id"], name: "index_user_instances_on_instance_id"
+    t.index ["user_id"], name: "index_user_instances_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

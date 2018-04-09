@@ -68,7 +68,7 @@ class UserCanInviteOthersTest < ActionDispatch::IntegrationTest
     sign_in @user3
     assert_equal 'inviting', @invitation.state
     # 任務開始會產生通知
-    assert_difference 'Notification.count', 2 do
+    assert_difference 'Notification.count', 1 do
       post accept_invitation_path(@invitation)
     end
 
