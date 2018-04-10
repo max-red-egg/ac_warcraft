@@ -528,13 +528,16 @@ namespace :mission do
         xp:1290,
         tag: "Rails, Ruby, HTML, CSS, JavaScript"
     }]
+    Mission.destroy_all
     fake_data.each do |newfake|
+      file = File.open("#{Rails.root}/public/mission/mission_#{(1..12).to_a.sample}.jpg")
       mission = Mission.new
       mission.name = newfake[:name]
       mission.level = newfake[:level]
       mission.description = newfake[:description]
       mission.participant_number = newfake[:participant_number]
       mission.invitation_number = 5
+      mission.image = file
       mission.xp = newfake[:xp]
       new_tags = newfake[:tag].split(",").reject { |c| c.empty? }
       mission.tag_list.add(new_tags)
