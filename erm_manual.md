@@ -114,3 +114,38 @@
 - **執行過的任務**
 
 ![探員資料庫](https://github.com/max-red-egg/pic_for_web/raw/master/user_show.png)
+
+
+
+
+# 暗碼局行政大樓 
+資料庫設計 ERD
+![erd](https://github.com/max-red-egg/pic_for_web/raw/master/ERD.jpg)
+以下為各欄位狀態設定
+
+**User.available**
+* true //可被邀請狀態
+* false //不可被邀請
+
+**Invitatoin.state**
+
+* inviting //邀請中 , 不能重複發送邀請
+* accepted //接受, 不能重複發送邀請
+* cancelled //邀請者取消
+* declined //受邀者取消
+
+**Instance.state**
+* teaming：組隊中
+* cancel：組隊取消
+* in_progress：進行中
+* abort：任務中離
+* complete：任務完成
+
+**Review.submit**
+* ture: 已經評論
+* false: 尚未評論
+
+
+
+
+
