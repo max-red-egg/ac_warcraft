@@ -1,5 +1,7 @@
 # ALPHACamp 程式學習魔獸爭霸
-Demoday project by 賣紅蛋小隊
+Demoday project by 賣紅蛋小隊 (@spreered @eggyy1224 @Cronobow )
+
+Deploy Site: http://www.erm.zone/
 
 ## 目錄
 
