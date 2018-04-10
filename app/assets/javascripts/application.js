@@ -22,6 +22,8 @@
 //--- Angle Vender Scripts
 //= require easy-pie-chart/dist/jquery.easypiechart
 //= require jquery-knob/dist/jquery.knob.min
+//--- SLIMSCROLL
+//= require jquery-slimscroll/jquery.slimscroll
 //--- SPARKLINE
 //= require jquery-sparkline/jquery.sparkline
 //--- FLOT CHART
