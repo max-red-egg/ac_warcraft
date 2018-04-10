@@ -148,7 +148,7 @@ namespace :dev do
     system 'rails db:reset' if Rails.env == 'development'
     system 'rails db:migrate'
     system 'rails dev:fake_user'
-    system 'rails dev:fake_mission'
+    system 'rails mission:mission_fake'
     system 'rails dev:fake_xp'
     system 'rails dev:fake_instances'
     system 'rails dev:fake_mission_tag'

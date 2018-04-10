@@ -7,7 +7,8 @@ Deploy Site: http://www.erm.zone/
 
 * [專案目的](#專案目的)
 * [產品故事](#產品故事)
-* [User Stroy](#user-story)
+* [User Stroy [已完成]](#user-story-已完成)
+* [Demo Day Finalize [進行中]](#demo-day-finalize-進行中)
 * [專案初始化](#專案初始化)
 * [自動化測試](#自動化測試)
 
@@ -27,7 +28,7 @@ Deploy Site: http://www.erm.zone/
 
 抵霸格過程漫長且許辛苦，ERM 暗碼局希望能號召你一起加入！
 
-## User Story
+## User Story [已完成]
 
 完整功能請見[暗碼局探員生存手冊](erm_manual.md)
 
@@ -117,6 +118,27 @@ Deploy Site: http://www.erm.zone/
 
 完整功能請見[暗碼局探員生存手冊](erm_manual.md)
 
+## Demo Day Finalize [進行中]
+
+### 綜合項目
+
+1. 修正 reviewer 建議之程式碼
+1. 調整 fake data 的真實性
+1. 調整系統用語
+1. 調整各區塊右上角說明文字的內容
+
+### 後端項目
+
+1. 檢查各欄位驗證
+1. 移除最終未使用的程式碼或外包檔案
+1. 檢查不同使用者視角，是否有不該出現的按鈕或畫面（如追蹤自己）
+1. 檢查各項提醒視窗，是否有如預期跳出
+
+### 前端項目
+
+1. 檢查 CSS 是否正確
+1. 檢查 RWD 是否跑版
+1. 調整文字大小，間距與區塊配色
 
 ## 專案初始化
 
