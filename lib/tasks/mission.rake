@@ -2,6 +2,99 @@ namespace :mission do
 
   task mission_fake: :environment do
     fake_data = [{
+        name: "運算思維",
+        level: 1,
+        description: "請問一週有多少人從松山機場進入台灣？",
+        participant_number: 2,
+        xp: 600,
+        tag: "Ruby"
+      }, {
+        name: "運算思維",
+        level: 1,
+        description: "請在網路上尋找兩個我們日常生活常會碰到，甚至在不知覺中經常使用的演算法例子。請嘗試把他的 input, output, 與邏輯解釋。",
+        participant_number: 2,
+        xp: 600,
+        tag: "Ruby"
+      },
+      {
+        name: "運算思維",
+        level: 1,
+        description: "找一個你日常生活碰到的問題，設計一個來解決這個問題的演算法。",
+        participant_number: 2,
+        xp: 600,
+        tag: "Ruby"
+      }, {
+        name: "CSS選擇器實際應用",
+        level: 1,
+        description: "請說明CSS選擇器如何選擇對應的元素",
+        participant_number: 2,
+        xp: 600,
+        tag: "HTML, CSS"
+      }, 
+      {
+        name: "HTML表單實戰",
+        level: 1,
+        description: "建立一個使用者的註冊表單，並用CSS加上樣式",
+        participant_number: 2,
+        xp: 600,
+        tag: "HTML, CSS"
+      }, {
+        name: "leetcode實戰",
+        level: 2,
+        description: '請至leetcode建立一個帳號並用JavaScript語言升級至五等',
+        participant_number: 2,
+        xp: 600,
+        tag: "JavaScript"
+      }, {
+        name: "CodeWar實戰",
+        level: 2,
+        description: '請至CodeWar建立一個帳號並用Ruby語言升級至五等',
+        participant_number: 2,
+        xp: 600,
+        tag: "Ruby"
+      },{
+        name: "響應式網站建立",
+        level: 4,
+        description: '請你使用 Bootstrap，建立一個新的網站專案',
+        participant_number: 2,
+        xp: 600,
+        tag: "SQL"
+      },{
+        name: "SQL基本",
+        level: 2,
+        description: '請根據以下 Table 進行作答，作答方式是將問題複製貼上在輸入框裡，並依序將答案填寫入內：',
+        participant_number: 2,
+        xp: 600,
+        tag: "SQL"
+      }, {
+        name: "畫出一個ERD",
+        level: 3,
+        description: '畫ERD 圖可以讓我們從無到有，逐漸看到一個資料庫的全貌，因而能用 ERD 圖去確定資料之間的關係，讓工程師在寫 code 之前，能對資料的結構與關聯有個全貌，確認有無遺漏。',
+        participant_number: 2,
+        xp: 600,
+        tag: "SQL"
+      }, {
+        name: "用javascript實作一個「英雄打怪」的小遊戲",
+        level: 3,
+        description: '在這次的實作裡，我們會從遊戲需求的角度出發，去思考如何對遊戲需求進行拆解，以下會是「英雄打怪」的遊戲需求和構思畫面：',
+        participant_number: 2,
+        xp: 600,
+        tag: "Javascript"
+      }, {
+        name: "用Ruby寫一個剪刀石頭布的遊戲",
+        level: 3,
+        description: "透過打造一個遊戲，一步一步觀察與練習從 idea -> pseudocode -> code 的實作過程。",
+        participant_number: 2,
+        xp: 600,
+        tag: "Ruby"
+      }, {
+        name: "打造自己的個人網頁",
+        level: 2,
+        description: "你的一位設計師朋友幫你畫好了 wireframe，因此你最後會應用所學，做出一個簡單的個人網站，如圖片展示",
+        participant_number: 1,
+        xp: 400,
+        tag: "HTML, CSS"
+      }, {
         name: "SQL的試煉",
         level: 12,
         description: "The Trips table holds all taxi trips. Each trip has a unique Id, while Client_Id and Driver_Id are both foreign keys to the Users_Id at the Users table. Status is an ENUM type of (‘completed’, ‘cancelled_by_driver’, ‘cancelled_by_client’).\r\n" +
