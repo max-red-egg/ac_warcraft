@@ -32,10 +32,8 @@ class UsersController < ApplicationController
     for i in 0 .. 4
       @rating_count[i]= @reviews.find_by_rating(i+1).count
     end
-    tags_data = @missions.tag_counts_on(:tags)
-    # tags_data[i] == {name: tag_name, value: tag_value}
-    @tagging_counts = Hash[tags_data.collect{|item| [item[:name],item[:taggings_count]]}]
-    #變成hash tagging_counts[program_name] = program_count
+    @tags_data = @missions.tag_counts_on(:tags).sort{ |k, v| v[:taggings_count] <=>k[:taggings_count] }
+    @chart_color=["#4acab4","#ffea88","#ff8153","#878bb6","#b2d767"]
 
 
     respond_to do |format|
