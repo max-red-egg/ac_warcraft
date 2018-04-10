@@ -1,15 +1,27 @@
 namespace :dev do
   task fake_user: :environment do
     User.destroy_all
-    20.times do |i|
-
-      file = File.open("#{Rails.root}/public/avatar/user#{i+1}.jpg")
+    9.times do |i|
+      file = File.open("#{Rails.root}/public/avatar/user#{(1..9).to_a.sample}.jpg")
       User.create!(
         email: (User.count+1).to_s+".user@sample.com",
         password:"12345678",
         name: FFaker::Name.first_name,
         level: rand(15)+1,
-        gender: FFaker::Gender.random,
+        gender: "female",
+        description:FFaker::Lorem.paragraph,
+        avatar: file,
+        confirmed_at: Time.zone.now
+        )
+    end
+    11.times do |i|
+      file = File.open("#{Rails.root}/public/avatar/user#{(10..20).to_a.sample}.jpg")
+      User.create!(
+        email: (User.count+1).to_s+".user@sample.com",
+        password:"12345678",
+        name: FFaker::Name.first_name,
+        level: rand(15)+1,
+        gender: "male",
         description:FFaker::Lorem.paragraph,
         avatar: file,
         confirmed_at: Time.zone.now
