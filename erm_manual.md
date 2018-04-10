@@ -11,18 +11,28 @@
 # 專案初始化
  [專案初始化](README.md)
 # 登入暗碼局
+[www.erm.zone](http://www.erm.zone)
+![登入畫面](https://github.com/max-red-egg/pic_for_web/raw/master/public_1.png)
+點選「關於暗碼局」，可以閱讀暗碼局的小故事
+![登入畫面](https://github.com/max-red-egg/pic_for_web/raw/master/public_2.png)
+
 ## 創建一個帳號
-註冊後請到註冊的信箱收取確認信，按下確認網址後會重新導回網頁並登入。用一般方式註冊而想要有GitHub相關功能的話可以到使用者編輯頁面填自己的GitHub username。
+可以使用email註冊，或者是建議你可以直接點選Github註冊！
+![註冊畫面](https://github.com/max-red-egg/pic_for_web/raw/master/public_3.png)
 ## 使用GitHub登入
-點擊使用GitHub登入按鈕後會連至Github並利用GitHub資訊登入至應用中。使用GitHub登入後可以直接在提交答案的部分直接選取自己的repo來提交。
+使用GitHub登入，可以直接在提交答案的部分直接選取自己的repo來提交。
 # 介面說明
-- 通知
-- 緊急招募
-- 戰情中心
+![介面說明](https://github.com/max-red-egg/pic_for_web/raw/master/interface.png)
+- 通知:navbar上面鈴鐺按鈕，可以檢視最新的通知。使用action cable實作，可即時收到通知。
+- 緊急招募：navbar上的火焰按鈕，可以檢視最新的緊急招募任務。
+- 戰情中心：暗碼局戰情看板，可以看到全站資訊、追蹤探員的最新動態、推薦的任務等等。
 - 任務資訊
-- 秘密通訊
-- 探員資料庫
-- 個人檔案
+   - 秘密任務室：可以瀏覽所有的任務。已經發起挑戰的任務無法點選，探員等級不足也無法挑戰。
+   - 進行中任務：目前正在進行的任務。
+   - 組隊中任務：探員自己發起，正在組隊中的任務。
+- 秘密通訊：可以瀏覽所有任務的邀請函。如有未讀訊息，會有紅色的數字提醒。
+- 探員資料庫：可以瀏覽全站所有探員。如對哪位探員有興趣，可以直接發起任務邀請。
+- 個人檔案：個人檔案瀏覽及修改。
 
 # 挑戰任務
 挑戰任務流程
