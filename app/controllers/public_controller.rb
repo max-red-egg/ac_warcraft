@@ -4,4 +4,7 @@ class PublicController < ApplicationController
   def landing
   end
 
+  def story
+  end
+
 end

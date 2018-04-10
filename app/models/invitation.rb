@@ -82,13 +82,15 @@ class Invitation < ApplicationRecord
 
   def setup_state!
 
-    if self.state == 'accept' && !instance.is_member?(self.invitee)
-      #join invitee into instance
+    if self.state == 'accept' 
+      if !instance.is_member?(self.invitee)
+        #join invitee into instance
 
-      instance.members << invitee
-      # binding.pry
-      #要save才會呼叫after_commit
-      instance.save
+        instance.members << invitee
+        # binding.pry
+        #要save才會呼叫after_commit
+        instance.save
+      end
     end
   end
 end

@@ -422,6 +422,13 @@ body .btn .sk-circle :before{
 }
 
 
+.public-bg{
+  width: 100%;
+  height:auto;
+  top: 0;
+  left: 0; 
+}
+
 .public-bg:before{
     content: "";
    /* The image used */
@@ -442,6 +449,62 @@ body .btn .sk-circle :before{
   z-index: 2;
   opacity: 1;
   position:relative;
+  margin-top: 10%;
+}
+.public-text{
+  z-index: 2;
+  opacity: 1;
+  position:relative;
+  width: 40%;
+  font-size: 20px;
+}
+.whoami-bg:before{
+    content: "";
+   /* The image used */
+    background-image: image-url("whoami.jpg");
+    opacity: 0.5;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.bugs-bg:before{
+    content: "";
+   /* The image used */
+    background-image: image-url("bugs.jpg");
+    opacity: 0.5;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.joinus-bg:before{
+    content: "";
+   /* The image used */
+    background-image: image-url("joinus.jpg");
+    opacity: 0.5;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
 .popover-body{
