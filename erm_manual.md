@@ -44,7 +44,7 @@
 # 挑戰任務
 挑戰任務流程可詳見README.md裡面的[user story](https://github.com/max-red-egg/ac_warcraft#user-story)
 ## 1.選擇任務
-你可以在 `側邊欄 > 任務資訊 > 秘密任務室` 中挑選你有興趣的任務，並可以使用篩選及搜尋的功能。
+你可以在 `側邊欄 > 任務資訊 > 秘密任務室` 中挑選你有興趣的任務，並可以使用排序或tag篩選的功能。
 
 ![mission board](https://github.com/max-red-egg/pic_for_web/raw/master/mission_borad_1.png)
 
