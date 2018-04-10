@@ -27,7 +27,7 @@ Demoday project by 賣紅蛋小隊
 
 ## User Story
 
-完整操作手冊請見[這裏](erm_manual.md)
+完整功能請見[暗碼局探員生存手冊](erm_manual.md)
 
 ### 使用者相關
 
@@ -113,7 +113,7 @@ Demoday project by 賣紅蛋小隊
 2. user 點擊提醒標題，可引導到對應的頁面
 
 
-其他專案細節請見[這裏](erm_manual.md)
+完整功能請見[暗碼局探員生存手冊](erm_manual.md)
 
 
 ## 專案初始化
