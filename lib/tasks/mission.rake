@@ -1,6 +1,7 @@
 namespace :mission do
 
   task mission_fake: :environment do
+    Mission.destroy_all
     fake_data = [{
         name: "ALPHA Camp Demo Day 快速通關",
         level: 1,
@@ -529,9 +530,11 @@ namespace :mission do
         tag: "Rails, Ruby, HTML, CSS, JavaScript"
     }]
     fake_data.each do |newfake|
+      file = File.open("#{Rails.root}/public/mission/mission_#{ rand(1..12) }.jpg")
       mission = Mission.new
       mission.name = newfake[:name]
       mission.level = newfake[:level]
+      mission.image = file
       mission.description = newfake[:description]
       mission.participant_number = newfake[:participant_number]
       mission.invitation_number = 5
