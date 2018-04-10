@@ -5,7 +5,7 @@ Demoday project by 賣紅蛋小隊
 
 * [專案目的](#專案目的)
 * [產品故事](#產品故事)
-* [User Stroy](#user-stroy)
+* [User Stroy](#user-story)
 * [專案初始化](#專案初始化)
 * [自動化測試](#自動化測試)
 
