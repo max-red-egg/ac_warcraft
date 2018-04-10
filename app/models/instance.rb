@@ -29,40 +29,41 @@ class Instance < ApplicationRecord
 
   # ::instance method:: 任務副本instance完成
   def complete!(user)
-    #任務完成，更改狀態
-    if self.state == 'in_progress'
+    return false if self.state != 'in_progress'  
+    # 用這種守衛提前返回的技巧，可以避免整個方法包在一個 if 裡面
+
+    # 使用transaction打包交易，以免其中一項失敗，db可以rollback
+    ActiveRecord::Base.transaction do 
       self.state = 'complete'
-      self.modifier = user  #觸發的使用者
-      self.save
-      # binding.pry
-      # 產生所有隊員的reivew
+      self.modifier = user 
+      self.save!
+
+      #產生所有的review
       self.members.each do |reviewee|
         self.members.each do |reviewer|
           if reviewee != reviewer
             new_review = reviewee.reviews.build(instance_id: self.id)
             new_review.reviewer = reviewer
-            new_review.save
+            new_review.save!
           end
         end
       end
 
+      #更新xp及complete count
       self.members.each do |member|
-        # 更新xp
         member.add_xp(self.xp)
-        puts "member #{member.name} add xp #{self.xp}"
-        member.save
-        # 更新complete count
+        member.save!
         member.update_instances_completed_count!
       end
-
-
     end
   end
 
   def cancel!
-    if self.state == 'teaming'
+    return false if self.state != 'teaming'
+
+    ActiveRecord::Base.transaction do
       self.state = 'cancel'
-      self.save
+      self.save!
 
       #取消所有人的邀請函
       self.invitations.find_inviting.each do |invitation|
@@ -70,15 +71,18 @@ class Instance < ApplicationRecord
         invitation.send_cancel_msg
       end
     end
+
   end
 
 
   # ::instance method::  任務副本instance終止
   def abort!(user)
-    if self.state == 'in_progress'
+    return false if self.state != 'in_progress'
+
+    ActiveRecord::Base.transaction do
       self.state = 'abort'
       self.modifier = user  #觸發的使用者
-      self.save
+      self.save!
 
       # 產生所有隊員的reivew
       self.members.each do |reviewee| 
@@ -86,11 +90,12 @@ class Instance < ApplicationRecord
           if reviewee != reviewer
             new_review = reviewee.reviews.build(instance_id: self.id)
             new_review.reviewer = reviewer
-            new_review.save
+            new_review.save!
           end
         end
       end
     end
+
   end
 
 
