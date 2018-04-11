@@ -97,18 +97,83 @@ namespace :dev do
   task fake_instances: :environment do 
     Instance.destroy_all
     Review.destroy_all
+    fake_reviews = [{
+      rating: 1,
+      comment: "消失不見也不通知，最後靠我一個人寫"
+      },{
+      rating: 1,
+      comment: "溝通能力有問題"
+      },{
+      rating: 2,
+      comment: "程度需要加強"
+      },{
+      rating: 2,
+      comment: "人很好，但是code有點髒"
+      },{
+      rating: 2,
+      comment: "不能都用暴力法來解啊"
+      },{
+      rating: 3,
+      comment: "還ok啦"
+      },{
+      rating: 3,
+      comment: "雖然寫得很快，但是有時候找不到人"
+      },{
+      rating: 3,
+      comment: "能力不錯，可是不太好溝通"
+      },{
+      rating: 3,
+      comment: "雖然能力不太優，可是是很認真的人"
+      },{
+      rating: 4,
+      comment: "還不錯"
+      },{
+      rating: 4,
+      comment: "愉快的合作！"
+      },{
+      rating: 4,
+      comment: "很厲害喔！"
+      },{
+      rating: 4,
+      comment: "是個很認真的人"
+      },{
+      rating: 4,
+      comment: "Good!"
+      },{
+      rating: 5,
+      comment: "hen 棒！"
+      },{
+      rating: 5,
+      comment: "整場都在cover我，不給五顆說不過去"
+      },{
+      rating: 5,
+      comment: "太強了"
+      },{
+      rating: 5,
+      comment: "都會用一些很神的寫法，效能也不錯，大推神隊友"
+      },{
+      rating: 5,
+      comment: "秒解！大神受我一拜！"
+      },{
+      rating: 5,
+      comment: "開心的一場戰役！"
+      },{
+      rating: 5,
+      comment: "太神的隊友，大家不要跟我搶"
+      }]
     Mission.where('participant_number >= ? ', 2).each do |mission|
       3.times do
-       members = User.where('level >= ?', mission.level).sample(2)   
-       instance = mission.instances.build(state: 'teaming', answer:FFaker::Lorem.sentence, xp: mission.xp)
-       instance.members << members
-       instance.save
-       instance.complete!(instance.members[0])
-       puts "generate instance #{instance.mission.name}"
-       instance.reviews.each do |review|
-        review.update!(rating: rand(1..5),submit: true, comment:FFaker::Lorem.sentence)
+        fake_review = fake_reviews.sample
+        members = User.where('level >= ?', mission.level).sample(2)   
+        instance = mission.instances.build(state: 'teaming', answer:FFaker::Lorem.sentence, xp: mission.xp)
+        instance.members << members
+        instance.save
+        instance.complete!(instance.members[0])
+        puts "generate instance #{instance.mission.name}"
+        instance.reviews.each do |review|
+        review.update!(rating: fake_review[:rating],submit: true, comment: fake_review[:comment])
         puts "#{review.reviewer.name} give #{review.reviewee.name} #{review.rating} star"
-       end
+        end
       end
     end
   end
