@@ -96,6 +96,10 @@ class InstancesController < ApplicationController
     if @instance.state == 'teaming'
       flash[:notice] = '放棄組隊！'
       @instance.cancel!
+      # binding.pry
+      recruit_board = RecruitBoard.find_by(user_id: current_user.id, instance_id: @instance.id)
+      # 如果這個任務有對應到招募的話便把招募刪除
+      recruit_board.delete if recruit_board
       redirect_to instance_path(@instance)
     else
       flash[:alert] = "存取禁止"

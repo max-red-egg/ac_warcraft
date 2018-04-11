@@ -6,11 +6,16 @@ class RecruitBoardsController < ApplicationController
   end
 
   def create
-    recruit_board = current_user.recruit_boards.build(user_id: current_user.id, instance_id: params[:instance_id])
-    # binding.pry
-    recruit_board.save
-    flash[:notice] = "成功發動本次招募"
-    redirect_back(fallback_location: root_path)
+    id_instance = params[:instance_id].to_i
+    unless current_user.recruit_board_repeat?(id_instance)
+      recruit_board = current_user.recruit_boards.build(user_id: current_user.id, instance_id: params[:instance_id])
+      recruit_board.save
+      flash[:notice] = "成功發動本次招募"
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:alert] = "本任務招募中"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def destroy

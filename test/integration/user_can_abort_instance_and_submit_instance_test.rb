@@ -8,6 +8,7 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     sign_in @user
     post challenge_mission_path(@mission2)
     @instance = Instance.last
+    @recruit_instance = instances(:instance_recruit)
   end
 
   test "user can abort mission" do
@@ -95,4 +96,10 @@ class UserCanAbortInstanceAndSubmitInstanceTest < ActionDispatch::IntegrationTes
     assert_equal 'cancel', instance.state
   end
 
+  # 取消有緊急招募的任務會把招募刪除
+  test "cancel recruit_board_instance will destroy recruit board" do
+    assert_difference 'RecruitBoard.count', -1 do
+      post cancel_instance_path(@recruit_instance)
+    end
+  end
 end

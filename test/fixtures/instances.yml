@@ -27,5 +27,9 @@ instance_recruit:
   mission: mission7
   state: teaming
 
+instance_recruit2:
+  mission: mission7
+  state: teaming
+
 
 
