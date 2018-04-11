@@ -48,6 +48,14 @@ user4:
   gender: female
   confirmed_at: <%= Time.zone.now %>
   level: 15
+
+user5:
+  name: user5 example
+  email: user5@email.com
+  # description: testtesttest
+  gender: female
+  confirmed_at: <%= Time.zone.now %>
+  level: 15
   
 <% 30.times do |n| %>
 user_<%= n %>:
