@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <% if request.referrer == missions_url %>
+    <% if request.referrer.include?(missions_url) %>
       <div class="modal-footer">
         <div class="mx-auto">
           <%= challenge_button(@mission) %>
