@@ -7,14 +7,19 @@ class RecruitDetectiveTest < ActionDispatch::IntegrationTest
     @user = users(:user)
     @user2 = users(:user2)
     @instance_recruit = instances(:instance_recruit)
+    @instance_recruit2 = instances(:instance_recruit2)
     @recruit_board = recruit_boards(:recruit_board1)
   end
   # 可以藉由招募的方式找隊友
   test "user can create a recruit request" do
     sign_in @user 
+    # 已發出招募訊息的任務不可以再次招募
+    assert_difference 'RecruitBoard.count', 0 do
+      post recruit_boards_path(instance_id: @instance_recruit.id)
+    end
     # 按招募的時候可以產生一個招募訊息
     assert_difference 'RecruitBoard.count', 1 do
-      post recruit_boards_path(instance_id: @instance_recruit.id)
+      post recruit_boards_path(instance_id: @instance_recruit2.id)
     end
   end
   # 不可以招募自己
