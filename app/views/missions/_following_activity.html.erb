@@ -12,7 +12,7 @@
       </span>
     </div>
     <div class="media-body text-truncate">
-       <p class="mb-1 text-purple"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user),class: 'text-purple m-0' %> 探員正準備挑戰 <%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission) ,class: 'text-purple m-0' %>任務 </a>
+       <p class="mb-1 text-purple"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user), remote: true ,class: 'text-purple m-0' %> 探員正準備挑戰【<%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission), remote: true  ,class: 'text-purple m-0' %>】任務 </a>
        </p>
        <p class="m-0">
           <small> 組隊中
@@ -30,15 +30,14 @@
     </span>
   </div>
   <div class="media-body text-truncate">
-     <p class="mb-1 text-info"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user),class: 'text-info m-0' %> 探員已經取消<%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission) ,class: 'text-info m-0' %> 任務組隊</a>
+     <p class="mb-1 text-info"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user), remote: true ,class: 'text-info m-0' %> 探員已經取消【<%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission), remote: true ,class: 'text-info m-0' %>】任務組隊</a>
      </p>
      <p class="m-0">
         <small>
-          是不是找不到人呢？試著約約看他吧？
+          是不是找不到人呢？試著<%=link_to '主動邀約 '+user_instance.user.name, user_path(user_instance.user),class: 'text-info' %> 吧？
         </small>
      </p>
   </div>
-
 
   <% when 'in_progress' %>
   <!-- 任務進行中 -->
@@ -49,7 +48,7 @@
     </span>
   </div>
   <div class="media-body text-truncate">
-     <p class="mb-1 text-danger"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user),class: 'text-danger m-0' %> 探員正在執行 <%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission) ,class: 'text-danger m-0' %> 任務，與霸閣熱烈決鬥中 </a>
+     <p class="mb-1 text-danger"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user), remote: true ,class: 'text-danger m-0' %> 探員正在執行【<%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission), remote: true  ,class: 'text-danger m-0' %>】任務，與霸閣熱烈決鬥中 </a>
      </p>
      <p class="m-0">
         <small>祈禱任務順利進行吧
@@ -66,7 +65,7 @@
     </span>
   </div>
   <div class="media-body text-truncate">
-     <p class="mb-1 text-success"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user),class: 'text-success m-0' %> 探員已經解了 <%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission) ,class: 'text-success m-0' %> 任務的霸閣 </a>
+     <p class="mb-1 text-success"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user), remote: true ,class: 'text-success m-0' %> 探員已經解了【<%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission), remote: true  ,class: 'text-success m-0' %>】任務的霸閣 </a>
      </p>
      <p class="m-0 text-success-dark">
         <small><% user_instance.user.name%> 經驗值+ <%= user_instance.instance.xp %>
@@ -84,7 +83,7 @@
     </span>
   </div>
   <div class="media-body text-truncate">
-     <p class="mb-1 text-warning"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user),class: 'text-warning m-0' %> 探員參與的 <%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission) ,class: 'text-warning m-0' %> 任務已終止，宣告失敗。 </a>
+     <p class="mb-1 text-warning"><a class=" m-0" href="#"><%=link_to user_instance.user.name, user_path(user_instance.user), remote: true ,class: 'text-warning m-0' %> 探員參與的【<%=link_to "#{user_instance.instance.mission.name} ", mission_path(user_instance.instance.mission), remote: true  ,class: 'text-warning m-0' %>】任務已終止，宣告失敗。 </a>
      </p>
      <p class="m-0 text-warning-dark">
         <small> 這隻霸閣太刁鑽...
