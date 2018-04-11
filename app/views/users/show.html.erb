@@ -91,7 +91,8 @@
                 <div class="card-title text-center">防守範圍</div>
               </div>
               <div class="card-body">
-                           <div class="chart-pie flot-chart" id= "tag-chart-pie" style="padding: 0px; position: relative;"></div>
+                           <div class="chart-pie flot-chart" id= "tag-chart-pie" style="padding: 0px; position: relative;">
+                           </div>
                         </div>
             </div>
           </div>
@@ -158,14 +159,22 @@
     $(function() {
 
         var data = [
-          <% for i in 0..4 %>
-            <% break if @tags_data[i].nil? %>
-            <%= "," if i >0 %>
+          <% if @tags_data[0].nil? %>
             {
-            "label": "<%= @tags_data[i][:name]%>",
-            "color": "<%= @chart_color[i]%>",
-            "data": "<%= @tags_data[i][:taggings_count].to_i %>"
+            "label": "尚未執行任何任務",
+            "color": "#40464D",
+            "data": "1"
             }
+          <% else %>
+            <% for i in 0..4 %>
+              <% break if @tags_data[i].nil? %>
+              <%= "," if i >0 %>
+              {
+              "label": "<%= @tags_data[i][:name]%>",
+              "color": "<%= @chart_color[i]%>",
+              "data": "<%= @tags_data[i][:taggings_count].to_i %>"
+              }
+            <%end%>
           <%end%>
         ];
 
