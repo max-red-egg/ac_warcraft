@@ -11,10 +11,8 @@
         <h3><%= title '戰情中心' %></h3>
       </div>
       <div class="container dashboard">
-
         <!-- 全站監控版 -->
-
-        <div class="row ">
+        <div class="row">
         <!-- 全站完成率 -->
           <div class="col-lg-3">
             <div class="card">
@@ -83,11 +81,10 @@
 
         <div class="row mt-3">
           <div class="col-lg-8">
-
               <!-- ERM放送台 start -->
             <div class="card card-dark pt-2 announcement">
               <div class="card-header">
-                <div class="card-title">ERM放送台<span class="align-middle"><i class="fa fa-question-circle float-right " title="" data-container="body" data-trigger='hover' data-toggle="popover" data-placement="top" data-content="這裡是站方公告">
+                <div class="card-title">ERM 放送台<span class="align-middle"><i class="fa fa-question-circle float-right " title="" data-container="body" data-trigger='hover' data-toggle="popover" data-placement="top" data-content="這裡是站方公告">
                 </i></span></div>
               </div>
               <div class="card-body p-0" data-scrollable="">
@@ -178,21 +175,25 @@
           </div>  <!-- col end -->
           <!-- 探員龍虎榜 end -->
         </div>  <!-- row end -->
-        <div class="row mt-5">
-          <h2>熱門任務</h2>
-        </div>
+      </div>
+
+      <div class="content-heading mt-5">
+        <h3>熱門任務</h3>
+      </div>
+      <div class="container dashboard">
         <div class="row mt-1">
           <% @hot_missions.each do |mission| %>
             <div class="col-sm-6 col-lg-4 col-xl-3 my-3">
               <%= render partial:"shared/mission_card" , locals: {mission: mission} %>
             </div>
           <% end %>
-
         </div>
-        <% unless @recommended_tag == '' %>
-          <div class="row mt-5">
-            <h2>你曾經成功挑戰<%= @recommended_tag %>任務，推薦給你...</h2>
-          </div>
+      </div>
+      <% unless @recommended_tag == '' %>
+        <div class="content-heading mt-5">
+          <h3>你曾經成功挑戰<%= @recommended_tag %>任務，推薦給你...</h3>
+        </div>
+        <div class="container dashboard">
           <div class="row mt-1">
             <% @recommended_missions.each do |mission| %>
               <div class="col-sm-6 col-lg-4 col-xl-3 my-3">
@@ -200,10 +201,8 @@
               </div>
             <% end %>
           </div>
-        <% end %>
-
-
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
