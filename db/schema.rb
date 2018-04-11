@@ -205,9 +205,9 @@ ActiveRecord::Schema.define(version: 2018_04_11_034335) do
     t.string "provider"
     t.string "uid"
     t.float "average_rating_count", default: 0.0, null: false
-    t.string "github_username"
     t.integer "instances_count", default: 0
     t.integer "instances_completed_count", default: 0
+    t.string "github_username"
     t.string "website"
     t.string "occupation"
     t.string "location", default: "none"
