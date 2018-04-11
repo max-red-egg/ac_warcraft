@@ -29,13 +29,13 @@ class Instance < ApplicationRecord
 
   # ::instance method:: 任務副本instance完成
   def complete!(user)
-    return false if self.state != 'in_progress'  
+    return false if self.state != 'in_progress'
     # 用這種守衛提前返回的技巧，可以避免整個方法包在一個 if 裡面
 
     # 使用transaction打包交易，以免其中一項失敗，db可以rollback
-    ActiveRecord::Base.transaction do 
+    ActiveRecord::Base.transaction do
       self.state = 'complete'
-      self.modifier = user 
+      self.modifier = user
       self.save!
 
       #產生所有的review
@@ -65,6 +65,8 @@ class Instance < ApplicationRecord
       self.state = 'cancel'
       self.save!
 
+      #取消緊急招募 - 未完成
+
       #取消所有人的邀請函
       self.invitations.find_inviting.each do |invitation|
         invitation.cancel!
@@ -85,7 +87,7 @@ class Instance < ApplicationRecord
       self.save!
 
       # 產生所有隊員的reivew
-      self.members.each do |reviewee| 
+      self.members.each do |reviewee|
         self.members.each do |reviewer|
           if reviewee != reviewer
             new_review = reviewee.reviews.build(instance_id: self.id)
@@ -151,7 +153,7 @@ class Instance < ApplicationRecord
   def recipients
     # in_progress 有 save和沒save的狀況：
     #   save:除了自己的所有人
-    # abort 
+    # abort
     #   除了自己的所有人
     # complete
     #   所有人
@@ -185,14 +187,14 @@ class Instance < ApplicationRecord
   def create_notifications
     # 通知
     # in_progress 有 save和沒save的狀況
-    # abort 
+    # abort
     # complete
     action = self.state
     if action == 'in_progress' ||action == 'abort' || action == 'complete'
       if self.modifier && action == 'in_progress' # save的狀況
         action = 'update_answer'
       end
-      if self.members.count >1 
+      if self.members.count >1
         recipients.each do |recipient|
           Notification.create(recipient: recipient, actor: actor,
             action: action, notifiable: self)
