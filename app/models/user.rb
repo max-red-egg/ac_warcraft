@@ -43,7 +43,7 @@ class User < ApplicationRecord
         id: User.joins(:user_instances).where('user_instances.instance_id = ? ',instance.id)
       ).where.not(
         id: User.joins('JOIN invitations ON invitations.invitee_id = users.id').where('invitations.instance_id = ? AND invitations.state = ?',instance.id,'inviting')
-      )
+      ).where.not(confirmed_at: nil)
   }
 
   filterrific(
@@ -273,10 +273,10 @@ class User < ApplicationRecord
   def have_github_username?
     begin
       Octokit.user "#{self.github_username}"
-    rescue 
+    rescue
       return false
     end
-    self.github_username && self.github_username != '' 
+    self.github_username && self.github_username != ''
   end
   # 拿user的github網址
   def github_url
@@ -292,8 +292,8 @@ class User < ApplicationRecord
   end
 
   # def unread_invite_msg
-  #   if self.instances.count > 0 
-      
+  #   if self.instances.count > 0
+
   # end
   def msg_read!(invitation)
     msgs = self.recived_invite_msgs.where(invitation_id: invitation.id).unread

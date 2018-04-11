@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     # @users = User.all
     # binding.pry
     @filterrific = filterrific_user or return
-    @users = @filterrific.find.page(params[:page]).per(20)
+    @users = @filterrific.find.where.not(confirmed_at: nil).page(params[:page]).per(20)
     # @users = User.page(params[:page]).per(20)
     @tag = 'all'
     respond_to do |format|

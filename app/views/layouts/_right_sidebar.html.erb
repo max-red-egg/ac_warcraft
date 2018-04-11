@@ -35,6 +35,8 @@
               <div class="media-body text-center mt-1">
                 <% if recruit_board.user == current_user %>
                   <%= link_to '取消本次徵招', recruit_board_path(recruit_board), method: :delete, class: 'badge bg-danger px-3 py-2' %>
+                <% elsif recruit_board.instance.mission.level > current_user.level %>
+                  <span class="badge bg-secondary px-3 py-2">等級不足</span>
                 <% else %>
                   <%= link_to '接受徵招', accept_recruit_board_path(recruit_board), method: :post, class: 'badge bg-primary px-3 py-2' %>
                 <% end %>
