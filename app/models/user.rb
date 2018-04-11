@@ -311,4 +311,9 @@ class User < ApplicationRecord
     self.description.blank? || 
     self.location.blank? 
   end
+
+  def recruit_board_repeat?(id_instance)
+    # 如果在recruit_boards裡的instance_id重複的話回傳true
+    self.recruit_boards.map(&:instance_id).include?(id_instance)
+  end
 end
