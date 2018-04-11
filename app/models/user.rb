@@ -307,11 +307,8 @@ class User < ApplicationRecord
 
   def info_not_completed?
     # 必填欄位為nil或者是空字串回傳true
-    self.name.nil? ||
-    self.name == '' ||  
-    self.description.nil? || 
-    self.description == '' ||
-    self.location.nil? ||
-    self.location == ''
+    self.name.blank? ||  
+    self.description.blank? || 
+    self.location.blank? 
   end
 end
