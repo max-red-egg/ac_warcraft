@@ -223,8 +223,6 @@ class User < ApplicationRecord
     self.save
   end
 
-
-
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
@@ -303,9 +301,12 @@ class User < ApplicationRecord
     end
   end
 
-
   def github_repos_url
     "https://github.com/#{self.github_username}?tab=repositories"
   end
 
+  def info_not_completed?
+    # 必填欄位為nil或者是空字串回傳true
+    self.name.nil? || self.gender.nil? || self.description.nil? || self.name == '' || self.gender == '' || self.description == ''
+  end
 end

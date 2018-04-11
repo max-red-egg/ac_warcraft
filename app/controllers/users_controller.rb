@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :check_info_completed, except: [:edit, :update]
   def index
     # @users = User.all
     # binding.pry
@@ -114,6 +114,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :description, :avatar, :state, :available, :github_username)
+    params.require(:user).permit(:name, :description, :avatar, :state, :available, :github_username, :gender)
   end
 end
