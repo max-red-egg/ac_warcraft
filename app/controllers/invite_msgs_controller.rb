@@ -1,7 +1,6 @@
 class InviteMsgsController < ApplicationController
-  before_action :authenticate_user!
 
-  def show 
+  def show
     invite_msg = InviteMsg.find(params[:id])
     render partial: 'invitations/invite_msg_show', locals:{msg: invite_msg}, layout: false
   end

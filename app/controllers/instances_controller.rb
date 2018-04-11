@@ -1,5 +1,4 @@
 class InstancesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_instance, except: [:history]
   before_action :authenticate_instance_member, except: [:history]
 

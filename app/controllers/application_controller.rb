@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   #skip_before_action :verify_authenticity_token, raise: false
+  before_action :authenticate_user!
   before_action :recruit_boards_index
   before_action :check_info_completed
 
@@ -7,9 +8,9 @@ class ApplicationController < ActionController::Base
 
   def check_info_completed
     # user登入才做此驗證
-    if current_user && current_user.info_not_completed? 
+    if current_user && current_user.info_not_completed?
       flash[:notice] = "請將個人資料填寫完整！"
-      redirect_to edit_user_path(current_user) 
+      redirect_to edit_user_path(current_user)
     end
   end
 

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_info_completed, except: [:edit, :update]
+  skip_before_action :check_info_completed, only: [:edit, :update]
+
   def index
     @filterrific = filterrific_user or return
     @users = @filterrific.find.where.not(confirmed_at: nil).page(params[:page]).per(20)
