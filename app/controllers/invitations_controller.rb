@@ -1,5 +1,4 @@
 class InvitationsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_invitation, except: [:index, :sent_index]
   before_action :auth_invitee, only: [:accept, :decline]
   before_action :check_inviting, only: [:accept, :decline, :cancel]

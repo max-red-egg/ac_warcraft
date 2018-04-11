@@ -10,104 +10,106 @@
       <div class="content-heading">
         <h3><%= title '變更探員檔案' %></h3>
       </div>
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="card card-default">
-            <div class="card-header d-flex align-items-center">
-              <div class="d-flex justify-content-center col">
-                <div class="h4 m-0 text-center">目前檔案</div>
-              </div>
-            </div>
-            <div class="card-body text-center">
-              <div class="pb-4">
-                <%= gravatar_for(@user, "img-fluid rounded-circle img-thumbnail thumb96") %>
-              </div>
-              <h3 class="m-0 text-bold"><%= @user.name %></h3>
-              <div class="my-3">
-                <p><%= @user.description %></p>
-              </div>
-            </div>
-            <div class="card-body bt text-center">
-              <div class="row">
-                <div class="col-4 br">
-                  <strong class="text-primary">Level</strong><br>
-                  <strong><%= @user.level %></strong>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card card-default">
+              <div class="card-header d-flex align-items-center">
+                <div class="d-flex justify-content-center col">
+                  <div class="h4 m-0 text-center">目前檔案</div>
                 </div>
-                <div class="col-4 br">
-                  <strong class="text-success">XP</strong><br>
-                  <strong><%= @user.xp %></strong>
+              </div>
+              <div class="card-body text-center">
+                <div class="pb-4">
+                  <%= gravatar_for(@user, "img-fluid rounded-circle img-thumbnail thumb96") %>
                 </div>
-                <div class="col-4">
-                  <strong class="text-purple">邀請狀態</strong><br>
-                  <strong><%= transcript_user_state(@user.available) %></strong>
+                <h3 class="m-0 text-bold"><%= @user.name %></h3>
+                <div class="my-3">
+                  <p><%= @user.description %></p>
+                </div>
+              </div>
+              <div class="card-body bt text-center">
+                <div class="row">
+                  <div class="col-4 br">
+                    <strong class="text-primary">Level</strong><br>
+                    <strong><%= @user.level %></strong>
+                  </div>
+                  <div class="col-4 br">
+                    <strong class="text-success">XP</strong><br>
+                    <strong><%= @user.xp %></strong>
+                  </div>
+                  <div class="col-4">
+                    <strong class="text-purple">邀請狀態</strong><br>
+                    <strong><%= transcript_user_state(@user.available) %></strong>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-8">
-          <div class="card card-default">
-            <div class="card-header d-flex align-items-center">
-              <div class="d-flex justify-content-center col">
-                <div class="h4 m-0 text-center">編輯個人資訊</div>
+          <div class="col-lg-8">
+            <div class="card card-default">
+              <div class="card-header d-flex align-items-center">
+                <div class="d-flex justify-content-center col">
+                  <div class="h4 m-0 text-center">編輯個人資訊</div>
+                </div>
               </div>
-            </div>
-            <div class="card-body">
-              <div class="row py-4 justify-content-center">
-                <%= simple_form_for @user ,html: { class: "form-horizontal"}  do |f| %>
-                  <div class="form-group row">
-                    <div class="col-12 text-center">
-                      <%= gravatar_for(@user, "img-fluid img-thumbnail w-50 mb-3") %>
-                      <p>
-                        更換照片?<br>
-                        (本站採用 <a href='https://zh-tw.gravatar.com/' target='_blank'>Gravatar</a> 頭像系統)
-                      </p>
+              <div class="card-body">
+                <div class="row py-4 justify-content-center">
+                  <%= simple_form_for @user ,html: { class: "form-horizontal"}  do |f| %>
+                    <div class="form-group row">
+                      <div class="col-12 text-center">
+                        <%= gravatar_for(@user, "img-fluid img-thumbnail w-50 mb-3") %>
+                        <p>
+                          更換照片?<br>
+                          (本站採用 <a href='https://zh-tw.gravatar.com/' target='_blank'>Gravatar</a> 頭像系統)
+                        </p>
+                      </div>
+
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-12">
+                        <%= f.input :name, label: "名字(必填)", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-12">
+                        <%= f.input :location, label: "地區(必填)", collection: [["不提供", "none"], ["北部","north"], ["中部", "central"], ["南部", "south"], ["東部", "east"], ["離島", "island"], ["國外", "abroad"]], selected: ["none"], label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-12">
+                        <%= f.input :description, label: "自我介紹(必填)", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                      </div>
                     </div>
 
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-12">
-                      <%= f.input :name, label: "名字(必填)", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                    <div class="form-group row">
+                      <div class="col-12">
+                        <%= f.input :occupation, label: "職業", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-12">
-                      <%= f.input :location, label: "地區(必填)", collection: [["不提供", "none"], ["北部","north"], ["中部", "central"], ["南部", "south"], ["東部", "east"], ["離島", "island"], ["國外", "abroad"]], selected: ["none"], label_html: {class: "text-bold float-left" }, class: "form-control" %>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-12">
-                      <%= f.input :description, label: "自我介紹(必填)", label_html: {class: "text-bold float-left" }, class: "form-control" %>
-                    </div>
-                  </div>
 
-                  <div class="form-group row">
-                    <div class="col-12">
-                      <%= f.input :occupation, label: "職業", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                    <div class="form-group row">
+                      <div class="col-12">
+                        <%= f.input :github_username, label: "Github Username", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="form-group row">
-                    <div class="col-12">
-                      <%= f.input :github_username, label: "Github Username", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                    <div class="form-group row">
+                      <div class="col-12">
+                        <%= f.input :website, label: "個人網站", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="form-group row">
-                    <div class="col-12">
-                      <%= f.input :website, label: "個人網站", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                    <div class="form-group row">
+                      <div class="col-12">
+                      <%= f.input :available, label: "邀請信箱 ", label_html: {class: "text-bold float-left" }, class: "form-control" ,as: :select, collection: [['開啟', true], ['關閉', false]]%>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="form-group row">
-                    <div class="col-12">
-                    <%= f.input :available, label: "邀請信箱 ", label_html: {class: "text-bold float-left" }, class: "form-control" ,as: :select, collection: [['開啟', true], ['關閉', false]]%>
-                    </div>
-                  </div>
+                    <%= f.submit "送出", class: "btn btn-primary" %>
 
-                  <%= f.submit "送出", class: "btn btn-primary" %>
-
-                <% end %>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>

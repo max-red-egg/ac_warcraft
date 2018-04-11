@@ -19,7 +19,7 @@
         <%= render partial: "layouts/navbar" %>
       </header>
       <%= yield %>
-      <footer class="footer-container">
+      <footer class="footer-container <%= "ml-0" if current_user.nil? %>">
         <%= render partial: "layouts/footer" %>
       </footer>
     </div>

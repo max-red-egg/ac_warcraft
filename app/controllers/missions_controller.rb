@@ -1,5 +1,4 @@
 class MissionsController < ApplicationController
-  before_action :authenticate_user!
 
   def dashboard
     @missions = Mission.all

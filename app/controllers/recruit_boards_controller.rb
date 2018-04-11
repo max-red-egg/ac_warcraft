@@ -1,5 +1,5 @@
 class RecruitBoardsController < ApplicationController
-  before_action :authenticate_user!
+
   def index
     @recruit_boards = RecruitBoard.where(state: true)
     # binding.pry

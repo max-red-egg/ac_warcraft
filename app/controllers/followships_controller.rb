@@ -1,5 +1,5 @@
 class FollowshipsController < ApplicationController
-  before_action :authenticate_user!
+
   def create
     if current_user.id.to_s == params[:following_id]
       flash[:alert] = "無法追蹤自己"
@@ -15,7 +15,7 @@ class FollowshipsController < ApplicationController
         redirect_back(fallback_location: root_path)
       end
     end
-    
+
   end
 
   def destroy
