@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :check_info_completed, except: [:edit, :update]
   def index
-    # @users = User.all
-    # binding.pry
     @filterrific = filterrific_user or return
     @users = @filterrific.find.where.not(confirmed_at: nil).page(params[:page]).per(20)
     # @users = User.page(params[:page]).per(20)
@@ -32,7 +30,7 @@ class UsersController < ApplicationController
     for i in 0 .. 4
       @rating_count[i]= @reviews.find_by_rating(i+1).count
     end
-    @tags_data = @missions.tag_counts_on(:tags).sort{ |k, v| v[:taggings_count] <=>k[:taggings_count] }
+    @tags_data = @missions.tag_counts_on(:tags).sort{ |k, v| v[:taggings_count] <=> k[:taggings_count] }
     @chart_color=["#4acab4","#ffea88","#ff8153","#878bb6","#b2d767"]
 
 
@@ -114,6 +112,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :description, :avatar, :state, :available, :github_username)
+    params.require(:user).permit(:name, :description, :avatar, :state, :available, :github_username, :location, :occupation, :website, :gender)
   end
 end

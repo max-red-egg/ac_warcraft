@@ -131,6 +131,5 @@ class MissionsController < ApplicationController
       flash[:alert] = "無法挑戰該任務"
       redirect_back(fallback_location: root_path)
     end
-
   end
 end

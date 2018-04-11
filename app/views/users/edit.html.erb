@@ -67,7 +67,23 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-12">
-                      <%= f.input :name, label: "名字", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                      <%= f.input :name, label: "名字(必填)", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-12">
+                      <%= f.input :location, label: "地區(必填)", collection: [["不提供", "none"], ["北部","north"], ["中部", "central"], ["南部", "south"], ["東部", "east"], ["離島", "island"], ["國外", "abroad"]], selected: ["none"], label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-12">
+                      <%= f.input :description, label: "自我介紹(必填)", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-12">
+                      <%= f.input :occupation, label: "職業", label_html: {class: "text-bold float-left" }, class: "form-control" %>
                     </div>
                   </div>
 
@@ -79,7 +95,7 @@
 
                   <div class="form-group row">
                     <div class="col-12">
-                      <%= f.input :description, label: "自我介紹", label_html: {class: "text-bold float-left" }, class: "form-control" %>
+                      <%= f.input :website, label: "個人網站", label_html: {class: "text-bold float-left" }, class: "form-control" %>
                     </div>
                   </div>
 

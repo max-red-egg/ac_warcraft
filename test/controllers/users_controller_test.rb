@@ -8,7 +8,26 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user2 = users(:user2)
     @user3 = users(:user3)
     @user4 = users(:user4)
+    @user5 = users(:user5) #資料不完整的使用者
     @instance = instances(:instance_teaming)
+  end
+  # 使用者資料必須完整才能瀏覽其他頁面，否則會被導向資料編輯
+  test "user info intergity" do
+    sign_in @user5
+    get root_path
+    assert_redirected_to edit_user_path(@user5)
+    # 將缺少的資料補上
+    patch user_path(@user5), params: { user: { description: "test" } }
+    @user5.reload
+    assert_equal "test", @user5.description
+    get root_path
+    assert_response :success
+  end
+
+  test "access dashboard" do
+    sign_in @user
+    get root_path
+    assert_response :success
   end
 
   test "only login can see user/index page" do

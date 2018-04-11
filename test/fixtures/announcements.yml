@@ -3,9 +3,9 @@
 one:
   title: MyString
   content: MyText
-  author_id: 1
+  author: admin
 
 two:
   title: MyString
   content: MyText
-  author_id: 1
+  author: admin
