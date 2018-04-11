@@ -29,16 +29,16 @@
                     <strong><%= link_to recruit_board.user.name, user_path(recruit_board.user), remote: true %></strong> 緊急招募中
                   </a>
                   <br>
-                  任務：<%= link_to recruit_board.instance.mission.name, recruit_board.instance.mission, remote: true  %>
+                  <%= link_to recruit_board.instance.mission.name, recruit_board.instance.mission, remote: true  %>
                 </div>
               </div>
               <div class="media-body text-center mt-1">
                 <% if recruit_board.user == current_user %>
-                  <%= link_to '取消本次徵招', recruit_board_path(recruit_board), method: :delete, class: 'badge bg-danger px-3 py-2' %>
+                  <%= link_to '取消本次徵召', recruit_board_path(recruit_board), method: :delete, class: 'badge bg-danger px-3 py-2' %>
                 <% elsif recruit_board.instance.mission.level > current_user.level %>
                   <span class="badge bg-secondary px-3 py-2">等級不足</span>
                 <% else %>
-                  <%= link_to '接受徵招', accept_recruit_board_path(recruit_board), method: :post, class: 'badge bg-primary px-3 py-2' %>
+                  <%= link_to '接受徵召', accept_recruit_board_path(recruit_board), method: :post, data: {confirm: '確認後，會立即啟動任務挑戰，你是否要接受徵召'}, class: 'badge bg-primary px-3 py-2'%>
                 <% end %>
               </div>
             </div>
@@ -64,9 +64,9 @@
               </div>
               <div class="media-body text-center mt-1">
                 <% if recruit_board.user == current_user %>
-                  <%= link_to '取消本次徵招', recruit_board_path(recruit_board), method: :delete, class: 'badge bg-danger px-3 py-2' %>
+                  <%= link_to '取消本次徵召', recruit_board_path(recruit_board), method: :delete, class: 'badge bg-danger px-3 py-2' %>
                 <% else %>
-                  <%= link_to '接受徵招', accept_recruit_board_path(recruit_board), method: :post, class: 'badge bg-primary px-3 py-2' %>
+                  <%= link_to '接受徵召', accept_recruit_board_path(recruit_board), method: :post, class: 'badge bg-primary px-3 py-2' %>
                 <% end %>
               </div>
             </div>
