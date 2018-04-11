@@ -40,6 +40,7 @@
       </li>
       <li class="">
         <a href="#progress" title="progress" data-toggle="collapse">
+          <%= content_tag :div, current_user.instances_in_progress.count, class: "float-right badge bg-primary" if current_user.instances_in_progress.count > 0 %>
           <em class="icon-fire"></em>
           <span>進行中任務</span>
         </a>
@@ -48,8 +49,8 @@
           <% if current_user.instances_in_progress.present? %>
             <% current_user.instances_in_progress.each do |instance| %>
               <li class="<%= active_class?(instance_path(instance)) %>">
-                <%= link_to instance_path(instance) do%>
-                <span class="float-left badge bg-warning-dark mr-1">L<%= instance.mission.level %></span> <%= instance.mission.name %>
+                <%= link_to instance_path(instance), class: "wrap" do%>
+                <span class="float-left badge bg-warning-dark mr-1">L<%= instance.mission.level %></span> <%= truncate(instance.mission.name, length: 18) %>
                 <% end %>
               </li>
             <% end %>
@@ -60,6 +61,7 @@
       </li>
       <li class="">
         <a href="#teaming" title="teaming" data-toggle="collapse">
+          <%= content_tag :div, current_user.instances_teaming.count, class: "float-right badge bg-primary" if current_user.instances_teaming.count > 0 %>
           <em class="icon-refresh"></em>
           <span>組隊中任務</span>
         </a>
@@ -68,8 +70,8 @@
           <% if current_user.instances_teaming.present? %>
             <% current_user.instances_teaming.each do |instance| %>
             <li class="<%= active_class?(instance_path(instance)) %>">
-              <%= link_to instance_path(instance) do%>
-              <span class="float-left badge bg-warning-dark mr-1">L<%= instance.mission.level %></span> <%= instance.mission.name %>
+              <%= link_to instance_path(instance), class: "wrap"  do%>
+              <span class="float-left badge bg-warning-dark mr-1">L<%= instance.mission.level %></span> <%= truncate(instance.mission.name, length: 18) %>
               <% end %>
             </li>
             <% end %>
