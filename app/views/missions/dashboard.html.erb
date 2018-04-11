@@ -90,31 +90,31 @@
                 <div class="card-title">ERM放送台<span class="align-middle"><i class="fa fa-question-circle float-right " title="" data-container="body" data-trigger='hover' data-toggle="popover" data-placement="top" data-content="這裡是站方公告">
                 </i></span></div>
               </div>
-              <div class="card-body" data-scrollable="">
-                <table class="table">
-                  <thead>
-                     <tr>
-                        <th class="h4" style="width: 75%;"></th>
-                        <th class="h4 d-none d-lg-table-cell"></th>
-                     </tr>
-                  </thead>
-                  <tbody>
+              <div class="card-body p-0" data-scrollable="">
+                <div class="announcement">
+                  <div class="list-group">
                     <% @announcements.each do |announcement| %>
-                    <tr>
-                      <td>
-                         <h4>
-                          <strong><%= link_to announcement.title, announcement_path(announcement), remote: true%><%=  %></strong>
-                         </h4>
-                         <div class="content text-muted"><%= announcement.content%></div>
-                      </td>
-                      <td class="d-none d-lg-table-cell"><%=link_to announcement.author.name, user_path(announcement.author) %></a>
-                         <br>
-                         <small><%=announcement.updated_at.strftime("%Y-%m-%d %H:%M")%></small>
-                      </td>
-                    </tr>
-                    <%end%>
-                  </tbody>
-                </table>
+                      <div class="list-group-item list-group-item-action border-0">
+                        <div class="media">
+                          <div data-toggle="tooltip" data-placement="bottom" title="<%= announcement.author.name %>">
+                            <%= gravatar_for(announcement.author, "align-self-start mr-2 img-thumbnail rounded-circle thumb32") %>
+                          </div>
+                          <div class="media-body text-truncate">
+                            <p class="mb-1">
+                              <strong class="text-primary">
+                                <span><%= link_to announcement.title, announcement_path(announcement), remote: true%></span>
+                              </strong>
+                            </p>
+                          <p class="mb-1 text-sm"><%= announcement.content %></p>
+                          </div>
+                          <div class="ml-auto">
+                            <small class="text-muted ml-2"><%=announcement.updated_at.strftime("%Y-%m-%d %H:%M")%></small>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- ERM放送台 end -->
