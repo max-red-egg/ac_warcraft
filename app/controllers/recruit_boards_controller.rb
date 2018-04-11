@@ -35,7 +35,7 @@ class RecruitBoardsController < ApplicationController
     # binding.pry
 
     #確認點擊的使用者可以接受邀請，自己不可以接受自己的徵招
-    if instance.can_invite?(current_user) && inviter != current_user
+    if instance.state == "teaming" && instance.can_invite?(current_user) && inviter != current_user
       #產生邀請
       invitation = inviter.invitations.build(instance_id: instance.id, invitee_id: current_user.id)
       invitation.save
@@ -50,7 +50,7 @@ class RecruitBoardsController < ApplicationController
       redirect_to instance_path(invitation.instance)
     else
       #不能收invite
-      flash[:alert] = '不能接受緊急招募！'
+      flash[:alert] = '不能接受本任務招募！'
       redirect_back(fallback_location: root_path)
     end
   end
