@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
       persistence_id: 'user_filter',
       select_options: {
         sorted_by: User.options_for_sorted_by,
-        with_gender: User.options_for_gender,
+        with_location: User.options_for_location,
         with_level: User.options_for_level,
       }
     )

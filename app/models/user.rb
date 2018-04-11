@@ -53,7 +53,7 @@ class User < ApplicationRecord
     available_filters: [
       :sorted_by,
       :search_query,
-      :with_gender,
+      :with_location,
       :with_friendtype,
       :with_level
     ]
@@ -102,8 +102,8 @@ class User < ApplicationRecord
 
   }
 
-  scope :with_gender, lambda { |genders|
-    where(gender: [*genders])
+  scope :with_location, lambda { |location|
+    where(location: [*location])
   }
 
   scope :with_friendtype, lambda { |friendtype|
@@ -124,13 +124,22 @@ class User < ApplicationRecord
 
   # always include the lower boundary for semi open intervals
   scope :with_level, lambda { |level|
-    where('users.level >= ? AND users.level <= ?', level-2 , level+2)
+    if level > 20
+      where('users.level > ? ', level)
+    else
+      where('users.level >= ? AND users.level <= ?', level-2 , level+2)
+    end
   }
 
-  def self.options_for_gender
+  def self.options_for_location
     [
-      ['男', 'male'],
-      ['女', 'female']
+      ["不限", ""],
+      ["北部", "north"],
+      ["中部", "central"],
+      ["南部", "south"],
+      ["東部", "east"],
+      ["離島", "island"],
+      ["國外", "abroad"],
     ]
   end
 
@@ -141,6 +150,7 @@ class User < ApplicationRecord
       ['6-10', '8'],
       ['11-15', '13'],
       ['16-20', '18'],
+      ['21+', '21'],
     ]
   end
 
@@ -307,8 +317,8 @@ class User < ApplicationRecord
 
   def info_not_completed?
     # 必填欄位為nil或者是空字串回傳true
-    self.name.blank? ||  
-    self.description.blank? || 
-    self.location.blank? 
+    self.name.blank? ||
+    self.description.blank? ||
+    self.location.blank?
   end
 end
