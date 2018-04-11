@@ -51,7 +51,7 @@ class UsersTest < ApplicationSystemTestCase
     # 但這邊又可以發送post請求？？？
     click_on "發動緊急招募"
     # 無法點擊按鈕？？？？？cabybara無法發送除了get的其他請求？
-    # click_on "取消本次徵招"
+    # click_on "取消本次徵召"
     # binding.pry
   end
 
@@ -65,7 +65,7 @@ class UsersTest < ApplicationSystemTestCase
     within ".card-body" do
       first(".btn").click
     end
-    
+
   end
 
   # 註冊測試

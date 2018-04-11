@@ -34,7 +34,7 @@ class RecruitBoardsController < ApplicationController
     inviter = recruit_board.user
     # binding.pry
 
-    #確認點擊的使用者可以接受邀請，自己不可以接受自己的徵招
+    #確認點擊的使用者可以接受邀請，自己不可以接受自己的徵召
     if instance.state == "teaming" && instance.can_invite?(current_user) && inviter != current_user
       #產生邀請
       invitation = inviter.invitations.build(instance_id: instance.id, invitee_id: current_user.id)

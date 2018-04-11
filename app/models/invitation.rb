@@ -11,7 +11,7 @@ class Invitation < ApplicationRecord
     where(state: 'inviting')
   }
   # scope :order_by_invite_msg, ->{
-  #   joins(:invite_msgs).order('invite_msgs.created_at DESC') 
+  #   joins(:invite_msgs).order('invite_msgs.created_at DESC')
   # }
 
   def time_updated!
@@ -65,15 +65,15 @@ class Invitation < ApplicationRecord
     when 'decline'
       self.user
     end
-        
+
   end
 
   # for notification
   def create_notifications
-    # 如果是藉由徵招的邀請函不要產生邀請訊息
+    # 如果是藉由徵召的邀請函不要產生邀請訊息
     # binding.pry
     return if RecruitBoard.all.any? { |recruit_board| recruit_board.instance == self.instance}
-    actor =  ( recipient == self.user ? self.invitee : self.user )        
+    actor =  ( recipient == self.user ? self.invitee : self.user )
     Notification.create(recipient: recipient, actor: actor,
         action: self.state, notifiable: self)
   end
@@ -82,7 +82,7 @@ class Invitation < ApplicationRecord
 
   def setup_state!
 
-    if self.state == 'accept' 
+    if self.state == 'accept'
       if !instance.is_member?(self.invitee)
         #join invitee into instance
 
