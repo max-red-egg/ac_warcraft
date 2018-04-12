@@ -20,6 +20,16 @@
             <div class="user-block-info">
               <span class="user-block-name">Hello：<%= current_user.name %> 探員</span>
             </div>
+            <div class="user-block-info pb-2">
+                <div class="row text-center">
+                  <div class="col-6 br">
+                    <strong><span class="text-primary">Level：</span> <%= current_user.level %></strong>
+                  </div>
+                  <div class="col-6">
+                    <strong><span class="text-success">XP：</span> <%= current_user.xp %></strong>
+                  </div>
+                </div>
+              </div>
           </div>
       </li>
       <!-- END user info-->
