@@ -271,7 +271,7 @@ class User < ApplicationRecord
 
   # 拿repos的名字與網址
   def github_repos
-    user = Octokit.user "#{self.github_username}"
+    user = authenticate_octokit.user "#{self.github_username}"
     repos = user.rels[:repos].get.data.sort_by { |repo| repo.updated_at }.reverse
     repo_names = repos.map { |repo| repo.name }
     repo_urls = repos.map { |repo| repo.html_url }
@@ -280,7 +280,7 @@ class User < ApplicationRecord
   # 確認此user是用github登入
   def have_github_username?
     begin
-      Octokit.user "#{self.github_username}"
+      authenticate_octokit.user "#{self.github_username}"
     rescue
       return false
     end
@@ -289,12 +289,12 @@ class User < ApplicationRecord
   # 拿user的github網址
   def github_url
     # binding.pry
-    user = Octokit.user "#{self.github_username}"
+    user = authenticate_octokit.user "#{self.github_username}"
     user.html_url
   end
   # 算user的repo數量
   def github_repos_count
-    user = Octokit.user "#{self.github_username}"
+    user = authenticate_octokit.user "#{self.github_username}"
     repos = user.rels[:repos].get.data
     repos.count
   end
@@ -325,5 +325,11 @@ class User < ApplicationRecord
   def recruit_board_repeat?(id_instance)
     # 如果在recruit_boards裡的instance_id重複的話回傳true
     self.recruit_boards.map(&:instance_id).include?(id_instance)
+  end
+
+  private
+
+  def authenticate_octokit
+    Octokit::Client.new(:client_id  => ENV['GITHUB_KEY'], :client_secret => ENV['GITHUB_SECRET'])
   end
 end
