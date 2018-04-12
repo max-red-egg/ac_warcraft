@@ -1,6 +1,6 @@
 class Invitation < ApplicationRecord
   after_commit :setup_state!
-  after_create_commit :create_notifications
+  after_commit :create_notifications, if: :state_changed?
   belongs_to :user
   belongs_to :instance
   belongs_to :invitee, class_name: "User"
