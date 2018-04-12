@@ -67,10 +67,10 @@ namespace :dev do
   end
 
   task fake_xp: :environment do
-    Mission.all.each do |mission|
-        mission.xp = Random.rand(200..600)
-        mission.save
-    end
+    # Mission.all.each do |mission|
+    #     mission.xp = Random.rand(200..600)
+    #     mission.save
+    # end
     User.all.each do |user|
         user.xp = user.level * 1000
         user.save
@@ -229,7 +229,7 @@ namespace :dev do
     system 'rails mission:mission_fake'
     system 'rails dev:fake_xp'
     system 'rails dev:fake_instances'
-    system 'rails dev:fake_mission_tag'
+    # system 'rails dev:fake_mission_tag'
     system 'rails dev:fake_followships'
     system 'rails dev:reset_average_rating'
   end
