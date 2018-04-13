@@ -15,7 +15,8 @@ module ApplicationHelper
     html_render_options = {
       filter_html:     true, # no input tag or textarea
       hard_wrap:       true,
-      link_attributes: { rel: 'nofollow' }
+      link_attributes: { rel: 'nofollow' },
+      no_images:       true
     }
 
     markdown_options = {
