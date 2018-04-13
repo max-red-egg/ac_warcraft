@@ -2,7 +2,7 @@
   <div class="col-12 my-3">
     <div class="d-flex justify-content-between">
       <div class=""><h4>任務筆記與留言</h4></div>
-      <div class=""><span class="ml-2 fa fa-question-circle  " title="" data-container="body" data-trigger='hover' data-toggle="popover" data-placement="top" data-content="可以留下自己的筆記，或者與您的夥伴交換任務資訊。"> </span></div>
+      <div class=""><span class="ml-2 fa fa-question-circle  " title="" data-container="body" data-trigger='hover' data-toggle="popover" data-placement="top" data-content="可以留下自己的筆記（本欄支援markdown語法），或者與您的夥伴交換任務資訊。"> </span></div>
     </div>
   </div>
   <div class="col-12">
@@ -18,7 +18,7 @@
                 </td>
                 <td class="b0">
                   <div class="bg-gray-darker px-3 py-2 rounded ">
-                    <span><%= simple_format msg.content %></span>
+                    <span ><%= to_markdown(msg.content) %></span>
                   </div>
                   <span class="text-muted mt-1"><%= time_ago_in_words(msg.updated_at) + '前' %></span>
                 </td>
@@ -38,7 +38,7 @@
   <%end%>
 <% end %>
 
-<script>
+<!-- <script>
   // 按enter可以直接送出
   $('#new_instance_msg').keypress(function (e) {
         if(e.which == 13 && !e.shiftKey) {
@@ -48,4 +48,4 @@
             $('#new_instance_msg').submit();
         }
     });
-</script>
+</script> -->
