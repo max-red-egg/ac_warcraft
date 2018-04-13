@@ -118,3 +118,19 @@
     </div>
   </div>
 </section>
+
+<script type="text/javascript">
+  $(window).on('load', function() {
+    console.log('All assets are loaded')
+    if ($("#user_name").val() == "") {
+      $("#user_name").css({"border": "5px #EC5156 groove"});
+    };
+    if ($("#user_location").val() == "") {
+      $("#user_location").css({"border": "5px #EC5156 groove"});
+    };
+    if ($("#user_description").val() == "") {
+      $("#user_description").css({"border": "5px #EC5156 groove"});
+    };
+  })
+  
+</script>
