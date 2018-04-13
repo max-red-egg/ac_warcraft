@@ -75,7 +75,8 @@ class InvitationsController < ApplicationController
 
       @instance = @invitation.instance
       @invitation.send_cancel_msg
-      @invitation.update!(state: "cancel")
+      @invitation.state= 'cancel'
+      @invitation.save!
       @alert_msg = "取消邀請"
 
       @remaining_invitations_count = @instance.remaining_invitations_count

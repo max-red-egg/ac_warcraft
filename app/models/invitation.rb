@@ -1,6 +1,7 @@
 class Invitation < ApplicationRecord
   after_commit :setup_state!
-  after_commit :create_notifications, if: :state_changed?
+  #after_commit {binding.pry}
+  after_commit :create_notifications
   belongs_to :user
   belongs_to :instance
   belongs_to :invitee, class_name: "User"
@@ -71,11 +72,16 @@ class Invitation < ApplicationRecord
   # for notification
   def create_notifications
     # 如果是藉由徵召的邀請函不要產生邀請訊息
-    # binding.pry
     return if RecruitBoard.all.any? { |recruit_board| recruit_board.instance == self.instance}
+    #Dirty object
+    return if !self.id_previously_changed? && !self.state_previously_changed?
     actor =  ( recipient == self.user ? self.invitee : self.user )
     Notification.create(recipient: recipient, actor: actor,
         action: self.state, notifiable: self)
+  end
+
+  def test_callback
+    binding.pry
   end
 
   private
