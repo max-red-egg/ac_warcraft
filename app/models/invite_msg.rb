@@ -26,7 +26,7 @@ class InviteMsg < ApplicationRecord
     end
     remove_notification = Notification.find_by(actor_id: self.user_id, notifiable_type:"InviteMsg", notifiable_id: msg_id)
     if remove_notification
-      puts "delete"
+      #puts "delete"
       remove_notification.delete
     end
 
