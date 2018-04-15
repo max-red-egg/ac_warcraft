@@ -172,7 +172,11 @@ class User < ApplicationRecord
     if self.level == 0
       self.level =1
     end
+    
     self.save!
+    if level_previously_changed?
+      self.create_notifications
+    end
   end
 
   def admin?
@@ -331,5 +335,18 @@ class User < ApplicationRecord
 
   def authenticate_octokit
     Octokit::Client.new(:client_id  => ENV['GITHUB_KEY'], :client_secret => ENV['GITHUB_SECRET'])
+  end
+
+  def create_notifications
+    # 升級通知
+    action = 'level_up'
+    actor = User.find_by(email:"admin@sample.com")
+    remove_notification = Notification.find_by(recipient_id:self.id, notifiable_type:"User",action: action)
+    if remove_notification
+      remove_notification.delete
+    end
+    Notification.create(recipient: self, actor: actor,
+      action: action, notifiable: self)
+        
   end
 end
