@@ -1,8 +1,81 @@
-
-
-<div class="public-bg">
+<section class="public-bg">
   <div class="text-center public-logo">
-  <div class="mb-2"><%= image_tag('logo-square_1.png') %></div> 
-  <a href="/story"><div class="btn btn-inverse ">關於暗碼局</div></a>
-  <a href="https://github.com/max-red-egg/ac_warcraft"><div class="btn btn-inverse "><i class="fa fa-github mr-2"></i> Github </div></a>
-</div></div>
+    <div class="mb-4">
+      <%= image_tag('logo-square_1.png') %>
+    </div>
+    <a href="story">
+      <div class="btn btn-inverse btn-lg">關於暗碼局</div>
+    </a>
+    <a href="https://github.com/max-red-egg/ac_warcraft">
+      <div class="btn btn-inverse btn-lg ml-3"><i class="fa fa-github mr-2"></i> Github </div>
+    </a>
+  </div>
+</section>
+<section class="feature" id="feature">
+  <div class="container py-5">
+    <div class="row pb-2 justify-content-center">
+      <h1 class="text-center">遊戲化互動程式學習平台</h1>
+      <div class="col-8 feature-content mt-3 text-center">
+        <p>透過挑戰任務來 <strong>學習程式語言</strong></p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 text-center my-3">
+        <%= image_tag "feature-lg-1.png", class: "img-fluid d-none d-lg-block" %>
+        <%= image_tag "feature-md-1.png", class: "img-fluid d-lg-none" %>
+      </div>
+      <div class="col-8 feature-content py-2">
+        <p>你可以自主學習，挑戰單人任務，或與 <strong>喜歡的隊友一起組隊</strong>，完成雙人任務。學習知識，獲取評價，並開啟下一次的學習旅程。</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="teaming" id="teaming" style="background-color: #495057">
+  <div class="container py-5">
+    <div class="row pb-2 justify-content-center">
+      <div class="col-8 feature-content mt-3 text-center">
+        <p>找到一起學習的 <strong>最佳夥伴</strong></p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 text-center my-3">
+        <%= image_tag "feature-2.png", class: "img-fluid" %>
+      </div>
+      <div class="col-8 feature-content py-2">
+        <p>和你 <strong>等級接近</strong> 的隊友，或與曾經一起完成任務的 <strong>老隊友</strong> 再次組隊。培養默契，教學相長，加快解任務的進度。</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="review" id="review">
+  <div class="container pt-5 pb-0">
+    <div class="row pb-2 justify-content-center">
+      <div class="col-8 feature-content mt-3 text-center">
+        <p>完成任務，取得隊友 <strong>真實的回饋</strong>，繼續下一趟旅程。</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 text-center mt-3">
+        <%= image_tag "feature-3.png", class: "img-fluid" %>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="signup bg-dark py-5" id="signup" style="background-color: #243847">
+  <div class="container py-5">
+    <div class="row pb-2 justify-content-center">
+      <h2 class="text-center">立刻加入 暗碼局，啟動你的學習之旅</h2>
+    </div>
+    <div class="row justify-content-center mt-2">
+      <div class="col-8 feature-content py-2 text-center">
+        <%= link_to '免費註冊', new_user_registration_path, class: "btn btn-warning btn-lg m-1"  %>
+        <%= link_to '登入帳號', new_user_session_path, class: "btn btn-inverse btn-lg m-1 "  %>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <footer class="footer-container ml-0" style="position: static;">
+    <%= render partial: "layouts/footer" %>
+  </footer>
+</section>
