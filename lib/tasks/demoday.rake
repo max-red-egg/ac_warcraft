@@ -144,7 +144,7 @@ namespace :demoday do
     end
   end
   task fake_egg: :environment do
-    user = User.find_by(github_username:'spreered')
+    user = User.find_by(github_username:'eggyy1224')
     #刪除user A所有參與過的 instance 
     #其中instance的review,  invite_msg, invitations, 通知
     if user 
@@ -161,7 +161,6 @@ namespace :demoday do
 
     end
 
-    ##產生新user
     user.update!(
       level: 14,
       name: "大雄",
