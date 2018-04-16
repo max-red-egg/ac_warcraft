@@ -57,6 +57,7 @@ body {
     min-height: 100%;
     overflow-x: hidden;
     background-color: $wrapper-bg;
+    padding-top: $navbar-height;
     &.ng-leave {
         display: none;
     }
