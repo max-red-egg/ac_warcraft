@@ -1,6 +1,6 @@
 <div class="card b text-center mb-2">
   <div class="card-body user-block">
-    <div class="user-block-picture">
+    <div class="user-block-picture w-50">
       <%= link_to gravatar_for(user,"img-thumbnail rounded-circle thumb80 mb-2"), user_path(user), remote: true %>
       <div class='user-block-status'>
         <% if user.available %>
