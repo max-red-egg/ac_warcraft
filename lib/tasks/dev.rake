@@ -6,7 +6,7 @@ namespace :dev do
       User.create!(
         email: (User.count+1).to_s+".user@sample.com",
         password:"12345678",
-        name: FFaker::Name.first_name,
+        name: FFaker::Name.first_name_female,
         level: rand(15)+1,
         gender: "female",
         description:FFaker::Lorem.paragraph,
@@ -19,7 +19,7 @@ namespace :dev do
       User.create!(
         email: (User.count+1).to_s+".user@sample.com",
         password:"12345678",
-        name: FFaker::Name.first_name,
+        name: FFaker::Name.first_name_male,
         level: rand(15)+1,
         gender: "male",
         description:FFaker::Lorem.paragraph,
