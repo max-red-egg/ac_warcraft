@@ -199,6 +199,8 @@ namespace :dev do
     puts "have created 100 fake follow" 
   end
 
+
+
   task reset_average_rating: :environment do 
     User.all.each do |user|
       user.set_average_rating_count!
