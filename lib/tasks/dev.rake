@@ -236,6 +236,13 @@ namespace :dev do
     system 'rails dev:reset_average_rating'
   end
 
+  task fake_demo_all: :environment do
+    system "rails demoday:fake_user_a"
+    system "rails demoday:fake_user_b"
+    system "rails demoday:fake_egg"
+    system "rails demoday:fake_announcements"
+  end
+
   task reset_instances_count_mission: :environment do 
     Mission.all.each do |mission|
       mission.instances_count = mission.instances.count

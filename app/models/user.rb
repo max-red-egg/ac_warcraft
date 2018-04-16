@@ -331,12 +331,6 @@ class User < ApplicationRecord
     self.recruit_boards.map(&:instance_id).include?(id_instance)
   end
 
-  private
-
-  def authenticate_octokit
-    Octokit::Client.new(:client_id  => ENV['GITHUB_KEY'], :client_secret => ENV['GITHUB_SECRET'])
-  end
-
   def create_notifications
     # 升級通知
     action = 'level_up'
@@ -349,4 +343,12 @@ class User < ApplicationRecord
       action: action, notifiable: self)
         
   end
+
+  private
+
+  def authenticate_octokit
+    Octokit::Client.new(:client_id  => ENV['GITHUB_KEY'], :client_secret => ENV['GITHUB_SECRET'])
+  end
+
+  
 end
